@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Oppgave1.csproj": {}
+    "/Users/dennis/Dokumenter/UiA 2024-2027/3-Semester/IS-202/kart-oppgave/Oppgave1/Oppgave1/Oppgave1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Oppgave1.csproj": {
+    "/Users/dennis/Dokumenter/UiA 2024-2027/3-Semester/IS-202/kart-oppgave/Oppgave1/Oppgave1/Oppgave1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Oppgave1.csproj",
+        "projectUniqueName": "/Users/dennis/Dokumenter/UiA 2024-2027/3-Semester/IS-202/kart-oppgave/Oppgave1/Oppgave1/Oppgave1.csproj",
         "projectName": "Oppgave1",
-        "projectPath": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Oppgave1.csproj",
-        "packagesPath": "C:\\Users\\noano\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\obj\\",
+        "projectPath": "/Users/dennis/Dokumenter/UiA 2024-2027/3-Semester/IS-202/kart-oppgave/Oppgave1/Oppgave1/Oppgave1.csproj",
+        "packagesPath": "/Users/dennis/.nuget/packages/",
+        "outputPath": "/Users/dennis/Dokumenter/UiA 2024-2027/3-Semester/IS-202/kart-oppgave/Oppgave1/Oppgave1/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\noano\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/dennis/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -74,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

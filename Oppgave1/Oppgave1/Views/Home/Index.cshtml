@@ -1,12 +1,48 @@
-﻿@{
+﻿@model Oppgave1.Models.ObstacleData
+@{
     ViewData["Title"] = "Home Page";
 }
-
 <head>
-
+    <link rel="stylesheet" href="~/css/index.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 
 <body>
-    
-    <script src="~/js/map.js"></script>
+<header class="text-center">
+    <h1>Oppgave 1</h1>
+    <p>Dette er Oppgave 1 i IS-202 av Gruppe 16</p>
+</header>
+
+<div id="map"></div>
+
+@* <a asp-action="DataForm">Register Obstacle</a> *@
+
+<h1 class="text-center">Obstacle Data Form</h1>
+<p class="text-center">Vennligst fyll inn data om nytt hinder</p>
+<form asp-action="DataForm" method="POST" class="text-center">
+
+    <div>
+        <label asp-for="ObstacleCoords">Hinder koordinater</label>
+        <input asp-for="ObstacleCoords" id="coords" />
+    </div>
+
+    <div>
+        <label asp-for="ObstacleName">Hinder navn</label>
+        <input asp-for="ObstacleName" />
+    </div>
+
+    <div>
+        <label asp-for="ObstacleHeight">Hinder høyde</label>
+        <input asp-for="ObstacleHeight" />
+    </div>
+
+    <div>
+        <label asp-for="ObstacleDescription">Hinder beskrivelse</label>
+        <input asp-for="ObstacleDescription" />
+    </div>
+
+    <button type="submit">Ferdig</button>
+</form>
+<script src="~/js/map.js"></script>
 </body>
