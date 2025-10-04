@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "5U+I9yIOwkE=",
+  "dgSpecHash": "cqaraefi7qA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Oppgave1.csproj",
+  "projectFilePath": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\Oppgave1.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\noano\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.22.1\\microsoft.visualstudio.azure.containers.tools.targets.1.22.1.nupkg.sha512"
+    "C:\\Users\\Madalitso\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.22.1\\microsoft.visualstudio.azure.containers.tools.targets.1.22.1.nupkg.sha512"
   ],
   "logs": []
 }
