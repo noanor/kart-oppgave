@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C45D5592-0393-4EE8-A5F9-F8EA4A4B6266}|oppgave1.Test\\oppgave1.Test.csproj|c:\\users\\madalitso\\documents\\skole\\prosjekt-it\\kart-oppgave\\oppgave1\\oppgave1.test\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C45D5592-0393-4EE8-A5F9-F8EA4A4B6266}|oppgave1.Test\\oppgave1.Test.csproj|solutionrelative:oppgave1.test\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5367284D-D8B9-4097-80E0-46884FA676EB}|Oppgave1.Tests\\Oppgave1.Tests.csproj|c:\\users\\madalitso\\documents\\skole\\prosjekt-it\\kart-oppgave\\oppgave1\\oppgave1.tests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5367284D-D8B9-4097-80E0-46884FA676EB}|Oppgave1.Tests\\Oppgave1.Tests.csproj|solutionrelative:oppgave1.tests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -24,13 +24,13 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "UnitTest1.cs",
-              "DocumentMoniker": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\oppgave1.Test\\UnitTest1.cs",
-              "RelativeDocumentMoniker": "oppgave1.Test\\UnitTest1.cs",
-              "ToolTip": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\oppgave1.Test\\UnitTest1.cs",
-              "RelativeToolTip": "oppgave1.Test\\UnitTest1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1.Tests\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "Oppgave1.Tests\\UnitTest1.cs",
+              "ToolTip": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1.Tests\\UnitTest1.cs",
+              "RelativeToolTip": "Oppgave1.Tests\\UnitTest1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T16:33:15.596Z",
+              "WhenOpened": "2025-10-04T16:56:25.601Z",
               "EditorCaption": ""
             },
             {
