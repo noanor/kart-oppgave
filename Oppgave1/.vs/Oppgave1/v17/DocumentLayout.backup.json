@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Oppgave1\\Oppgave1.csproj|c:\\users\\noano\\code\\repos\\kart-oppgave\\oppgave1\\oppgave1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Oppgave1\\Oppgave1.csproj|solutionrelative:oppgave1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Oppgave1\\Oppgave1.csproj|c:\\users\\noano\\code\\repos\\kart-oppgave\\oppgave1\\oppgave1\\wwwroot\\js\\map.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Oppgave1\\Oppgave1.csproj|solutionrelative:oppgave1\\wwwroot\\js\\map.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +18,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Oppgave1\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Oppgave1\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-04T15:29:13.657Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "map.js",
+              "DocumentMoniker": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\wwwroot\\js\\map.js",
+              "RelativeDocumentMoniker": "Oppgave1\\wwwroot\\js\\map.js",
+              "ToolTip": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\wwwroot\\js\\map.js",
+              "RelativeToolTip": "Oppgave1\\wwwroot\\js\\map.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-10-04T15:26:11.125Z",
+              "EditorCaption": ""
             }
           ]
         }
