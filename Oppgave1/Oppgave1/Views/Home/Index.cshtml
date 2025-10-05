@@ -18,8 +18,9 @@
 
 @* <a asp-action="DataForm">Register Obstacle</a> *@
 
-<h1 class="text-center">Obstacle Data Form</h1>
+<h1 class="text-center">Registrer nytt hinder</h1>
 <p class="text-center">Vennligst fyll inn data om nytt hinder</p>
+<p class="text-center">Trykk på kart for plassering</p>
 <form asp-action="DataForm" method="POST" class="text-center">
 
     <div>
@@ -42,7 +43,7 @@
         <input asp-for="ObstacleDescription" />
     </div>
 
-    <button type="submit">Ferdig</button>
+    <button id="btnSubmit" type="submit">Ferdig</button>
 </form>
 <script src="~/js/map.js"></script>
 </body>
