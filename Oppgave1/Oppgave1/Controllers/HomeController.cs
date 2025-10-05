@@ -23,6 +23,18 @@ namespace Oppgave1.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult DataForm()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult DataForm(ObstacleData obstacledata)
+        {
+            return View("Overview", obstacledata);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
