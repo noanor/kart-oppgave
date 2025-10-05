@@ -38,5 +38,14 @@ namespace Oppgave1.Models
         // Koordinater for hvor hindringen befinner seg – må fylles ut
         [Required(ErrorMessage = "Obstacle coordinates are required.")]
         public string ObstacleCoords { get; set; }
+        
+        public string GetLatitude()
+        {
+            return this.ObstacleCoords.Split(",")[0];
+        }
+        public string GetLongitude()
+        {
+            return this.ObstacleCoords.Split(",")[1];
+        }
     }
 }

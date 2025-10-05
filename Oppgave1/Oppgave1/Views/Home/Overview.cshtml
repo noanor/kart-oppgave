@@ -1,0 +1,38 @@
+﻿@model Oppgave1.Models.ObstacleData
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<head>
+
+</head>
+
+<body>
+    <div>
+        <p>Hinder navn:</p>
+        @Model.ObstacleName
+    </div>
+
+    <div>
+        <p>Hinder høyde:</p>
+        @Model.ObstacleHeight
+    </div>
+
+    <div>
+        <p>Hinder beskrivelse:</p>
+        @Model.ObstacleDescription
+    </div>
+
+    <div>
+        <p>Hinder lengdegrad:</p>
+        @Model.GetLongitude()
+    </div>
+
+    <div>
+        <p>Hinder breddegrad:</p>
+        @Model.GetLatitude()
+    </div>
+    
+</body>
