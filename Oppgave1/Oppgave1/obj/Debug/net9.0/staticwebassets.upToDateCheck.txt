@@ -1,3 +1,4 @@
+wwwroot\css\index.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\js\map.js
@@ -62,7 +63,6 @@ wwwroot\lib\jquery\dist\jquery.slim.js
 wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
-wwwroot\css\index.css
 C:\Users\noano\code\repos\kart-oppgave\Oppgave1\Oppgave1\wwwroot\css\site.css
 C:\Users\noano\code\repos\kart-oppgave\Oppgave1\Oppgave1\wwwroot\favicon.ico
 C:\Users\noano\code\repos\kart-oppgave\Oppgave1\Oppgave1\wwwroot\js\map.js
