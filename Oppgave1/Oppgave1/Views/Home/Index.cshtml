@@ -1,4 +1,4 @@
-﻿@model Oppgave1.Models.ObstacleData
+﻿@model Oppgave1.Models.ViewModel.ViewObstacleDataModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -29,18 +29,18 @@
     </div>
 
     <div>
-        <label asp-for="ObstacleName">Hinder navn</label>
-        <input asp-for="ObstacleName" />
+        <label>Hinder navn</label>
+        <input asp-for="ViewObstacleName" />
     </div>
 
     <div>
-        <label asp-for="ObstacleHeight">Hinder høyde</label>
-        <input asp-for="ObstacleHeight" />
+        <label>Hinder høyde</label>
+        <input asp-for="ViewObstacleHeight" />
     </div>
 
     <div>
-        <label asp-for="ObstacleDescription">Hinder beskrivelse</label>
-        <input asp-for="ObstacleDescription" />
+        <label>Hinder beskrivelse</label>
+        <input asp-for="ViewObstacleDescription" />
     </div>
 
     <button id="btnSubmit" type="submit">Ferdig</button>

@@ -8,7 +8,7 @@ namespace Oppgave1.DataContext
 {
     public class ApplicationContext : DbContext
     {
-        DbSet<ObstacleData> Obstacles { get; set; } //Table in the database
+        public DbSet<ObstacleData> Obstacles { get; set; } //Table in the database
         public ApplicationContext(DbContextOptions<ApplicationContext> dbContextopt) : base(dbContextopt)
         {
 

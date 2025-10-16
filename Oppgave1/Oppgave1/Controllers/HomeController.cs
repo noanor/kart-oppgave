@@ -1,16 +1,18 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Oppgave1.Models;
+using Oppgave1.Models.ViewModel;
+using Oppgave1.Repository;
 
 namespace Oppgave1.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IDataRepocs _iDataRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IDataRepocs dataRepocs)
         {
-            _logger = logger;
+            _iDataRepository = dataRepocs;
         }
 
         public IActionResult Index()
@@ -30,9 +32,27 @@ namespace Oppgave1.Controllers
         }
 
         [HttpPost]
-        public IActionResult DataForm(ObstacleData obstacledata)
+        public async Task<ActionResult> DataForm(ViewObstacleDataModel serverdata)
         {
-            return View("Overview", obstacledata);
+            if (serverdata != null && serverdata.ViewObstacleHeight > 0)
+            {
+                ObstacleData obstacleData = new ObstacleData
+                {
+                    ObstacleName = serverdata.ViewObstacleName,
+                    ObstacleHeight = serverdata.ViewObstacleHeight,
+                    ObstacleDescription = serverdata.ViewObstacleDescription,
+                    ObstacleCoords = serverdata.ObstacleCoords
+                };
+
+                var toDatabase =  await _iDataRepository.AddObstacle(obstacleData);
+                serverdata.ViewObstacleID = toDatabase.ObstacleID;
+
+                return View("Overview", serverdata);
+
+            }
+
+
+            return BadRequest("Obs, du må fylle inn feltene");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

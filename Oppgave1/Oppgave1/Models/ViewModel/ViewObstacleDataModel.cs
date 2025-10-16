@@ -1,44 +1,50 @@
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Oppgave1.Models
+namespace Oppgave1.Models.ViewModel
 {
-    public class ObstacleData
+    public class ViewObstacleDataModel
     {
         // Unik ID for hver hindring
-        public int ObstacleID { get; set; }
+        public int ViewObstacleID { get; set; }
 
         // Navn på hindringen – må fylles ut
         [Required(ErrorMessage = "Obstacle name is required.")]
-        public string ObstacleName { get; set; }
+        public string ViewObstacleName { get; set; }
 
         // Intern lagring av høydeverdien
-        private int _obstacleHeight;
+        private int _viewObstacleHeight;
 
         // Høyde på hindringen – må være mellom 0 og 200
         [Range(0, 200, ErrorMessage = "Obstacle height must be between 0 and 200.")]
-        public int ObstacleHeight
+        public int ViewObstacleHeight
         {
-            get => _obstacleHeight;
+            get => _viewObstacleHeight;
             set
             {
                 // Sjekker at høyden ikke er over 200
                 if (value > 200)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(ObstacleHeight), "Obstacle height cannot exceed 200.");
+                    throw new ArgumentOutOfRangeException(nameof(ViewObstacleHeight), "Obstacle height cannot exceed 200.");
                 }
-                _obstacleHeight = value;
+                _viewObstacleHeight = value;
             }
         }
 
         // Beskrivelse av hindringen – må fylles ut
         [Required(ErrorMessage = "Obstacle description is required.")]
-        public string ObstacleDescription { get; set; }
+        public string ViewObstacleDescription { get; set; }
 
         // Koordinater for hvor hindringen befinner seg – må fylles ut
         [Required(ErrorMessage = "Obstacle coordinates are required.")]
         public string ObstacleCoords { get; set; }
-        
-    
+
+        public string GetLatitude()
+        {
+            return this.ObstacleCoords.Split(",")[0];
+        }
+        public string GetLongitude()
+        {
+            return this.ObstacleCoords.Split(",")[1];
+        }
     }
 }

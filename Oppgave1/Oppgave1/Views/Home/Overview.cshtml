@@ -1,4 +1,4 @@
-﻿@model Oppgave1.Models.ObstacleData
+﻿@model Oppgave1.Models.ViewModel.ViewObstacleDataModel
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -10,19 +10,25 @@
 </head>
 
 <body>
+
+    <div>
+        <p>SakId:</p>
+        @Model.ViewObstacleID
+    </div>
+
     <div>
         <p>Hinder navn:</p>
-        @Model.ObstacleName
+        @Model.ViewObstacleName
     </div>
 
     <div>
         <p>Hinder høyde:</p>
-        @Model.ObstacleHeight
+        @Model.ViewObstacleHeight
     </div>
 
     <div>
         <p>Hinder beskrivelse:</p>
-        @Model.ObstacleDescription
+        @Model.ViewObstacleDescription
     </div>
 
     <div>

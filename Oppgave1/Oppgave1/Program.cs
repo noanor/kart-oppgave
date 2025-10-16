@@ -1,7 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using Oppgave1.DataContext;
+using Oppgave1.Repository;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IDataRepocs, ObstacleDataRepo>();
+
+builder.Services.AddDbContext<ApplicationContext>(options =>
+               options.UseMySql(builder.Configuration.GetConnectionString("DbConnection"),
+               new MySqlServerVersion(new Version(11, 8, 3))));
 
 var app = builder.Build();
 
