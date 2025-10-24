@@ -39,6 +39,17 @@ namespace Luftfartshinder.Models
         [Required(ErrorMessage = "Obstacle coordinates are required.")]
         public string ObstacleCoords { get; set; }
         
+<<<<<<< HEAD
     
+=======
+        public string GetLatitude()
+        {
+            return this.ObstacleCoords.Split(",")[0];
+        }
+        public string GetLongitude()
+        {
+            return this.ObstacleCoords.Split(",")[1];
+        }
+>>>>>>> 445730baa88f7cdccb9ead394803ef9045d87d32
     }
 }

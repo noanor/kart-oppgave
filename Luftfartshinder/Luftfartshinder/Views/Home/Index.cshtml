@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿@model Luftfartshinder.Models.ViewModel.ViewObstacleDataModel
+=======
+﻿@model Luftfartshinder.Models.ObstacleData
+>>>>>>> 445730baa88f7cdccb9ead394803ef9045d87d32
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -9,6 +13,7 @@
 </head>
 
 <body>
+<<<<<<< HEAD
 <header class="text-center">
     <h1>Oppgave 1</h1>
     <p>Dette er Oppgave 1 i IS-202 av Gruppe 16</p>
@@ -46,4 +51,43 @@
     <button id="btnSubmit" type="submit">Ferdig</button>
 </form>
 <script src="~/js/map.js"></script>
+=======
+    <header class="text-center">
+        <h1>Luftfartshinder</h1>
+        <p>Dette er Gruppe 16 sitt prosjekt</p>
+    </header>
+
+    <div id="map"></div>
+
+    @* <a asp-action="DataForm">Register Obstacle</a> *@
+
+    <h1 class="text-center">Registrer nytt hinder</h1>
+    <p class="text-center">Vennligst fyll inn data om nytt hinder</p>
+    <p class="text-center">Trykk på kart for plassering</p>
+    <form asp-action="DataForm" method="POST" class="text-center">
+
+        <div>
+            <label asp-for="ObstacleCoords">Hinder koordinater</label>
+            <input asp-for="ObstacleCoords" id="coords" />
+        </div>
+
+        <div>
+            <label asp-for="ObstacleName">Hinder navn</label>
+            <input asp-for="ObstacleName" />
+        </div>
+
+        <div>
+            <label asp-for="ObstacleHeight">Hinder høyde</label>
+            <input asp-for="ObstacleHeight" />
+        </div>
+
+        <div>
+            <label asp-for="ObstacleDescription">Hinder beskrivelse</label>
+            <input asp-for="ObstacleDescription" />
+        </div>
+
+        <button id="btnSubmit" type="submit">Ferdig</button>
+    </form>
+    <script src="~/js/map.js"></script>
+>>>>>>> 445730baa88f7cdccb9ead394803ef9045d87d32
 </body>

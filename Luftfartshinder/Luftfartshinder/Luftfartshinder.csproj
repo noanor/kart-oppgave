@@ -21,4 +21,11 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
   </ItemGroup>
 
+<<<<<<< HEAD
+=======
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
+>>>>>>> 445730baa88f7cdccb9ead394803ef9045d87d32
 </Project>

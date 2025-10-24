@@ -18,7 +18,12 @@ html {
 }
 
 body {
+<<<<<<< HEAD
   margin-bottom: 60px;
+=======
+    margin-bottom: 60px;
+    background-color: #FAF8F1;
+>>>>>>> 445730baa88f7cdccb9ead394803ef9045d87d32
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -28,4 +33,11 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+<<<<<<< HEAD
+=======
+}
+
+.bg-detail {
+    background-color: #34656D;
+>>>>>>> 445730baa88f7cdccb9ead394803ef9045d87d32
 }
