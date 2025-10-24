@@ -1,17 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Luftfartshinder.DataContext;
-<<<<<<< HEAD
 using Luftfartshinder.Repository;
 using System;
-=======
->>>>>>> 445730baa88f7cdccb9ead394803ef9045d87d32
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-<<<<<<< HEAD
 builder.Services.AddScoped<IDataRepocs, ObstacleDataRepo>();
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
@@ -25,18 +21,6 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 
 var app = builder.Build();
 
-=======
-
-builder.Services.AddDbContext<ApplicationContext>(options =>
-                options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
-                new MySqlServerVersion(new Version(11, 5, 2))));
-
-
-var app = builder.Build();
-
-
-
->>>>>>> 445730baa88f7cdccb9ead394803ef9045d87d32
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

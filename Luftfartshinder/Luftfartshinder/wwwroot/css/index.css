@@ -1,25 +1,11 @@
 * {
     font-family: 'Segoe UI';
-<<<<<<< HEAD
-    
-=======
->>>>>>> 445730baa88f7cdccb9ead394803ef9045d87d32
 }
 
 p {
     font-size: 18px;
 }
 
-<<<<<<< HEAD
-#map {
-    height: 490px;
-    width: 80%;
-    margin-left: 10%;
-    border: solid #333 5px;
-    border-radius: 16px;
-}
-
-=======
 @media (max-width: 1000px) {
     #map {
         width: 100%;
@@ -40,7 +26,6 @@ p {
 }
 
 
->>>>>>> 445730baa88f7cdccb9ead394803ef9045d87d32
 form {
     background-color: white;
     padding: 25px 35px;
