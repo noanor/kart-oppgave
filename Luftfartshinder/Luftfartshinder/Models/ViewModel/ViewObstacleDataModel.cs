@@ -36,15 +36,15 @@ namespace Luftfartshinder.Models.ViewModel
 
         // Koordinater for hvor hindringen befinner seg – må fylles ut
         [Required(ErrorMessage = "Obstacle coordinates are required.")]
-        public string ObstacleCoords { get; set; }
+        public string ViewObstacleCoords { get; set; }
 
         public string GetLatitude()
         {
-            return this.ObstacleCoords.Split(",")[0];
+            return this.ViewObstacleCoords.Split(",")[0];
         }
         public string GetLongitude()
         {
-            return this.ObstacleCoords.Split(",")[1];
+            return this.ViewObstacleCoords.Split(",")[1];
         }
     }
 }

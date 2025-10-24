@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36408.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oppgave1", "Luftfartshinder\Luftfartshinder.csproj", "{B2941486-DDEB-4F6E-8488-45B782D38A83}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luftfartshinder", "Luftfartshinder\Luftfartshinder.csproj", "{B2941486-DDEB-4F6E-8488-45B782D38A83}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luftfartshinder.Tests", "Luftfartshinder.Tests\Luftfartshinder.Tests.csproj", "{5367284D-D8B9-4097-80E0-46884FA676EB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oppgave1.Tests", "Oppgave1.Tests\Oppgave1.Tests.csproj", "{A2791ACD-8017-496D-AA8E-AA6B76541374}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
