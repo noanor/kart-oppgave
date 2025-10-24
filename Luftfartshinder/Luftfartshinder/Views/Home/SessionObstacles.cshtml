@@ -1,0 +1,21 @@
+﻿@model Luftfartshinder.DataContext.ApplicationContext
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<body>
+    <h2>Session Obstacles</h2>
+    <p>Session obstacles are challenges that can arise when using session state in web applications. Here are some common session obstacles:</p>
+    <ul>
+        <li><strong>Scalability Issues:</strong> Storing session data on the server can lead to scalability problems, especially in load-balanced environments where multiple servers handle requests.</li>
+        <li><strong>Data Loss:</strong> If the server crashes or is restarted, session data may be lost unless it is stored in a persistent storage mechanism.</li>
+        <li><strong>Security Concerns:</strong> Session data can be vulnerable to attacks such as session hijacking or fixation if not properly secured.</li>
+        <li><strong>Performance Overhead:</strong> Frequent access to session data can introduce performance overhead, especially if the session store is slow or if there are many concurrent users.</li>
+        <li><strong>Complexity in Management:</strong> Managing session state across multiple servers or instances can add complexity to the application architecture.</li>
+    </ul>
+    <p>To mitigate these obstacles, developers can consider using distributed caching solutions, implementing secure session management practices, and optimizing session data usage.</p>
+
+    @* @Model.Obstacles *@
+</body>

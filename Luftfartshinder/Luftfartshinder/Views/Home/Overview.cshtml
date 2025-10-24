@@ -1,0 +1,38 @@
+﻿@model Luftfartshinder.Models.ObstacleData
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Overview";
+}
+
+<head>
+    <link href="~/css/overview.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="paper">
+        <div class="info-elt">
+            <p>Hinder navn: <span>@Model.ObstacleName</span></p>
+
+        </div>
+
+        <div class="info-elt">
+            <p>Hinder høyde: <span>@Model.ObstacleHeight</span></p>
+        </div>
+
+        <div class="info-elt">
+            <p>Hinder beskrivelse: <span>@Model.ObstacleDescription</span></p>
+
+        </div>
+
+        <div class="info-elt">
+            <p>Hinder breddegrad: <span class="lat-style">@Model.GetLatitude()</span></p>
+
+        </div>
+
+        <div class="info-elt">
+            <p>Hinder lengdegrad: <span>@Model.GetLongitude()</span></p>
+        </div>
+    </div>
+</body>

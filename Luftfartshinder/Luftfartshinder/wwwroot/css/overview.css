@@ -1,0 +1,28 @@
+﻿/*#paper {
+    width: 60%;
+    background-color: #FAEAB1;
+    margin-left: 20%;
+    margin-right: auto;
+    text-align: center;
+    padding: 10px;
+}*/
+
+#paper p {
+    font-weight: 600;
+}
+
+#paper p span {
+    font-weight: 400;
+}
+
+.info-elt {
+    background-color: white;
+    padding: 5px;
+    margin-top: 10px;
+    box-shadow: rgb(37, 37, 37, 0.50) 1px 1px 8px;
+    border-radius: 8px;
+    font-size: 18px;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: auto;
+}
