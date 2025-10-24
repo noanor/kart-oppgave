@@ -1,24 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\",
+  "WorkspaceRootPath": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Luftfartshinder\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Controllers\\DashboardController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Overview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\DataContext\\ApplicationContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Shared\\_Layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\Controllers\\HomeController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\wwwroot\\css\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Madalitso\\AppData\\Local\\SourceServer\\d7b18c07dd196c97ee19db9a8eb17961b017f1d6b3b4845de41f6d9fa38c96c1\\Oppgave1\\Oppgave1\\Controllers\\HomeController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\wwwroot\\css\\overview.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Overview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\DataContext\\ApplicationContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Luftfartshinder\\DataContext\\ApplicationContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\DataContext\\AuthDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Luftfartshinder\\DataContext\\AuthDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -37,73 +42,89 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "DashboardController.cs",
-              "DocumentMoniker": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Controllers\\DashboardController.cs",
-              "RelativeDocumentMoniker": "..\\Oppgave1\\Oppgave1\\Controllers\\DashboardController.cs",
-              "ToolTip": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Controllers\\DashboardController.cs",
-              "RelativeToolTip": "..\\Oppgave1\\Oppgave1\\Controllers\\DashboardController.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T11:15:52.918Z"
+              "Title": "Overview.cshtml",
+              "DocumentMoniker": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Overview.cshtml",
+              "RelativeDocumentMoniker": "..\\Oppgave1\\Oppgave1\\Views\\Home\\Overview.cshtml",
+              "ToolTip": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Overview.cshtml",
+              "RelativeToolTip": "..\\Oppgave1\\Oppgave1\\Views\\Home\\Overview.cshtml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T10:15:49.858Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "..\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "..\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-22T11:03:26.949Z"
+              "Title": "ApplicationContext.cs",
+              "DocumentMoniker": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\DataContext\\ApplicationContext.cs",
+              "RelativeDocumentMoniker": "..\\Oppgave1\\Oppgave1\\DataContext\\ApplicationContext.cs",
+              "ToolTip": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\DataContext\\ApplicationContext.cs",
+              "RelativeToolTip": "..\\Oppgave1\\Oppgave1\\DataContext\\ApplicationContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T10:15:38.763Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "..\\Oppgave1\\Oppgave1\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "..\\Oppgave1\\Oppgave1\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA8AAAB7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-20T11:25:51.633Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "index.css",
-              "DocumentMoniker": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\wwwroot\\css\\index.css",
-              "RelativeDocumentMoniker": "..\\Oppgave1\\Oppgave1\\wwwroot\\css\\index.css",
-              "ToolTip": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\wwwroot\\css\\index.css",
-              "RelativeToolTip": "..\\Oppgave1\\Oppgave1\\wwwroot\\css\\index.css",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-10-20T10:25:36.681Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "overview.css",
-              "DocumentMoniker": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\wwwroot\\css\\overview.css",
-              "RelativeDocumentMoniker": "..\\Oppgave1\\Oppgave1\\wwwroot\\css\\overview.css",
-              "ToolTip": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\wwwroot\\css\\overview.css",
-              "RelativeToolTip": "..\\Oppgave1\\Oppgave1\\wwwroot\\css\\overview.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-10-08T11:06:34.22Z"
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "..\\Oppgave1\\Oppgave1\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "..\\Oppgave1\\Oppgave1\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T10:15:33.663Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Overview.cshtml",
-              "DocumentMoniker": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Overview.cshtml",
-              "RelativeDocumentMoniker": "..\\Oppgave1\\Oppgave1\\Views\\Home\\Overview.cshtml",
-              "ToolTip": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Overview.cshtml",
-              "RelativeToolTip": "..\\Oppgave1\\Oppgave1\\Views\\Home\\Overview.cshtml",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAAAUAAAAjAAAAAAAAAA==",
+              "Title": "ApplicationContext.cs",
+              "DocumentMoniker": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\DataContext\\ApplicationContext.cs",
+              "RelativeDocumentMoniker": "Luftfartshinder\\DataContext\\ApplicationContext.cs",
+              "ToolTip": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\DataContext\\ApplicationContext.cs",
+              "RelativeToolTip": "Luftfartshinder\\DataContext\\ApplicationContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAABZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T10:08:26.051Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AuthDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\DataContext\\AuthDbContext.cs",
+              "RelativeDocumentMoniker": "Luftfartshinder\\DataContext\\AuthDbContext.cs",
+              "ToolTip": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\DataContext\\AuthDbContext.cs",
+              "RelativeToolTip": "Luftfartshinder\\DataContext\\AuthDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T10:08:30.258Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Madalitso\\AppData\\Local\\SourceServer\\d7b18c07dd196c97ee19db9a8eb17961b017f1d6b3b4845de41f6d9fa38c96c1\\Oppgave1\\Oppgave1\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\d7b18c07dd196c97ee19db9a8eb17961b017f1d6b3b4845de41f6d9fa38c96c1\\Oppgave1\\Oppgave1\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Madalitso\\AppData\\Local\\SourceServer\\d7b18c07dd196c97ee19db9a8eb17961b017f1d6b3b4845de41f6d9fa38c96c1\\Oppgave1\\Oppgave1\\Controllers\\HomeController.cs [Read Only]",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\d7b18c07dd196c97ee19db9a8eb17961b017f1d6b3b4845de41f6d9fa38c96c1\\Oppgave1\\Oppgave1\\Controllers\\HomeController.cs [Read Only]",
+              "ViewState": "AgIAABkAAAAAAAAAAAAEwCwAAAAAAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-16T13:56:17.977Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "..\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "..\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-05T14:57:10.272Z"
+              "WhenOpened": "2025-10-04T15:29:13.657Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             }
           ]
         }
