@@ -1,0 +1,6 @@
+C:\Users\noano\code\repos\kart-oppgave\Oppgave1\Oppgave1.Tests\obj\Debug\net9.0\Oppgave1.Tests.csproj.AssemblyReference.cache
+C:\Users\noano\code\repos\kart-oppgave\Oppgave1\Oppgave1.Tests\obj\Debug\net9.0\Oppgave1.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\noano\code\repos\kart-oppgave\Oppgave1\Oppgave1.Tests\obj\Debug\net9.0\Oppgave1.Tests.AssemblyInfoInputs.cache
+C:\Users\noano\code\repos\kart-oppgave\Oppgave1\Oppgave1.Tests\obj\Debug\net9.0\Oppgave1.Tests.AssemblyInfo.cs
+C:\Users\noano\code\repos\kart-oppgave\Oppgave1\Oppgave1.Tests\obj\Debug\net9.0\Oppgave1.Tests.csproj.CoreCompileInputs.cache
+C:\Users\noano\code\repos\kart-oppgave\Oppgave1\Oppgave1.Tests\obj\Debug\net9.0\Oppgave1.Tests.sourcelink.json

@@ -1,0 +1,62 @@
+* {
+    font-family: 'Segoe UI';
+}
+
+p {
+    font-size: 18px;
+}
+
+@media (max-width: 1000px) {
+    #map {
+        width: 100%;
+        height: 600px;
+        border: none;
+        margin: 0;
+    }
+}
+
+@media (min-width: 1000px) {
+    #map {
+        height: 490px;
+        width: 90%;
+        margin-left: 5%;
+        border: solid #333 5px;
+        border-radius: 16px;
+    }
+}
+
+
+form {
+    background-color: white;
+    padding: 25px 35px;
+    border-radius: 12px;
+    width: 20%;
+    margin-left: 40%;
+    margin-right: auto;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+}
+
+#btnSubmit {
+    border: 2px solid black;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 5px 10px;
+    background-color: #57e13d;
+}
