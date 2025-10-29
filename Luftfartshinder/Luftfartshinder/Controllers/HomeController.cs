@@ -38,7 +38,7 @@ namespace Luftfartshinder.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> DataForm(ViewObstacleDataModel serverdata)
+       public async Task<ActionResult> DataForm(ViewObstacleDataModel serverdata)
         {
             if (serverdata != null && serverdata.ViewObstacleHeight > 0)
             {
