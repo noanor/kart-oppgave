@@ -787,8 +787,6 @@ C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\w7nuiw802i-9vr69e8ynj.gz
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\sg2vb6gl44-87fc7y1x7t.gz
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\4ge782ero6-mlv21k5csn.gz
-C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\tbra1yxt01-8jpga2cmlf.gz
-C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\fdxh007m95-8jpga2cmlf.gz
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\staticwebassets.development.json
@@ -800,3 +798,10 @@ C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\Luftfartshinder.pdb
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\Luftfartshinder.genruntimeconfig.cache
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\ref\Luftfartshinder.dll
+C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\tbra1yxt01-awos6wvg6e.gz
+C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\fdxh007m95-awos6wvg6e.gz

@@ -64,7 +64,6 @@ wwwroot\lib\jquery\dist\jquery.slim.js
 wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
-C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\dist\jquery.slim.min.js
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\index.css
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\overview.css
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\site.css
@@ -127,5 +126,6 @@ C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\www
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\dist\jquery.min.js
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\dist\jquery.min.map
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\dist\jquery.slim.js
-C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\LICENSE.txt
+C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\dist\jquery.slim.min.js
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\dist\jquery.slim.min.map
+C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\LICENSE.txt
