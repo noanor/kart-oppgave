@@ -33,7 +33,7 @@ namespace Luftfartshinder.Controllers
             if (identityResult.Succeeded)
             {
                 //Nå gir man brukeren er rolle
-                var roleIdentityResult = await userManager.AddToRoleAsync(identityUser, "User");
+                var roleIdentityResult = await userManager.AddToRoleAsync(identityUser, "Registerfører");
 
                 if (roleIdentityResult.Succeeded)
                 {

@@ -23,6 +23,17 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AuthDbContext>();
 
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    // Dette er default settings for passord
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequiredLength = 6;
+    options.Password.RequiredUniqueChars = 1;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

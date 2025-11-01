@@ -60,7 +60,6 @@ C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder.Tes
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder.Tests\bin\Debug\net9.0\System.Composition.Hosting.dll
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder.Tests\bin\Debug\net9.0\System.Composition.Runtime.dll
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder.Tests\bin\Debug\net9.0\System.Composition.TypedParts.dll
-C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder.Tests\bin\Debug\net9.0\System.Text.Json.dll
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder.Tests\bin\Debug\net9.0\xunit.abstractions.dll
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder.Tests\bin\Debug\net9.0\xunit.assert.dll
 C:\Users\Madalitso\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder.Tests\bin\Debug\net9.0\xunit.core.dll
