@@ -1,0 +1,48 @@
+@model Luftfartshinder.Models.ViewModel.LoginViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            
+            <h1 class="mt-3 mb-3 h3">
+                Innlogging 
+            </h1>
+            
+            <!-- Viser rød boks med feilmelding dersom innloggins misslykkes-->
+            @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
+            {
+                @Html.ValidationSummary(false, "", new { @class = "alert alert-danger" })
+            }
+
+            
+            <form method="post">
+                <div class="mb-3">
+                    <label class= "form-label">Brukernavn (superadmin)</label>
+                    <input type="text" id="brukernavn" class="form-control" asp-for="Brukernavn"/>
+                    <span asp-validation-for="Brukernavn" class="text-danger"></span>
+                </div>
+            
+                <div class="mb-3">
+                    <label class= "form-label">Passord (Test123!)</label>
+                    <input type="Password" id="passord" class="form-control" asp-for="Passord"/>
+                    <span asp-validation-for="Passord" class="text-danger"></span>
+                </div>
+            
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-dark">Logg inn</button>
+                </div>
+                
+            </form>
+            
+            <!-- Automatisk validering av brukernavn og passord uten å laste inn siden på nytt igjen -->
+            @section Scripts {
+                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+            }
+            
+        </div>
+    </div>
+</div>

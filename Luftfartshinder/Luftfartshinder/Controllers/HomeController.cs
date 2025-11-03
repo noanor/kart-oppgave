@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Luftfartshinder.Models;
 using Luftfartshinder.Models.ViewModel;
 using Luftfartshinder.Repository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Luftfartshinder.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IDataRepocs _iDataRepository;
@@ -58,7 +60,7 @@ namespace Luftfartshinder.Controllers
             }
 
 
-            return BadRequest("Obs, du må fylle inn feltene");
+            return BadRequest("Obs, du mÃ¥ fylle inn feltene");
         }
         public IActionResult DataForm(ObstacleData obstacledata)
         {
@@ -70,5 +72,25 @@ namespace Luftfartshinder.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        
+        
+        [Authorize(Roles = "Superadmin")]
+        public IActionResult SuperAdminHome()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Flybesetning, Superadmin")]
+        public IActionResult FlybesetningHome()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Registerforer, Superadmin")]
+        public IActionResult RegisterforerHome()
+        {
+            return View();
+        }
+        
     }
 }

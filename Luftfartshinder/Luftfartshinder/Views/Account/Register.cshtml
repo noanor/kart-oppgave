@@ -1,0 +1,56 @@
+@model Luftfartshinder.Models.ViewModel.RegisterViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            
+            <h1 class="mt-3 mb-3 h3">
+                Registrer en ny bruker
+            </h1>
+            <form method="post">
+                <div class="mb-3">
+                    <label class= "form-label">Fornavn</label>
+                    <input type="text" id="fornavn" class="form-control" asp-for="Fornavn"/>
+                </div>
+                
+                <div class="mb-3">
+                    <label class= "form-label">Etternavn</label>
+                    <input type="text" id="etternavn" class="form-control" asp-for="Etternavn"/>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">E-mail</label>
+                    <input type="email" id="email" class="form-control" asp-for="Email"/>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Brukernavn</label>
+                    <input type="text" id="brukernavn" class="form-control" asp-for="Brukernavn"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Passord</label>
+                    <input type="passord" id="Passord" class="form-control" asp-for="Passord"/>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Rolle</label>
+                    <select asp-for="Rolle" class="form-control">
+                        <option value="Registerfører">Registerfører</option>
+                        <option value="Flybesetning">Flybesetning</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-dark">Registrer</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
