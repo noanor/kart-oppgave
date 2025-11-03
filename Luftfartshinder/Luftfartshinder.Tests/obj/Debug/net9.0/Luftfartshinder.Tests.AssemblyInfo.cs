@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Luftfartshinder.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb4055c31e828c7a475cfdd988e280fc3c970667")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4f59522d6041bc5ce3b8fa941575f12f9ab976b5")]
 [assembly: System.Reflection.AssemblyProductAttribute("Luftfartshinder.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Luftfartshinder.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
