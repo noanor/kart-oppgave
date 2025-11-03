@@ -19,7 +19,7 @@ namespace Luftfartshinder.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<ActionResult> Report(ViewObstacleDataModel request)
+        public async Task<ActionResult> Report(Obstacle request)
         {
             return View();
         }

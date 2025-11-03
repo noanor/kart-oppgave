@@ -1,18 +1,18 @@
-﻿using Luftfartshinder.Models;
+﻿using Luftfartshinder.Models.ViewModel;
 
 namespace Luftfartshinder.Repository
 {
     public interface IDataRepocs
     {
-        Task<ObstacleData> AddObstacle(ObstacleData obstacleData);
+        Task<Obstacle> AddObstacle(Obstacle obstacleData);
 
-        Task<ObstacleData> GetObstacleById(int id);
+        Task<Obstacle> GetObstacleById(int id);
 
-        Task<IEnumerable<ObstacleData>> GetAllObstacles(ObstacleData obstacleData);
+        Task<IEnumerable<Obstacle>> GetAllObstacles(Obstacle obstacleData);
 
-        Task<ObstacleData>DeleteById(int id);
+        Task<Obstacle> DeleteById(int id);
 
-        Task<ObstacleData> UpdateObstacle(ObstacleData obstacleData);
+        Task<Obstacle> UpdateObstacle(Obstacle obstacleData);
 
 
     }

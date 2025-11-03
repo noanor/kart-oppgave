@@ -68,6 +68,10 @@ input, textarea {
   box-sizing: border-box;
 }
 
+.hidden {
+    display: none;
+}
+
 html {
   user-select: none;
   overflow: hidden;

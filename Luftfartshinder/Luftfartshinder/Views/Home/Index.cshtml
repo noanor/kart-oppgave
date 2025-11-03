@@ -1,4 +1,4 @@
-﻿@model Luftfartshinder.Models.ViewModel.ViewObstacleDataModel
+﻿@model Luftfartshinder.Models.ViewModel.Obstacle
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -22,36 +22,53 @@
         <div class="arc"><i class="material-symbols-outlined">crop_square</i></div>
     </div>
 
-    <section>
+    <form method="post">
+        <div>
+            <input type="hidden" asp-for="Longitude" id="longitude" />
+            <input type="hidden" asp-for="Latitude" id="latitude" />
+        </div>
+
+        <div>
+            <input type="hidden" asp-for="Type" id="obstacletype"/>
+        </div>
+
+        
+
+    </form>
+
+    
+
+
+    @* <section>
         <h1 class="text-center">Registrer nytt hinder</h1>
         <p class="text-center">Vennligst fyll inn data om nytt hinder</p>
         <p class="text-center">Trykk på kart for plassering</p>
         <form asp-action="DataForm" method="POST" class="text-center">
 
             <div>
-                <label asp-for="ViewObstacleCoords">Hinder koordinater</label>
-                <input asp-for="ViewObstacleCoords" id="coords" />
+                <label asp-for="Coords">Hinder koordinater</label>
+                <input asp-for="Coords" id="coords" />
             </div>
 
             <div>
                 <label>Hinder navn</label>
-                <input asp-for="ViewObstacleName" />
+                <input asp-for="Name" />
             </div>
 
             <div>
                 <label>Hinder høyde</label>
-                <input asp-for="ViewObstacleHeight" />
+                <input asp-for="Height" />
             </div>
 
             <div>
                 <label>Hinder beskrivelse</label>
-                <input asp-for="ViewObstacleDescription" />
+                <input asp-for="Description" />
             </div>
 
             <button id="btnSubmit" type="submit">Ferdig</button>
         </form>
-    </section>
+    </section> *@
 
 
-    <script src="~/js/map.js"></script>
+    <script src="~/js/map.js" defer></script>
 </body>
