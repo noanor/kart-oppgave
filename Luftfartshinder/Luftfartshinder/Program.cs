@@ -53,16 +53,22 @@ using (var scope = app.Services.CreateScope())
     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
-    string[] roles = { "Superadmin", "Registerforer", "Flybesetning" };
+    await SeedRolesAndSuperadmin(roleManager, userManager);
+}
 
-    // Opprett rollene hvis de ikke finnes
-    foreach (var role in roles)
+string[] roles = { "Superadmin", "Registerforer", "Flybesetning" };
+    
+    static async Task SeedRolesAndSuperadmin(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
     {
-        if (!await roleManager.RoleExistsAsync(role))
+        string[] roles = { "Superadmin", "Registerforer", "Flybesetning" };
+
+        foreach (var role in roles)
         {
-            await roleManager.CreateAsync(new IdentityRole(role));
+            if (!await roleManager.RoleExistsAsync(role))
+            {
+                await roleManager.CreateAsync(new IdentityRole(role));
+            }
         }
-    }
     
     //  Oppretter en superadmin-bruker for testing:
     string superadminEmail = "superadmin@kartverket.no";
@@ -76,6 +82,8 @@ using (var scope = app.Services.CreateScope())
         {
             UserName = superadminBrukernavn,
             Email = superadminEmail,
+            Fornavn = "Test",
+            Etternavn = "Tester"
         };
         
         // Lagerer passordet som hash i bakgrunnen 
