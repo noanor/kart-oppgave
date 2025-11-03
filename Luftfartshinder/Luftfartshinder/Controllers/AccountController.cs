@@ -40,7 +40,7 @@ namespace Luftfartshinder.Controllers
                 if (roleIdentityResult.Succeeded)
                 {
                     //Hvis notifikasjon sucess
-                    return RedirectToAction("Register");
+                    return RedirectToAction("Register"); 
                 }
 
 
