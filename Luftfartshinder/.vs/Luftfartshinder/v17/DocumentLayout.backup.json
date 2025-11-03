@@ -1,5 +1,6 @@
 {
   "Version": 1,
+<<<<<<< Updated upstream
   "WorkspaceRootPath": "C:\\Users\\Madalitso\\source\\repos\\kart-oppgave\\Luftfartshinder\\",
   "Documents": [
     {
@@ -45,6 +46,43 @@
     {
       "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\madalitso\\source\\repos\\kart-oppgave\\luftfartshinder\\luftfartshinder\\migrations\\authdb\\20251029154126_creatingauth.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\migrations\\authdb\\20251029154126_creatingauth.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+  "WorkspaceRootPath": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\noano\\code\\repos\\kart-oppgave\\luftfartshinder\\luftfartshinder\\datacontext\\applicationcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\datacontext\\applicationcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\noano\\code\\repos\\kart-oppgave\\luftfartshinder\\luftfartshinder\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\noano\\code\\repos\\kart-oppgave\\luftfartshinder\\luftfartshinder\\models\\viewmodel\\viewobstacledatamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\models\\viewmodel\\viewobstacledatamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\noano\\code\\repos\\kart-oppgave\\luftfartshinder\\luftfartshinder\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\noano\\code\\repos\\kart-oppgave\\luftfartshinder\\luftfartshinder\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\noano\\code\\repos\\kart-oppgave\\luftfartshinder\\luftfartshinder\\models\\obstacledata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\models\\obstacledata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\noano\\code\\repos\\kart-oppgave\\luftfartshinder\\luftfartshinder\\views\\home\\overview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\views\\home\\overview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Madalitso\\AppData\\Local\\SourceServer\\d7b18c07dd196c97ee19db9a8eb17961b017f1d6b3b4845de41f6d9fa38c96c1\\Oppgave1\\Oppgave1\\Controllers\\HomeController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+>>>>>>> Stashed changes
     }
   ],
   "DocumentGroupContainers": [
@@ -61,12 +99,75 @@
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
+<<<<<<< Updated upstream
               "$type": "Bookmark",
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+=======
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApplicationContext.cs",
+              "DocumentMoniker": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\DataContext\\ApplicationContext.cs",
+              "RelativeDocumentMoniker": "Luftfartshinder\\DataContext\\ApplicationContext.cs",
+              "ToolTip": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\DataContext\\ApplicationContext.cs",
+              "RelativeToolTip": "Luftfartshinder\\DataContext\\ApplicationContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T11:20:11.866Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "Luftfartshinder\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "Luftfartshinder\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T11:17:04.263Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Luftfartshinder\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Luftfartshinder\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T11:14:37.379Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ObstacleData.cs",
+              "DocumentMoniker": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Models\\ObstacleData.cs",
+              "RelativeDocumentMoniker": "Luftfartshinder\\Models\\ObstacleData.cs",
+              "ToolTip": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Models\\ObstacleData.cs",
+              "RelativeToolTip": "Luftfartshinder\\Models\\ObstacleData.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAgwCYAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T11:13:48.269Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ViewObstacleDataModel.cs",
+              "DocumentMoniker": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Models\\ViewModel\\ViewObstacleDataModel.cs",
+              "RelativeDocumentMoniker": "Luftfartshinder\\Models\\ViewModel\\ViewObstacleDataModel.cs",
+              "ToolTip": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Models\\ViewModel\\ViewObstacleDataModel.cs",
+              "RelativeToolTip": "Luftfartshinder\\Models\\ViewModel\\ViewObstacleDataModel.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAADwvw0AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T11:08:13.846Z"
+>>>>>>> Stashed changes
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+<<<<<<< Updated upstream
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\Madalitso\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Luftfartshinder\\Views\\Shared\\_Layout.cshtml",
@@ -87,10 +188,21 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-02T11:31:09.692Z"
+=======
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Luftfartshinder\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Luftfartshinder\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAowDEAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T11:02:26.626Z"
+>>>>>>> Stashed changes
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+<<<<<<< Updated upstream
               "Title": "DashboardController.cs",
               "DocumentMoniker": "C:\\Users\\Madalitso\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Controllers\\DashboardController.cs",
               "RelativeDocumentMoniker": "Luftfartshinder\\Controllers\\DashboardController.cs",
@@ -112,16 +224,35 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-30T10:32:24.811Z",
               "EditorCaption": ""
+=======
+              "Title": "Overview.cshtml",
+              "DocumentMoniker": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Views\\Home\\Overview.cshtml",
+              "RelativeDocumentMoniker": "Luftfartshinder\\Views\\Home\\Overview.cshtml",
+              "ToolTip": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Views\\Home\\Overview.cshtml",
+              "RelativeToolTip": "Luftfartshinder\\Views\\Home\\Overview.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T11:07:48.317Z"
+>>>>>>> Stashed changes
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
+<<<<<<< Updated upstream
               "Title": "MapController.cs",
               "DocumentMoniker": "C:\\Users\\Madalitso\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Controllers\\MapController.cs",
               "RelativeDocumentMoniker": "Luftfartshinder\\Controllers\\MapController.cs",
               "ToolTip": "C:\\Users\\Madalitso\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Controllers\\MapController.cs",
               "RelativeToolTip": "Luftfartshinder\\Controllers\\MapController.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+=======
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Madalitso\\AppData\\Local\\SourceServer\\d7b18c07dd196c97ee19db9a8eb17961b017f1d6b3b4845de41f6d9fa38c96c1\\Oppgave1\\Oppgave1\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Madalitso\\AppData\\Local\\SourceServer\\d7b18c07dd196c97ee19db9a8eb17961b017f1d6b3b4845de41f6d9fa38c96c1\\Oppgave1\\Oppgave1\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Madalitso\\AppData\\Local\\SourceServer\\d7b18c07dd196c97ee19db9a8eb17961b017f1d6b3b4845de41f6d9fa38c96c1\\Oppgave1\\Oppgave1\\Controllers\\HomeController.cs [Read Only]",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Madalitso\\AppData\\Local\\SourceServer\\d7b18c07dd196c97ee19db9a8eb17961b017f1d6b3b4845de41f6d9fa38c96c1\\Oppgave1\\Oppgave1\\Controllers\\HomeController.cs [Read Only]",
+              "ViewState": "AgIAABkAAAAAAAAAAAAEwCwAAAAAAAAAAQAAAA==",
+>>>>>>> Stashed changes
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-02T11:29:20.165Z"
             },
@@ -165,6 +296,7 @@
             {
               "$type": "Document",
               "DocumentIndex": 8,
+<<<<<<< Updated upstream
               "Title": "ViewObstacleDataModel.cs",
               "DocumentMoniker": "C:\\Users\\Madalitso\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Models\\ViewModel\\ViewObstacleDataModel.cs",
               "RelativeDocumentMoniker": "Luftfartshinder\\Models\\ViewModel\\ViewObstacleDataModel.cs",
@@ -183,6 +315,13 @@
               "ToolTip": "C:\\Users\\Madalitso\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Views\\Account\\Login.cshtml",
               "RelativeToolTip": "Luftfartshinder\\Views\\Account\\Login.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAXAAAAAAAAAA==",
+=======
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Oppgave1\\Oppgave1\\Views\\Home\\Index.cshtml",
+>>>>>>> Stashed changes
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-11-01T15:56:53.291Z"
             },
