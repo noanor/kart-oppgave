@@ -10,7 +10,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 document.getElementById('map').addEventListener('contextmenu', e => e.preventDefault());
 
 const wheel = document.querySelector('.wheel');
-const arcs  = Array.from(wheel.querySelectorAll('.arc'));
+const arcs = Array.from(wheel.querySelectorAll('.arc'));
 const centerX = window.innerWidth / 2;
 const centerY = window.innerHeight / 2;
 
@@ -28,15 +28,42 @@ map.on('moveend', () => {
     setTimeout(() => { justEndedPan = false; }, 0);
 });
 
-
-function openWheel(x, y) {
-  wheel.style.setProperty('--x', `${x}px`);
-  wheel.style.setProperty('--y', `${y}px`);
-  wheel.setAttribute('data-chosen', 0);
-    setTimeout(() => { wheel.classList.add('on') }, 50) ;
-    wheel.classList.remove('hidden');
-  isOpen = true;
+async function addObstacle(type, lat, lng) {
+    const payload = { type, lat, lng };
+    const res = await fetch('/obstacles/add-one', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+        const txt = await res.text();
+        throw new Error(`Add failed: ${txt}`);
+    }
+    return res.json();
 }
+
+// Example: you likely saved the click location when opening the wheel
+let lastClick = { lat: 0, lng: 0 };
+
+
+function openWheel(x, y, lat, lng) {
+    lastClick = { lat, lng };
+    wheel.style.setProperty('--x', `${x}px`);
+    wheel.style.setProperty('--y', `${y}px`);
+    wheel.setAttribute('data-chosen', 0);
+    setTimeout(() => { wheel.classList.add('on') }, 50);
+    wheel.classList.remove('hidden');
+    isOpen = true;
+}
+
+document.addEventListener('click', (e) => {
+    if (e.target.closest('.arc')) {
+        const type = e.target.closest('.arc').dataset.type;
+        addObstacle(type, lastClick.lat, lastClick.lng)
+            .then(() => console.log('Added'))
+            .catch(console.error);
+    }
+});
 
 function closeWheel() {
     wheel.classList.remove('on');
@@ -83,7 +110,7 @@ function addMarker(lat, lon) {
 
 function handleChoice(index) {
     const choice = parseInt(wheel.getAttribute('data-chosen'), 10);
-    
+
 
     console.log("User picked:", choice);
     let typeOfObstacle;
@@ -107,8 +134,8 @@ function handleChoice(index) {
     }
 
     document.getElementById('obstacletype').value = typeOfObstacle;
-    
-    
+
+
 }
 
 
@@ -116,57 +143,57 @@ function handleChoice(index) {
 
 /* Click anywhere to open (unless you clicked a slice while open) */
 document.addEventListener('click', (e) => {
-  const arc = e.target.closest('.arc');
+    const arc = e.target.closest('.arc');
 
-  // If the wheel is open and a slice was clicked → select it.
-  if (isOpen && arc) {
-    const index = arcs.indexOf(arc) + 1; // 1..N
-    wheel.setAttribute('data-chosen', index);
+    // If the wheel is open and a slice was clicked → select it.
+    if (isOpen && arc) {
+        const index = arcs.indexOf(arc) + 1; // 1..N
+        wheel.setAttribute('data-chosen', index);
 
-    // TODO: trigger your action here
-      handleChoice(index);
+        // TODO: trigger your action here
+        handleChoice(index);
 
-    closeWheel();
-    return;
-  }
-
-  // If the wheel is open and you clicked outside → close it.
-  if (isOpen && !arc && !e.target.closest('.wheel')) {
-    closeWheel();
-    return;
-  }
-
-const clickedInsideMap = map.getContainer().contains(e.target);
-if (!isOpen) {
-    if (clickedInsideMap && (isPanning || justEndedPan)) {
-        // It was a drag/pan (or the synthetic click right after) → do nothing
+        closeWheel();
         return;
     }
-    // Otherwise, open centered as before
-    openWheel(centerX, centerY);
-}
 
-  // If the wheel is closed → open it at the click position.
-  if (!isOpen) {
-    openWheel(centerX, centerY);
-  }
+    // If the wheel is open and you clicked outside → close it.
+    if (isOpen && !arc && !e.target.closest('.wheel')) {
+        closeWheel();
+        return;
+    }
+
+    const clickedInsideMap = map.getContainer().contains(e.target);
+    if (!isOpen) {
+        if (clickedInsideMap && (isPanning || justEndedPan)) {
+            // It was a drag/pan (or the synthetic click right after) → do nothing
+            return;
+        }
+        // Otherwise, open centered as before
+        openWheel(centerX, centerY);
+    }
+
+    // If the wheel is closed → open it at the click position.
+    if (!isOpen) {
+        openWheel(centerX, centerY);
+    }
 });
 
 /* Esc to close */
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && isOpen) closeWheel();
+    if (e.key === 'Escape' && isOpen) closeWheel();
 });
 
 /* Optional: preview highlight on hover while open */
 arcs.forEach((arc, i) => {
-  arc.addEventListener('mouseenter', () => {
-    if (!isOpen) return;
-    wheel.setAttribute('data-chosen', i + 1);
-  });
-  arc.addEventListener('mouseleave', () => {
-    if (!isOpen) return;
-    wheel.setAttribute('data-chosen', 0);
-  });
+    arc.addEventListener('mouseenter', () => {
+        if (!isOpen) return;
+        wheel.setAttribute('data-chosen', i + 1);
+    });
+    arc.addEventListener('mouseleave', () => {
+        if (!isOpen) return;
+        wheel.setAttribute('data-chosen', 0);
+    });
 });
 
 let marker;

@@ -1,2 +1,0 @@
-C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\draftEditor.js
-C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\obstacleDraft.js

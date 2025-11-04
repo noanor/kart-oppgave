@@ -594,8 +594,6 @@ C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luft
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\Luftfartshinder.genruntimeconfig.cache
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\ref\Luftfartshinder.dll
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\luftfartshinder\obj\Debug\net9.0\compressed\vylom24x76-v72rb4m7ow.gz
-c:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\it5k2btw20-5intmtvwrr.gz
-c:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\xmlwy1bauz-ztsyyxdpux.gz
 c:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\tbra1yxt01-e4magi4fcg.gz
 c:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\fdxh007m95-e4magi4fcg.gz
 c:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\Luftfartshinder.csproj.AssemblyReference.cache
@@ -798,3 +796,6 @@ c:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\it5k2btw20-1tc77uedqu.gz
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\xmlwy1bauz-19zlugblh1.gz
+C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\it5k2btw20-jjdzd16njz.gz
+C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\xmlwy1bauz-3z0pbdlo44.gz

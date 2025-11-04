@@ -23,7 +23,6 @@ builder.Services.AddSession();
 var app = builder.Build();
 Console.WriteLine("[EF DB] " + builder.Configuration.GetConnectionString("DbConnection"));
 
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -43,6 +42,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();
