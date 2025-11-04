@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Luftfartshinder.DataContext;
+using Luftfartshinder.Models;
 using Luftfartshinder.Repository;
 using System;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,10 +17,24 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
                new MariaDbServerVersion(new Version(11, 8, 3))));
 builder.Services.AddSession();
 
-//(legg til pakkene, og arv)
-//builder.Services.AddDbContext<AuthDbContext>(options =>
-//               options.UseMySql(builder.Configuration.GetConnectionString("AuthConnection"),
-//               new MySqlServerVersion(new Version(11, 8, 3))));
+//////(legg til pakkene, og arv)
+builder.Services.AddDbContext<AuthDbContext>(options =>
+           options.UseMySql(builder.Configuration.GetConnectionString("AuthConnection"),
+             new MySqlServerVersion(new Version(11, 8, 3))));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<AuthDbContext>();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    // Dette er default settings for passord
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequiredLength = 6;
+    options.Password.RequiredUniqueChars = 1;
+});
 
 var app = builder.Build();
 Console.WriteLine("[EF DB] " + builder.Configuration.GetConnectionString("DbConnection"));
@@ -40,7 +56,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Account}/{action=Login}/{id?}")
     .WithStaticAssets();
 
 app.Run();

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Luftfartshinder.Models;
 using Luftfartshinder.Models.ViewModel;
 using Luftfartshinder.Repository;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Luftfartshinder.Controllers
 {
@@ -67,5 +69,24 @@ namespace Luftfartshinder.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        
+        [Authorize(Roles = "SuperAdmin")]
+        public IActionResult SuperAdminHome()
+        {
+            return View();
+        }
+    
+        [Authorize(Roles = "Registrar, SuperAdmin")]
+        public IActionResult RegistrarHome()
+        {
+            return View();
+        }
+    
+        [Authorize(Roles = "FlightCrew, SuperAdmin")]
+        public IActionResult IndexHome()
+        {
+            return View("Index");
+        }
+        
     }
 }

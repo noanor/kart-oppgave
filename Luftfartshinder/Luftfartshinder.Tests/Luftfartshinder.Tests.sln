@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luftfartshinder", "Luftfartshinder.csproj", "{9A57807F-EC6A-8151-92DD-3C4FC344A395}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luftfartshinder.Tests", "Luftfartshinder.Tests.csproj", "{644CE034-DAC6-618D-4FA5-26D6EB678BCC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,15 +10,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9A57807F-EC6A-8151-92DD-3C4FC344A395}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A57807F-EC6A-8151-92DD-3C4FC344A395}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A57807F-EC6A-8151-92DD-3C4FC344A395}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A57807F-EC6A-8151-92DD-3C4FC344A395}.Release|Any CPU.Build.0 = Release|Any CPU
+		{644CE034-DAC6-618D-4FA5-26D6EB678BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{644CE034-DAC6-618D-4FA5-26D6EB678BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{644CE034-DAC6-618D-4FA5-26D6EB678BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{644CE034-DAC6-618D-4FA5-26D6EB678BCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {ACCA09F6-BA54-4572-9E30-0BA25FBA9310}
+		SolutionGuid = {A2103E2C-32D4-4A51-8A46-682856536682}
 	EndGlobalSection
 EndGlobal
