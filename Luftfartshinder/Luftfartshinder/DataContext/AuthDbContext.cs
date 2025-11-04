@@ -6,7 +6,7 @@ using System.IO.Pipelines;
 
 namespace Luftfartshinder.DataContext
 {
-    public class AuthDbContext : IdentityDbContext
+    public class AuthDbContext : IdentityDbContext<ApplicationUser>
     {
         public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options) { }
 
@@ -16,32 +16,32 @@ namespace Luftfartshinder.DataContext
 
             //seed roller
 
-            var flyBesetningRolleId = "d0fe1bc1-1838-48db-b483-a31510e5a2f6";
-            var registerFørerRolleId = "89b2d41d-faa8-45fe-8601-1925778c4c30";
-            var superAdminRolleId = "66eeb3d3-c3a2-4c2a-8e47-d6513739f417";
+            var flightCrewRoleId = "d0fe1bc1-1838-48db-b483-a31510e5a2f6";
+            var registrarRoleId = "89b2d41d-faa8-45fe-8601-1925778c4c30";
+            var superAdminRoleId = "66eeb3d3-c3a2-4c2a-8e47-d6513739f417";
 
             var roller = new List<IdentityRole>
             {
                 new IdentityRole
                 {
-                    Name = "Flybesetning",
-                    NormalizedName = "Flybesetning",
-                    Id = flyBesetningRolleId,
-                    ConcurrencyStamp = flyBesetningRolleId
+                    Name = "FlightCrew",
+                    NormalizedName = "FLIGHTCREW",
+                    Id = flightCrewRoleId,
+                    ConcurrencyStamp = flightCrewRoleId
                 },
                 new IdentityRole
                 {
-                    Name = "Registerfører",
-                    NormalizedName = "Registerfører",
-                    Id = registerFørerRolleId,
-                    ConcurrencyStamp = registerFørerRolleId
+                    Name = "Registrar",
+                    NormalizedName = "REGISTRAR",
+                    Id = registrarRoleId,
+                    ConcurrencyStamp = registrarRoleId
                 },
                 new IdentityRole
                 {
-                    Name = "Superadmin",
-                    NormalizedName = "Superadmin",
-                    Id = superAdminRolleId,
-                    ConcurrencyStamp = superAdminRolleId
+                    Name = "SuperAdmin",
+                    NormalizedName = "SUPERADMIN",
+                    Id = superAdminRoleId,
+                    ConcurrencyStamp = superAdminRoleId
                 }
             };
             
@@ -52,44 +52,45 @@ namespace Luftfartshinder.DataContext
 
             var superAdminId = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b";
 
-            var superAdminBruker = new IdentityUser
+            var superAdminUser = new ApplicationUser
             {
                 Id = superAdminId,
                 UserName = "superadmin@kartverket.no",
-                NormalizedUserName = "Superadmin@kartverket.no".ToUpper(),
+                NormalizedUserName = "SUPERADMIN@KARTVERKET.NO",
                 Email = "superadmin@kartverket.no",
-                NormalizedEmail = "Superadmin@kartverket.no".ToUpper(),
-               
-               
+                NormalizedEmail = "SUPERADMIN@KARTVERKET.NO",
+                FirstName = "Super",
+                LastName = "Admin",
             };
 
-            superAdminBruker.PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(superAdminBruker, "Superadmin123");
+            superAdminUser.PasswordHash = new PasswordHasher<ApplicationUser>().HashPassword(superAdminUser, "Superadmin123");
 
-            builder.Entity<IdentityUser>().HasData(superAdminBruker);
+            builder.Entity<ApplicationUser>().HasData(superAdminUser);
+
 
        
 
             // Gi alle brukerne til SuperAdmin,
 
-            var superAdminRoller = new List<IdentityUserRole<string>>
+            var superAdminRoles = new List<IdentityUserRole<string>>
             {
                 new IdentityUserRole<string>
                 {
-                    RoleId = flyBesetningRolleId,
+                    RoleId = flightCrewRoleId,
                     UserId = superAdminId
                 },
                 new IdentityUserRole<string>
                 {
-                    RoleId = registerFørerRolleId,
+                    RoleId = registrarRoleId,
                     UserId = superAdminId
                 },
                  new IdentityUserRole<string>
                 {
-                    RoleId = superAdminRolleId,
+                    RoleId = superAdminRoleId,
                     UserId = superAdminId
                 }
             };
-            builder.Entity<IdentityUserRole<string>>().HasData(superAdminRoller);
+            builder.Entity<IdentityUserRole<string>>().HasData(superAdminRoles);
         }
     }
 }

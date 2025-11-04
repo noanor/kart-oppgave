@@ -3724,31 +3724,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Madalitso\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/Users/dennis/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Madalitso\\Source\\Repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
+      "projectUniqueName": "/Users/dennis/Dokumenter/UiA 2024-2027/3-Semester/IS-202/kart-oppgave/Luftfartshinder/Luftfartshinder.Tests/Luftfartshinder.Tests.csproj",
       "projectName": "Luftfartshinder.Tests",
-      "projectPath": "C:\\Users\\Madalitso\\Source\\Repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
-      "packagesPath": "C:\\Users\\Madalitso\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Madalitso\\Source\\Repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\obj\\",
+      "projectPath": "/Users/dennis/Dokumenter/UiA 2024-2027/3-Semester/IS-202/kart-oppgave/Luftfartshinder/Luftfartshinder.Tests/Luftfartshinder.Tests.csproj",
+      "packagesPath": "/Users/dennis/.nuget/packages/",
+      "outputPath": "/Users/dennis/Dokumenter/UiA 2024-2027/3-Semester/IS-202/kart-oppgave/Luftfartshinder/Luftfartshinder.Tests/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Madalitso\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/dennis/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3822,7 +3815,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
