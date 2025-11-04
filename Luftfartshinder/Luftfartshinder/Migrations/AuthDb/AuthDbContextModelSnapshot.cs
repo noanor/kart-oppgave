@@ -22,81 +22,7 @@ namespace Luftfartshinder.Migrations.AuthDb
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex");
-
-                    b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "d0fe1bc1-1838-48db-b483-a31510e5a2f6",
-                            ConcurrencyStamp = "d0fe1bc1-1838-48db-b483-a31510e5a2f6",
-                            Name = "Flybesetning",
-                            NormalizedName = "Flybesetning"
-                        },
-                        new
-                        {
-                            Id = "89b2d41d-faa8-45fe-8601-1925778c4c30",
-                            ConcurrencyStamp = "89b2d41d-faa8-45fe-8601-1925778c4c30",
-                            Name = "Registerfører",
-                            NormalizedName = "Registerfører"
-                        },
-                        new
-                        {
-                            Id = "66eeb3d3-c3a2-4c2a-8e47-d6513739f417",
-                            ConcurrencyStamp = "66eeb3d3-c3a2-4c2a-8e47-d6513739f417",
-                            Name = "Superadmin",
-                            NormalizedName = "Superadmin"
-                        });
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+            modelBuilder.Entity("Luftfartshinder.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
@@ -114,6 +40,14 @@ namespace Luftfartshinder.Migrations.AuthDb
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
@@ -164,18 +98,94 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             Id = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6150b775-23f1-463d-98d0-5da76eee5ba2",
+                            ConcurrencyStamp = "b48a9b9b-4394-4254-a304-e9238abbb241",
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
+                            FirstName = "Super",
+                            LastName = "Admin",
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@KARTVERKET.NO",
                             NormalizedUserName = "SUPERADMIN@KARTVERKET.NO",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDH2oeiICIcVEUaF+sStVzNIfzsjCuLL6tNhvQ0p6GlY5Sv81DDOPCoFzs4qjd43oQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIsbDyyFfN7qW2firFzg9//s2PT86AJOEZDDpPi/cVX3+bPWbsfok8VFV8yah8YYPA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "895f928b-a94a-473d-9057-7a791b329fa6",
+                            SecurityStamp = "2ceaf4c4-f2e7-41b7-8654-862c0403b12e",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "d0fe1bc1-1838-48db-b483-a31510e5a2f6",
+                            ConcurrencyStamp = "d0fe1bc1-1838-48db-b483-a31510e5a2f6",
+                            Name = "FlightCrew",
+                            NormalizedName = "FLIGHTCREW"
+                        },
+                        new
+                        {
+                            Id = "89b2d41d-faa8-45fe-8601-1925778c4c30",
+                            ConcurrencyStamp = "89b2d41d-faa8-45fe-8601-1925778c4c30",
+                            Name = "Registrar",
+                            NormalizedName = "REGISTRAR"
+                        },
+                        new
+                        {
+                            Id = "66eeb3d3-c3a2-4c2a-8e47-d6513739f417",
+                            ConcurrencyStamp = "66eeb3d3-c3a2-4c2a-8e47-d6513739f417",
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMIN"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -287,7 +297,7 @@ namespace Luftfartshinder.Migrations.AuthDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Luftfartshinder.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -296,7 +306,7 @@ namespace Luftfartshinder.Migrations.AuthDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Luftfartshinder.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -311,7 +321,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Luftfartshinder.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -320,7 +330,7 @@ namespace Luftfartshinder.Migrations.AuthDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Luftfartshinder.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
