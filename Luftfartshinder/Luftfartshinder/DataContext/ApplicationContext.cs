@@ -12,7 +12,7 @@ namespace Luftfartshinder.DataContext
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         { 
         }
-        public DbSet<ObstacleData> Obstacles { get; set; } //Table in the database
+        public DbSet<Obstacle> Obstacles { get; set; } //Table in the database
        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
