@@ -12,6 +12,9 @@
         <link rel="stylesheet" href="~/Luftfartshinder.styles.css" asp-append-version="true" />
     </head>
     <body>
+		@if (signInManager.IsSignedIn(User))
+		{
+
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-detail box-shadow position-fixed">
                 <div class="container-fluid">
@@ -29,27 +32,24 @@
                                 <a class="nav-link text-white" asp-area="" asp-controller="Obstacles" asp-action="Draft">Draft</a>
                             </li>
                         </ul>
+						<div class="me-3 text-light navbar-right">
+                                
+								@User?.Identity?.Name
+                                
+
+							<a class="btn me-3 bg-light text-dark"
+							    asp-area=""
+							    asp-controller="Account"
+							    asp-action="SignOut">Sign out</a>
+
+						</div>
                     <div>
-						@if (signInManager.IsSignedIn(User))
-						{
-							<div class="me-3 text-light navbar-right">
-                                
-								    @User?.Identity?.Name
-                                
-
-							    <a class="btn me-3 bg-light text-dark"
-							       asp-area=""
-							       asp-controller="Account"
-							       asp-action="SignOut">Sign out</a>
-
-							</div>
-
-						}
 					</div>
                     </div>
                 </div>
             </nav>
         </header>
+		}
         
         @RenderBody()
             
