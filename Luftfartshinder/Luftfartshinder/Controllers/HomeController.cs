@@ -4,7 +4,6 @@ using Luftfartshinder.Models;
 using Luftfartshinder.Models.ViewModel;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Luftfartshinder.Controllers
 {
