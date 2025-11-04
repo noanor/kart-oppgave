@@ -14,7 +14,8 @@ builder.Services.AddScoped<IDataRepocs, ObstacleDataRepo>();
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
                options.UseMySql(builder.Configuration.GetConnectionString("DbConnection"),
-               new MySqlServerVersion(new Version(11, 8, 3))));
+               new MariaDbServerVersion(new Version(11, 8, 3))));
+builder.Services.AddSession();
 
 //////(legg til pakkene, og arv)
 builder.Services.AddDbContext<AuthDbContext>(options =>
@@ -36,6 +37,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 var app = builder.Build();
+Console.WriteLine("[EF DB] " + builder.Configuration.GetConnectionString("DbConnection"));
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -47,8 +49,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
-app.UseAuthentication();
+app.UseSession();
 app.UseAuthorization();
 
 app.MapStaticAssets();

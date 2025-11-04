@@ -40,20 +40,21 @@ namespace Luftfartshinder.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> DataForm(ViewObstacleDataModel serverdata)
+        public async Task<ActionResult> DataForm(Obstacle serverdata)
         {
-            if (serverdata != null && serverdata.ViewObstacleHeight > 0)
+            if (serverdata != null && serverdata.Height > 0)
             {
-                ObstacleData obstacleData = new ObstacleData
+                Obstacle obstacleData = new Obstacle
                 {
-                    ObstacleName = serverdata.ViewObstacleName,
-                    ObstacleHeight = serverdata.ViewObstacleHeight,
-                    ObstacleDescription = serverdata.ViewObstacleDescription,
-                    ObstacleCoords = serverdata.ViewObstacleCoords
+                    Name = serverdata.Name,
+                    Height = serverdata.Height,
+                    Description = serverdata.Description,
+                    Latitude = serverdata.Latitude,
+                    Longitude = serverdata.Longitude
                 };
 
                 var toDatabase = await _iDataRepository.AddObstacle(obstacleData);
-                serverdata.ViewObstacleID = toDatabase.ObstacleID;
+                serverdata.Id = toDatabase.Id;
 
                 return View("Overview", serverdata);
 
@@ -61,10 +62,6 @@ namespace Luftfartshinder.Controllers
 
 
             return BadRequest("Obs, du m� fylle inn feltene");
-        }
-        public IActionResult DataForm(ObstacleData obstacledata)
-        {
-            return View("Overview", obstacledata);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

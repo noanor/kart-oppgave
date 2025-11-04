@@ -1,42 +1,68 @@
-# ---- Visual Studio & ASP.NET ----
+# ---- Visual Studio / IDEs ----
 .vs/
-bin/
-obj/
-Debug/
-Release/
-x64/
-x86/
-*.user
+.vscode/
+.idea/
 *.suo
+*.user
+*.rsuser
 *.userosscache
 *.sln.docstates
+*.userprefs
+_ReSharper.Caches/
+*.DotSettings.user
 
-# ---- Build / Publish / Cache ----
+# ---- .NET build output ----
+bin/
+obj/
 [Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+*.pdb
+*.mdb
+
+# ---- Logs / cache / temp ----
 [Ll]og/
 [Tt]emp/
 *.log
 *.cache
-*.pdb
-*.mdb
+
+# ---- ASP.NET Core config ----
+# Keep appsettings.json in git, but ignore dev/local variants
+appsettings.Development.json
+appsettings.*.local.json
+appsettings.Local.json
+# User secrets should live in the user-secrets store; ignore env files just in case
+.env
+*.env
 
 # ---- Entity Framework ----
 Migrations/obj/
 *.dbmdl
+# Local databases (if you use SQLite/SQL Server localdb)
+*.db
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.mdf
+*.ldf
 
-# ---- Package Management ----
+# ---- Package management ----
 packages/
 *.nupkg
 *.snupkg
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log
+pnpm-debug.log
 
-# ---- User-specific files ----
-*.rsuser
-*.userprefs
-*.ide
-*.vscode/
-*.DS_Store
+# ---- Web assets (if you build to wwwroot) ----
+wwwroot/lib/
+wwwroot/dist/
 
-# ---- ASP.NET & IIS ----
+# ---- IIS / legacy ASP.NET artifacts ----
 App_Data/
 App_Browsers/
 App_Code/
@@ -46,17 +72,25 @@ App_WebReferences/
 *.pubxml
 *.Publish.xml
 project.lock.json
-wwwroot/lib/
 
-# ---- Docker / Containers ----
-*.dockerignore
-docker-compose.*
-Dockerfile.*
+# ---- Docker ----
+# Keep Dockerfile and compose in git – only ignore local override
+docker-compose.override.yml
+# DO NOT ignore Dockerfile or compose by pattern
+
+# ---- Test / Coverage / Benchmarks ----
+TestResult*/
+*.coverage
+*.coveragexml
+.coverage
+BenchmarkDotNet.Artifacts/
 
 # ---- System files ----
+*.DS_Store
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 
-# ---- Temporary debug indexes ----
-FileContentIndex
+# ---- Misc scratch ----
+.history/
+*.orig

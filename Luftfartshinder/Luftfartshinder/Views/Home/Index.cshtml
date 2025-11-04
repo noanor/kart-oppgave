@@ -1,4 +1,4 @@
-﻿@model Luftfartshinder.Models.ViewModel.ViewObstacleDataModel
+﻿@model Luftfartshinder.Models.ViewModel.Obstacle
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -6,44 +6,69 @@
     <link rel="stylesheet" href="~/css/index.css"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://kit.fontawesome.com/53d2400da6.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 
 <body>
-<header class="text-center">
-    <h1>Oppgave 1</h1>
-    <p>Dette er Oppgave 1 i IS-202 av Gruppe 16</p>
-</header>
 
-<div id="map"></div>
+    <div id="map"></div>
 
-@* <a asp-action="DataForm">Register Obstacle</a> *@
-
-<h1 class="text-center">Registrer nytt hinder</h1>
-<p class="text-center">Vennligst fyll inn data om nytt hinder</p>
-<p class="text-center">Trykk på kart for plassering</p>
-<form asp-action="DataForm" method="POST" class="text-center">
-
-    <div>
-        <label asp-for="ViewObstacleCoords">Hinder koordinater</label>
-        <input asp-for="ViewObstacleCoords" id="coords" />
+    <div class="wheel">
+        <div class="arc" data-type="punkt"><i class="fa-solid fa-genderless"></i></div>
+        <div class="arc" data-type="mast"><i class="material-symbols-outlined">adjust</i></div>
+        <div class="arc" data-type="linje"><i class="material-symbols-outlined"> show_chart</i></div>
+        <div class="arc" data-type="luftspenn"><i class="material-symbols-outlined">diagonal_line</i></div>
+        <div class="arc" data-type="flate"><i class="material-symbols-outlined">crop_square</i></div>
     </div>
 
-    <div>
-        <label>Hinder navn</label>
-        <input asp-for="ViewObstacleName" />
-    </div>
+    <form method="post">
+        <div>
+            <input type="hidden" asp-for="Longitude" id="longitude" />
+            <input type="hidden" asp-for="Latitude" id="latitude" />
+        </div>
 
-    <div>
-        <label>Hinder høyde</label>
-        <input asp-for="ViewObstacleHeight" />
-    </div>
+        <div>
+            <input type="hidden" asp-for="Type" id="obstacletype"/>
+        </div>
 
-    <div>
-        <label>Hinder beskrivelse</label>
-        <input asp-for="ViewObstacleDescription" />
-    </div>
+        
 
-    <button id="btnSubmit" type="submit">Ferdig</button>
-</form>
-<script src="~/js/map.js"></script>
+    </form>
+
+    
+
+
+    @* <section>
+        <h1 class="text-center">Registrer nytt hinder</h1>
+        <p class="text-center">Vennligst fyll inn data om nytt hinder</p>
+        <p class="text-center">Trykk på kart for plassering</p>
+        <form asp-action="DataForm" method="POST" class="text-center">
+
+            <div>
+                <label asp-for="Coords">Hinder koordinater</label>
+                <input asp-for="Coords" id="coords" />
+            </div>
+
+            <div>
+                <label>Hinder navn</label>
+                <input asp-for="Name" />
+            </div>
+
+            <div>
+                <label>Hinder høyde</label>
+                <input asp-for="Height" />
+            </div>
+
+            <div>
+                <label>Hinder beskrivelse</label>
+                <input asp-for="Description" />
+            </div>
+
+            <button id="btnSubmit" type="submit">Ferdig</button>
+        </form>
+    </section> *@
+
+
+    <script src="~/js/map.js" defer></script>
 </body>

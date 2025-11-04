@@ -3,6 +3,7 @@ using Luftfartshinder.Models;
 using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
+using Luftfartshinder.Models.ViewModel;
 
 namespace Luftfartshinder.DataContext
 {
@@ -19,8 +20,8 @@ namespace Luftfartshinder.DataContext
 
             //Primary keys, remember to think of .Entity as THIS => table in the database
 
-            modelBuilder.Entity<ObstacleData>()
-                .HasKey(pk => pk.ObstacleID); //Primary key for ObstacleData
+            modelBuilder.Entity<Obstacle>()
+                .HasKey(pk => pk.Id); //Primary key for Data
         }
     }
 }
