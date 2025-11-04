@@ -48,6 +48,7 @@ namespace Luftfartshinder.Controllers
                     Height = serverdata.Height,
                     Description = serverdata.Description,
                     Latitude = serverdata.Latitude,
+
                     Longitude = serverdata.Longitude
                 };
 
