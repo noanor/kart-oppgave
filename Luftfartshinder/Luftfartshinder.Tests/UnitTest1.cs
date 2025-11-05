@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //using System.Collections.Generic;
 //using System.ComponentModel.DataAnnotations;
 //using Xunit;
@@ -66,3 +67,11 @@
 //    }
 //}
 //>>>>>>> 445730baa88f7cdccb9ead394803ef9045d87d32
+=======
+namespace Luftfartshinder.Tests
+{
+    // Temporary placeholder so the test project compiles.
+    // Replace with real tests later.
+    public class UnitTest1 { }
+} 
+>>>>>>> f788ca2 (Lagde registrar side)
