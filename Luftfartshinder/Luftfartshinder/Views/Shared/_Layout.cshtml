@@ -2,18 +2,18 @@
 @inject SignInManager<ApplicationUser> signInManager
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - Luftfartshinder</title>
-        <script type="importmap"></script>
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/Luftfartshinder.styles.css" asp-append-version="true" />
-    </head>
-    <body>
-		@if (signInManager.IsSignedIn(User))
-		{
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Luftfartshinder</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Luftfartshinder.styles.css" asp-append-version="true" />
+</head>
+<body>
+    @if (signInManager.IsSignedIn(User))
+    {
 
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-detail box-shadow position-fixed">
@@ -32,50 +32,42 @@
                                 <a class="nav-link text-white" asp-area="" asp-controller="Obstacles" asp-action="Draft">Draft</a>
                             </li>
                         </ul>
-						<div class="me-3 text-light navbar-right">
-                                
-								@User?.Identity?.Name
-                                
+                        <div class="me-3 text-light navbar-right">
 
-							<a class="btn me-3 bg-light text-dark"
-							    asp-area=""
-							    asp-controller="Account"
-							    asp-action="SignOut">Sign out</a>
+                            @User?.Identity?.Name
 
-						</div>
-                    <div>
-					</div>
+
+                            <a class="btn me-3 bg-light text-dark"
+                               asp-area=""
+                               asp-controller="Account"
+                               asp-action="SignOut">Sign out</a>
+
+                        </div>
+                        <div>
+                        </div>
                     </div>
                 </div>
             </nav>
         </header>
-		}
-        
-        @RenderBody()
-            
-        
+    }
 
-        @* <footer class="border-top footer text-muted">
+    @RenderBody()
+
+    @* <footer class="border-top footer text-muted">
             <div class="container">
                 &copy; 2025 - Luftfartshinder - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
         </footer> *@
 
-	@* <div class="container">
-		<main role="main" class="pb-3">
-			@RenderBody()
-		</main>
-	</div> *@
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - Luftfartshinder - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
 
-	<footer class="border-top footer text-muted">
-		<div class="container">
-			&copy; 2025 - Luftfartshinder - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-		</div>
-	</footer>
-
-	<script src="~/lib/jquery/dist/jquery.min.js"></script>
-	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="~/js/site.js" asp-append-version="true"></script>
-	@await RenderSectionAsync("Scripts", required: false)
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

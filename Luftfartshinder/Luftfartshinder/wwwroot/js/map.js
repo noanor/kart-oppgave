@@ -1,22 +1,17 @@
-﻿var map = L.map('map').setView([58.1630, 8.003], 13);
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
-}).addTo(map);
-
+﻿
 // // Source: https://codepen.io/wheatup/pen/GbgyLY
 
 // OPTIONAL: keep this if you still want to block context menus
 document.getElementById('map').addEventListener('contextmenu', e => e.preventDefault());
 
-const wheel = document.querySelector('.wheel');
-const arcs = Array.from(wheel.querySelectorAll('.arc'));
-const centerX = window.innerWidth / 2;
-const centerY = window.innerHeight / 2;
+// LEAFLET MAP
+var map = L.map('map').setView([58.1630, 8.003], 13);
 
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+}).addTo(map);
 
 let isOpen = false;
-
 let isPanning = false;
 let justEndedPan = false;
 
@@ -28,6 +23,86 @@ map.on('moveend', () => {
     setTimeout(() => { justEndedPan = false; }, 0);
 });
 
+
+// WHEEL MENU
+const wheel = document.querySelector('.wheel');
+const arcs = Array.from(wheel.querySelectorAll('.arc'));
+const centerX = window.innerWidth / 2;
+const centerY = window.innerHeight / 2;
+
+function openWheel(x, y, lat, lng) {
+    lastClick = { lat, lng };
+    wheel.style.setProperty('--x', `${x}px`);
+    wheel.style.setProperty('--y', `${y}px`);
+    wheel.setAttribute('data-chosen', 0);
+    setTimeout(() => { wheel.classList.add('on') }, 50);
+    wheel.classList.remove('hidden');
+    isOpen = true;
+}
+function closeWheel() {
+    wheel.classList.remove('on');
+    setTimeout(() => { wheel.classList.add('hidden') }, 500);
+    wheel.setAttribute('data-chosen', 0);
+    isOpen = false;
+}
+function handleChoice(index) {
+    const choice = parseInt(wheel.getAttribute('data-chosen'), 10);
+
+
+    console.log("User picked:", choice);
+    let typeOfObstacle;
+
+    switch (choice) {
+        case 1:
+            typeOfObstacle = 'mast'
+            break;
+        case 2:
+            typeOfObstacle = 'punkt'
+            break;
+        case 3:
+            typeOfObstacle = 'linje'
+            break;
+        case 4:
+            typeOfObstacle = 'luftspenn'
+            break;
+        case 5:
+            typeOfObstacle = 'flate'
+            break;
+    }
+
+    document.getElementById('obstacletype').value = typeOfObstacle;
+
+}
+
+document.addEventListener('click', (e) => {
+    if (e.target.closest('.arc')) {
+        const type = e.target.closest('.arc').dataset.type;
+        addObstacle(type, lastClick.lat, lastClick.lng)
+            .then(() => console.log('Added'))
+            .catch(console.error);
+    }
+});
+
+
+/* Esc to close */
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) closeWheel();
+});
+
+/* Optional: preview highlight on hover while open */
+arcs.forEach((arc, i) => {
+    arc.addEventListener('mouseenter', () => {
+        if (!isOpen) return;
+        wheel.setAttribute('data-chosen', i + 1);
+    });
+    arc.addEventListener('mouseleave', () => {
+        if (!isOpen) return;
+        wheel.setAttribute('data-chosen', 0);
+    });
+});
+
+
+// ADD OBSTACLE TO DRAFT
 async function addObstacle(type, lat, lng) {
     const payload = { type, lat, lng };
     const res = await fetch('/obstacles/add-one', {
@@ -44,33 +119,6 @@ async function addObstacle(type, lat, lng) {
 
 // Example: you likely saved the click location when opening the wheel
 let lastClick = { lat: 0, lng: 0 };
-
-
-function openWheel(x, y, lat, lng) {
-    lastClick = { lat, lng };
-    wheel.style.setProperty('--x', `${x}px`);
-    wheel.style.setProperty('--y', `${y}px`);
-    wheel.setAttribute('data-chosen', 0);
-    setTimeout(() => { wheel.classList.add('on') }, 50);
-    wheel.classList.remove('hidden');
-    isOpen = true;
-}
-
-document.addEventListener('click', (e) => {
-    if (e.target.closest('.arc')) {
-        const type = e.target.closest('.arc').dataset.type;
-        addObstacle(type, lastClick.lat, lastClick.lng)
-            .then(() => console.log('Added'))
-            .catch(console.error);
-    }
-});
-
-function closeWheel() {
-    wheel.classList.remove('on');
-    setTimeout(() => { wheel.classList.add('hidden') }, 500);
-    wheel.setAttribute('data-chosen', 0);
-    isOpen = false;
-}
 
 function setLL(lat, lon) {
     // write to hidden inputs (5–6 decimals is 1–10 m precision)
@@ -107,39 +155,6 @@ function addMarker(lat, lon) {
     const display = document.getElementById('llDisplay');
     if (display) display.textContent = `Lat ${lat.toFixed(6)}, Lon ${lon.toFixed(6)}`;
 }
-
-function handleChoice(index) {
-    const choice = parseInt(wheel.getAttribute('data-chosen'), 10);
-
-
-    console.log("User picked:", choice);
-    let typeOfObstacle;
-
-    switch (choice) {
-        case 1:
-            typeOfObstacle = 'mast'
-            break;
-        case 2:
-            typeOfObstacle = 'punkt'
-            break;
-        case 3:
-            typeOfObstacle = 'linje'
-            break;
-        case 4:
-            typeOfObstacle = 'luftspenn'
-            break;
-        case 5:
-            typeOfObstacle = 'flate'
-            break;
-    }
-
-    document.getElementById('obstacletype').value = typeOfObstacle;
-
-
-}
-
-
-
 
 /* Click anywhere to open (unless you clicked a slice while open) */
 document.addEventListener('click', (e) => {
@@ -179,22 +194,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-/* Esc to close */
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isOpen) closeWheel();
-});
-
-/* Optional: preview highlight on hover while open */
-arcs.forEach((arc, i) => {
-    arc.addEventListener('mouseenter', () => {
-        if (!isOpen) return;
-        wheel.setAttribute('data-chosen', i + 1);
-    });
-    arc.addEventListener('mouseleave', () => {
-        if (!isOpen) return;
-        wheel.setAttribute('data-chosen', 0);
-    });
-});
 
 let marker;
 

@@ -17,7 +17,7 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
                new MariaDbServerVersion(new Version(11, 8, 3))));
 builder.Services.AddSession();
 
-//////(legg til pakkene, og arv)
+// (legg til pakkene, og arv)
 builder.Services.AddDbContext<AuthDbContext>(options =>
            options.UseMySql(builder.Configuration.GetConnectionString("AuthConnection"),
              new MySqlServerVersion(new Version(11, 8, 3))));
