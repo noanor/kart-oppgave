@@ -7,7 +7,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Luftfartshinder.DataContext;
-using Luftfartshinder.Models;
+using Luftfartshinder.Models.ViewModel;
 
 namespace Luftfartshinder.Controllers
 {
@@ -27,7 +27,7 @@ namespace Luftfartshinder.Controllers
         // GET /Registrar
         public IActionResult Index(string q = "", string from = "", string to = "")
         {
-            var data = _db.Set<ObstacleData>().AsEnumerable();
+            var data = _db.Set<Obstacle>().AsEnumerable();
             var mapped = data.Select((o, i) => MapToRow(o, i)).ToList();
 
             if (!string.IsNullOrWhiteSpace(q))
@@ -53,7 +53,7 @@ namespace Luftfartshinder.Controllers
         // GET /Registrar/Details/5
         public IActionResult Details(int id)
         {
-            var set = _db.Set<ObstacleData>().AsEnumerable();
+            var set = _db.Set<Obstacle>().AsEnumerable();
             foreach (var item in set)
             {
                 var foundId = GetInt(item, "Id", "ObstacleId", "EntityId", "RowId");
