@@ -1,0 +1,198 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder\\controllers\\registrarcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\controllers\\registrarcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder\\views\\registrar\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\views\\registrar\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder\\views\\registrar\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\views\\registrar\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder\\models\\viewmodel\\viewobstacledatamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\models\\viewmodel\\viewobstacledatamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5367284D-D8B9-4097-80E0-46884FA676EB}|Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder.tests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5367284D-D8B9-4097-80E0-46884FA676EB}|Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj|solutionrelative:luftfartshinder.tests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "Luftfartshinder\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "Luftfartshinder\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAADoAAAAAAAAAAADwv0kAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-11-04T09:55:41.732Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Luftfartshinder\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Luftfartshinder\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAB0AAABzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-03T12:24:00.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Luftfartshinder\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Luftfartshinder\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-03T12:21:45.928Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder.Tests\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "Luftfartshinder.Tests\\UnitTest1.cs",
+              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder.Tests\\UnitTest1.cs",
+              "RelativeToolTip": "Luftfartshinder.Tests\\UnitTest1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T12:06:18.519Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Views\\Registrar\\Details.cshtml",
+              "RelativeDocumentMoniker": "Luftfartshinder\\Views\\Registrar\\Details.cshtml",
+              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Views\\Registrar\\Details.cshtml",
+              "RelativeToolTip": "Luftfartshinder\\Views\\Registrar\\Details.cshtml",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAAAGcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-03T11:54:09.426Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Views\\Registrar\\Index.cshtml",
+              "RelativeDocumentMoniker": "Luftfartshinder\\Views\\Registrar\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Views\\Registrar\\Index.cshtml",
+              "RelativeToolTip": "Luftfartshinder\\Views\\Registrar\\Index.cshtml",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAuwGsAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-03T11:52:58.637Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RegistrarController.cs",
+              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Controllers\\RegistrarController.cs",
+              "RelativeDocumentMoniker": "Luftfartshinder\\Controllers\\RegistrarController.cs",
+              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Controllers\\RegistrarController.cs",
+              "RelativeToolTip": "Luftfartshinder\\Controllers\\RegistrarController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T11:47:48.948Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ViewObstacleDataModel.cs",
+              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Models\\ViewModel\\ViewObstacleDataModel.cs",
+              "RelativeDocumentMoniker": "Luftfartshinder\\Models\\ViewModel\\ViewObstacleDataModel.cs",
+              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Models\\ViewModel\\ViewObstacleDataModel.cs",
+              "RelativeToolTip": "Luftfartshinder\\Models\\ViewModel\\ViewObstacleDataModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T11:38:43.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Luftfartshinder\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Models\\User.cs",
+              "RelativeToolTip": "Luftfartshinder\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T11:25:58.231Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 276,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
