@@ -1,6 +1,7 @@
 ﻿using Luftfartshinder.Models.ViewModel;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Luftfartshinder.Controllers
@@ -35,7 +36,15 @@ namespace Luftfartshinder.Controllers
             }
             return View(userViewModel);
         }
-        
+
+        [HttpPost]
+        public async Task<IActionResult> Delete (Guid id)
+
+
+        {
+
+            return View();
+        }
     }
 
 }
