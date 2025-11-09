@@ -1,0 +1,65 @@
+﻿@model Luftfartshinder.Models.ViewModel.UserViewModel
+@{
+}
+@* Flash-meldinger (Peek -> ikke forbruk) *@
+@{
+	var ok = TempData.Peek("Success") as string;
+	var err = TempData.Peek("Error") as string;
+}
+@if (!string.IsNullOrWhiteSpace(ok))
+{
+	<div class="alert alert-success" role="alert">@ok</div>
+}
+@if (!string.IsNullOrWhiteSpace(err))
+{
+	<div class="alert alert-danger" role="alert">@err</div>
+}
+
+<div class=" bg-secondary bg-opacity-10 py-2">
+	<div class=" container">
+		<h1>All Users - Admin Functionality</h1>
+	</div>
+</div>
+
+<div>
+	<div class="container py-5">
+		@if (Model.Users != null || Model.Users.Any())
+		{
+			<table class="table">
+				<thead>
+					<tr>
+						<th> Id</th>
+						<th> Username</th>
+						<th> Email</th>
+						<th> </th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var user in Model.Users)
+					{
+						<tr>
+							<td>@user.Id</td>
+							<td>@user.UserName</td>
+							<td>@user.EmailAdress</td>
+							<td>
+								<form method="post"
+									  asp-controller="SuperAdmin"
+									  asp-action="Delete"
+									  asp-route-id="@user.Id">
+									<button class=" btn btn-danger" type="submit">Delete  </button>
+
+								</form>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		}
+		else
+		{
+			<p> No users found!</p>
+		}
+
+
+	</div>
+</div>

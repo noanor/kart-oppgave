@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IDataRepocs, ObstacleDataRepo>();
@@ -36,6 +37,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredUniqueChars = 1;
 });
 
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 var app = builder.Build();
 Console.WriteLine("[EF DB] " + builder.Configuration.GetConnectionString("DbConnection"));
 
@@ -50,6 +52,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseSession();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

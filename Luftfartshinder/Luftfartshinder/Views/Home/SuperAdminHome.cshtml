@@ -1,2 +1,28 @@
-<h2>Welcome Superadmin</h2>
-<a asp-controller="Account" asp-action="Register" class="btn btn-dark">Register a new user </a>
+@using Microsoft.AspNetCore.Identity
+<h1>Welcome Superadmin</h1>
+
+
+
+<div class="d-flex justify-content-center align-items-start gap-5 mt-5 flex-wrap">
+    
+    <a asp-controller="SuperAdmin" asp-action="List" class="text-decoration-none text-dark">
+        <div class="card shadow-lg border-0" style="width: 20rem;">
+            <img src="~/images/admin-dashboard.jpg" class="card-img-top" alt="">
+            <div class="card-body text-center">
+                <h5 class="card-title fw-bold">Manage Users</h5>
+                <p class="card-text">An overview of all users.</p>
+            </div>
+        </div>
+    </a>
+
+            
+    <a asp-controller="Account" asp-action="Register" class="text-decoration-none text-dark">
+        <div class="card shadow-lg border-0" style="width: 20rem;">
+            <img src="~/images/admin-dashboard.jpg" class="card-img-top" alt="">
+            <div class="card-body text-center">
+                <h5 class="card-title fw-bold">Register Users</h5>
+                <p class="card-text">Make new users.</p>
+            </div>
+        </div>
+    </a>
+</div>
