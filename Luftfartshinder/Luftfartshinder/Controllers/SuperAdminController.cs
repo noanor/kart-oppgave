@@ -1,4 +1,5 @@
-﻿using Luftfartshinder.Models.ViewModel;
+﻿using Luftfartshinder.Models;
+using Luftfartshinder.Models.ViewModel;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -11,11 +12,13 @@ namespace Luftfartshinder.Controllers
     public class SuperAdminController : Controller
     {
         private readonly IUserRepository userRepository;
+        private readonly UserManager<ApplicationUser> userManager;
 
 
-        public SuperAdminController(IUserRepository userRepository)
+        public SuperAdminController(IUserRepository userRepository, UserManager<ApplicationUser> userManager)
         {
             this.userRepository = userRepository;
+            this.userManager = userManager;
         }
         public async Task<IActionResult> List()
         {
@@ -38,13 +41,32 @@ namespace Luftfartshinder.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete (Guid id)
-
-
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(Guid id)
         {
+            var user = await userManager.FindByIdAsync(id.ToString());
 
+            if (user is not null)
+            {
+
+                var IdentityResult = await userManager.DeleteAsync(user);
+
+                if (IdentityResult.Succeeded && IdentityResult is not null)
+                {
+                    return RedirectToAction("List", "SuperAdmin");
+                }
+            }
             return View();
         }
     }
-
 }
+
+
+
+
+
+
+
+       
+
+
