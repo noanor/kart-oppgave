@@ -1,9 +1,8 @@
-using Microsoft.EntityFrameworkCore;
 using Luftfartshinder.DataContext;
 using Luftfartshinder.Models;
 using Luftfartshinder.Repository;
-using System;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
