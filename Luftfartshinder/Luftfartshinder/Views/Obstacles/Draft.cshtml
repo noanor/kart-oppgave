@@ -12,52 +12,52 @@
     }
     else
     {
-    
-            <table class="table table-striped table-hover">
-                <caption>Obstacles in current Session</caption>
-                <thead>
+
+        <table class="table table-striped table-hover">
+            <caption>Obstacles in current Session</caption>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Height</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                @for (var i = 0; i < Model.Obstacles.Count; i++)
+                {
+                    var o = Model.Obstacles[i];
                     <tr>
-                        <th>#</th>
-                        <th>Type</th>
-                        <th>Name</th>
-                        <th>Height</th>
-                        <th>Latitude</th>
-                        <th>Longitude</th>
-                        <th>Description</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                    @for (var i = 0; i < Model.Obstacles.Count; i++)
-                    {
-                        var o = Model.Obstacles[i];
-                        <tr>
-                            <td>@(i + 1)</td>
-                            <td>@o.Type</td>
-                            <td>@(o.Name ?? o.GetType().GetProperty("Name")?.GetValue(o) ?? "")</td>
-                            <td>
-                                @{
-                                    // Try both property names in case your Obstacle uses a different one
-                                    var hProp = o.GetType().GetProperty("ViewObstacleHeight") ?? o.GetType().GetProperty("Height");
-                                    var hVal = hProp?.GetValue(o);
-                                }
-                                @hVal
-                            </td>
-                            <td>
-                                @{
-                                    var latitude = o.GetType().GetProperty("Latitude")?.GetValue(o);
-                                    string formattedLatitude = String.Format("{0:0.000000}", latitude);
-                                }
-                                @formattedLatitude
-                            </td>
-                            <td>
-                                @{
-                                    var longitude = o.GetType().GetProperty("Longitude")?.GetValue(o);
-                                    string formattedLongitude = String.Format("{0:0.000000}", longitude);
-                                }
-                                @formattedLongitude
-                            </td>
-                            <td>@(o.Description ?? o.GetType().GetProperty("Description")?.GetValue(o) ?? "")</td>
+                        <td>@(i + 1)</td>
+                        <td>@o.Type</td>
+                        <td>@(o.Name ?? o.GetType().GetProperty("Name")?.GetValue(o) ?? "")</td>
+                        <td>
+                            @{
+                                // Try both property names in case your Obstacle uses a different one
+                                var hProp = o.GetType().GetProperty("ViewObstacleHeight") ?? o.GetType().GetProperty("Height");
+                                var hVal = hProp?.GetValue(o);
+                            }
+                            @hVal
+                        </td>
+                        <td>
+                            @{
+                                var latitude = o.GetType().GetProperty("Latitude")?.GetValue(o);
+                                string formattedLatitude = String.Format("{0:0.000000}", latitude);
+                            }
+                            @formattedLatitude
+                        </td>
+                        <td>
+                            @{
+                                var longitude = o.GetType().GetProperty("Longitude")?.GetValue(o);
+                                string formattedLongitude = String.Format("{0:0.000000}", longitude);
+                            }
+                            @formattedLongitude
+                        </td>
+                        <td>@(o.Description ?? o.GetType().GetProperty("Description")?.GetValue(o) ?? "")</td>
                         <td>
                             <a href="#" style="vertical-align: middle; text-decoration: none;">
                                 Edit <span class="material-symbols-outlined inline-icon">
@@ -65,11 +65,11 @@
                                 </span>
                             </a>
                         </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-    
+                    </tr>
+                }
+            </tbody>
+        </table>
+
 
         <div class="mb-5">
             <p class="text-muted">Review the obstacles above before submitting them for review.</p>
