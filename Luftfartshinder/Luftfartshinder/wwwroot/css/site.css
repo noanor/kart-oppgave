@@ -34,3 +34,8 @@ body {
 .bg-detail {
     background-color: #34656D;
 }
+
+.inline-icon {
+    font-size: 1.2rem;
+    vertical-align: text-bottom;
+}

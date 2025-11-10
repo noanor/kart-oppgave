@@ -8,15 +8,17 @@ namespace Luftfartshinder.Models.ViewModel
         public int Id { get; set; }
 
         // Navn på hindringen – må fylles ut
+        public string Type { get; set; } = "";
+
         [Required(ErrorMessage = "Obstacle name is required.")]
         public string Name { get; set; }
 
         // Intern lagring av høydeverdien
-        private int _height;
+        private double? _height;
 
         // Høyde på hindringen – må være mellom 0 og 200
-        [Range(0, 200, ErrorMessage = "Obstacle height must be between 0 and 200.")]
-        public int Height
+        //[Range(0, 200, ErrorMessage = "Obstacle height must be between 0 and 200.")]
+        public double? Height
         {
             get => _height;
             set
@@ -30,17 +32,17 @@ namespace Luftfartshinder.Models.ViewModel
             }
         }
 
-        // Beskrivelse av hindringen – må fylles ut
-        [Required(ErrorMessage = "Obstacle description is required.")]
-        public string Description { get; set; }
-
         // Koordinater for hvor hindringen befinner seg – må fylles ut
         [Required(ErrorMessage = "Obstacle latitude is required.")]
-        public string Latitude { get; set; }
+        public double Latitude { get; set; }
         [Required(ErrorMessage = "Obstacle longitude is required.")]
-        public string Longitude { get; set; }
+        public double Longitude { get; set; }
+
+        // Beskrivelse av hindringen – må fylles ut
+        //[Required(ErrorMessage = "Obstacle description is required.")]
+        public string Description { get; set; }
+
 
         public bool IsDraft { get; set; } = true;
-        public string Type { get; set; } = "";
     }
 }

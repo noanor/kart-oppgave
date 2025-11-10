@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.IO.Pipelines;
 
 namespace Luftfartshinder.DataContext
 {
@@ -44,7 +43,7 @@ namespace Luftfartshinder.DataContext
                     ConcurrencyStamp = superAdminRoleId
                 }
             };
-            
+
             //Gjør klar for migrasjon
             builder.Entity<IdentityRole>().HasData(roller);
 
@@ -68,7 +67,7 @@ namespace Luftfartshinder.DataContext
             builder.Entity<ApplicationUser>().HasData(superAdminUser);
 
 
-       
+
 
             // Gi alle brukerne til SuperAdmin,
 

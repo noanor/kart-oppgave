@@ -5,26 +5,29 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <h2>Draft Obstacles (@Model.Obstacles.Count)</h2>
+<div style="overflow:auto;" class="container mt-3">
+    @if (Model.Obstacles.Count == 0)
+    {
+        <p>Obstacle draft is empty.</p>
+    }
+    else
+    {
 
-@if (Model.Obstacles.Count == 0)
-{
-    <p>No obstacles in draft yet.</p>
-}
-else
-{
-    <div style="overflow:auto;">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-hover">
+            <caption>Obstacles in current Session</caption>
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Type</th>
                     <th>Name</th>
                     <th>Height</th>
-                    <th>Coords</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
                     <th>Description</th>
+                    <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 @for (var i = 0; i < Model.Obstacles.Count; i++)
                 {
                     var o = Model.Obstacles[i];
@@ -42,31 +45,48 @@ else
                         </td>
                         <td>
                             @{
-                                // Show either "lat,lng" or a combined coords string
-                                var latitude = o.GetType().GetProperty("Latitude")?.GetValue(o) as string;
-                                var longitude = o.GetType().GetProperty("Longitude")?.GetValue(o) as string;
-                                
-                                if (!string.IsNullOrWhiteSpace(latitude) && !string.IsNullOrEmpty(longitude))
-                                {
-                                    @latitude
-                                }
-                                
+                                var latitude = o.GetType().GetProperty("Latitude")?.GetValue(o);
+                                string formattedLatitude = String.Format("{0:0.000000}", latitude);
                             }
+                            @formattedLatitude
+                        </td>
+                        <td>
+                            @{
+                                var longitude = o.GetType().GetProperty("Longitude")?.GetValue(o);
+                                string formattedLongitude = String.Format("{0:0.000000}", longitude);
+                            }
+                            @formattedLongitude
                         </td>
                         <td>@(o.Description ?? o.GetType().GetProperty("Description")?.GetValue(o) ?? "")</td>
+                        <td>
+                            <a
+                               asp-action="EditObstacle"
+                               asp-controller="Obstacles"
+                               asp-route-index="@o.Id"
+                                style="vertical-align: middle; text-decoration: none;">
+                                Edit <span class="material-symbols-outlined inline-icon">
+                                    edit
+                                </span>
+                            </a>
+                        </td>
                     </tr>
                 }
             </tbody>
         </table>
-    </div>
 
-    <form asp-action="Commit" asp-controller="Obstacles" method="post" class="d-inline">
-        @Html.AntiForgeryToken()
-        <button class="btn btn-primary btn-sm" type="submit">Commit to DB</button>
-    </form>
 
-    <form asp-action="ClearDraft" asp-controller="Obstacles" method="post" class="d-inline ms-2">
-        @Html.AntiForgeryToken()
-        <button class="btn btn-outline-danger btn-sm" type="submit">Clear Draft</button>
-    </form>
-}
+        <div class="mb-5">
+            <p class="text-muted">Review the obstacles above before submitting them for review.</p>
+            <form asp-action="SubmitDraft" asp-controller="Obstacles" method="post" class="d-inline">
+                @Html.AntiForgeryToken()
+                <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+            </form>
+
+            <form asp-action="ClearDraft" asp-controller="Obstacles" method="post" class="d-inline ms-2">
+                @Html.AntiForgeryToken()
+                <button class="btn btn-outline-danger btn-sm" type="submit">Clear Draft</button>
+            </form>
+        </div>
+    }
+
+</div>
