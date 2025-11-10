@@ -59,11 +59,11 @@
                         </td>
                         <td>@(o.Description ?? o.GetType().GetProperty("Description")?.GetValue(o) ?? "")</td>
                         <td>
-                            <a
-                               asp-action="EditObstacle"
+                            <a 
+                                asp-action="EditObstacle"
                                asp-controller="Obstacles"
                                asp-route-index="@o.Id"
-                                style="vertical-align: middle; text-decoration: none;">
+                               style="vertical-align: middle; text-decoration: none;">
                                 Edit <span class="material-symbols-outlined inline-icon">
                                     edit
                                 </span>
@@ -73,6 +73,7 @@
                 }
             </tbody>
         </table>
+
 
 
         <div class="mb-5">
