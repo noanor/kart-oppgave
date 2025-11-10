@@ -35,7 +35,54 @@ body {
     background-color: #34656D;
 }
 
+
 .inline-icon {
     font-size: 1.2rem;
     vertical-align: text-bottom;
 }
+/* --- Registrar UI tweaks --- */
+.table .col-status {
+    width: 140px;
+}
+
+.table .col-actions {
+    width: 90px;
+}
+
+.badge.rounded-pill {
+    font-weight: 600;
+}
+
+/* Back to List link styling */
+.back-link {
+    color: #212529;
+    transition: color 0.1s ease-in-out;
+}
+
+    .back-link:hover {
+        color: #0d6efd;
+        text-decoration: underline;
+    }
+
+.table .col-status {
+    width: 140px;
+}
+
+.table .col-actions {
+    width: 90px;
+}
+
+
+textarea.form-control {
+    resize: vertical;
+}
+
+.card-title {
+    letter-spacing: 0.2px;
+}
+
+textarea.form-control {
+    resize: vertical;
+}
+
+>>>>>>> 50b962d (Lagde registrar side)
