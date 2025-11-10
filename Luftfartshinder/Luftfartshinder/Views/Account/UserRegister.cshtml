@@ -1,0 +1,75 @@
+@model Luftfartshinder.Models.ViewModel.RegisterViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            
+            <h1 class="mt-3 mb-3 h3">
+                Registrer en ny bruker
+            </h1>
+            <p class="mb-4 text-muted">
+                Please fill in the form to create your account.
+            </p>
+            
+            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+            
+            <form method="post">
+                <div class="mb-3">
+                    <label class= "form-label">First name</label>
+                    <input type="text" id="firstname" class="form-control" asp-for="FirstName"/>
+                    <span class="text-danger" asp-validation-for="FirstName"></span>
+                </div>
+                
+                <div class="mb-3">
+                    <label class= "form-label">Last name</label>
+                    <input type="text" id="lastname" class="form-control" asp-for="LastName"/>
+                    <span class="text-danger" asp-validation-for="LastName"></span>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">E-mail</label>
+                    <input type="email" id="email" class="form-control" asp-for="Email"/>
+                    <span class="text-danger" asp-validation-for="Email"></span>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" id="username" class="form-control" asp-for="Username"/>
+                    <span class="text-danger" asp-validation-for="Username"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="password" class="form-control" asp-for="Password"/>
+                    <span class="text-danger" asp-validation-for="Password"></span>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Role</label>
+                    <select asp-for="SelectedRole" class="form-control">
+                        <option value="">-- Select a role --</option>
+                        <option value="Registrar">Registrar</option>
+                        <option value="FlightCrew">FlightCrew</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="SelectedRole"></span>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-dark">Confirm registration</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+

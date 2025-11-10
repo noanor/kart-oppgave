@@ -1,4 +1,5 @@
 ﻿using Luftfartshinder.DataContext;
+using Luftfartshinder.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +13,7 @@ namespace Luftfartshinder.Repository
         {
             this.authDbContext = authDbContext;
         }
-        public async Task<IEnumerable<IdentityUser>> GetAll()
+        public async Task<IEnumerable<ApplicationUser>> GetAll()
         {
             var users = await authDbContext.Users.ToListAsync();
 

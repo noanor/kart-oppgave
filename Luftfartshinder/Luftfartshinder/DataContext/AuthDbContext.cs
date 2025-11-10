@@ -60,6 +60,7 @@ namespace Luftfartshinder.DataContext
                 NormalizedEmail = "SUPERADMIN@KARTVERKET.NO",
                 FirstName = "Super",
                 LastName = "Admin",
+                IsApproved = true
             };
 
             superAdminUser.PasswordHash = new PasswordHasher<ApplicationUser>().HashPassword(superAdminUser, "Superadmin123");

@@ -26,35 +26,80 @@ namespace Luftfartshinder.Controllers
 
         [HttpPost]
         [Authorize(Roles = "SuperAdmin")]
-        public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            var identityUser = new ApplicationUser
+            var newUser = new ApplicationUser
             {
-                FirstName = registerViewModel.FirstName,
-                LastName = registerViewModel.LastName,
-                Email = registerViewModel.Email,
-                UserName = registerViewModel.Username
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                UserName = model.Username,
+                IsApproved = true
             };
 
-            var identityResult = await userManager.CreateAsync(identityUser, registerViewModel.Password);
+            var createResult = await userManager.CreateAsync(newUser, model.Password);
 
-            if (identityResult.Succeeded)
+            if (createResult.Succeeded)
             {
-                //Nå gir man brukeren er rolle
-                var roleIdentityResult = await userManager.AddToRoleAsync(identityUser, registerViewModel.SelectedRole);
+                var roleResult = await userManager.AddToRoleAsync(newUser, model.SelectedRole);
 
-                if (roleIdentityResult.Succeeded)
+                if (roleResult.Succeeded)
                 {
-                    //Hvis notifikasjon sucess
                     return RedirectToAction("Register"); 
                 }
-
-
             }
 
-            // Vis feil notifikasjon
             return View();
+        }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult UserRegister()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> UserRegister(RegisterViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var newUser = new ApplicationUser
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                UserName = model.Username
+            };
+
+            var createResult = await userManager.CreateAsync(newUser, model.Password);
+
+            if (!createResult.Succeeded)
+            {
+                foreach (var error in createResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View(model);
+            }
+
+            var roleResult = await userManager.AddToRoleAsync(newUser, model.SelectedRole);
+
+            if (!roleResult.Succeeded)
+            {
+                foreach (var error in roleResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View(model);
+            }
+
+            TempData["RegistrationSuccess"] = "Registration successful! Please wait for admin approval before logging in.";
+            return RedirectToAction("Login");
         }
 
         [HttpGet]
@@ -66,29 +111,36 @@ namespace Luftfartshinder.Controllers
         
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            var signInResult = await signInManager.PasswordSignInAsync(loginViewModel.Username, loginViewModel.Password, false, false);
-
-            if (signInResult.Succeeded)
+            var user = await userManager.FindByNameAsync(model.Username);
+            
+            if (user != null && !user.IsApproved)
             {
-                var user = await userManager.FindByNameAsync(loginViewModel.Username);
-                var roles = await userManager.GetRolesAsync(user);
-
-                if (roles.Contains("SuperAdmin"))
-                    return RedirectToAction("SuperAdminHome", "Home");
-
-                if (roles.Contains("Registrar"))
-                    return RedirectToAction("RegistrarHome", "Home");
-
-                if (roles.Contains("FlightCrew"))
-                    return RedirectToAction("Index", "Home");
-                
-                return RedirectToAction("index", "Home");
+                ModelState.AddModelError("", "Your account is pending approval by an administrator.");
+                return View();
             }
-            //viser feil
-            ModelState.AddModelError("", "Invalid username or password");
-            return View();
+
+            var signInResult = await signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
+
+            if (!signInResult.Succeeded)
+            {
+                ModelState.AddModelError("", "Invalid username or password");
+                return View();
+            }
+
+            var roles = await userManager.GetRolesAsync(user);
+
+            if (roles.Contains("SuperAdmin"))
+                return RedirectToAction("SuperAdminHome", "Home");
+
+            if (roles.Contains("Registrar"))
+                return RedirectToAction("RegistrarHome", "Home");
+
+            if (roles.Contains("FlightCrew"))
+                return RedirectToAction("Index", "Home");
+                
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]

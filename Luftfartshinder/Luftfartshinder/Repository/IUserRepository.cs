@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Luftfartshinder.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Luftfartshinder.Repository
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<IdentityUser>> GetAll();
+        Task<IEnumerable<ApplicationUser>> GetAll();
     }
 }

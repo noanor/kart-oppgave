@@ -1,18 +1,45 @@
 ﻿@model Luftfartshinder.Models.ViewModel.UserViewModel
 @{
 }
-@* Flash-meldinger (Peek -> ikke forbruk) *@
-@{
-	var ok = TempData.Peek("Success") as string;
-	var err = TempData.Peek("Error") as string;
-}
-@if (!string.IsNullOrWhiteSpace(ok))
+
+@* Success/Error Messages *@
+@if (TempData["Success"] != null)
 {
-	<div class="alert alert-success" role="alert">@ok</div>
+	<div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 9999; min-width: 400px; max-width: 600px;">
+		<div id="successAlert" class="alert alert-success alert-dismissible fade show shadow-lg border-0" role="alert">
+			<div class="d-flex align-items-center">
+				<div class="flex-shrink-0">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+						<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+					</svg>
+				</div>
+				<div class="flex-grow-1 ms-3">
+					<strong>Success!</strong>
+					<div class="small mt-1">@TempData["Success"]</div>
+				</div>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		</div>
+	</div>
 }
-@if (!string.IsNullOrWhiteSpace(err))
+@if (TempData["Error"] != null)
 {
-	<div class="alert alert-danger" role="alert">@err</div>
+	<div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 9999; min-width: 400px; max-width: 600px;">
+		<div id="errorAlert" class="alert alert-danger alert-dismissible fade show shadow-lg border-0" role="alert">
+			<div class="d-flex align-items-center">
+				<div class="flex-shrink-0">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+						<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+					</svg>
+				</div>
+				<div class="flex-grow-1 ms-3">
+					<strong>Error!</strong>
+					<div class="small mt-1">@TempData["Error"]</div>
+				</div>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		</div>
+	</div>
 }
 
 <div class=" bg-secondary bg-opacity-10 py-2">
@@ -23,32 +50,88 @@
 
 <div>
 	<div class="container py-5">
+		
+		<!-- Role Filter Buttons -->
+		<div class="mb-4">
+			<div class="btn-group" role="group" aria-label="Filter by role">
+				<a href="@Url.Action("List", new { roleFilter = "All" })" 
+				   class="btn @(ViewBag.CurrentFilter == "All" ? "btn-dark" : "btn-outline-dark")">
+					All Users
+				</a>
+				<a href="@Url.Action("List", new { roleFilter = "Registrar" })" 
+				   class="btn @(ViewBag.CurrentFilter == "Registrar" ? "btn-dark" : "btn-outline-dark")">
+					Registrars
+				</a>
+				<a href="@Url.Action("List", new { roleFilter = "FlightCrew" })" 
+				   class="btn @(ViewBag.CurrentFilter == "FlightCrew" ? "btn-dark" : "btn-outline-dark")">
+					Flight Crew
+				</a>
+			</div>
+			<span class="ms-3 text-muted">
+				Showing: <strong>@ViewBag.CurrentFilter</strong> (@Model.Users.Count() user@(Model.Users.Count() != 1 ? "s" : ""))
+			</span>
+		</div>
+		
 		@if (Model.Users != null || Model.Users.Any())
 		{
-			<table class="table">
+			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th> Id</th>
-						<th> Username</th>
-						<th> Email</th>
-						<th> </th>
+						<th>Username</th>
+						<th>Email</th>
+						<th>Role</th>
+						<th>Status</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach (var user in Model.Users)
 					{
 						<tr>
-							<td>@user.Id</td>
 							<td>@user.UserName</td>
 							<td>@user.EmailAdress</td>
+							<td>@user.Role</td>
 							<td>
-								<form method="post"
-									  asp-controller="SuperAdmin"
-									  asp-action="Delete"
-									  asp-route-id="@user.Id">
-									<button class=" btn btn-danger" type="submit">Delete  </button>
-
-								</form>
+								@if (user.IsApproved)
+								{
+									<span class="badge bg-success">Approved</span>
+								}
+								else
+								{
+									<span class="badge bg-warning text-dark">Pending</span>
+								}
+							</td>
+							<td>
+								@if (!user.IsApproved)
+								{
+									<form method="post" style="display:inline;"
+										  asp-controller="SuperAdmin"
+										  asp-action="Approve"
+										  asp-route-id="@user.Id"
+										  data-confirm="Are you sure you want to approve @user.UserName?"
+										  data-action-type="approve">
+										<button class="btn btn-success btn-sm" type="submit">Approve</button>
+									</form>
+									<form method="post" style="display:inline;"
+										  asp-controller="SuperAdmin"
+										  asp-action="Decline"
+										  asp-route-id="@user.Id"
+										  data-confirm="Are you sure you want to decline @user.UserName? This will remove the user from the system."
+										  data-action-type="decline">
+										<button class="btn btn-danger btn-sm" type="submit">Decline</button>
+									</form>
+								}
+								else
+								{
+									<form method="post" style="display:inline;"
+										  asp-controller="SuperAdmin"
+										  asp-action="Delete"
+										  asp-route-id="@user.Id"
+										  data-confirm="Are you sure you want to delete @user.UserName?"
+										  data-action-type="delete">
+										<button class="btn btn-danger btn-sm" type="submit">Delete</button>
+									</form>
+								}
 							</td>
 						</tr>
 					}
@@ -57,9 +140,101 @@
 		}
 		else
 		{
-			<p> No users found!</p>
+			<div class="alert alert-info" role="alert">
+				<i class="bi bi-info-circle"></i> No users found with role: <strong>@ViewBag.CurrentFilter</strong>
+			</div>
 		}
 
 
 	</div>
 </div>
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header border-0">
+				<h5 class="modal-title" id="confirmModalTitle">Confirm Action</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body" id="confirmModalBody">
+				Are you sure you want to proceed?
+			</div>
+			<div class="modal-footer border-0">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary" id="confirmModalBtn">Confirm</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts
+{
+	<script>
+		let formToSubmit = null;
+		const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+
+		function autoDismissAlerts() {
+			setTimeout(function () {
+				const successAlert = document.getElementById('successAlert');
+				const errorAlert = document.getElementById('errorAlert');
+
+				if (successAlert) {
+					new bootstrap.Alert(successAlert).close();
+				}
+
+				if (errorAlert) {
+					new bootstrap.Alert(errorAlert).close();
+				}
+			}, 4000);
+		}
+
+		function getButtonStyle(actionType) {
+			if (actionType === 'approve') {
+				return { text: 'Approve', class: 'btn-success' };
+			}
+			if (actionType === 'delete') {
+				return { text: 'Delete', class: 'btn-danger' };
+			}
+			if (actionType === 'decline') {
+				return { text: 'Decline', class: 'btn-danger' };
+			}
+			return { text: 'Confirm', class: 'btn-primary' };
+		}
+
+		function showConfirmation(message, buttonText, buttonClass, form) {
+			document.getElementById('confirmModalBody').textContent = message;
+			const confirmButton = document.getElementById('confirmModalBtn');
+			confirmButton.textContent = buttonText;
+			confirmButton.className = 'btn ' + buttonClass;
+			formToSubmit = form;
+			confirmModal.show();
+		}
+
+		function setupConfirmationForms() {
+			document.querySelectorAll('form[data-confirm]').forEach(function(form) {
+				form.addEventListener('submit', function(event) {
+					event.preventDefault();
+					
+					const message = form.getAttribute('data-confirm');
+					const actionType = form.getAttribute('data-action-type');
+					const buttonStyle = getButtonStyle(actionType);
+					
+					showConfirmation(message, buttonStyle.text, buttonStyle.class, form);
+				});
+			});
+		}
+
+		document.getElementById('confirmModalBtn').addEventListener('click', function() {
+			if (formToSubmit) {
+				confirmModal.hide();
+				formToSubmit.submit();
+			}
+		});
+
+		document.addEventListener('DOMContentLoaded', function() {
+			autoDismissAlerts();
+			setupConfirmationForms();
+		});
+	</script>
+}
