@@ -59,7 +59,11 @@
                         </td>
                         <td>@(o.Description ?? o.GetType().GetProperty("Description")?.GetValue(o) ?? "")</td>
                         <td>
-                            <a href="#" style="vertical-align: middle; text-decoration: none;">
+                            <a
+                               asp-action="EditObstacle"
+                               asp-controller="Obstacles"
+                               asp-route-index="@o.Id"
+                                style="vertical-align: middle; text-decoration: none;">
                                 Edit <span class="material-symbols-outlined inline-icon">
                                     edit
                                 </span>

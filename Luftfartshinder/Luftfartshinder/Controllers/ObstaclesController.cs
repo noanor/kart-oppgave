@@ -93,6 +93,25 @@ public partial class ObstaclesController : Controller
         return RedirectToAction("Index", "Home");
     }
 
+    // === POST: /obstacles/edit-obstacle ===
+    [HttpPost("/obstacles/edit-obstacle")]
+    public IActionResult EditObstacle(int index)
+    {
+        var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
+        if (draft is null || index < 0 || index >= draft.Obstacles.Count)
+        {
+            return BadRequest("Invalid draft or index.");
+        }
+        var obstacle = draft.Obstacles[index];
+        obstacle.Type = dto.Type;
+        obstacle.Name = dto.Name ?? obstacle.Name;
+        obstacle.Description = dto.Description ?? obstacle.Description;
+        obstacle.Height = dto.Height;
+        obstacle.Latitude = dto.Latitude;
+        obstacle.Longitude = dto.Longitude;
+        HttpContext.Session.Set(DraftKey, draft);
+        return Ok(new { Ok = true });
+    }
 
     // DTO for JSON requests
     public class AddObstacleRequest
