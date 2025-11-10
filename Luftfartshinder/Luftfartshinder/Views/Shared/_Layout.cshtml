@@ -18,9 +18,8 @@
     <body>
         @if (signInManager.IsSignedIn(User))
         {
-
             <header>
-                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-detail box-shadow position-fixed">
+                <nav class="navbar navbar-expand-sm navbar-light bg-detail box-shadow fixed-top">
                     <div class="container-fluid">
                         <a class="navbar-brand text-white" asp-area="" asp-controller="Home"
                             asp-action="Index">Luftfartshinder</a>
@@ -29,6 +28,7 @@
                             aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
+
                         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                             <ul class="navbar-nav flex-grow-1">
                                 <li class="nav-item">
@@ -39,24 +39,26 @@
                                     <a class="nav-link text-white" asp-area="" asp-controller="Obstacles"
                                         asp-action="Draft">Draft</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Registrar" asp-action="Index">Registrar</a>
+                                </li>
                             </ul>
-                            <div class="me-3 text-light navbar-right">
+                            <div class="d-flex align-items-center ms-auto text-light">
 
                                 @User?.Identity?.Name
 
 
-                                <a class="btn me-3 bg-light text-dark" asp-area="" asp-controller="Account"
+                                <a class="btn me-3 ms-3 bg-light text-dark" asp-area="" asp-controller="Account"
                                     asp-action="SignOut">Sign out</a>
 
                             </div>
-                            <div>
-                            </div>
                         </div>
                     </div>
+                </nav>
             </header>
         }
 
-        @RenderBody()
+        @RenderBody();
 
 
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
