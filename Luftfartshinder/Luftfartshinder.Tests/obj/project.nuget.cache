@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hLX4k1Tr8xc=",
+  "dgSpecHash": "xOoidCerwOU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
+  "projectFilePath": "C:\\Users\\Bruker\\Source\\Repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Bruker\\.nuget\\packages\\coverlet.collector\\6.0.2\\coverlet.collector.6.0.2.nupkg.sha512",
     "C:\\Users\\Bruker\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

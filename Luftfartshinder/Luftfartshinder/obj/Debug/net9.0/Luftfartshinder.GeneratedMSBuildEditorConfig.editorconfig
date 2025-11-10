@@ -17,85 +17,85 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Luftfartshinder
 build_property.RootNamespace = Luftfartshinder
-build_property.ProjectDir = C:\Users\Bruker\source\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\
+build_property.ProjectDir = C:\Users\Bruker\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Bruker\source\repos\kart-oppgave\Luftfartshinder\Luftfartshinder
+build_property.MSBuildProjectDirectory = C:\Users\Bruker\Source\Repos\kart-oppgave\Luftfartshinder\Luftfartshinder
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Account/Login.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Account/Register.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Advice/Index.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Advice/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWR2aWNlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Home/Index.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Home/Privacy.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Home/RegistrarHome.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Home/RegistrarHome.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3RyYXJIb21lLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Home/SessionObstacles.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Home/SessionObstacles.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZXNzaW9uT2JzdGFjbGVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Home/SuperAdminHome.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Home/SuperAdminHome.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTdXBlckFkbWluSG9tZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Map/Report.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Map/Report.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFwXFJlcG9ydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Obstacles/Draft.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Obstacles/Draft.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2JzdGFjbGVzXERyYWZ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Registrar/Details.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Registrar/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmFyXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Registrar/Index.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Registrar/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmFyXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Shared/Error.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/SuperAdmin/List.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/SuperAdmin/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/_ViewImports.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/_ViewStart.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruker/source/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Shared/_Layout.cshtml]
+[C:/Users/Bruker/Source/Repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-nnup2x4dar

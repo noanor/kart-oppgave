@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = "Registrar – Queue";
 }
+<head>
+    <link href="~/css/registrar.css" rel="stylesheet" />
+</head>
 
 <div class="container mt-4">
     <h2 class="mb-3">Registrar Queue</h2>
@@ -28,12 +31,14 @@
 
 
   <div class="table-responsive">
-    <table class="table table-striped align-middle">
+    <table class="table align-middle table-hover">
             <thead>
                 <tr>
                     <th class="text-center">Id</th>
+                    <th class="text-center">Type</th>
                     <th class="text-center">Name</th>
-                    <th class="text-center">Coordinates</th>
+                    <th class="text-center">Latitude</th>
+                    <th class="text-center">Longitude</th>
                     <th class="text-center">Height</th>
                     <th class="text-center">Reporter</th>
                     <th class="text-center">Date</th>
@@ -43,18 +48,24 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="table-group-divider">
                 @foreach (var r in Model)
                 {
                     <tr>
                         <td class="text-center">@r.Id</td>
+
+                        <td class="text-center">@r.Type</td>
 
                         <td class="text-center">
                             @(string.IsNullOrWhiteSpace(r.Name) ? "-" : r.Name)
                         </td>
 
                         <td class="text-center">
-                            @r.Latitude.ToString("0.000000"), @r.Longitude.ToString("0.000000")
+                            @r.Latitude.ToString("0.000000")
+                        </td>
+
+                        <td class="text-center">
+                            @r.Longitude.ToString("0.000000")
                         </td>
 
                         <td class="text-center">

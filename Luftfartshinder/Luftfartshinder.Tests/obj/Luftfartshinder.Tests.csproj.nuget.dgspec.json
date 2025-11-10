@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj": {}
+    "C:\\Users\\Bruker\\Source\\Repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj": {
+    "C:\\Users\\Bruker\\Source\\Repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\Bruker\\Source\\Repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
         "projectName": "Luftfartshinder.Tests",
-        "projectPath": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
+        "projectPath": "C:\\Users\\Bruker\\Source\\Repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
         "packagesPath": "C:\\Users\\Bruker\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\obj\\",
+        "outputPath": "C:\\Users\\Bruker\\Source\\Repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

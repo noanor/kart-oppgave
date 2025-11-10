@@ -102,6 +102,7 @@ namespace Luftfartshinder.Controllers
         private RegistrarRow MapToRow(object o, int fallbackIndex)
         {
             var id = GetInt(o, "Id", "ObstacleId", "EntityId", "RowId") ?? -1;
+            var type = GetString(o, "Type");
             var name = GetString(o, "Name", "ObstacleName", "ViewObstacleName", "Title");
 
             var lat = GetDouble(o, "Latitude", "Lat", "Y", "Northing") ?? 0;
@@ -128,6 +129,7 @@ namespace Luftfartshinder.Controllers
             return new RegistrarRow
             {
                 Id = id,
+                Type = type,
                 Name = string.IsNullOrWhiteSpace(name) ? "Obstacle" : name,
                 Latitude = lat,
                 Longitude = lng,
@@ -146,6 +148,7 @@ namespace Luftfartshinder.Controllers
             return new RegistrarDetails
             {
                 Id = r.Id,
+                Type = r.Type,
                 Name = r.Name,
                 Latitude = r.Latitude,
                 Longitude = r.Longitude,
@@ -216,7 +219,8 @@ namespace Luftfartshinder.Controllers
 
     public class RegistrarRow
     {
-        public int Id { get; set; }               
+        public int Id { get; set; }
+        public string? Type { get; set; }
         public string? Name { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }

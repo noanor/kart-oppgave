@@ -95,7 +95,7 @@ public partial class ObstaclesController : Controller
 
     // === POST: /obstacles/edit-obstacle ===
     [HttpPost("/obstacles/edit-obstacle")]
-    public IActionResult EditObstacle(int index)
+    public IActionResult EditObstacle(int index, [FromBody] Obstacle dto)
     {
         var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
         if (draft is null || index < 0 || index >= draft.Obstacles.Count)
