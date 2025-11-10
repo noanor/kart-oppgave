@@ -1,42 +1,38 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\",
+  "WorkspaceRootPath": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder\\controllers\\registrarcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\source\\repos\\kart-oppgave\\luftfartshinder\\luftfartshinder\\controllers\\registrarcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\controllers\\registrarcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder\\views\\registrar\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\views\\registrar\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\source\\repos\\kart-oppgave\\luftfartshinder\\luftfartshinder\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder\\views\\registrar\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\views\\registrar\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\source\\repos\\kart-oppgave\\luftfartshinder\\luftfartshinder\\datacontext\\authdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\datacontext\\authdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder\\models\\viewmodel\\viewobstacledatamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\models\\viewmodel\\viewobstacledatamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\source\\repos\\kart-oppgave\\luftfartshinder\\luftfartshinder\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5367284D-D8B9-4097-80E0-46884FA676EB}|Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder.tests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5367284D-D8B9-4097-80E0-46884FA676EB}|Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj|solutionrelative:luftfartshinder.tests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\source\\repos\\kart-oppgave\\luftfartshinder\\luftfartshinder\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\desktop\\luftfartshinder 2\\luftfartshinder\\luftfartshinder\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\source\\repos\\kart-oppgave\\luftfartshinder\\luftfartshinder\\views\\registrar\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\views\\registrar\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\source\\repos\\kart-oppgave\\luftfartshinder\\luftfartshinder\\views\\registrar\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\views\\registrar\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|c:\\users\\bruker\\source\\repos\\kart-oppgave\\luftfartshinder\\luftfartshinder\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{B2941486-DDEB-4F6E-8488-45B782D38A83}|Luftfartshinder\\Luftfartshinder.csproj|solutionrelative:luftfartshinder\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,8 +42,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 11,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "Luftfartshinder\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "Luftfartshinder\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAADoAAAAAAAAAAADwv0kAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-11-04T09:55:41.732Z",
+              "IsPinned": true
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -66,119 +75,94 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "Luftfartshinder\\wwwroot\\css\\site.css",
-              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "Luftfartshinder\\wwwroot\\css\\site.css",
-              "ViewState": "AgIAADoAAAAAAAAAAADwv0kAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-11-04T09:55:41.732Z",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Program.cs",
+              "RelativeDocumentMoniker": "Luftfartshinder\\Program.cs",
+              "ToolTip": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Program.cs",
+              "RelativeToolTip": "Luftfartshinder\\Program.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAADsAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T10:53:02.53Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "AuthDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\DataContext\\AuthDbContext.cs",
+              "RelativeDocumentMoniker": "Luftfartshinder\\DataContext\\AuthDbContext.cs",
+              "ToolTip": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\DataContext\\AuthDbContext.cs",
+              "RelativeToolTip": "Luftfartshinder\\DataContext\\AuthDbContext.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAowEEAAABuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T10:13:49.857Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Views\\Shared\\_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Luftfartshinder\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "Luftfartshinder\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAAB0AAABzAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAB0AAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-11-03T12:24:00.558Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Views\\Home\\Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Luftfartshinder\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "Luftfartshinder\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAHAAAAAAAAAA==",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-11-03T12:21:45.928Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "UnitTest1.cs",
-              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder.Tests\\UnitTest1.cs",
-              "RelativeDocumentMoniker": "Luftfartshinder.Tests\\UnitTest1.cs",
-              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder.Tests\\UnitTest1.cs",
-              "RelativeToolTip": "Luftfartshinder.Tests\\UnitTest1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T12:06:18.519Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Views\\Registrar\\Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Views\\Registrar\\Details.cshtml",
               "RelativeDocumentMoniker": "Luftfartshinder\\Views\\Registrar\\Details.cshtml",
-              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Views\\Registrar\\Details.cshtml",
+              "ToolTip": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Views\\Registrar\\Details.cshtml",
               "RelativeToolTip": "Luftfartshinder\\Views\\Registrar\\Details.cshtml",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAAAGcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-11-03T11:54:09.426Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Views\\Registrar\\Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Views\\Registrar\\Index.cshtml",
               "RelativeDocumentMoniker": "Luftfartshinder\\Views\\Registrar\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Views\\Registrar\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Views\\Registrar\\Index.cshtml",
               "RelativeToolTip": "Luftfartshinder\\Views\\Registrar\\Index.cshtml",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAuwGsAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAACAZmZmZmYUwGsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-11-03T11:52:58.637Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "RegistrarController.cs",
-              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Controllers\\RegistrarController.cs",
+              "DocumentMoniker": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Controllers\\RegistrarController.cs",
               "RelativeDocumentMoniker": "Luftfartshinder\\Controllers\\RegistrarController.cs",
-              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Controllers\\RegistrarController.cs",
+              "ToolTip": "C:\\Users\\Bruker\\source\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Controllers\\RegistrarController.cs",
               "RelativeToolTip": "Luftfartshinder\\Controllers\\RegistrarController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAwwDYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-03T11:47:48.948Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ViewObstacleDataModel.cs",
-              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Models\\ViewModel\\ViewObstacleDataModel.cs",
-              "RelativeDocumentMoniker": "Luftfartshinder\\Models\\ViewModel\\ViewObstacleDataModel.cs",
-              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Models\\ViewModel\\ViewObstacleDataModel.cs",
-              "RelativeToolTip": "Luftfartshinder\\Models\\ViewModel\\ViewObstacleDataModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T11:38:43.398Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Luftfartshinder\\Models\\User.cs",
-              "ToolTip": "C:\\Users\\Bruker\\Desktop\\Luftfartshinder 2\\Luftfartshinder\\Luftfartshinder\\Models\\User.cs",
-              "RelativeToolTip": "Luftfartshinder\\Models\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T11:25:58.231Z"
             }
           ]
         },
