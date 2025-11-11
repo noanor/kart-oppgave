@@ -45,7 +45,7 @@ namespace Luftfartshinder.Controllers
 
                 if (roleResult.Succeeded)
                 {
-                    return RedirectToAction("Register"); 
+                    return RedirectToAction("SuperAdminHome", "Home"); 
                 }
             }
 
