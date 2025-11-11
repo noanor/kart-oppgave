@@ -10,11 +10,12 @@
             font-family: "Arial Rounded MT Bold"
         }
         .login-page {
-            min-height: calc(100vh - 200px);
+            height: calc(100vh - 120px);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-align: center;
         }
         .page-heading {
             text-align: center;
@@ -84,22 +85,22 @@
     </style>
 </head>
 <body> 
-< class="login-page">
+<div class="login-page">
     <div class="page-heading">
         <h1>Welcome Aboard!</h1>
         <p>Sign in to update obstacle data</p>
     </div>
-    <div class="card">
-<h2>Log-in</h2>
-<form asp-action="Login" method="post">
-    <label asp-for="Username">Username:</label>
-    <input asp-for="Username" placeholder="Enter username" required />
+
+<div class="card">
+    <h2>Log-in</h2>
+    <form asp-action="Login" method="post">
+        <label asp-for="Username">Username:</label>
+        <input asp-for="Username" placeholder="Enter username" required />
     
-    <label asp-for="Password">Password:</label>
-    <input asp-for="Password" type="password" placeholder="Enter password" required />
+        <label asp-for="Password">Password:</label>
+        <input asp-for="Password" type="password" placeholder="Enter password" required />
     
-    <input type="submit" value="Sign in">
-</form>
-</div>
+        <input type="submit" value="Sign in">
+    </form>
 </body>
-</html
+</html>
