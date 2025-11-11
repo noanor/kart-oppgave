@@ -3088,25 +3088,41 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\Madalitso\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+=======
+    "/Users/marionrasmussen/.nuget/packages/": {}
+>>>>>>> d8f6116 (Endret layout på log-in pagen)
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Luftfartshinder.csproj",
       "projectName": "Luftfartshinder",
       "projectPath": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Luftfartshinder.csproj",
       "packagesPath": "C:\\Users\\Madalitso\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\obj\\",
+=======
+      "projectUniqueName": "/Users/marionrasmussen/IS-110/kart-oppgave/Luftfartshinder/Luftfartshinder/Luftfartshinder.csproj",
+      "projectName": "Luftfartshinder",
+      "projectPath": "/Users/marionrasmussen/IS-110/kart-oppgave/Luftfartshinder/Luftfartshinder/Luftfartshinder.csproj",
+      "packagesPath": "/Users/marionrasmussen/.nuget/packages/",
+      "outputPath": "/Users/marionrasmussen/IS-110/kart-oppgave/Luftfartshinder/Luftfartshinder/obj/",
+>>>>>>> d8f6116 (Endret layout på log-in pagen)
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\Madalitso\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+=======
+        "/Users/marionrasmussen/.nuget/NuGet/NuGet.Config"
+>>>>>>> d8f6116 (Endret layout på log-in pagen)
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -3181,7 +3197,11 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "/Users/marionrasmussen/.dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+>>>>>>> d8f6116 (Endret layout på log-in pagen)
       }
     }
   }

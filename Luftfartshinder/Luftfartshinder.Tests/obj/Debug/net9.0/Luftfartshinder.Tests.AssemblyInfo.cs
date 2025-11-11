@@ -14,7 +14,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Luftfartshinder.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+37f42641cf6bbdfa8d5cf940bd2fbbb8cb9097bd")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6f0da61546cfbfac79fc0a184d471d287e2927f8")]
+>>>>>>> d8f6116 (Endret layout på log-in pagen)
 [assembly: System.Reflection.AssemblyProductAttribute("Luftfartshinder.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Luftfartshinder.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
