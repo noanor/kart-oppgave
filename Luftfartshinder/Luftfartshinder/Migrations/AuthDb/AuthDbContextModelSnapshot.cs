@@ -45,6 +45,9 @@ namespace Luftfartshinder.Migrations.AuthDb
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -98,17 +101,18 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             Id = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "de019b91-47cf-4ec2-8f1e-bae9327777f7",
+                            ConcurrencyStamp = "3f4a67f0-338e-4499-bf79-172b340833ce",
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
+                            IsApproved = true,
                             LastName = "Admin",
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@KARTVERKET.NO",
                             NormalizedUserName = "SUPERADMIN@KARTVERKET.NO",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBC4kTs+Gl9ZwnxYRase9y8vcKN7eufS9m0xYYmSNGaGpZsDUEtX6dMLg1HG3oZ2Xw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFmOanCuG8lWfe/l5dh4wU8USr1reDelFa/gYZw7xPlCAkvO96CtVuFeiw14nPn9Dg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "122b8647-de8f-414f-a07c-d629f6f5d389",
+                            SecurityStamp = "656c2dbf-6af7-4201-b379-bad75bbc8113",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         });
