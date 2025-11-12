@@ -42,6 +42,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-white" asp-area="" asp-controller="Registrar" asp-action="Index">Registrar</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Feedback" asp-action="Index">Tilbakemelding</a>
+                                </li>
                                 @if (User.IsInRole("SuperAdmin"))
                                 {
                                     <li class="nav-item">
@@ -52,6 +55,7 @@
                             <div class="d-flex align-items-center ms-auto text-light">
 
                                 @User?.Identity?.Name
+
 
 
                                 <a class="btn me-3 ms-3 bg-light text-dark" asp-area="" asp-controller="Account"
