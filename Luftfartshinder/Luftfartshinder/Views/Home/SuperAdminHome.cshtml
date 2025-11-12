@@ -2,6 +2,13 @@
 <h1>Welcome Superadmin</h1>
 
 
+@if (TempData["RegistrationSuccess"] != null)
+{
+    <div id="registerAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["RegistrationSuccess"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
 
 <div class="d-flex justify-content-center align-items-start gap-5 mt-5 flex-wrap">
     

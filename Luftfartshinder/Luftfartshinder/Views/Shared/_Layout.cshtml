@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/Luftfartshinder.styles.css" asp-append-version="true" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
     </head>
 
     <body>
@@ -54,9 +56,8 @@
                                 @User?.Identity?.Name
 
 
-                                <a class="btn me-3 ms-3 bg-light text-dark" asp-area="" asp-controller="Account"
-                                    asp-action="SignOut">Sign out</a>
-
+                                <a id="signoutButton" class="btn me-3 ms-3 bg-light text-dark" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">Sign out</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -71,6 +72,25 @@
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         @await RenderSectionAsync("Scripts", required: false)
-    </body>
+        
+        <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="logoutModalLabel">Confirm Sign Out</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to sign out?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <a id="confirmLogout" class="btn btn-danger">Sign out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        </body>
 
 </html>

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/marionrasmussen/IS-110/kart-oppgave/Luftfartshinder/Luftfartshinder.Tests/Luftfartshinder.Tests.csproj": {}
+    "/Users/dennis/Dokumenter/UiA 2024-2027/3-Semester/IS-202/kart-oppgave/Luftfartshinder/Luftfartshinder.Tests/Luftfartshinder.Tests.csproj": {}
   },
   "projects": {
-    "/Users/marionrasmussen/IS-110/kart-oppgave/Luftfartshinder/Luftfartshinder.Tests/Luftfartshinder.Tests.csproj": {
+    "/Users/dennis/Dokumenter/UiA 2024-2027/3-Semester/IS-202/kart-oppgave/Luftfartshinder/Luftfartshinder.Tests/Luftfartshinder.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/marionrasmussen/IS-110/kart-oppgave/Luftfartshinder/Luftfartshinder.Tests/Luftfartshinder.Tests.csproj",
+        "projectUniqueName": "/Users/dennis/Dokumenter/UiA 2024-2027/3-Semester/IS-202/kart-oppgave/Luftfartshinder/Luftfartshinder.Tests/Luftfartshinder.Tests.csproj",
         "projectName": "Luftfartshinder.Tests",
-        "projectPath": "/Users/marionrasmussen/IS-110/kart-oppgave/Luftfartshinder/Luftfartshinder.Tests/Luftfartshinder.Tests.csproj",
-        "packagesPath": "/Users/marionrasmussen/.nuget/packages/",
-        "outputPath": "/Users/marionrasmussen/IS-110/kart-oppgave/Luftfartshinder/Luftfartshinder.Tests/obj/",
+        "projectPath": "/Users/dennis/Dokumenter/UiA 2024-2027/3-Semester/IS-202/kart-oppgave/Luftfartshinder/Luftfartshinder.Tests/Luftfartshinder.Tests.csproj",
+        "packagesPath": "/Users/dennis/.nuget/packages/",
+        "outputPath": "/Users/dennis/Dokumenter/UiA 2024-2027/3-Semester/IS-202/kart-oppgave/Luftfartshinder/Luftfartshinder.Tests/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/marionrasmussen/.nuget/NuGet/NuGet.Config"
+          "/Users/dennis/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -93,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/Users/marionrasmussen/.dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
