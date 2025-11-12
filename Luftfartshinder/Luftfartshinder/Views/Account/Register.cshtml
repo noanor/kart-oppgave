@@ -30,6 +30,14 @@
                     }
                 </div>
             }
+            
+            @if (TempData["RegistrationSuccess"] != null)
+            {
+                <div id="registerAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["RegistrationSuccess"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
 
             <form id="registerForm" method="post">
                 <div class="mb-3">
@@ -128,8 +136,8 @@
                 <input type="hidden" id="hiddenOrganization" name="Organization" />
 
                 <div class="mb-3">
-                    <a asp-controller="Account" asp-action="Login" class="btn btn-secondary me-2">Back</a>
-                    <button type="submit" id="submitBtn" class="btn btn-dark">Create account</button>
+                    <a asp-controller="Home" asp-action="SuperAdminHome" class="btn btn-secondary me-2">Back</a>
+                    <button type="submit" id="submitBtn" class="btn btn-dark" disabled>Create account</button>
                 </div>
             </form>
 

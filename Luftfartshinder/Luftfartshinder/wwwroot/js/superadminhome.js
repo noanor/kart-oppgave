@@ -1,8 +1,9 @@
 setTimeout(function () {
     var alertEl = document.getElementById('registerAlert');
-    if(alertEl)
-    {
-        var alert = new bootstrap.Alert(alertEl);
-        alert.close();
+    if (alertEl) {
+        alertEl.classList.remove('show');
+        setTimeout(function() {
+            alertEl.remove(); 
+        }, 500); 
     }
-}, 3500); 
+}, 3500);
