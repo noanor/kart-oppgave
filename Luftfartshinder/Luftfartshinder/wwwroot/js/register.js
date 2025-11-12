@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
         
-        const canSubmit = passwordValid && allFieldsValid && roleAndOrgValid; 
+        const canSubmit = passwordValid && allFieldsValid && roleAndOrgValid;
         submitBtn.disabled = !canSubmit;
         submitBtn.classList.toggle("btn-dark", canSubmit);
         submitBtn.classList.toggle("btn-secondary", !canSubmit);
