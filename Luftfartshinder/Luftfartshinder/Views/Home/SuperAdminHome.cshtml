@@ -1,28 +1,47 @@
 @using Microsoft.AspNetCore.Identity
-<h1>Welcome Superadmin</h1>
 
-
-
-<div class="d-flex justify-content-center align-items-start gap-5 mt-5 flex-wrap">
-    
-    <a asp-controller="SuperAdmin" asp-action="List" class="text-decoration-none text-dark">
-        <div class="card shadow-lg border-0" style="width: 20rem;">
-            <img src="~/images/admin-dashboard.jpg" class="card-img-top" alt="">
-            <div class="card-body text-center">
-                <h5 class="card-title fw-bold">Manage Users</h5>
-                <p class="card-text">An overview of all users.</p>
-            </div>
+<div class="container py-5">
+    <div class="row justify-content-center mt-5">
+        
+        <div class="col-md-5 col-lg-4 mb-4">
+            <a asp-controller="SuperAdmin" asp-action="List" class="text-decoration-none">
+                <div class="card shadow border-0 h-100 hover-card">
+                    <div class="card-body text-center p-5">
+                        <div class="mb-4">
+                            <i class="fas fa-users-cog fa-4x text-primary"></i>
+                        </div>
+                        <h3 class="card-title fw-bold text-dark mb-3">Manage Users</h3>
+                        <p class="card-text text-muted">An overview of all users.</p>
+                    </div>
+                </div>
+            </a>
         </div>
-    </a>
 
-            
-    <a asp-controller="Account" asp-action="Register" class="text-decoration-none text-dark">
-        <div class="card shadow-lg border-0" style="width: 20rem;">
-            <img src="~/images/admin-dashboard.jpg" class="card-img-top" alt="">
-            <div class="card-body text-center">
-                <h5 class="card-title fw-bold">Register Users</h5>
-                <p class="card-text">Make new users.</p>
-            </div>
+        <div class="col-md-5 col-lg-4 mb-4">
+            <a asp-controller="Account" asp-action="Register" class="text-decoration-none">
+                <div class="card shadow border-0 h-100 hover-card">
+                    <div class="card-body text-center p-5">
+                        <div class="mb-4">
+                            <i class="fas fa-user-plus fa-4x text-success"></i>
+                        </div>
+                        <h3 class="card-title fw-bold text-dark mb-3">Register Users</h3>
+                        <p class="card-text text-muted">Make new users.</p>
+                    </div>
+                </div>
+            </a>
         </div>
-    </a>
+        
+    </div>
 </div>
+
+<style>
+    .hover-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .hover-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+    }
+</style>
