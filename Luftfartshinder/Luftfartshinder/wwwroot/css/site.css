@@ -84,3 +84,15 @@ textarea.form-control {
 textarea.form-control {
     resize: vertical;
 }
+
+#passwordRequirements .text-success { color: green; }
+#passwordRequirements .text-muted { color: #999; }
+
+.input-group-text {
+    background-color: #fff;
+    border-left: 0;
+}
+.input-group .form-control {
+    border-right: 0;
+}
+

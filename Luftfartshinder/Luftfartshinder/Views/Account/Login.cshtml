@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 	<title>Log-In</title>
 	<style>
         body {
@@ -116,43 +117,44 @@
 	</div>
 	<div class="card">
 		<h2>Log-in</h2>
+		
 		<form asp-action="Login" method="post">
+			@if (!ViewData.ModelState.IsValid)
+			{
+				<div class="alert alert-danger">
+					@foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+					{
+						<div>@error.ErrorMessage</div>
+					}
+				</div>
+			}
+			
 			<label asp-for="Username">Username:</label>
 			<input asp-for="Username" placeholder="Enter username" required/>
 
 			<label asp-for="Password">Password:</label>
-			<input asp-for="Password" type="password" placeholder="Enter password" required/>
+			<div class="input-group mb-3">
+				<input type="password" id="password" name="Password" class="form-control" placeholder="Enter password" required/>
+				<span class="input-group-text" id="togglePassword" style="cursor:pointer;">
+					<i class="bi bi-eye"></i>
+				</span>
+			</div>
 
 			<input type="submit" value="Sign in">
 		</form>
 
 		<div class="mt-3">
 			<a asp-action="UserRegister" asp-controller="Account" class="btn btn-outline-dark">Register user</a>
-
-			@section Scripts
-			{
-				@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-
-				<script>
-                    setTimeout(function () 
-                    {
-	                    var alertEl = document.getElementById('logoutAlert');
-                        if(alertEl){
-                            var alert = new bootstrap.Alert(alertEl);
-                            alert.close();
-                        }
-                        
-	                    var registrationAlertEl = document.getElementById('registrationAlert');
-                        if(registrationAlertEl){
-                            var registrationAlert = new bootstrap.Alert(registrationAlertEl);
-                            registrationAlert.close();
-                        }
-                    }, 2500);
-				</script>
-			}
+			
 		</div>
 	</div>
 </div>
+
+@section Scripts
+{
+	@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+	<script src="~/js/login.js"></script>
+}
 </body>
 </html>
 
