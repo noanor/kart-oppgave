@@ -134,4 +134,38 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     
     checkForm();
+
+    function hasUserInput() {
+        const inputs = document.querySelectorAll("#registerForm input, #registerForm select");
+        for (const input of inputs) {
+            if (input.type !== "hidden" && input.value.trim() !== "") {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function confirmCancel(redirectUrl) {
+        if (hasUserInput()) {
+            if (confirm("You have unsaved information. Are you sure you want to cancel the registration?")) {
+                window.location.href = redirectUrl;
+            }
+        } else {
+            window.location.href = redirectUrl;
+        }
+    }
+    
+    const cancelBtnUser = document.getElementById("cancelBtnUser");
+    if (cancelBtnUser) {
+        cancelBtnUser.addEventListener("click", function () {
+            confirmCancel("/Account/Login");
+        });
+    }
+    
+    const cancelBtnAdmin = document.getElementById("cancelBtnAdmin");
+    if (cancelBtnAdmin) {
+        cancelBtnAdmin.addEventListener("click", function () {
+            confirmCancel("/Home/SuperAdminHome");
+        });
+    }
 });
