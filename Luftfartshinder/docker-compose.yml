@@ -1,0 +1,34 @@
+﻿services:
+  luftfartshinder:
+    image: ${DOCKER_REGISTRY-}luftfartshinder
+    build:
+      context: .
+      dockerfile: Luftfartshinder/Dockerfile
+    depends_on:
+      - mariadb
+        # condition: service_healthy
+    # ports:
+    #   - "5000:8080"   HTTP
+    #   - "5001:8081"   HTTPS (optional)
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DbConnection: Server=mariadb;Port=3306;Database=Kartverketdb;User=app;Password=app_pw
+      ConnectionStrings__AuthConnection: Server=mariadb;Port=3306;Database=AuthKartverketdb;User=app;Password=app_pw
+
+  mariadb:
+    image: mariadb:11.3
+    restart: always
+    environment:
+        MARIADB_ROOT_PASSWORD: root123
+    volumes:
+    - dbdata:/var/lib/mysql
+    - ./db-init:/docker-entrypoint-initdb.d:ro
+    # healthcheck:
+    # Use mysql client to run a trivial query over TCP
+    #     test: ["CMD-SHELL", "mysql -h 127.0.0.1 -P 3306 -uroot -p$${MARIADB_ROOT_PASSWORD} -e 'SELECT 1' >/dev/null 2>&1 || exit 1"]
+    #     interval: 5s
+    #     timeout: 5s
+    #     retries: 30
+
+volumes:
+  dbdata: {}

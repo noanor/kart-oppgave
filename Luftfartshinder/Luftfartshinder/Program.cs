@@ -12,6 +12,13 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IDataRepocs, ObstacleDataRepo>();
 
+
+// Unødvendig med singleton her når vi bruker DbContext?
+
+//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+//builder.Services.AddSingleton(new MySqlConnection(connectionString));
+
 builder.Services.AddDbContext<ApplicationContext>(options =>
                options.UseMySql(builder.Configuration.GetConnectionString("DbConnection"),
                new MariaDbServerVersion(new Version(11, 8, 3))));
