@@ -51,90 +51,134 @@
 <div>
 	<div class="container py-5">
 		
+		<div class="mb-3">
+			<a asp-controller="Home" asp-action="SuperAdminHome" class="btn btn-secondary">
+				&larr; Back to Dashboard
+			</a>
+		</div>
+
 		<!-- Role Filter Buttons -->
-		<div class="mb-4">
+		<div class="d-flex justify-content-between align-items-center mb-4">
+			<!-- Quick role buttons -->
 			<div class="btn-group" role="group" aria-label="Filter by role">
-				<a href="@Url.Action("List", new { roleFilter = "All" })" 
-				   class="btn @(ViewBag.CurrentFilter == "All" ? "btn-dark" : "btn-outline-dark")">
+				<a href="@Url.Action("List", new { roleFilter = "All" })"
+				class="btn @(ViewBag.CurrentFilter == "All" ? "btn-dark" : "btn-outline-dark")">
 					All Users
 				</a>
-				<a href="@Url.Action("List", new { roleFilter = "Registrar" })" 
-				   class="btn @(ViewBag.CurrentFilter == "Registrar" ? "btn-dark" : "btn-outline-dark")">
+				<a href="@Url.Action("List", new { roleFilter = "Registrar" })"
+				class="btn @(ViewBag.CurrentFilter == "Registrar" ? "btn-dark" : "btn-outline-dark")">
 					Registrars
 				</a>
-				<a href="@Url.Action("List", new { roleFilter = "FlightCrew" })" 
-				   class="btn @(ViewBag.CurrentFilter == "FlightCrew" ? "btn-dark" : "btn-outline-dark")">
+				<a href="@Url.Action("List", new { roleFilter = "FlightCrew" })"
+				class="btn @(ViewBag.CurrentFilter == "FlightCrew" ? "btn-dark" : "btn-outline-dark")">
 					Flight Crew
 				</a>
 			</div>
-			<span class="ms-3 text-muted">
-				Showing: <strong>@ViewBag.CurrentFilter</strong> (@Model.Users.Count() user@(Model.Users.Count() != 1 ? "s" : ""))
-			</span>
+
+			<!-- Search input -->
+			<div class="d-flex align-items-center">
+				<input type="text" id="userSearch" class="form-control form-control-sm me-2" placeholder="Search users...">
+        
+				<!-- Advanced filters toggle -->
+				<button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#advancedFilters" aria-expanded="false" aria-controls="advancedFilters">
+					Advanced Filters
+				</button>
+			</div>
 		</div>
-		
+
+		<!-- Advanced filters section -->
+		<div class="collapse mb-4" id="advancedFilters">
+			<div class="card card-body bg-light">
+				<div class="row g-3">
+					<div class="col-md-4">
+						<label class="form-label">Role</label>
+						<select id="filterRole" class="form-select">
+							<option value="">All Roles</option>
+							<option value="Registrar">Registrar</option>
+							<option value="FlightCrew">Flight Crew</option>
+						</select>
+					</div>
+					<div class="col-md-4">
+						<label class="form-label">Status</label>
+						<select id="filterStatus" class="form-select">
+							<option value="">All Statuses</option>
+							<option value="Approved">Approved</option>
+							<option value="Pending">Pending</option>
+						</select>
+					</div>
+					<div class="col-md-4 d-flex align-items-end">
+						<button class="btn btn-primary" id="applyFilters">Apply Filters</button>
+						<button class="btn btn-secondary ms-2" id="resetFilters">Reset</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		@if (Model.Users != null || Model.Users.Any())
 		{
 			<table class="table table-hover">
 				<thead>
-					<tr>
-						<th>Username</th>
-						<th>Email</th>
-						<th>Role</th>
-						<th>Status</th>
-						<th>Actions</th>
-					</tr>
+				<tr>
+					<th>Username</th>
+					<th>Email</th>
+					<th>Organization</th>
+					<th>Role</th>
+					<th>Status</th>
+					<th>Actions</th>
+				</tr>
 				</thead>
 				<tbody>
-					@foreach (var user in Model.Users)
-					{
-						<tr>
-							<td>@user.UserName</td>
-							<td>@user.EmailAdress</td>
-							<td>@user.Role</td>
-							<td>
-								@if (user.IsApproved)
-								{
-									<span class="badge bg-success">Approved</span>
-								}
-								else
-								{
-									<span class="badge bg-warning text-dark">Pending</span>
-								}
-							</td>
-							<td>
-								@if (!user.IsApproved)
-								{
-									<form method="post" style="display:inline;"
-										  asp-controller="SuperAdmin"
-										  asp-action="Approve"
-										  asp-route-id="@user.Id"
-										  data-confirm="Are you sure you want to approve @user.UserName?"
-										  data-action-type="approve">
-										<button class="btn btn-success btn-sm" type="submit">Approve</button>
-									</form>
-									<form method="post" style="display:inline;"
-										  asp-controller="SuperAdmin"
-										  asp-action="Decline"
-										  asp-route-id="@user.Id"
-										  data-confirm="Are you sure you want to decline @user.UserName? This will remove the user from the system."
-										  data-action-type="decline">
-										<button class="btn btn-danger btn-sm" type="submit">Decline</button>
-									</form>
-								}
-								else
-								{
-									<form method="post" style="display:inline;"
-										  asp-controller="SuperAdmin"
-										  asp-action="Delete"
-										  asp-route-id="@user.Id"
-										  data-confirm="Are you sure you want to delete @user.UserName?"
-										  data-action-type="delete">
-										<button class="btn btn-danger btn-sm" type="submit">Delete</button>
-									</form>
-								}
-							</td>
-						</tr>
-					}
+				@foreach (var user in Model.Users)
+				{
+					<tr>
+						<td>@user.UserName</td>
+						<td>@user.EmailAdress</td>
+						<td>@user.Organization</td>
+						<td>@user.Role</td>
+						<td>
+							@if (user.IsApproved)
+							{
+								<span class="badge bg-success">Approved</span>
+							}
+							else
+							{
+								<span class="badge bg-warning text-dark">Pending</span>
+							}
+						</td>
+						<td>
+							@if (!user.IsApproved)
+							{
+								<form method="post" style="display:inline;"
+								      asp-controller="SuperAdmin"
+								      asp-action="Approve"
+								      asp-route-id="@user.Id"
+								      data-confirm="Are you sure you want to approve @user.UserName?"
+								      data-action-type="approve">
+									<button class="btn btn-success btn-sm" type="submit">Approve</button>
+								</form>
+								<form method="post" style="display:inline;"
+								      asp-controller="SuperAdmin"
+								      asp-action="Decline"
+								      asp-route-id="@user.Id"
+								      data-confirm="Are you sure you want to decline @user.UserName? This will remove the user from the system."
+								      data-action-type="decline">
+									<button class="btn btn-danger btn-sm" type="submit">Decline</button>
+								</form>
+							}
+							else
+							{
+								<form method="post" style="display:inline;"
+								      asp-controller="SuperAdmin"
+								      asp-action="Delete"
+								      asp-route-id="@user.Id"
+								      data-confirm="Are you sure you want to delete @user.UserName?"
+								      data-action-type="delete">
+									<button class="btn btn-danger btn-sm" type="submit">Delete</button>
+								</form>
+							}
+						</td>
+					</tr>
+				}
 				</tbody>
 			</table>
 		}
@@ -168,73 +212,8 @@
 	</div>
 </div>
 
-@section Scripts
-{
-	<script>
-		let formToSubmit = null;
-		const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
 
-		function autoDismissAlerts() {
-			setTimeout(function () {
-				const successAlert = document.getElementById('successAlert');
-				const errorAlert = document.getElementById('errorAlert');
 
-				if (successAlert) {
-					new bootstrap.Alert(successAlert).close();
-				}
-
-				if (errorAlert) {
-					new bootstrap.Alert(errorAlert).close();
-				}
-			}, 4000);
-		}
-
-		function getButtonStyle(actionType) {
-			if (actionType === 'approve') {
-				return { text: 'Approve', class: 'btn-success' };
-			}
-			if (actionType === 'delete') {
-				return { text: 'Delete', class: 'btn-danger' };
-			}
-			if (actionType === 'decline') {
-				return { text: 'Decline', class: 'btn-danger' };
-			}
-			return { text: 'Confirm', class: 'btn-primary' };
-		}
-
-		function showConfirmation(message, buttonText, buttonClass, form) {
-			document.getElementById('confirmModalBody').textContent = message;
-			const confirmButton = document.getElementById('confirmModalBtn');
-			confirmButton.textContent = buttonText;
-			confirmButton.className = 'btn ' + buttonClass;
-			formToSubmit = form;
-			confirmModal.show();
-		}
-
-		function setupConfirmationForms() {
-			document.querySelectorAll('form[data-confirm]').forEach(function(form) {
-				form.addEventListener('submit', function(event) {
-					event.preventDefault();
-					
-					const message = form.getAttribute('data-confirm');
-					const actionType = form.getAttribute('data-action-type');
-					const buttonStyle = getButtonStyle(actionType);
-					
-					showConfirmation(message, buttonStyle.text, buttonStyle.class, form);
-				});
-			});
-		}
-
-		document.getElementById('confirmModalBtn').addEventListener('click', function() {
-			if (formToSubmit) {
-				confirmModal.hide();
-				formToSubmit.submit();
-			}
-		});
-
-		document.addEventListener('DOMContentLoaded', function() {
-			autoDismissAlerts();
-			setupConfirmationForms();
-		});
-	</script>
+@section Scripts {
+	<script src="~/js/list.js" asp-append-version="true"></script>
 }

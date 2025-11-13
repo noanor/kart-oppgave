@@ -28,13 +28,42 @@ namespace Luftfartshinder.Controllers
         [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
+            var existingUserByUsername = await userManager.FindByNameAsync(model.Username);
+
+            if (existingUserByEmail != null)
+            {
+                ModelState.AddModelError("Email", "Email is already taken");
+                return View(model);
+            }
+
+            if (existingUserByUsername != null)
+            {
+                ModelState.AddModelError("Username", "Username is already taken");
+                return View(model);
+            }
+            
+            if (!ModelState.IsValid)
+            {
+                return View(model); 
+            }
+            
+            string? organization = null;
+            if (model.SelectedRole == "FlightCrew")
+            {
+                if (model.Organization == "Other" && !string.IsNullOrEmpty(model.OtherOrganization))
+                    organization = model.OtherOrganization;
+                else
+                    organization = model.Organization;
+            }
+
             var newUser = new ApplicationUser
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
                 UserName = model.Username,
-                IsApproved = true
+                Organization = organization 
             };
 
             var createResult = await userManager.CreateAsync(newUser, model.Password);
@@ -45,6 +74,7 @@ namespace Luftfartshinder.Controllers
 
                 if (roleResult.Succeeded)
                 {
+                    TempData["RegistrationSuccess"] = "User registered successfully!";
                     return RedirectToAction("SuperAdminHome", "Home"); 
                 }
             }
@@ -65,24 +95,57 @@ namespace Luftfartshinder.Controllers
         {
             if (!ModelState.IsValid)
             {
+             return View(model);
+            }
+
+    
+            var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
+            var existingUserByUsername = await userManager.FindByNameAsync(model.Username);
+
+            if (existingUserByEmail != null)
+            { 
+                ModelState.AddModelError("Email", "Email is already taken");
                 return View(model);
             }
 
-            var newUser = new ApplicationUser
+            if (existingUserByUsername != null)
+            {
+                ModelState.AddModelError("Username", "Username is already taken");
+                return View(model);
+            }
+    
+            string? organization = null;
+            if (model.SelectedRole == "FlightCrew")
+            {
+                if (model.Organization == "Other" && !string.IsNullOrEmpty(model.OtherOrganization))
+                    organization = model.OtherOrganization;
+                else
+                    organization = model.Organization;
+            }
+
+                var newUser = new ApplicationUser
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
-                UserName = model.Username
+                UserName = model.Username,
+                Organization = organization 
             };
 
             var createResult = await userManager.CreateAsync(newUser, model.Password);
 
             if (!createResult.Succeeded)
             {
+                ModelState.AddModelError(string.Empty, "Registration failed. Please correct the fields below.");
+        
                 foreach (var error in createResult.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    if (error.Code.Contains("DuplicateUserName"))
+                        ModelState.AddModelError("Username", "This username is already taken.");
+                    else if (error.Code.Contains("DuplicateEmail"))
+                        ModelState.AddModelError("Email", "This email is already taken.");
+                    else
+                        ModelState.AddModelError(string.Empty, error.Description); 
                 }
                 return View(model);
             }
@@ -113,6 +176,11 @@ namespace Luftfartshinder.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            
             var user = await userManager.FindByNameAsync(model.Username);
             
             if (user != null && !user.IsApproved)

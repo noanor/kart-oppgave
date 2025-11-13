@@ -3724,25 +3724,41 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\hildi\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+=======
+    "/Users/dennis/.nuget/packages/": {}
+>>>>>>> a319333 (Oppdaterte registreringssidene for vablige brukere og superadmin. La til "er du sikker på at du vil logge ut" popup.)
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\hildi\\Documents\\GitHub\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
       "projectName": "Luftfartshinder.Tests",
       "projectPath": "C:\\Users\\hildi\\Documents\\GitHub\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
       "packagesPath": "C:\\Users\\hildi\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\hildi\\Documents\\GitHub\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\obj\\",
+=======
+      "projectUniqueName": "/Users/dennis/Dokumenter/UiA 2024-2027/3-Semester/IS-202/kart-oppgave/Luftfartshinder/Luftfartshinder.Tests/Luftfartshinder.Tests.csproj",
+      "projectName": "Luftfartshinder.Tests",
+      "projectPath": "/Users/dennis/Dokumenter/UiA 2024-2027/3-Semester/IS-202/kart-oppgave/Luftfartshinder/Luftfartshinder.Tests/Luftfartshinder.Tests.csproj",
+      "packagesPath": "/Users/dennis/.nuget/packages/",
+      "outputPath": "/Users/dennis/Dokumenter/UiA 2024-2027/3-Semester/IS-202/kart-oppgave/Luftfartshinder/Luftfartshinder.Tests/obj/",
+>>>>>>> a319333 (Oppdaterte registreringssidene for vablige brukere og superadmin. La til "er du sikker på at du vil logge ut" popup.)
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\hildi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+=======
+        "/Users/dennis/.nuget/NuGet/NuGet.Config"
+>>>>>>> a319333 (Oppdaterte registreringssidene for vablige brukere og superadmin. La til "er du sikker på at du vil logge ut" popup.)
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -3823,7 +3839,11 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
+>>>>>>> a319333 (Oppdaterte registreringssidene for vablige brukere og superadmin. La til "er du sikker på at du vil logge ut" popup.)
       }
     }
   }

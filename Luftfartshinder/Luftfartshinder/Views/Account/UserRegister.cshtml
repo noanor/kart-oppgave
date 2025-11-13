@@ -10,57 +10,127 @@
         <div class="col-12 col-lg-6">
             
             <h1 class="mt-3 mb-3 h3">
-                Registrer en ny bruker
+                Create a new account
             </h1>
-            <p class="mb-4 text-muted">
-                Please fill in the form to create your account.
+            
+            <p class="mb-4 text-muted text-center">
+                Please fill in the fields below to register.<br />
+                Your account will be reviewed and approved by an administrator before you can log in.
+            </p>
+
+            <p class="text-muted text-center mb-4">
+                Please fill in all required fields marked with <span class="text-danger">*</span>.
             </p>
             
-            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+            @if (ViewData.ModelState.ContainsKey(string.Empty) && ViewData.ModelState[string.Empty].Errors.Count > 0)
+            {
+                <div class="alert alert-danger">
+                    @foreach (var error in ViewData.ModelState[string.Empty].Errors)
+                    {
+                        <div>@error.ErrorMessage</div>
+                    }
+                </div>
+            }
             
-            <form method="post">
+            <form id="registerForm" method="post">
                 <div class="mb-3">
-                    <label class= "form-label">First name</label>
-                    <input type="text" id="firstname" class="form-control" asp-for="FirstName"/>
-                    <span class="text-danger" asp-validation-for="FirstName"></span>
+                    <label asp-for="FirstName" class="form-label">
+                        First Name <span class="text-danger">*</span>
+                    </label>
+                    <input asp-for="FirstName" class="form-control" required />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
                 
                 <div class="mb-3">
-                    <label class= "form-label">Last name</label>
-                    <input type="text" id="lastname" class="form-control" asp-for="LastName"/>
-                    <span class="text-danger" asp-validation-for="LastName"></span>
+                    <label asp-for="LastName" class="form-label">
+                        Last Name <span class="text-danger">*</span>
+                    </label>
+                    <input asp-for="LastName" class="form-control" required />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
                 
                 <div class="mb-3">
-                    <label class="form-label">E-mail</label>
-                    <input type="email" id="email" class="form-control" asp-for="Email"/>
-                    <span class="text-danger" asp-validation-for="Email"></span>
+                    <label asp-for="Email" class="form-label">
+                        E-mail <span class="text-danger">*</span>
+                    </label>
+                    <input asp-for="Email" class="form-control" required />
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 
                 <div class="mb-3">
-                    <label class="form-label">Username</label>
-                    <input type="text" id="username" class="form-control" asp-for="Username"/>
-                    <span class="text-danger" asp-validation-for="Username"></span>
+                    <label asp-for="Username" class="form-label">
+                        Username <span class="text-danger">*</span>
+                    </label>
+                    <input asp-for="Username" class="form-control" required />
+                    <span asp-validation-for="Username" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" id="password" class="form-control" asp-for="Password"/>
+                    <label asp-for="Password" class="form-label">
+                        Password <span class="text-danger">*</span>
+                    </label>
+                    <div class="input-group">
+                        <input type="password" id="password" class="form-control" asp-for="Password"/>
+                        <span class="input-group-text" id="togglePassword" style="cursor:pointer;">
+                            <i class="bi bi-eye"></i>
+                        </span>
+                    </div>
+                    
                     <span class="text-danger" asp-validation-for="Password"></span>
+                    
+                    <div id="passwordRequirements" class="mt-1 p-2 border rounded" style="background-color:#f5f5f5;">
+                        <strong>Password must:</strong>
+                        <ul class="mb-0 mt-1">
+                            <li id="length" class="text-muted">Be at least 8 characters</li>
+                            <li id="uppercase" class="text-muted">Include at least one uppercase letter</li>
+                            <li id="lowercase" class="text-muted">Include at least one lowercase letter</li>
+                            <li id="number" class="text-muted">Include at least one number</li>
+                            <li id="special" class="text-muted">Include at least one special character</li>
+                        </ul>
+                    </div>
                 </div>
                 
                 <div class="mb-3">
-                    <label class="form-label">Role</label>
-                    <select asp-for="SelectedRole" class="form-control">
+                    <label asp-for="SelectedRole" class="form-label">
+                        Role <span class="text-danger">*</span>
+                    </label>
+                    <select id="role" asp-for="SelectedRole" class="form-control">
                         <option value="">-- Select a role --</option>
                         <option value="Registrar">Registrar</option>
-                        <option value="FlightCrew">FlightCrew</option>
+                        <option value="FlightCrew">Flight Crew</option>
                     </select>
                     <span class="text-danger" asp-validation-for="SelectedRole"></span>
                 </div>
+                
+                <div class="mb-3" id="organizationDiv" style="display:none;">
+                    <label asp-for="Organization" class="form-label">
+                        Organization <span class="text-danger">*</span>
+                    </label>
+                    <select id="organization" class="form-control">
+                        <option value="">-- Select organization --</option>
+                        <option value="Norwegian Air Ambulance">Norwegian Air Ambulance</option>
+                        <option value="Police">Police</option>
+                        <option value="Norwegian Armed Forces">Norwegian Armed Forces</option>
+                        <option value="Avinor">Avinor</option>
+                        <option value="Other">Other</option>
+                    </select>
 
+                    <input type="text" id="customOrganization" class="form-control mt-2" placeholder="Enter organization" style="display:none;">
+                    <input type="hidden" id="hiddenOrganization" name="Organization" />
+
+
+                    
+                    <script>
+                    document.getElementById('organization').addEventListener('change', function() {
+                        document.getElementById('otherOrganization').style.display = (this.value === 'Other') ? 'block' : 'none';
+                    });
+                    </script>
+                    
+                </div>
+                
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-dark">Confirm registration</button>
+                    <button type="button" id="cancelBtnUser" class="btn btn-secondary me-2">Cancel</button>
+                    <button type="submit" id="submitBtn" class="btn btn-dark">Create account</button>
                 </div>
             </form>
             
@@ -71,5 +141,6 @@
 @section Scripts
 {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script src="~/js/register.js"></script>
 }
 

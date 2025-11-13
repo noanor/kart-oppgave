@@ -40,7 +40,8 @@ namespace Luftfartshinder.Controllers
                     UserName = user.UserName,
                     EmailAdress = user.Email,
                     IsApproved = user.IsApproved,
-                    Role = userRole
+                    Role = userRole,
+                    Organization = user.Organization
                 });
             }
             

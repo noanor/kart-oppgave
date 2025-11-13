@@ -1,4 +1,9 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿document.addEventListener("DOMContentLoaded", function () {
+    const confirmLogoutBtn = document.getElementById("confirmLogout");
 
-// Write your JavaScript code.
+    if (confirmLogoutBtn) {
+        confirmLogoutBtn.addEventListener("click", function () {
+            window.location.href = '/Account/SignOut';
+        });
+    }
+});
