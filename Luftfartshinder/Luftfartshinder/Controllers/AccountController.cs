@@ -63,7 +63,8 @@ namespace Luftfartshinder.Controllers
                 LastName = model.LastName,
                 Email = model.Email,
                 UserName = model.Username,
-                Organization = organization 
+                Organization = organization, 
+                IsApproved = true
             };
 
             var createResult = await userManager.CreateAsync(newUser, model.Password);
@@ -123,13 +124,14 @@ namespace Luftfartshinder.Controllers
                     organization = model.Organization;
             }
 
-                var newUser = new ApplicationUser
+            var newUser = new ApplicationUser
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
                 UserName = model.Username,
-                Organization = organization 
+                Organization = organization,
+                IsApproved = false
             };
 
             var createResult = await userManager.CreateAsync(newUser, model.Password);
