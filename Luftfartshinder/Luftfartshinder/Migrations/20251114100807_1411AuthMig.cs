@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Luftfartshinder.Migrations.AuthDb
+namespace Luftfartshinder.Migrations
 {
     /// <inheritdoc />
-    public partial class _1311MigrationAuthDbContext : Migration
+    public partial class _1411AuthMig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -47,6 +47,8 @@ namespace Luftfartshinder.Migrations.AuthDb
                     LastName = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsApproved = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Organization = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -215,8 +217,8 @@ namespace Luftfartshinder.Migrations.AuthDb
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsApproved", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3c1b1dcf-6345-42b9-90fe-45227eb5be5b", 0, "553f071d-471f-4a5f-9aa5-4fcec8ab001c", "superadmin@kartverket.no", false, "Super", true, "Admin", false, null, "SUPERADMIN@KARTVERKET.NO", "SUPERADMIN@KARTVERKET.NO", "AQAAAAIAAYagAAAAEDZ5cqEJjyKjzJvkSrkZTtbNvcXlpvK7Ey6l6Nm5Mf5z1TT9s5v5lLEgJq2AGMmHLQ==", null, false, "7aaea2da-1fdc-426f-b6cf-9a0dea1f090a", false, "superadmin@kartverket.no" });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsApproved", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Organization", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "3c1b1dcf-6345-42b9-90fe-45227eb5be5b", 0, "d9ebf65d-eb6f-4928-afb8-433ef618a35c", "superadmin@kartverket.no", false, "Super", true, "Admin", false, null, "SUPERADMIN@KARTVERKET.NO", "SUPERADMIN@KARTVERKET.NO", null, "AQAAAAIAAYagAAAAENaoVF52NXWWRhyjMsrO0nqFIgh74hbPXRYbwbTapWBm55SaL+OZQjK9MGzFJsOt5A==", null, false, "7915bb07-0aff-4194-b93c-accb89a531bf", false, "superadmin@kartverket.no" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

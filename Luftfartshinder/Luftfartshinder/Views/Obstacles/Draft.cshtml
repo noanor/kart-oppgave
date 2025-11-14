@@ -8,7 +8,17 @@
 <div style="overflow:auto;" class="container mt-3">
     @if (Model.Obstacles.Count == 0)
     {
-        <p>Obstacle draft is empty.</p>
+        <p class="mb-3">
+            Obstacle draft is empty.<br />
+            Add obstacles through the map.
+        </p>
+
+        <a class="btn btn-lg btn-primary" role="button"
+            asp-area=""
+            asp-controller="Home"
+            asp-action="Index"    
+        >Back to Map</a>
+
     }
     else
     {
@@ -61,12 +71,13 @@
                         <td>@(o.Description ?? o.GetType().GetProperty("Description")?.GetValue(o) ?? "")</td>
                         <td>@o.IsDraft</td>
                         <td>
-                            <a 
+                            <a class="btn btn-outline-primary" role="button"
                                asp-action="EditObstacle"
                                asp-controller="Obstacles"
                                asp-route-index="@o.Id"
                                style="vertical-align: middle; text-decoration: none;">
-                                Edit <span class="material-symbols-outlined inline-icon">
+                                Edit 
+                                <span class="material-symbols-outlined inline-icon">
                                     edit
                                 </span>
                             </a>

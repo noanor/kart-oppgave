@@ -69,7 +69,7 @@ public partial class ObstaclesController : Controller
         var newReport = new Report()
         {
             ReportDate = DateTime.Now
-            
+
         };
 
         if (draft is null || draft.Obstacles.Count == 0)
@@ -98,6 +98,9 @@ public partial class ObstaclesController : Controller
         HttpContext.Session.Remove(DraftKey);
         return RedirectToAction("Index", "Home");
     }
+
+    //[HttpGet]
+    //public IActionResult EditObstacle()
 
     // === POST: /obstacles/edit-obstacle ===
     [HttpPost("/obstacles/edit-obstacle")]

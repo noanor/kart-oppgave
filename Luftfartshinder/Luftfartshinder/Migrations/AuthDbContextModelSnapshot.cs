@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Luftfartshinder.Migrations.AuthDb
+namespace Luftfartshinder.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
     partial class AuthDbContextModelSnapshot : ModelSnapshot
@@ -66,6 +66,9 @@ namespace Luftfartshinder.Migrations.AuthDb
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
+                    b.Property<string>("Organization")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("PasswordHash")
                         .HasColumnType("longtext");
 
@@ -101,7 +104,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             Id = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "553f071d-471f-4a5f-9aa5-4fcec8ab001c",
+                            ConcurrencyStamp = "d9ebf65d-eb6f-4928-afb8-433ef618a35c",
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -110,9 +113,9 @@ namespace Luftfartshinder.Migrations.AuthDb
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@KARTVERKET.NO",
                             NormalizedUserName = "SUPERADMIN@KARTVERKET.NO",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDZ5cqEJjyKjzJvkSrkZTtbNvcXlpvK7Ey6l6Nm5Mf5z1TT9s5v5lLEgJq2AGMmHLQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENaoVF52NXWWRhyjMsrO0nqFIgh74hbPXRYbwbTapWBm55SaL+OZQjK9MGzFJsOt5A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7aaea2da-1fdc-426f-b6cf-9a0dea1f090a",
+                            SecurityStamp = "7915bb07-0aff-4194-b93c-accb89a531bf",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         });
