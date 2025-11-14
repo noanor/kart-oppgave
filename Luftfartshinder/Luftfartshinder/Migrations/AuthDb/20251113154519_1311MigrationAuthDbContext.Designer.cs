@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Luftfartshinder.Migrations.AuthDb
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20251109173250_AuthMigration")]
-    partial class AuthMigration
+    [Migration("20251113154519_1311MigrationAuthDbContext")]
+    partial class _1311MigrationAuthDbContext
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,9 @@ namespace Luftfartshinder.Migrations.AuthDb
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -101,17 +104,18 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             Id = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "de019b91-47cf-4ec2-8f1e-bae9327777f7",
+                            ConcurrencyStamp = "553f071d-471f-4a5f-9aa5-4fcec8ab001c",
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
+                            IsApproved = true,
                             LastName = "Admin",
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@KARTVERKET.NO",
                             NormalizedUserName = "SUPERADMIN@KARTVERKET.NO",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBC4kTs+Gl9ZwnxYRase9y8vcKN7eufS9m0xYYmSNGaGpZsDUEtX6dMLg1HG3oZ2Xw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDZ5cqEJjyKjzJvkSrkZTtbNvcXlpvK7Ey6l6Nm5Mf5z1TT9s5v5lLEgJq2AGMmHLQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "122b8647-de8f-414f-a07c-d629f6f5d389",
+                            SecurityStamp = "7aaea2da-1fdc-426f-b6cf-9a0dea1f090a",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         });

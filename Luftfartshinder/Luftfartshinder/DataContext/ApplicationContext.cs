@@ -13,7 +13,8 @@ namespace Luftfartshinder.DataContext
         { 
         }
         public DbSet<Obstacle> Obstacles { get; set; } //Table in the database
-       
+        public DbSet<Report> Reports { get; set; } //Table in the database
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,6 +22,9 @@ namespace Luftfartshinder.DataContext
             //Primary keys, remember to think of .Entity as THIS => table in the database
 
             modelBuilder.Entity<Obstacle>()
+                .HasKey(pk => pk.Id); //Primary key for Data
+            
+            modelBuilder.Entity<Report>()
                 .HasKey(pk => pk.Id); //Primary key for Data
         }
     }

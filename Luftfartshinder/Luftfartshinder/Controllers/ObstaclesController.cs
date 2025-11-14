@@ -66,14 +66,20 @@ public partial class ObstaclesController : Controller
     public async Task<IActionResult> SubmitDraft()
     {
         var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
+        var newReport = new Report()
+        {
+            ReportDate = DateTime.Now
+            
+        };
+
         if (draft is null || draft.Obstacles.Count == 0)
         {
             return BadRequest("No draft to submit.");
         }
         foreach (var obstacle in draft.Obstacles)
         {
-            obstacle.IsDraft = false;
-            applicationContext.Obstacles.Add(obstacle);
+            newReport.Obstacles.Add(obstacle);
+            applicationContext.Reports.Add(newReport);
         }
 
         try

@@ -1,7 +1,7 @@
-﻿@{
+﻿@model Luftfartshinder.Models.ViewModel.SessionObstacleDraft
+@{
 }
 
-@model Luftfartshinder.Models.ViewModel.SessionObstacleDraft
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <h2>Draft Obstacles (@Model.Obstacles.Count)</h2>
@@ -24,6 +24,7 @@
                     <th>Latitude</th>
                     <th>Longitude</th>
                     <th>Description</th>
+                    <th>Draft status</th>
                     <th></th>
                 </tr>
             </thead>
@@ -58,9 +59,10 @@
                             @formattedLongitude
                         </td>
                         <td>@(o.Description ?? o.GetType().GetProperty("Description")?.GetValue(o) ?? "")</td>
+                        <td>@o.IsDraft</td>
                         <td>
                             <a 
-                                asp-action="EditObstacle"
+                               asp-action="EditObstacle"
                                asp-controller="Obstacles"
                                asp-route-index="@o.Id"
                                style="vertical-align: middle; text-decoration: none;">
