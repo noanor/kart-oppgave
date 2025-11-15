@@ -56,6 +56,13 @@
                                 >Feedback</a>
                             </li>
 
+                            <li class="nav-item">
+                                <a class="nav-link text-white"
+                                   asp-area=""
+                                   asp-controller="Account"
+                                   asp-action="Dashboard">Dashboard</a>
+                            </li>
+
                             @if (User.IsInRole("Registrar"))
                             {
                                 <li class="nav-item">
@@ -74,7 +81,7 @@
                                         asp-area="" 
                                         asp-controller="Home" 
                                         asp-action="SuperAdminHome"
-                                    >Dashboard</a>
+                                    >Superadmin Dashboard</a>
                                 </li>
                             }
                         </ul>

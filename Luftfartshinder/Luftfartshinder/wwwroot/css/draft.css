@@ -1,0 +1,12 @@
+﻿.obstacle-map {
+    width: 250px;
+    height: 200px;
+}
+
+.preview-map .leaflet-control-container{
+    display: none;
+}
+
+select option {
+    font-size: 1.5em;
+}

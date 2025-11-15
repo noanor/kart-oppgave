@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Luftfartshinder.DataContext;
-using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Models.Domain;
 
 namespace Luftfartshinder.Repository
 {

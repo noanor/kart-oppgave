@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Luftfartshinder.Migrations.Application
+namespace Luftfartshinder.Migrations
 {
     /// <inheritdoc />
-    public partial class _1411DbMig : Migration
+    public partial class _1511dbMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,6 +22,8 @@ namespace Luftfartshinder.Migrations.Application
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Author = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    AuthorId = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ReportDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Title = table.Column<string>(type: "longtext", nullable: false)

@@ -3,7 +3,7 @@ using Luftfartshinder.Models;
 using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
-using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Models.Domain;
 
 namespace Luftfartshinder.DataContext
 {

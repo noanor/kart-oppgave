@@ -1,8 +1,10 @@
-﻿using Luftfartshinder.Models;
+﻿using Luftfartshinder.DataContext;
+using Luftfartshinder.Models;
 using Luftfartshinder.Models.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Luftfartshinder.Controllers
 {
@@ -10,11 +12,13 @@ namespace Luftfartshinder.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly ApplicationContext applicationContext;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationContext applicationContext)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.applicationContext = applicationContext;
         }
 
         [HttpGet]
@@ -42,12 +46,12 @@ namespace Luftfartshinder.Controllers
                 ModelState.AddModelError("Username", "Username is already taken");
                 return View(model);
             }
-            
+
             if (!ModelState.IsValid)
             {
-                return View(model); 
+                return View(model);
             }
-            
+
             string? organization = null;
             if (model.SelectedRole == "FlightCrew")
             {
@@ -63,7 +67,7 @@ namespace Luftfartshinder.Controllers
                 LastName = model.LastName,
                 Email = model.Email,
                 UserName = model.Username,
-                Organization = organization, 
+                Organization = organization,
                 IsApproved = true
             };
 
@@ -76,7 +80,7 @@ namespace Luftfartshinder.Controllers
                 if (roleResult.Succeeded)
                 {
                     TempData["RegistrationSuccess"] = "User registered successfully!";
-                    return RedirectToAction("SuperAdminHome", "Home"); 
+                    return RedirectToAction("SuperAdminHome", "Home");
                 }
             }
 
@@ -96,15 +100,15 @@ namespace Luftfartshinder.Controllers
         {
             if (!ModelState.IsValid)
             {
-             return View(model);
+                return View(model);
             }
 
-    
+
             var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
             var existingUserByUsername = await userManager.FindByNameAsync(model.Username);
 
             if (existingUserByEmail != null)
-            { 
+            {
                 ModelState.AddModelError("Email", "Email is already taken");
                 return View(model);
             }
@@ -114,7 +118,7 @@ namespace Luftfartshinder.Controllers
                 ModelState.AddModelError("Username", "Username is already taken");
                 return View(model);
             }
-    
+
             string? organization = null;
             if (model.SelectedRole == "FlightCrew")
             {
@@ -139,7 +143,7 @@ namespace Luftfartshinder.Controllers
             if (!createResult.Succeeded)
             {
                 ModelState.AddModelError(string.Empty, "Registration failed. Please correct the fields below.");
-        
+
                 foreach (var error in createResult.Errors)
                 {
                     if (error.Code.Contains("DuplicateUserName"))
@@ -147,7 +151,7 @@ namespace Luftfartshinder.Controllers
                     else if (error.Code.Contains("DuplicateEmail"))
                         ModelState.AddModelError("Email", "This email is already taken.");
                     else
-                        ModelState.AddModelError(string.Empty, error.Description); 
+                        ModelState.AddModelError(string.Empty, error.Description);
                 }
                 return View(model);
             }
@@ -173,7 +177,7 @@ namespace Luftfartshinder.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -182,9 +186,9 @@ namespace Luftfartshinder.Controllers
             {
                 return View(model);
             }
-            
+
             var user = await userManager.FindByNameAsync(model.Username);
-            
+
             if (user != null && !user.IsApproved)
             {
                 ModelState.AddModelError("", "Your account is pending approval by an administrator.");
@@ -209,7 +213,7 @@ namespace Luftfartshinder.Controllers
 
             if (roles.Contains("FlightCrew"))
                 return RedirectToAction("Index", "Home");
-                
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -218,10 +222,21 @@ namespace Luftfartshinder.Controllers
         public async Task<IActionResult> SignOut()
         {
             await signInManager.SignOutAsync();
-            
+
             TempData["SignOutMessage"] = "Goodbye! You have been logged out successfully.";
-            
+
             return RedirectToAction("Login", "Account");
         }
+
+        [HttpGet]
+        public IActionResult Dashboard()
+        {
+            var reports = applicationContext.Reports
+                .Include(r => r.Obstacles)
+                .ToList();
+            return View(reports);
+        }
+
+
     }
 }

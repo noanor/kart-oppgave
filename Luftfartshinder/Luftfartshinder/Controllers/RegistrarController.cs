@@ -7,7 +7,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Luftfartshinder.DataContext;
-using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Models.Domain;
 
 namespace Luftfartshinder.Controllers
 {

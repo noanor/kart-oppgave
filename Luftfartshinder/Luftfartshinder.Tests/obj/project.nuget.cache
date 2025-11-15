@@ -55,15 +55,5 @@
     "C:\\Users\\Noa\\.nuget\\packages\\xunit.extensibility.execution\\2.9.2\\xunit.extensibility.execution.2.9.2.nupkg.sha512",
     "C:\\Users\\Noa\\.nuget\\packages\\xunit.runner.visualstudio\\2.8.2\\xunit.runner.visualstudio.2.8.2.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "message": "Problem reading the cache file C:\\Users\\Noa\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\obj\\project.nuget.cache : '<' is an invalid start of a value. Path: $ | LineNumber: 0 | BytePositionInLine: 0.",
-      "projectPath": "C:\\Users\\Noa\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\Noa\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }

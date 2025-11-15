@@ -3793,13 +3793,5 @@
         }
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\Noa\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\obj\\project.nuget.cache : '<' is an invalid start of a value. Path: $ | LineNumber: 0 | BytePositionInLine: 0."
-    }
-  ]
+  }
 }

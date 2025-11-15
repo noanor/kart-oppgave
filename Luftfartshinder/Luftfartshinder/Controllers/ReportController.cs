@@ -10,7 +10,8 @@ namespace Luftfartshinder.Controllers
         private const string DraftKey = "ObstacleDraft";
         private readonly ApplicationContext applicationContext;
 
-        public ReportController(ApplicationContext applicationContext) {
+        public ReportController(ApplicationContext applicationContext)
+        {
             this.applicationContext = applicationContext;
         }
         public IActionResult Add()
@@ -22,7 +23,7 @@ namespace Luftfartshinder.Controllers
             }
             foreach (var obstacle in draft.Obstacles)
             {
-                obstacle.IsDraft = false;
+                //obstacle.IsDraft = false;
                 applicationContext.Obstacles.Add(obstacle);
             }
 
@@ -41,7 +42,7 @@ namespace Luftfartshinder.Controllers
             //applicationContext.SaveChanges();
             HttpContext.Session.Remove(DraftKey);
             return RedirectToAction("Index", "Home");
-            return View("Report");
+            //return View("Report");
         }
     }
 }

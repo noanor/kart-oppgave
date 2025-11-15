@@ -4,16 +4,19 @@ using Luftfartshinder.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Luftfartshinder.Migrations.Application
+namespace Luftfartshinder.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20251115162741_1511dbMigration")]
+    partial class _1511dbMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace Luftfartshinder.Migrations.Application
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Luftfartshinder.Models.ViewModel.Obstacle", b =>
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.Obstacle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -64,7 +67,7 @@ namespace Luftfartshinder.Migrations.Application
                     b.ToTable("Obstacles");
                 });
 
-            modelBuilder.Entity("Luftfartshinder.Models.ViewModel.Report", b =>
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.Report", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,6 +76,10 @@ namespace Luftfartshinder.Migrations.Application
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("AuthorId")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -88,14 +95,14 @@ namespace Luftfartshinder.Migrations.Application
                     b.ToTable("Reports");
                 });
 
-            modelBuilder.Entity("Luftfartshinder.Models.ViewModel.Obstacle", b =>
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.Obstacle", b =>
                 {
-                    b.HasOne("Luftfartshinder.Models.ViewModel.Report", null)
+                    b.HasOne("Luftfartshinder.Models.Domain.Report", null)
                         .WithMany("Obstacles")
                         .HasForeignKey("ReportId");
                 });
 
-            modelBuilder.Entity("Luftfartshinder.Models.ViewModel.Report", b =>
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.Report", b =>
                 {
                     b.Navigation("Obstacles");
                 });
