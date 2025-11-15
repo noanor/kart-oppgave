@@ -1,18 +1,25 @@
 using Luftfartshinder.DataContext;
 using Luftfartshinder.Extensions;
+using Luftfartshinder.Models;
+using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Models.ViewModel;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 public partial class ObstaclesController : Controller
 {
     private const string DraftKey = "ObstacleDraft";
     private readonly ApplicationContext applicationContext;
+    private readonly UserManager<ApplicationUser> userManager;
 
     public record AddOneResponse(bool Ok, int Count);
 
-    public ObstaclesController(ApplicationContext applicationContext)
+    public ObstaclesController(ApplicationContext applicationContext, UserManager<ApplicationUser> userManager)
     {
         this.applicationContext = applicationContext;
+        this.userManager = userManager;
     }
 
     // === GET: /obstacles/draft ===
@@ -62,18 +69,27 @@ public partial class ObstaclesController : Controller
     }
 
     // === POST: /obstacles/submit-draft ===
+    [Authorize]
     [HttpPost("/obstacles/submit-draft")]
     public async Task<IActionResult> SubmitDraft()
     {
         var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
+        var newReport = new Report()
+        {
+            ReportDate = DateTime.Now,
+            Author = User.Identity.Name,
+            AuthorId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+            Title = ""
+        };
+
         if (draft is null || draft.Obstacles.Count == 0)
         {
             return BadRequest("No draft to submit.");
         }
         foreach (var obstacle in draft.Obstacles)
         {
-            obstacle.IsDraft = false;
-            applicationContext.Obstacles.Add(obstacle);
+            newReport.Obstacles.Add(obstacle);
+            applicationContext.Reports.Add(newReport);
         }
 
         try
@@ -93,24 +109,63 @@ public partial class ObstaclesController : Controller
         return RedirectToAction("Index", "Home");
     }
 
-    // === POST: /obstacles/edit-obstacle ===
-    [HttpPost("/obstacles/edit-obstacle")]
-    public IActionResult EditObstacle(int index, [FromBody] Obstacle dto)
+    [HttpGet]
+    public IActionResult EditObstacle(int index)
     {
         var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
         if (draft is null || index < 0 || index >= draft.Obstacles.Count)
         {
             return BadRequest("Invalid draft or index.");
         }
+
         var obstacle = draft.Obstacles[index];
-        obstacle.Type = dto.Type;
-        obstacle.Name = dto.Name ?? obstacle.Name;
-        obstacle.Description = dto.Description ?? obstacle.Description;
-        obstacle.Height = dto.Height;
-        obstacle.Latitude = dto.Latitude;
-        obstacle.Longitude = dto.Longitude;
+
+        if (obstacle is not null)
+        {
+            var editObstacleRequest = new EditObstacleRequest
+            {
+                Type = obstacle.Type,
+                Name = obstacle.Name,
+                Height = obstacle.Height,
+                Latitude = obstacle.Latitude,
+                Longitude = obstacle.Longitude,
+                Description = obstacle.Description
+            };
+            return View("EditObstacle", editObstacleRequest);
+        }
+
+        return View(null);
+
+
+    }
+
+    // === POST: /obstacles/edit-obstacle ===
+    [HttpPost]
+    public IActionResult EditObstacle(EditObstacleRequest editObstacleRequest, int index)
+    {
+        var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
+        if (draft is null || index < 0 || index >= draft.Obstacles.Count)
+        {
+            return BadRequest("Invalid draft or index.");
+        }
+
+        draft.Obstacles[index] = new Obstacle
+        {
+            Id = editObstacleRequest.Id,
+            Type = editObstacleRequest.Type,
+            Name = editObstacleRequest.Name,
+            Height = editObstacleRequest.Height,
+            Latitude = editObstacleRequest.Latitude,
+            Longitude = editObstacleRequest.Longitude,
+            Description = editObstacleRequest.Description
+        };
+
+
+
         HttpContext.Session.Set(DraftKey, draft);
-        return Ok(new { Ok = true });
+
+        return RedirectToAction("Draft");
+
     }
 
     // DTO for JSON requests

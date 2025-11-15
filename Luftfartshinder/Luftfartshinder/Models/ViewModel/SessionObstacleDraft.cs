@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Luftfartshinder.Models.Domain;
+using System.Collections.Generic;
 
 namespace Luftfartshinder.Models.ViewModel
 {

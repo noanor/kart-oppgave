@@ -1,0 +1,66 @@
+﻿@model Luftfartshinder.Models.ViewModel.EditObstacleRequest
+@{
+}
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>Edit Obstacle - @Model.Name</h1>
+    </div>
+</div>
+
+<div class="container py-5">
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label" for="type">Type</label>
+            @* <input class="form-control" list="datalistOptions" id="type" placeholder="Obstacle type" asp-for="Type"> *@
+           
+            <select class="form-select" id="type" name="type"
+                    asp-for="Type">
+                <option value="Punkt">Punkt</option>
+                <option value="Mast">Mast</option>
+                <option value="Linje">Linje</option>
+                <option value="Luftspenn">Luftspenn</option>
+                <option value="Flate">Flate</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" id="name" class="form-control" asp-for="Name" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Height</label>
+            <input type="text" id="height" class="form-control" asp-for="Height" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Latitude</label>
+            <input type="text" id="latitude" class="form-control" asp-for="Latitude" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Longitude</label>
+            <input type="text" id="longitude" class="form-control" asp-for="Longitude" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <input type="text" id="decription" class="form-control" asp-for="Description" />
+        </div>
+
+        <div class="mb-3">
+            <div class="d-flex">
+                <button type="submit" class="btn btn-primary">Update</button>
+
+                <button class="btn btn-danger ms-2" type="submit"
+                        asp-area="" 
+                        asp-controller="AdminTags" 
+                        asp-action="Delete"
+                >Delete</button>
+            </div>
+
+        </div>
+    </form>
+
+</div>

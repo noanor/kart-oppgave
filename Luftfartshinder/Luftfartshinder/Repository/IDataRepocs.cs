@@ -1,4 +1,4 @@
-﻿using Luftfartshinder.Models.ViewModel;
+﻿using Luftfartshinder.Models.Domain;
 
 namespace Luftfartshinder.Repository
 {

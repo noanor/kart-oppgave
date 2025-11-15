@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Luftfartshinder.Models.ViewModel;
 using Luftfartshinder.Repository;
+using Luftfartshinder.Models.Domain;
 
 namespace Luftfartshinder.Controllers
 {

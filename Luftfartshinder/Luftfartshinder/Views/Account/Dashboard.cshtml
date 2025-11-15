@@ -1,0 +1,63 @@
+﻿@using System.Security.Claims
+@model List<Luftfartshinder.Models.Domain.Report>
+
+@{
+}
+
+<div class="container mt-5 py-5">
+    
+    <div class="d-flex flex-row h1">
+        @if (User.IsInRole("SuperAdmin"))
+        {
+            <div>Admin Dashboard</div>
+        }
+        else if (User.IsInRole("Registrar"))
+        {
+            <div>Registrar Dashboard</div>
+        }
+        else
+        {
+            <div>Dashboard</div>
+        }
+
+    </div>
+
+    <div>
+        <h4>Your obstacles:</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Height</th>
+                        <th scope="col">Lat</th>
+                        <th scope="col">Lon</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var r in Model)
+                    {
+                        if (r.AuthorId == User.FindFirstValue(ClaimTypes.NameIdentifier))
+                        {
+                            @foreach (var o in r.Obstacles)
+                            {
+                                <tr>
+                                    <th scope="row">@o.Id</th>
+                                    <td>@o.Type</td>
+                                    <td>@o.Name</td>
+                                    <td>@o.Height</td>
+                                    <td>@o.Latitude</td>
+                                    <td>@o.Longitude</td>
+                                    <td>@o.IsDraft</td>
+                                </tr>
+                            }
+                        }
+                    }
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+

@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Luftfartshinder.Models;
-using Luftfartshinder.Models.ViewModel;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
+using Luftfartshinder.Models.Domain;
 
 namespace Luftfartshinder.Controllers
 {
