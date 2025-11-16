@@ -1,45 +1,57 @@
-# kart-oppgave
-Oppgave 1 IS-202
+# Luftfartshinder - Nasjonalt Register over Luftfartshindre
 
+## Prosjektbeskrivelse
 
+System for innmelding og kontroll av luftfartshindre til Nasjonalt register over luftfartshindre (NRL).
 
-## Kartverket – Hinder registrering,
-System for innmelding og kontroll av luftromshindringer
+Denne applikasjonen er utviklet for å gi piloter og flybesetning fra NLA, Luftforsvaret og Politiets helikoptertjeneste mulighet til å registrere hindringer i luftrommet. Innmeldte data kan deretter gjennomgås og enten godkjennes eller avvises av registerfører i NRL. Målet er å styrke flysikkerheten gjennom et kontinuerlig oppdatert register over luftfartshindre.
 
-Denne applikasjonen er utviklet for å gi piloter mulighet til å registrere hindringer i luftrommet. Innmeldte data kan deretter gjennomgås og enten godkjennes eller avvises av registerfører i NRL. Målet er å styrke flysikkerheten gjennom et kontinuerlig oppdatert register over luftromshindringer.
+## Teknologier
 
-Teknologi brukt:
+- ASP.NET Core 9.0 MVC
+- Entity Framework Core
+- ASP.NET Core Identity
+- MySQL/MariaDB
+- Leaflet (kartklient)
+- Docker (containerisering)
 
-ASP.NET Core MVC,
-Entity Framework Core,
-MySQL/MariaDB,
-Docker for drift og portabilitet,
+## Arkitektur
 
----
+Løsningen er bygd etter Model-View-Controller (MVC)-mønsteret:
 
-### Arkitektur
-Løsningen er bygd etter Model–View–Controller (MVC)-mønsteret:
+- **Model** – Domeneklasser og valideringslogikk
+- **View** – Razor Views benyttes for visning av skjemaer, oversiktssider, kart og tilbakemeldinger
+- **Controller** – Ansvarlig for ruting og forretningslogikk
+- **Database** – Data lagres i MySQL/MariaDB og håndteres via Entity Framework Core med migrasjoner gjennom ApplicationDbContext og AuthDbContext
 
-Model – Domeneklasser og valideringslogikk
-View – Razor Views benyttes for visning av skjemaer, oversiktssider, kart og tilbakemeldinger.
-Controller – Ansvarlig for ruting og forretningslogikk,
-Database – Data vil i fremtidig versjon av appen lagres i MySQL/MariaDB og håndteres via Entity Framework Core med migrasjoner gjennom ApplicationDbContext.
+## Dataflyt
 
----
+1. Brukeren logger inn på systemet
+2. Piloter kan registrere nye hindringer gjennom interaktivt kart (Home → Index)
+3. Input blir validert med modellattributter
+4. Hindre lagres i draft-session før innsending
+5. Gyldige innsendelser publiseres til database
+6. Registerfører kan behandle og validere innkomne rapporter direkte i systemet
+7. Brukere får beskjed om godkjenning/avvisning
 
-### Dataflyt
-Brukeren åpner startsiden (Home → Index).
-Piloter kan registrere nye hindringer gjennom skjemaet (Index → ObstacleData → Vises  i OverView).
-Input blir validert med modellattributter
-Gyldige innsendelser publiseres til oversiktssiden.
+## Funksjonalitet
 
-Fremtidig funksjonalitet inkluderer at registerfører kan behandle og validere innkomne rapporter direkte i systemet.,
+- Brukerregistrering med godkjenning av SuperAdmin
+- Rollbasert tilgangskontroll (SuperAdmin, Registrar, FlightCrew)
+- Rapportering av luftfartshindre via interaktivt kart (Leaflet)
+- Draft-system for midlertidig lagring før innsending
+- Godkjenning/avvisning av rapporterte hindre
+- Brukeradministrasjon med filtrering og søk
 
----
+## Drift og distribusjon
 
-### Drift og distribusjon
-Applikasjonen er pakket som en Docker-løsning for enkel kjøring og skalerbarhet. Med docker-compose kan både webapplikasjon og database startes i separate containere:
+Applikasjonen er pakket som en Docker-løsning for enkel kjøring og skalerbarhet:
 
-Webdelen kjøres på mcr.microsoft.com/dotnet/aspnet:9.0.
-Databasen kjører i en mariadbcontainer.
-Komponentene kommuniserer via et felles Docker-nettverk.
+- Webdelen kjøres på `mcr.microsoft.com/dotnet/aspnet:9.0`
+- Databasen kjører i en MariaDB container
+- Komponentene kommuniserer via connection strings konfigurert i `appsettings.json`
+
+## Dokumentasjon
+
+- **Kjøreinstruksjoner:** Se [README.md](Luftfartshinder/README.md) i Luftfartshinder-mappen
+- **Testing:** Se [TESTING.md](Luftfartshinder/TESTING.md) for testdokumentasjon og resultater
