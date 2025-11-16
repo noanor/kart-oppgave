@@ -53,4 +53,5 @@ Applikasjonen er pakket som en Docker-løsning for enkel kjøring og skalerbarhe
 
 ## Dokumentasjon
 
-For detaljerte kjøreinstruksjoner, se [README.md](Luftfartshinder/README.md) i Luftfartshinder-mappen.
+- **Kjøreinstruksjoner:** Se [README.md](Luftfartshinder/README.md) i Luftfartshinder-mappen
+- **Testing:** Se [TESTING.md](Luftfartshinder/TESTING.md) for testdokumentasjon og resultater

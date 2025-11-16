@@ -88,3 +88,13 @@ Denne brukeren har tilgang til alle funksjoner og kan opprette nye brukere.
 - **SuperAdmin:** Full tilgang, kan administrere brukere
 - **Registrar:** Kan godkjenne/avvise rapporterte hindre
 - **FlightCrew:** Kan rapportere nye hindre
+
+## Testing
+
+For detaljert testing-dokumentasjon, se [TESTING.md](TESTING.md).
+
+Testene kan kjøres med:
+```bash
+cd Luftfartshinder.Tests
+dotnet test
+```
