@@ -1,127 +1,204 @@
-﻿@model Luftfartshinder.Controllers.RegistrarDetails
-@{
-    ViewData["Title"] = "Registrar – Details";
-}
+﻿
 
 <head>
     <link href="~/css/registrar.css" rel="stylesheet" />
 </head>
 
-<div class="container">
+@model Luftfartshinder.Controllers.RegistrarDetails
+@{
+    ViewData["Title"] = Model.Name ?? "Obstacle";
+    var noteSaved = TempData["NoteSaved"] != null;
+}
 
-    <div class="mb-3">
-        <a href="@Url.Action("Index", "Registrar")" class="back-link d-inline-flex align-items-center text-decoration-none">
-            <span class="me-2 fs-5">←</span>
-            <span class="fw-semibold">Back to List</span>
-        </a>
+<div class="container-xxl details-shell">
+
+    <!-- PERFECTLY CENTERED HEADER -->
+    <div class="row align-items-center mb-4">
+
+        <!-- Left: Back to list -->
+        <div class="col-4 text-start">
+            <a href="@Url.Action("Index", "Registrar")" class="back-icon">
+                <i class="bi bi-arrow-left-circle"></i>
+            </a>
+        </div>
+
+        <!-- Center: Obstacle title -->
+        <div class="col-4 text-center">
+            <h1 class="page-title mb-0">@Model.Name</h1>
+        </div>
+
+        <!-- Right: Delete button -->
+        <div class="col-4 text-end">
+            <button type="button"
+                    class="btn btn-danger btn-sm d-inline-flex align-items-center gap-2"
+                    data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <i class="bi bi-trash"></i> 
+            </button>
+        </div>
+
     </div>
 
-    <div class="card shadow-sm mt-3">
-        <div class="card-body p-4">
-            <h3 class="card-title mb-4">@(!string.IsNullOrWhiteSpace(Model.Name) ? Model.Name : "Obstacle")</h3>
 
-            <dl class="row g-3">
-                <dt class="col-sm-3">Id</dt>
-                <dd class="col-sm-9">@Model.Id</dd>
+    <!-- META BOX (ID / Type / Status) -->
+    <div class="card meta-box mb-4">
+        <div class="card-body">
+            <div class="meta-grid">
 
-                <dt class="col-sm-3">Type</dt>
-                <dd class="col-sm-9">@Model.Type</dd>
+                <!-- ID -->
+                <div class="meta-item">
+                    <div class="meta-label">ID</div>
+                    <div class="meta-value">#@Model.Id</div>
+                </div>
 
-                <dt class="col-sm-3">Actions</dt>
-                <dd class="col-sm-9">
-                    @if (Model.Id >= 0)
-                    {
-                        <div class="d-flex align-items-center gap-2 flex-wrap">
-                            <form asp-controller="Registrar" asp-action="Approve" method="post" class="d-inline">
-                                <input type="hidden" name="id" value="@Model.Id" />
-                                <button type="submit" class="btn btn-success btn-sm px-4 py-2">Approve</button>
-                            </form>
-                            <form asp-controller="Registrar" asp-action="Reject" method="post" class="d-inline">
-                                <input type="hidden" name="id" value="@Model.Id" />
-                                <button type="submit" class="btn btn-danger btn-sm px-4 py-2">Reject</button>
-                            </form>
-                        </div>
-                    }
-                </dd>
+                <!-- Type -->
+                <div class="meta-item">
+                    <div class="meta-label">Type</div>
+                    <div class="meta-value">@Model.Type</div>
+                </div>
 
-                <dt class="col-sm-3">Status</dt>
-                <dd class="col-sm-9">
-                    @switch (Model.Status)
-                    {
-                        case Luftfartshinder.Controllers.ReviewStatus.Approved:
-                            <span class="badge rounded-pill bg-success px-3 py-2">Approved</span>
-                            break;
-                        case Luftfartshinder.Controllers.ReviewStatus.Rejected:
-                            <span class="badge rounded-pill bg-danger px-3 py-2">Rejected</span>
-                            break;
-                        default:
-                            <span class="badge rounded-pill bg-warning text-dark px-3 py-2">Pending</span>
-                            break;
-                    }
-                </dd>
+                <!-- Status -->
+                <div class="meta-item">
+                    <div class="meta-label">Status</div>
 
-                <dt class="col-sm-3">Latitude</dt>
-                <dd class="col-sm-9">@Model.Latitude.ToString("0.000000")</dd>
+                    <div class="meta-actions">
 
-                <dt class="col-sm-3">Longitude</dt>
-                <dd class="col-sm-9">@Model.Longitude.ToString("0.000000")</dd>
+                        @switch (Model.Status)
+                        {
+                            case Luftfartshinder.Controllers.ReviewStatus.Approved:
+                                <span class="pill pill-approved">Approved</span>
+                                break;
 
-                <dt class="col-sm-3">Height</dt>
-                <dd class="col-sm-9">@((Model.Height?.ToString()) ?? "-")</dd>
+                            case Luftfartshinder.Controllers.ReviewStatus.Rejected:
+                                <span class="pill pill-rejected">Rejected</span>
+                                break;
 
-                <dt class="col-sm-3">Reporter</dt>
-                <dd class="col-sm-9">@(!string.IsNullOrWhiteSpace(Model.Reporter) ? Model.Reporter : "-")</dd>
+                            default:
+                                <span class="pill pill-pending">Pending</span>
+                                break;
+                        }
 
-                <dt class="col-sm-3">Date</dt>
-                <dd class="col-sm-9">
-                    @(Model.CreatedAt.HasValue
-                                    ? Model.CreatedAt.Value.ToLocalTime().ToString("yyyy-MM-dd")
-                                    : "-")
-                </dd>
+                        <!-- Approve -->
+                        <form asp-controller="Registrar" asp-action="Approve" method="post" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@Model.Id" />
+                            <button type="submit" class="btn btn-success btn-pill">Approve</button>
+                        </form>
 
-                <dt class="col-sm-3">Registrar Note</dt>
-                <dd class="col-sm-9">
-                    @{
-                        var noteSaved = TempData["NoteSaved"] != null; 
-                    }
-                    <form asp-controller="Registrar" asp-action="SaveNote" method="post" class="row g-2">
+                        <!-- Reject -->
+                        <form asp-controller="Registrar" asp-action="Reject" method="post" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@Model.Id" />
+                            <button type="submit" class="btn btn-danger btn-pill">Reject</button>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row g-4">
+
+        <!-- LEFT COLUMN -->
+        <div class="col-xl-6">
+
+
+            <!-- Obstacle details -->
+            <div class="card card-large shadow-sm mb-4">
+                <div class="card-body">
+                    <dl class="info-grid mb-0">
+                        <dt>Latitude</dt>
+                        <dd>@Model.Latitude.ToString("0.######")</dd>
+
+                        <dt>Longitude</dt>
+                        <dd>@Model.Longitude.ToString("0.######")</dd>
+
+                        <dt>Height</dt>
+                        <dd>@((Model.Height?.ToString()) ?? "-")</dd>
+
+                        <dt>Reporter</dt>
+                        <dd>@(!string.IsNullOrWhiteSpace(Model.Reporter) ? Model.Reporter : "-")</dd>
+
+                        <dt>Date</dt>
+                        <dd>
+                            @(Model.CreatedAt.HasValue
+                                                        ? Model.CreatedAt.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm")
+                                                        : "-")
+                        </dd>
+
+                        <dt>Description</dt>
+                        <dd>@(!string.IsNullOrWhiteSpace(Model.Description) ? Model.Description : "-")</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <!-- Registrar Note -->
+            <div class="card card-large shadow-sm">
+                <div class="card-header fw-semibold">Registrar Note</div>
+                <div class="card-body">
+                    <form asp-controller="Registrar" asp-action="SaveNote" method="post" class="row g-3">
                         <input type="hidden" name="id" value="@Model.Id" />
+                        @Html.AntiForgeryToken()
 
-                 
                         <div class="col-12">
                             <textarea name="note" class="form-control" rows="4"
                                       placeholder="Ask for more info, add internal remarks, etc.">@Model.Note</textarea>
                         </div>
 
-                        <!-- Button + Saved indicator (stays visible) -->
                         <div class="col-12 d-flex align-items-center gap-3">
-                            <button type="submit" class="btn btn-primary btn-sm px-4 py-2" id="saveNoteBtn">Save note</button>
-
-                            <span id="noteSavedMsg"
-                                  class="fw-semibold text-dark @(noteSaved ? "" : "d-none")">
-                                ✓ Saved
-                            </span>
+                            <button type="submit" class="btn btn-primary btn-sm px-4 py-2">Save note</button>
+                            @if (noteSaved)
+                            {
+                                <span class="text-dark fw-semibold">✓ Saved</span>
+                            }
                         </div>
                     </form>
-                </dd>
+                </div>
+            </div>
+        </div>
 
-                <dt class="col-sm-3">Description</dt>
-                <dd class="col-sm-9">@(!string.IsNullOrWhiteSpace(Model.Description) ? Model.Description : "-")</dd>
-
-                <script>
-                    document.addEventListener("DOMContentLoaded", function () {
-                        const saveBtn = document.getElementById("saveNoteBtn");
-                        const savedMsg = document.getElementById("noteSavedMsg");
-                        if (!saveBtn || !savedMsg) return;
-
-                        saveBtn.addEventListener("click", function () {
-                            savedMsg.classList.remove("d-none");
-                        });
-                    });
-                </script>
-
-            </dl>
+        <!-- RIGHT COLUMN -->
+        <div class="col-xl-6">
+            <div class="card card-large shadow-sm">
+                <div class="card-header fw-semibold">Map Preview</div>
+                <div class="card-body">
+                    <div class="map-placeholder d-flex align-items-center justify-content-center">
+                        <div class="text-muted small">Map will appear here</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<!-- Delete confirmation modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete obstacle?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <strong>@Model.Name</strong>? This action cannot be undone!
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form asp-controller="Registrar" asp-action="Delete" method="post" class="d-inline">
+                    <input type="hidden" name="id" value="@Model.Id" /> 
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash"></i> 
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
