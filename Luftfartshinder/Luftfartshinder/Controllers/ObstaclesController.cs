@@ -1,8 +1,8 @@
-using Luftfartshinder.DataContext;
 using Luftfartshinder.Extensions;
 using Luftfartshinder.Models;
 using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,15 +11,15 @@ using System.Security.Claims;
 public partial class ObstaclesController : Controller
 {
     private const string DraftKey = "ObstacleDraft";
-    private readonly ApplicationContext applicationContext;
     private readonly UserManager<ApplicationUser> userManager;
+    private readonly IReportRepository reportRepository;
 
     public record AddOneResponse(bool Ok, int Count);
 
-    public ObstaclesController(ApplicationContext applicationContext, UserManager<ApplicationUser> userManager)
+    public ObstaclesController(UserManager<ApplicationUser> userManager, IReportRepository reportRepository)
     {
-        this.applicationContext = applicationContext;
         this.userManager = userManager;
+        this.reportRepository = reportRepository;
     }
 
     // === GET: /obstacles/draft ===
@@ -74,6 +74,8 @@ public partial class ObstaclesController : Controller
     public async Task<IActionResult> SubmitDraft()
     {
         var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
+
+        // Create new report
         var newReport = new Report()
         {
             ReportDate = DateTime.Now,
@@ -86,24 +88,28 @@ public partial class ObstaclesController : Controller
         {
             return BadRequest("No draft to submit.");
         }
+
+        // Assign obstacles to the report
         foreach (var obstacle in draft.Obstacles)
         {
-            newReport.Obstacles.Add(obstacle);
-            applicationContext.Reports.Add(newReport);
+            try
+            {
+                newReport.Obstacles.Add(obstacle);
+
+                // Send report to DB
+                await reportRepository.AddAsync(newReport);
+
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (not shown here for brevity)
+                // Most MySQL details are here:
+                Console.WriteLine("DbUpdateException: " + ex.Message);
+                Console.WriteLine("Inner: " + ex.InnerException?.Message);
+                throw; // or return BadRequest with the inner message
+            }
         }
 
-        try
-        {
-            await applicationContext.SaveChangesAsync();
-        }
-        catch (Exception ex)
-        {
-            // Log the exception (not shown here for brevity)
-            // Most MySQL details are here:
-            Console.WriteLine("DbUpdateException: " + ex.Message);
-            Console.WriteLine("Inner: " + ex.InnerException?.Message);
-            throw; // or return BadRequest with the inner message
-        }
         //applicationContext.SaveChanges();
         HttpContext.Session.Remove(DraftKey);
         return RedirectToAction("Index", "Home");
