@@ -1,5 +1,4 @@
-﻿@model IEnumerable<Luftfartshinder.Controllers.RegistrarRow>
-
+﻿@model List<Luftfartshinder.Models.Domain.Report>
 @{
     ViewData["Title"] = "Registrar List";
 }
@@ -10,211 +9,49 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
-@if (TempData["Msg"] != null)
-{
-    <div id="toastMsg" style="
-                 position: fixed;
-                 top: 4.5rem;
-                 right: 1.2rem;
-                 z-index: 5000;
-                 opacity: 0;
-                 transition: opacity .6s ease-in-out;">
-
-        <div style="
-                     display: inline-flex;
-                     align-items: center;
-                     gap: .45rem;
-                     background-color: #f8d7da;
-                     border: 1px solid #f5c2c7;
-                     color: #842029;
-                     border-radius: .55rem;
-                     padding: .55rem .9rem;
-                     font-size: .85rem;
-                     min-width: 240px;
-                     box-shadow: 0 2px 10px rgba(0,0,0,.15);
-                     font-weight: 600;">
-
-            <i class="bi bi-x-circle-fill" style="font-size: 1rem;"></i>
-            <span>@TempData["Msg"]</span>
-        </div>
-    </div>
-
-    <script>
-        const toast = document.getElementById("toastMsg");
-        setTimeout(() => toast.style.opacity = "1", 100);
-
-        setTimeout(() => {
-            toast.style.opacity = "0";
-        }, 6000);
-
-        setTimeout(() => {
-            if (toast) toast.remove();
-        }, 6600);
-    </script>
-}
-
-<div class="container mt-4">
-    <h2 class="mb-3">Registrar List</h2>
-
-    <form method="get" class="row g-3 mb-3 align-items-end">
-        <div class="col-sm-6">
-            <input name="q" class="form-control"
-                   placeholder="Search name, reporter, description…"
-                   value="@Context.Request.Query["q"]" />
-        </div>
-
-        <div class="col-sm-3">
-            <label class="form-label mb-1">From</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <i class="bi bi-calendar3"></i>
-                </span>
-                <input id="fromDate"
-                       name="from"
-                       type="text"
-                       class="form-control date-smaller"
-                       placeholder="YYYY-MM-DD"
-                       value="@Context.Request.Query["from"]" />
-            </div>
-        </div>
-
-        <div class="col-sm-3">
-            <label class="form-label mb-1">To</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <i class="bi bi-calendar3"></i>
-                </span>
-                <input id="toDate"
-                       name="to"
-                       type="text"
-                       class="form-control date-smaller"
-                       placeholder="YYYY-MM-DD"
-                       value="@Context.Request.Query["to"]" />
-            </div>
-        </div>
-    </form>
-
-    <div class="table-responsive">
-        <table class="table align-middle table-hover">
+<body>
+    <header>
+        <h2>Registrar - List of Reports</h2>
+    </header>
+    <div class="container">
+        <table class="table">
             <thead>
                 <tr>
-                    <th class="text-center">Id</th>
-                    <th class="text-center">Type</th>
-                    <th class="text-center">Name</th>
-                    <th class="text-center">Latitude</th>
-                    <th class="text-center">Longitude</th>
-                    <th class="text-center">Height</th>
-                    <th class="text-center">Reporter</th>
-                    <th class="text-center">Date</th>
-                    <th class="text-center col-status">Status</th>
-                    <th class="text-center col-actions"></th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">No. of obstacles</th>
+                    <th></th>
                 </tr>
             </thead>
 
-            <tbody class="table-group-divider">
-                @foreach (var r in Model)
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
                 {
                     <tr>
-                        <td class="text-center">@r.Id</td>
-
-                        <td class="text-center">@r.Type</td>
-
-                        <td class="text-center">
-                            @(string.IsNullOrWhiteSpace(r.Name) ? "-" : r.Name)
-                        </td>
-
-                        <td class="text-center">
-                            @r.Latitude.ToString("0.000000")
-                        </td>
-
-                        <td class="text-center">
-                            @r.Longitude.ToString("0.000000")
-                        </td>
-
-                        <td class="text-center">
-                            @(r.Height?.ToString() ?? "-")
-                        </td>
-
-                        <td class="text-center">
-                            @(string.IsNullOrWhiteSpace(r.Reporter) ? "-" : r.Reporter)
-                        </td>
-
-                        <td class="text-center">
-                            @(r.CreatedAt.HasValue
-                                                    ? r.CreatedAt.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm")
-                                                    : "-")
-                    </td>
-
-                        <td class="text-center col-status">
-                        @switch (r.Status)
-                            {
-                                case Luftfartshinder.Controllers.ReviewStatus.Approved:
-                                    <span class="badge rounded-pill bg-success px-3 py-2">Approved</span>
-                                    break;
-                                case Luftfartshinder.Controllers.ReviewStatus.Rejected:
-                                    <span class="badge rounded-pill bg-danger px-3 py-2">Rejected</span>
-                                    break;
-                                default:
-                                    <span class="badge rounded-pill bg-lightgray text-dark px-3 py-2">Pending</span>
-                                    break;
-                            }
-                        </td>
-
-                        <td class="text-center col-actions">
-                            @if (r.Id >= 0)
-                            {
-                                <a class="btn btn-outline-primary btn-sm px-3 py-2"
-                                   href="@Url.Action("Details", "Registrar", new { id = r.Id })">
-                                    View
-                                </a>
-                            }
+                        <td>@Model[i].Id</td>
+                        <td>@Model[i].Title</td>
+                        <td>@Model[i].Author</td>
+                        <td>@Model[i].ReportDate</td>
+                        <td>@Model[i].Obstacles.Count</td>
+                        <td>
+                            <a class="btn btn-primary" role="button"
+                               asp-action="Details"
+                               asp-controller="Registrar"
+                               asp-route-id="@(i+1)"
+                               style="vertical-align: middle; text-decoration: none;">
+                                View
+                            </a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
+<<<<<<< HEAD
+</body>
 
-    @if (!Model.Any())
-    {
-        <div class="alert alert-info">No obstacles found for the current filter.</div>
-    }
-</div>
-
-@section Scripts {
-    <script>
-     
-        const mondayFirstLocale = {
-            firstDayOfWeek: 1,  // 1 = Monday
-            weekdays: {
-                shorthand: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-                longhand: [
-                    "Sunday", "Monday", "Tuesday", "Wednesday",
-                    "Thursday", "Friday", "Saturday"
-                ]
-            },
-            months: {
-                shorthand: [
-                    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-                ],
-                longhand: [
-                    "January", "February", "March", "April", "May", "June",
-                    "July", "August", "September", "October", "November", "December"
-                ]
-            }
-        };
-
-        flatpickr("#fromDate", {
-            dateFormat: "Y-m-d",
-            allowInput: true,
-            locale: mondayFirstLocale
-        });
-
-        flatpickr("#toDate", {
-            dateFormat: "Y-m-d",
-            allowInput: true,
-            locale: mondayFirstLocale
-        });
-    </script>
-}
+=======
+</body>
+>>>>>>> 8330f24fd081539c0a223cc597ba44a358e16cbe

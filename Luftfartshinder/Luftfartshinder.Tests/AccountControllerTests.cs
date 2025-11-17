@@ -2,6 +2,7 @@ using Luftfartshinder.Controllers;
 using Luftfartshinder.DataContext;
 using Luftfartshinder.Models;
 using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,15 +15,14 @@ namespace Luftfartshinder.Tests
     {
         private readonly Mock<UserManager<ApplicationUser>> userManagerMock;
         private readonly Mock<SignInManager<ApplicationUser>> signInManagerMock;
-        private readonly ApplicationContext applicationContext;
         private readonly AccountController controller;
+        private readonly IAccountRepository accountRepository;
 
         public AccountControllerTests()
         {
             var options = new DbContextOptionsBuilder<ApplicationContext>()
                 .UseInMemoryDatabase(databaseName: "TestDb")
                 .Options;
-            applicationContext = new ApplicationContext(options);
 
             var userStoreMock = new Mock<IUserStore<ApplicationUser>>();
             userManagerMock = new Mock<UserManager<ApplicationUser>>(
@@ -36,7 +36,7 @@ namespace Luftfartshinder.Tests
                 claimsFactoryMock.Object,
                 null, null, null, null);
 
-            controller = new AccountController(userManagerMock.Object, signInManagerMock.Object, applicationContext);
+            controller = new AccountController(userManagerMock.Object, signInManagerMock.Object, accountRepository);
         }
 
         [Fact]

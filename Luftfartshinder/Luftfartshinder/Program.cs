@@ -3,14 +3,13 @@ using Luftfartshinder.Models;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
-
-builder.Services.AddScoped<IDataRepocs, ObstacleDataRepo>();
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
                options.UseMySql(builder.Configuration.GetConnectionString("DbConnection"),
@@ -36,9 +35,34 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredUniqueChars = 1;
 });
 
+// Repository pattern
+builder.Services.AddScoped<IObstacleRepository, ObstacleRepository>();
+builder.Services.AddScoped<IReportRepository, ReportRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+
 var app = builder.Build();
 Console.WriteLine("[EF DB] " + builder.Configuration.GetConnectionString("DbConnection"));
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    try
+    {
+        var authContext = services.GetRequiredService<AuthDbContext>();
+        var appplicationContext = services.GetRequiredService<ApplicationContext>();
+
+        authContext.Database.Migrate();
+        appplicationContext.Database.Migrate();
+        
+    } catch(Exception ex)
+    {
+        Console.WriteLine($"An error occured in the database: {ex}");
+        Environment.Exit(1);
+    }
+
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

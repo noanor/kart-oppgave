@@ -1,15 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
-using Luftfartshinder.DataContext;
+﻿using Luftfartshinder.DataContext;
 using Luftfartshinder.Models.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Luftfartshinder.Repository
 {
-    public class ObstacleDataRepo : IDataRepocs
+    public class ObstacleRepository : IObstacleRepository
     {
         private readonly ApplicationContext _context;
 
-        public ObstacleDataRepo(ApplicationContext context)
+        public ObstacleRepository(ApplicationContext context)
         {
             _context = context;
 

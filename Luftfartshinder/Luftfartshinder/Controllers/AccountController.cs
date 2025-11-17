@@ -1,10 +1,9 @@
-﻿using Luftfartshinder.DataContext;
-using Luftfartshinder.Models;
+﻿using Luftfartshinder.Models;
 using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Luftfartshinder.Controllers
 {
@@ -12,13 +11,12 @@ namespace Luftfartshinder.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly ApplicationContext applicationContext;
-
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationContext applicationContext)
+        private readonly IAccountRepository accountRepository;
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.applicationContext = applicationContext;
+            this.accountRepository = accountRepository;
         }
 
         [HttpGet]
@@ -229,11 +227,11 @@ namespace Luftfartshinder.Controllers
         }
 
         [HttpGet]
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
-            var reports = applicationContext.Reports
-                .Include(r => r.Obstacles)
-                .ToList();
+            var reports = await accountRepository.GetReports();
+            //.Include(r => r.Obstacles)
+            //.ToList();
             return View(reports);
         }
 
