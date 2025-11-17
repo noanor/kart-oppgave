@@ -19,10 +19,11 @@ namespace Luftfartshinder.Controllers
             this.userManager = userManager;
         }
 
-        public async Task<IActionResult> List(string roleFilter = "All")
+        public async Task<IActionResult> List(string roleFilter = "All", string statusFilter = "", string organizationFilter = "")
         {
             var allUsers = await userRepository.GetAll();
             var filteredUsers = new List<User>();
+            var uniqueOrganizations = new HashSet<string>();
 
             foreach (var user in allUsers)
             {
@@ -32,6 +33,25 @@ namespace Luftfartshinder.Controllers
                 if (roleFilter != "All" && userRole != roleFilter)
                 {
                     continue;
+                }
+                
+                if (!string.IsNullOrEmpty(statusFilter))
+                {
+                    bool isApproved = statusFilter == "Approved";
+                    if (user.IsApproved != isApproved)
+                    {
+                        continue;
+                    }
+                }
+                
+                if (!string.IsNullOrEmpty(organizationFilter) && user.Organization != organizationFilter)
+                {
+                    continue;
+                }
+                
+                if (!string.IsNullOrEmpty(user.Organization))
+                {
+                    uniqueOrganizations.Add(user.Organization);
                 }
                 
                 filteredUsers.Add(new User
@@ -47,6 +67,9 @@ namespace Luftfartshinder.Controllers
             
             var viewModel = new UserViewModel { Users = filteredUsers };
             ViewBag.CurrentFilter = roleFilter;
+            ViewBag.StatusFilter = statusFilter;
+            ViewBag.OrganizationFilter = organizationFilter;
+            ViewBag.Organizations = uniqueOrganizations.OrderBy(o => o).ToList();
             
             return View(viewModel);
         }

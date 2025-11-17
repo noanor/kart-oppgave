@@ -63,6 +63,16 @@
                                    asp-action="Dashboard">Dashboard</a>
                             </li>
 
+                            @if (User.IsInRole("FlightCrew"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" 
+                                       href="#" 
+                                       id="tutorialNavButton"
+                                       style="cursor: pointer;">Tutorial</a>
+                                </li>
+                            }
+
                             @if (User.IsInRole("Registrar"))
                             {
                                 <li class="nav-item">
@@ -137,6 +147,16 @@
                                     >Feedback</a>
                                 </li>
 
+                                @if (User.IsInRole("FlightCrew"))
+                                {
+                                    <li class="nav-item mb-3">
+                                        <a class="nav-link btn btn-dark active text-light" 
+                                           href="#" 
+                                           id="tutorialNavButtonIPad"
+                                           role="button"
+                                           style="cursor: pointer;">Tutorial</a>
+                                    </li>
+                                }
 
                             </ul>
                         </div>
