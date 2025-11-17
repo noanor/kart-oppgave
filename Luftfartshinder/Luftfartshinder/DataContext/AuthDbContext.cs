@@ -63,7 +63,8 @@ namespace Luftfartshinder.DataContext
                 IsApproved = true
             };
 
-            superAdminUser.PasswordHash = new PasswordHasher<ApplicationUser>().HashPassword(superAdminUser, "Superadmin123");
+            superAdminUser.PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==";
+
 
             builder.Entity<ApplicationUser>().HasData(superAdminUser);
 

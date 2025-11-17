@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Luftfartshinder.Controllers.RegistrarRow>
+﻿@model List<Luftfartshinder.Models.Domain.Report>
 @{
     ViewData["Title"] = "Registrar – Queue";
 }
@@ -6,122 +6,44 @@
     <link href="~/css/registrar.css" rel="stylesheet" />
 </head>
 
-<div class="container mt-4">
-    <h2 class="mb-3">Registrar Queue</h2>
-    <form method="get" class="row g-3 mb-3 align-items-end">
-        <div class="col-sm-6">
-            <input name="q" class="form-control"
-                   placeholder="Search name, reporter, description…"
-                   value="@Context.Request.Query["q"]" />
-        </div>
-
-        <div class="col-sm-3">
-            <label class="form-label mb-1">From</label>
-            <input name="from" type="date" class="form-control"
-                   value="@Context.Request.Query["from"]" />
-        </div>
-
-        <div class="col-sm-3">
-            <label class="form-label mb-1">To</label>
-            <input name="to" type="date" class="form-control"
-                   value="@Context.Request.Query["to"]" />
-        </div>
-    </form>
-
-
-
-  <div class="table-responsive">
-    <table class="table align-middle table-hover">
+<body>
+    <header>
+        <h2>Registrar - List of Reports</h2>
+    </header>
+    <div class="container">
+        <table class="table">
             <thead>
                 <tr>
-                    <th class="text-center">Id</th>
-                    <th class="text-center">Type</th>
-                    <th class="text-center">Name</th>
-                    <th class="text-center">Latitude</th>
-                    <th class="text-center">Longitude</th>
-                    <th class="text-center">Height</th>
-                    <th class="text-center">Reporter</th>
-                    <th class="text-center">Date</th>
-                    <th class="text-center">Note</th>
-                    <th class="text-center col-status">Status</th>
-                    <th class="text-center col-actions"></th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">No. of obstacles</th>
+                    <th></th>
                 </tr>
             </thead>
 
-            <tbody class="table-group-divider">
-                @foreach (var r in Model)
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
                 {
                     <tr>
-                        <td class="text-center">@r.Id</td>
-
-                        <td class="text-center">@r.Type</td>
-
-                        <td class="text-center">
-                            @(string.IsNullOrWhiteSpace(r.Name) ? "-" : r.Name)
-                        </td>
-
-                        <td class="text-center">
-                            @r.Latitude.ToString("0.000000")
-                        </td>
-
-                        <td class="text-center">
-                            @r.Longitude.ToString("0.000000")
-                        </td>
-
-                        <td class="text-center">
-                            @(r.Height?.ToString() ?? "-")
-                        </td>
-
-                        <td class="text-center">
-                            @(string.IsNullOrWhiteSpace(r.Reporter) ? "-" : r.Reporter)
-                        </td>
-
-                        <td class="text-center">
-                            @(r.CreatedAt.HasValue
-                                                    ? r.CreatedAt.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm")
-                                                    : "-")
-                                                      </td>
-
-                        <td class="text-center">
-                            @(string.IsNullOrWhiteSpace(r.Note)
-                                                    ? "-"
-                                                    : (r.Note!.Length > 40 ? r.Note.Substring(0, 40) + "…" : r.Note))
-                    </td>
-
-                        <td class="text-center col-status">
-                        @switch (r.Status)
-                            {
-                                case Luftfartshinder.Controllers.ReviewStatus.Approved:
-                                    <span class="badge rounded-pill bg-success px-3 py-2">Approved</span>
-                                    break;
-                                case Luftfartshinder.Controllers.ReviewStatus.Rejected:
-                                    <span class="badge rounded-pill bg-danger px-3 py-2">Rejected</span>
-                                    break;
-                                default:
-                                    <span class="badge rounded-pill bg-warning text-dark px-3 py-2">Pending</span>
-                                    break;
-                            }
-                        </td>
-
-                        <td class="text-center col-actions">
-                            @if (r.Id >= 0)
-                            {
-                                <a class="btn btn-outline-primary btn-sm px-3 py-2"
-                                   href="@Url.Action("Details", "Registrar", new { id = r.Id })">
-                                    View
-                                </a>
-                            }
+                        <td>@Model[i].Id</td>
+                        <td>@Model[i].Title</td>
+                        <td>@Model[i].Author</td>
+                        <td>@Model[i].ReportDate</td>
+                        <td>@Model[i].Obstacles.Count</td>
+                        <td>
+                            <a class="btn btn-primary" role="button"
+                               asp-action="Details"
+                               asp-controller="Registrar"
+                               asp-route-id="@(i+1)"
+                               style="vertical-align: middle; text-decoration: none;">
+                                View
+                            </a>
                         </td>
                     </tr>
                 }
             </tbody>
-
-    </table>
-</div>
-
-
-    @if (!Model.Any())
-    {
-        <div class="alert alert-info">No obstacles found for the current filter.</div>
-    }
-</div>
+        </table>
+    </div>
+</body>
