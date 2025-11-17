@@ -1,19 +1,18 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 using Luftfartshinder.Models;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
-using Luftfartshinder.Models.Domain;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace Luftfartshinder.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IDataRepocs _iDataRepository;
+        private readonly IObstacleRepository obstacleRepository;
 
-        public HomeController(IDataRepocs dataRepocs)
+        public HomeController(IObstacleRepository obstacleRepository)
         {
-            _iDataRepository = dataRepocs;
+            this.obstacleRepository = obstacleRepository;
         }
         //private readonly ILogger<HomeController> _logger;
 
@@ -38,54 +37,29 @@ namespace Luftfartshinder.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<ActionResult> DataForm(Obstacle serverdata)
-        {
-            if (serverdata != null && serverdata.Height > 0)
-            {
-                Obstacle obstacleData = new Obstacle
-                {
-                    Name = serverdata.Name,
-                    Height = serverdata.Height,
-                    Description = serverdata.Description,
-                    Latitude = serverdata.Latitude,
-                    Longitude = serverdata.Longitude
-                };
-
-                var toDatabase = await _iDataRepository.AddObstacle(obstacleData);
-                serverdata.Id = toDatabase.Id;
-
-                return View("Overview", serverdata);
-
-            }
-
-
-            return BadRequest("Obs, du m� fylle inn feltene");
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        
+
         [Authorize(Roles = "SuperAdmin")]
         public IActionResult SuperAdminHome()
         {
             return View();
         }
-    
+
         [Authorize(Roles = "Registrar, SuperAdmin")]
         public IActionResult RegistrarHome()
         {
             return View();
         }
-    
+
         [Authorize(Roles = "FlightCrew, SuperAdmin")]
         public IActionResult IndexHome()
         {
             return View("Index");
         }
-        
+
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Luftfartshinder.Repository
 {
-    public interface IDataRepocs
+    public interface IObstacleRepository
     {
         Task<Obstacle> AddObstacle(Obstacle obstacleData);
 
