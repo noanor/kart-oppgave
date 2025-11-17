@@ -80,6 +80,9 @@ namespace Luftfartshinder.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("RegistrarNote")
+                        .HasColumnType("longtext");
+
                     b.Property<DateTime>("ReportDate")
                         .HasColumnType("datetime(6)");
 

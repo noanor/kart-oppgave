@@ -8,12 +8,8 @@
         public string AuthorId { get; set; }
         public DateTime ReportDate { get; set; }
         public string Title { get; set; }
+        public string? RegistrarNote { get; set; }
 
         public ICollection<Obstacle> Obstacles { get; set; } = [];
-
-        public int GetTotalObstacles()
-        {
-            return Obstacles.Count;
-        }
     }
 }

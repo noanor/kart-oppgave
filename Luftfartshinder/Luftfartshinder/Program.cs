@@ -3,6 +3,7 @@ using Luftfartshinder.Models;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +43,26 @@ builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 
 var app = builder.Build();
 Console.WriteLine("[EF DB] " + builder.Configuration.GetConnectionString("DbConnection"));
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    try
+    {
+        var authContext = services.GetRequiredService<AuthDbContext>();
+        var appplicationContext = services.GetRequiredService<ApplicationContext>();
+
+        authContext.Database.Migrate();
+        appplicationContext.Database.Migrate();
+        
+    } catch(Exception ex)
+    {
+        Console.WriteLine($"An error occured in the database: {ex}");
+        Environment.Exit(1);
+    }
+
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
