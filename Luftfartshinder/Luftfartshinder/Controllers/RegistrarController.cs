@@ -1,16 +1,4 @@
-<<<<<<< HEAD
-﻿using System.Text.Json;                 
-using IOFile = System.IO.File;            
-using IOPath = System.IO.Path;
-using IODirectory = System.IO.Directory;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-=======
 ﻿using System.Globalization;
->>>>>>> b8762d7 (Docker Compose og Refaktorisering av registrar sider)
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Luftfartshinder.DataContext;
@@ -61,7 +49,6 @@ namespace Luftfartshinder.Controllers
                 return View(editReport);
 
             }
-
             return null;
 
         }
