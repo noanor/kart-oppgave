@@ -1,4 +1,8 @@
-﻿using System;
+﻿using System.Text.Json;                 
+using IOFile = System.IO.File;            
+using IOPath = System.IO.Path;
+using IODirectory = System.IO.Directory;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -17,42 +21,146 @@ namespace Luftfartshinder.Controllers
         private readonly ILogger<RegistrarController> _logger;
         private static readonly Dictionary<int, ReviewStatus> _statuses = new();
         private static readonly Dictionary<int, string> _notes = new();
-
+        private static readonly object _notesLock = new();
+        private static bool _notesLoaded = false;
+        private static readonly string _notesFilePath =
+            IOPath.Combine(AppContext.BaseDirectory, "App_Data", "registrar_notes.json");
+        private static readonly object _statusesLock = new();
+        private static readonly string _statusesFilePath =
+            Path.Combine(AppContext.BaseDirectory, "App_Data", "registrar_statuses.json");
+        private static bool _statusesLoaded = false;
         public RegistrarController(ApplicationContext db, ILogger<RegistrarController> logger)
         {
             _db = db;
             _logger = logger;
+            EnsureNotesLoaded();
+        }
+
+        private void EnsureStatusesLoaded()
+        {
+            lock (_statusesLock)
+            {
+                if (_statusesLoaded) return;
+
+                try
+                {
+                    var dir = Path.GetDirectoryName(_statusesFilePath);
+                    if (!Directory.Exists(dir))
+                        Directory.CreateDirectory(dir!);
+
+                    if (System.IO.File.Exists(_statusesFilePath))
+                    {
+                        var json = System.IO.File.ReadAllText(_statusesFilePath);
+                        var data = System.Text.Json.JsonSerializer
+                            .Deserialize<Dictionary<int, int>>(json) ?? new Dictionary<int, int>();
+
+                        _statuses.Clear();
+                        foreach (var kv in data)
+                        {
+                           
+                            if (Enum.IsDefined(typeof(ReviewStatus), kv.Value))
+                                _statuses[kv.Key] = (ReviewStatus)kv.Value;
+                        }
+                    }
+                }
+                catch
+                {
+                  
+                }
+
+                _statusesLoaded = true;
+            }
+        }
+
+        private void PersistStatuses()
+        {
+            lock (_statusesLock)
+            {
+                try
+                {
+                    var dir = Path.GetDirectoryName(_statusesFilePath);
+                    if (!Directory.Exists(dir))
+                        Directory.CreateDirectory(dir!);
+
+                    var data = _statuses.ToDictionary(k => k.Key, v => (int)v.Value);
+                    var json = System.Text.Json.JsonSerializer.Serialize(
+                        data,
+                        new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+
+                    System.IO.File.WriteAllText(_statusesFilePath, json);
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
+        private static void EnsureNotesLoaded()
+        {
+            lock (_notesLock)
+            {
+                if (_notesLoaded) return;
+
+                try
+                {
+                    var dir = IOPath.GetDirectoryName(_notesFilePath);
+                    if (!string.IsNullOrEmpty(dir) && !IODirectory.Exists(dir))
+                        IODirectory.CreateDirectory(dir);
+
+                    if (IOFile.Exists(_notesFilePath))
+                    {
+                        var json = IOFile.ReadAllText(_notesFilePath);
+                        var data = JsonSerializer.Deserialize<Dictionary<int, string>>(json)
+                                   ?? new Dictionary<int, string>();
+                        _notes.Clear();
+                        foreach (var kv in data)
+                            _notes[kv.Key] = kv.Value ?? "";
+                    }
+                }
+                catch { 
+                
+                }
+
+                _notesLoaded = true;
+            }
+        }
+
+        private static void PersistNotes()
+        {
+            lock (_notesLock)
+            {
+                try
+                {
+                    var dir = IOPath.GetDirectoryName(_notesFilePath);
+                    if (!string.IsNullOrEmpty(dir) && !IODirectory.Exists(dir))
+                        IODirectory.CreateDirectory(dir);
+
+                    var json = JsonSerializer.Serialize(_notes, new JsonSerializerOptions { WriteIndented = true });
+                    IOFile.WriteAllText(_notesFilePath, json);
+                }
+                catch 
+                { 
+                
+                }
+            }
         }
 
         // GET /Registrar
         public IActionResult Index(string q = "", string from = "", string to = "")
         {
-            var data = _db.Set<Obstacle>().AsEnumerable();
+            EnsureStatusesLoaded();
+            var data = _db.Set<Obstacle>().AsEnumerable();   
             var mapped = data.Select((o, i) => MapToRow(o, i)).ToList();
-
-            if (!string.IsNullOrWhiteSpace(q))
-                mapped = mapped.Where(r =>
-                    (r.Name ?? "").Contains(q, StringComparison.OrdinalIgnoreCase) ||
-                    (r.Reporter ?? "").Contains(q, StringComparison.OrdinalIgnoreCase) ||
-                    (r.Description ?? "").Contains(q, StringComparison.OrdinalIgnoreCase)).ToList();
-
-            if (DateTime.TryParse(from, out var fromDt))
-                mapped = mapped.Where(r => r.CreatedAt.HasValue && r.CreatedAt.Value >= fromDt).ToList();
-
-            if (DateTime.TryParse(to, out var toDt))
-                mapped = mapped.Where(r => r.CreatedAt.HasValue && r.CreatedAt.Value <= toDt).ToList();
-
-            mapped = mapped
-                .OrderByDescending(r => r.CreatedAt ?? DateTime.MinValue)
-                .Take(500)
-                .ToList();
-
             return View(mapped);
         }
 
-        // GET /Registrar/Details/5
+
+
+        // GET /Registrar/Details/
         public IActionResult Details(int id)
         {
+            EnsureStatusesLoaded();
             var set = _db.Set<Obstacle>().AsEnumerable();
             foreach (var item in set)
             {
@@ -71,8 +179,20 @@ namespace Luftfartshinder.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Approve(int id)
         {
-            SetStatus(id, ReviewStatus.Approved);
-            TempData["Msg"] = $"Obstacle #{id} approved.";
+            var entity = _db.Obstacles.FirstOrDefault(o => o.Id == id);
+
+            if (entity != null)
+            {
+           
+                SetStatus(id, ReviewStatus.Approved);
+                PersistStatuses();
+
+                var obstacleName = string.IsNullOrWhiteSpace(entity.Name)
+                    ? $"Obstacle {id}"
+                    : entity.Name;
+            }
+
+           
             return RedirectToAction(nameof(Details), new { id });
         }
 
@@ -81,10 +201,22 @@ namespace Luftfartshinder.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Reject(int id)
         {
-            SetStatus(id, ReviewStatus.Rejected);
-            TempData["Msg"] = $"Obstacle #{id} rejected.";
+            var entity = _db.Obstacles.FirstOrDefault(o => o.Id == id);
+
+            if (entity != null)
+            {
+                SetStatus(id, ReviewStatus.Rejected);
+                PersistStatuses();
+
+                var obstacleName = string.IsNullOrWhiteSpace(entity.Name)
+                    ? $"Obstacle {id}"
+                    : entity.Name;
+            }
+
+           
             return RedirectToAction(nameof(Details), new { id });
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -93,11 +225,34 @@ namespace Luftfartshinder.Controllers
             if (id >= 0)
             {
                 _notes[id] = note ?? "";
+                PersistNotes();
                 TempData["NoteSaved"] = true; 
             }
 
             return RedirectToAction(nameof(Details), new { id });
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            var entity = _db.Obstacles.FirstOrDefault(o => o.Id == id);
+
+            if (entity != null)
+            {
+                string obstacleName = entity.Name;   
+
+                _db.Obstacles.Remove(entity);
+                _db.SaveChanges();
+
+                PersistStatuses();
+
+                TempData["Msg"] = $"{obstacleName} has been deleted.";
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
 
         private RegistrarRow MapToRow(object o, int fallbackIndex)
         {
@@ -156,7 +311,8 @@ namespace Luftfartshinder.Controllers
                 Reporter = r.Reporter,
                 CreatedAt = r.CreatedAt,
                 Description = r.Description,
-                Status = r.Status
+                Status = r.Status,
+                Note = r.Note,
             };
         }
 
