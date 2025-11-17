@@ -10,7 +10,6 @@ namespace Luftfartshinder.Controllers
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
-<<<<<<< HEAD
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IAccountRepository accountRepository;
         public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository)
@@ -18,16 +17,6 @@ namespace Luftfartshinder.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.accountRepository = accountRepository;
-=======
-        private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly ApplicationContext applicationContext;
-
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationContext applicationContext)
-        {
-            this.userManager = userManager;
-            this.signInManager = signInManager;
-            this.applicationContext = applicationContext;
->>>>>>> 68182d2 (ordet admin, css og turtorial)
         }
 
         [HttpGet]
@@ -235,7 +224,6 @@ namespace Luftfartshinder.Controllers
             TempData["SignOutMessage"] = "Goodbye! You have been logged out successfully.";
 
             return RedirectToAction("Login", "Account");
-<<<<<<< HEAD
         }
 
         [HttpGet]
@@ -248,19 +236,5 @@ namespace Luftfartshinder.Controllers
         }
 
 
-=======
-        }
-
-        [HttpGet]
-        public IActionResult Dashboard()
-        {
-            var reports = applicationContext.Reports
-                .Include(r => r.Obstacles)
-                .ToList();
-            return View(reports);
-        }
-
-
->>>>>>> 68182d2 (ordet admin, css og turtorial)
     }
 }

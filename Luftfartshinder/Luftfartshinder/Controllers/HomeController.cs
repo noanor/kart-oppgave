@@ -59,18 +59,18 @@ namespace Luftfartshinder.Controllers
         public IActionResult IndexHome()
         {
             return View("Index");
-<<<<<<< HEAD
+
         }
 
-=======
-        }
-        
+
+
+
         [Authorize]
         public IActionResult Tutorial()
         {
             return View();
         }
-        
->>>>>>> 68182d2 (ordet admin, css og turtorial)
+
+
     }
 }
