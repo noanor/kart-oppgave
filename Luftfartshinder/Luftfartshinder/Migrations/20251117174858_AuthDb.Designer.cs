@@ -4,16 +4,19 @@ using Luftfartshinder.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Luftfartshinder.Migrations.AuthDb
+namespace Luftfartshinder.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    partial class AuthDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251117174858_AuthDb")]
+    partial class AuthDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,7 +107,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             Id = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c254918e-7284-419b-9d66-5a43bafd520a",
+                            ConcurrencyStamp = "7e18e04d-dc0f-4cdc-9ceb-64df2b04047b",
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -115,7 +118,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                             NormalizedUserName = "SUPERADMIN@KARTVERKET.NO",
                             PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b3fbe4d5-1417-4145-b128-f82a6f20dd5b",
+                            SecurityStamp = "4307a39f-9ba1-4feb-96f6-b27eb325aa54",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         });

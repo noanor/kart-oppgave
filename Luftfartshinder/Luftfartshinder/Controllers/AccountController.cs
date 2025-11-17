@@ -212,7 +212,7 @@ namespace Luftfartshinder.Controllers
             if (roles.Contains("FlightCrew"))
                 return RedirectToAction("Index", "Home");
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Tutorial", "Home");
         }
 
         [HttpGet]

@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Luftfartshinder.Migrations
+namespace Luftfartshinder.Migrations.Application
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20251117121225_DBmigration2")]
-    partial class DBmigration2
+    [Migration("20251117175141_ApplicationhDb")]
+    partial class ApplicationhDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,7 +84,6 @@ namespace Luftfartshinder.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("RegistrarNote")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("ReportDate")

@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Luftfartshinder.Migrations
+namespace Luftfartshinder.Migrations.Application
 {
     /// <inheritdoc />
-    public partial class DbMig : Migration
+    public partial class ApplicationhDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,6 +27,8 @@ namespace Luftfartshinder.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ReportDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Title = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RegistrarNote = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>

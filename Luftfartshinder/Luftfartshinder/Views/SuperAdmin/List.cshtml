@@ -90,23 +90,34 @@
 		<div class="collapse mb-4" id="advancedFilters">
 			<div class="card card-body bg-light">
 				<div class="row g-3">
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<label class="form-label">Role</label>
 						<select id="filterRole" class="form-select">
 							<option value="">All Roles</option>
-							<option value="Registrar">Registrar</option>
-							<option value="FlightCrew">Flight Crew</option>
+							<option value="Registrar" selected="@(ViewBag.CurrentFilter == "Registrar")">Registrar</option>
+							<option value="FlightCrew" selected="@(ViewBag.CurrentFilter == "FlightCrew")">Flight Crew</option>
 						</select>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<label class="form-label">Status</label>
 						<select id="filterStatus" class="form-select">
 							<option value="">All Statuses</option>
-							<option value="Approved">Approved</option>
-							<option value="Pending">Pending</option>
+							<option value="Approved" selected="@(ViewBag.StatusFilter == "Approved")">Approved</option>
+							<option value="Pending" selected="@(ViewBag.StatusFilter == "Pending")">Pending</option>
 						</select>
 					</div>
-					<div class="col-md-4 d-flex align-items-end">
+					<div class="col-md-3">
+						<label class="form-label">Organization</label>
+						<select id="filterOrganization" class="form-select">
+							<option value="">All Organizations</option>
+							<option value="Norwegian Air Ambulance" selected="@(ViewBag.OrganizationFilter == "Norwegian Air Ambulance")">Norwegian Air Ambulance</option>
+							<option value="Police" selected="@(ViewBag.OrganizationFilter == "Police")">Police</option>
+							<option value="Norwegian Armed Forces" selected="@(ViewBag.OrganizationFilter == "Norwegian Armed Forces")">Norwegian Armed Forces</option>
+							<option value="Avinor" selected="@(ViewBag.OrganizationFilter == "Avinor")">Avinor</option>
+							<option value="Other" selected="@(ViewBag.OrganizationFilter == "Other")">Other</option>
+						</select>
+					</div>
+					<div class="col-md-3 d-flex align-items-end">
 						<button class="btn btn-primary" id="applyFilters">Apply Filters</button>
 						<button class="btn btn-secondary ms-2" id="resetFilters">Reset</button>
 					</div>

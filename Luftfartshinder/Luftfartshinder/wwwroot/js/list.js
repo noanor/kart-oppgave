@@ -55,31 +55,52 @@ function filterUsers() {
     const searchText = document.getElementById('userSearch').value.toLowerCase();
     const roleFilter = document.getElementById('filterRole').value;
     const statusFilter = document.getElementById('filterStatus').value;
+    const organizationFilter = document.getElementById('filterOrganization').value;
 
     const rows = document.querySelectorAll('table tbody tr');
     rows.forEach(row => {
         const username = row.cells[0].textContent.toLowerCase();
         const email = row.cells[1].textContent.toLowerCase();
-        const organization = row.cells[2].textContent.toLowerCase();
+        const organization = row.cells[2].textContent.trim();
         const role = row.cells[3].textContent;
         const status = row.cells[4].textContent.trim().toLowerCase();
         const statusFilterValue = statusFilter.toLowerCase();
 
-        let matchesSearch = username.includes(searchText) || email.includes(searchText) || organization.includes(searchText);
+        let matchesSearch = username.includes(searchText) || email.includes(searchText) || organization.toLowerCase().includes(searchText);
         let matchesRole = roleFilter === "" || role === roleFilter;
         let matchesStatus = statusFilter === "" || status === statusFilterValue;
+        let matchesOrganization = organizationFilter === "" || organization === organizationFilter;
 
-        row.style.display = (matchesSearch && matchesRole && matchesStatus) ? "" : "none";
+        row.style.display = (matchesSearch && matchesRole && matchesStatus && matchesOrganization) ? "" : "none";
     });
 }
 
 
 document.getElementById('userSearch').addEventListener('input', filterUsers);
 
-document.getElementById('applyFilters').addEventListener('click', filterUsers);
-document.getElementById('resetFilters').addEventListener('click', () => {
-    document.getElementById('userSearch').value = "";
-    document.getElementById('filterRole').value = "";
-    document.getElementById('filterStatus').value = "";
-    filterUsers();
+document.getElementById('applyFilters').addEventListener('click', function() {
+    const roleFilter = document.getElementById('filterRole').value;
+    const statusFilter = document.getElementById('filterStatus').value;
+    const organizationFilter = document.getElementById('filterOrganization').value;
+    
+    const roleFilterParam = roleFilter ? roleFilter : "All";
+    const params = new URLSearchParams();
+    
+    params.append('roleFilter', roleFilterParam);
+    
+    if (statusFilter) {
+        params.append('statusFilter', statusFilter);
+    }
+    
+    if (organizationFilter) {
+        params.append('organizationFilter', organizationFilter);
+    }
+    
+    const baseUrl = window.location.pathname.split('?')[0];
+    window.location.href = baseUrl + '?' + params.toString();
+});
+
+document.getElementById('resetFilters').addEventListener('click', function() {
+    const baseUrl = window.location.pathname.split('?')[0];
+    window.location.href = baseUrl + '?roleFilter=All';
 });
