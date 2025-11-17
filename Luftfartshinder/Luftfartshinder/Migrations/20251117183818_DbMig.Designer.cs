@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Luftfartshinder.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20251117121225_DBmigration2")]
-    partial class DBmigration2
+    [Migration("20251117183818_DbMig")]
+    partial class DbMig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,6 @@ namespace Luftfartshinder.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<double?>("Height")
@@ -51,6 +50,9 @@ namespace Luftfartshinder.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RegistrarNote")
                         .HasColumnType("longtext");
 
                     b.Property<int?>("ReportId")
@@ -84,7 +86,6 @@ namespace Luftfartshinder.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("RegistrarNote")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("ReportDate")

@@ -27,6 +27,8 @@ namespace Luftfartshinder.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ReportDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Title = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RegistrarNote = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -48,7 +50,9 @@ namespace Luftfartshinder.Migrations
                     Height = table.Column<double>(type: "double", nullable: true),
                     Latitude = table.Column<double>(type: "double", nullable: false),
                     Longitude = table.Column<double>(type: "double", nullable: false),
-                    Description = table.Column<string>(type: "longtext", nullable: false)
+                    Description = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RegistrarNote = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsDraft = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     ReportId = table.Column<int>(type: "int", nullable: true)

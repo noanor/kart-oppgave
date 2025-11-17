@@ -31,7 +31,6 @@ namespace Luftfartshinder.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<double?>("Height")
@@ -48,6 +47,9 @@ namespace Luftfartshinder.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RegistrarNote")
                         .HasColumnType("longtext");
 
                     b.Property<int?>("ReportId")

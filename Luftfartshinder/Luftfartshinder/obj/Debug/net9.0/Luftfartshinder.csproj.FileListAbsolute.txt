@@ -972,7 +972,6 @@ C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\q9y3tdv12i-px2b75sq1k.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\5tmwaozt2g-5kn6rivk6b.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\it5k2btw20-5intmtvwrr.gz
-C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\l5rfuj9o9x-d8b2rl1bvx.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\vylom24x76-y8933wx6wt.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\yorxud8s3o-i205jcmrqa.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\e3doprob5o-abwuryrnaz.gz
@@ -1013,3 +1012,4 @@ C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\w7nuiw802i-9vr69e8ynj.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\tbra1yxt01-tkr943dwy6.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\fdxh007m95-tkr943dwy6.gz
+C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\l5rfuj9o9x-yc6ffzbyxl.gz

@@ -40,9 +40,9 @@ namespace Luftfartshinder.Models.Domain
 
         // Beskrivelse av hindringen – må fylles ut
         //[Required(ErrorMessage = "Obstacle description is required.")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
-
+        public string? RegistrarNote { get; set; }
         public bool IsDraft { get; set; } = true;
     }
 }

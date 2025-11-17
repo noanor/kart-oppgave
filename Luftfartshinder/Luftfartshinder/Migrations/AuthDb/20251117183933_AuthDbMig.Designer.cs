@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Luftfartshinder.Migrations.AuthDb
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20251117150939_StaticPassHash")]
-    partial class StaticPassHash
+    [Migration("20251117183933_AuthDbMig")]
+    partial class AuthDbMig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,7 +107,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             Id = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c254918e-7284-419b-9d66-5a43bafd520a",
+                            ConcurrencyStamp = "401bfa3c-e784-48d5-abf2-44184f4155f4",
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -118,7 +118,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                             NormalizedUserName = "SUPERADMIN@KARTVERKET.NO",
                             PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b3fbe4d5-1417-4145-b128-f82a6f20dd5b",
+                            SecurityStamp = "49b3d5ca-5838-4870-a6cb-eee0a4d98f2c",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         });
