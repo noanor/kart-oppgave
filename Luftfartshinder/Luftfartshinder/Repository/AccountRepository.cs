@@ -14,9 +14,10 @@ namespace Luftfartshinder.Repository
             this.reportRepository = reportRepository;
         }
 
-        public Task<Report> GetReports()
+        public async Task<IEnumerable<Report>> GetReports()
         {
-            throw new NotImplementedException();
+            var reports = await reportRepository.GetAllAsync();
+            return reports;
         }
     }
 }

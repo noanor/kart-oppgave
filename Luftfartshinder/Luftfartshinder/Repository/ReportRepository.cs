@@ -22,12 +22,12 @@ namespace Luftfartshinder.Repository
 
         public async Task<IEnumerable<Report>> GetAllAsync()
         {
-            return await context.Reports.ToListAsync();
+            return await context.Reports.Include(r => r.Obstacles).ToListAsync();
         }
 
         public async Task<Report?> GetByIdAsync(int id)
         {
-            return await context.Reports.FirstOrDefaultAsync(r => r.Id == id);
+            return await context.Reports.Include(r => r.Obstacles).FirstAsync(r => r.Id == id);
         }
 
         public async Task<Report?> UpdateAsync(Report report)
