@@ -28,6 +28,7 @@ namespace Luftfartshinder.Controllers
 
         [HttpPost]
         [Authorize(Roles = "SuperAdmin")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
@@ -77,7 +78,7 @@ namespace Luftfartshinder.Controllers
 
                 if (roleResult.Succeeded)
                 {
-                    TempData["RegistrationSuccess"] = "User registered successfully!";
+                    TempData["RegistrationSuccess"] = "The user has been successfully registered.";
                     return RedirectToAction("SuperAdminHome", "Home");
                 }
             }
@@ -94,6 +95,7 @@ namespace Luftfartshinder.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UserRegister(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
@@ -165,7 +167,7 @@ namespace Luftfartshinder.Controllers
                 return View(model);
             }
 
-            TempData["RegistrationSuccess"] = "Registration successful! Please wait for admin approval before logging in.";
+            TempData["RegistrationSuccess"] = "Thank you for registering! Your account has been submitted for review and must be approved by an administrator before you can log in.";
             return RedirectToAction("Login");
         }
 
@@ -178,6 +180,7 @@ namespace Luftfartshinder.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
@@ -221,7 +224,7 @@ namespace Luftfartshinder.Controllers
         {
             await signInManager.SignOutAsync();
 
-            TempData["SignOutMessage"] = "Goodbye! You have been logged out successfully.";
+            TempData["SignOutMessage"] = "You have been signed out successfully";
 
             return RedirectToAction("Login", "Account");
         }

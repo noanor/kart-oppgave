@@ -33,6 +33,7 @@
                     }
 
                     <form id="registerForm" method="post">
+                        @Html.AntiForgeryToken()
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
                                 <label asp-for="FirstName" class="form-label">First Name <span class="text-danger">*</span></label>

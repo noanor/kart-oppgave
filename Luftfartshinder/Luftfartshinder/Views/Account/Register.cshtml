@@ -40,6 +40,7 @@
                     }
 
                     <form id="registerForm" method="post">
+                        @Html.AntiForgeryToken()
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
                                 <label asp-for="FirstName" class="form-label">First Name <span class="text-danger">*</span></label>
@@ -122,7 +123,7 @@
 
                         <div class="mb-3">
                             <button type="button" id="cancelBtnAdmin" class="btn-auth-secondary me-2">Cancel</button>
-                            <button type="submit" id="submitBtn" class="btn-auth-primary" >Create account</button>
+                            <button type="submit" id="submitBtn" class="btn-auth-primary">Create account</button>
                         </div>
                     </form>
                 </div>
