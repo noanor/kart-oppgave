@@ -1126,7 +1126,6 @@ C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\scopedcss\bundle\Luftfartshinder.styles.css
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\scopedcss\projectbundle\Luftfartshinder.bundle.scp.css
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\akyxjxcf3o-{0}-08df69tgpz-08df69tgpz.gz
-C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\3tmo7al1ky-{0}-5kn6rivk6b-5kn6rivk6b.gz
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\i8089q8v5i-{0}-ounxu4r1cy-ounxu4r1cy.gz
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\8vc2rc1mou-{0}-87txtcvnil-87txtcvnil.gz
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\66o8rtae56-{0}-yx8w4pyn7q-yx8w4pyn7q.gz
@@ -1211,6 +1210,7 @@ C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\Luftfartshinder.pdb
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\Luftfartshinder.genruntimeconfig.cache
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\ref\Luftfartshinder.dll
-C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\elfel0a0nb-{0}-9mj8g1blc4-9mj8g1blc4.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\5tmwaozt2g-ideykflcn7.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\l5rfuj9o9x-ptvoitmytk.gz
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\3tmo7al1ky-{0}-ideykflcn7-ideykflcn7.gz
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\elfel0a0nb-{0}-66ui8b5pvd-66ui8b5pvd.gz

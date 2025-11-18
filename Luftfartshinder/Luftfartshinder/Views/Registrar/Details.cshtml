@@ -74,17 +74,17 @@
 
                         <div class="meta-actions">
 
-                            @switch (o.IsDraft)
+                            @switch (o.Status)
                             {
-                                case false:
+                                case Luftfartshinder.Models.Domain.Obstacle.Statuses.Approved:
                                     <span class="pill pill-approved">Approved</span>
                                     break;
 
-                                case true:
+                                case Luftfartshinder.Models.Domain.Obstacle.Statuses.Rejected:
                                     <span class="pill pill-rejected">Rejected</span>
                                     break;
 
-                                default:
+                                case Luftfartshinder.Models.Domain.Obstacle.Statuses.Pending:
                                     <span class="pill pill-pending">Pending</span>
                                     break;
                             }
@@ -92,14 +92,14 @@
                             <!-- Approve -->
                             <form asp-controller="Registrar" asp-action="Approve" method="post" class="d-inline">
                                 @Html.AntiForgeryToken()
-                                <input type="hidden" name="id" value="@Model.Id" />
+                                <input type="hidden" name="id" value="@o.Id" />
                                 <button type="submit" class="btn btn-success btn-pill">Approve</button>
                             </form>
 
                             <!-- Reject -->
                             <form asp-controller="Registrar" asp-action="Reject" method="post" class="d-inline">
                                 @Html.AntiForgeryToken()
-                                <input type="hidden" name="id" value="@Model.Id" />
+                                <input type="hidden" name="id" value="@o.Id" />
                                 <button type="submit" class="btn btn-danger btn-pill">Reject</button>
                             </form>
 
@@ -111,16 +111,14 @@
         </div>
 
 
-        <div class="row mb-5" style="height: 85vh;">
+        <div class="row mb-5 position-relative" style="height: 70vh;">
 
             <!-- LEFT COLUMN -->
-            <div class="col-xl-6 h-75">
+            <div class="col-xl-6 h-100 position-absolute obstacle-column">
                 <!-- Obstacle details -->
-                <div class="card card-large shadow-sm mb-auto h-auto">
-                    <div class="card-header">
-                        <div class="card-title fw-semibold">General information</div>
-                    </div>
-                    <div class="card-body h-90">
+                <div class="card card-large shadow-sm mb-auto left-col-card w-100 position-absolute">
+                    <div class="card-header fw-semibold">General Information</div>
+                    <div class="card-body">
                         <dl class="info-grid mb-0">
                             <dt>Latitude</dt>
                             <dd>@o.Latitude.ToString("0.######")</dd>
@@ -138,7 +136,7 @@
                 </div>
 
                 <!-- Registrar Note -->
-                <div class="card card-large shadow-sm mt-4 h-auto mb-0">
+                <div class="card card-large shadow-sm bottom-0 position-absolute w-100 left-col-card">
                     <div class="card-header fw-semibold">Registrar Note</div>
                     <div class="card-body">
                         <form asp-controller="Registrar" asp-action="SaveNote" method="post" class="row g-3">
@@ -146,13 +144,13 @@
                             @Html.AntiForgeryToken()
 
                             <div class="col-12">
-                                <textarea name="note" class="form-control" rows="4"
+                                <textarea name="note" class="form-control" rows="7"
                                           placeholder="Ask for more info, add internal remarks, etc."
                                           asp-for="RegistrarNote"
                                 >@o.RegistrarNote</textarea>
                             </div>
 
-                            <div class="col-12 d-flex align-items-center gap-3">
+                            <div class="col-12 d-flex align-items-center gap-3 position-absolute btn-save-note">
                                 <button type="submit" class="btn btn-primary btn-sm px-4 py-2"
                                     asp-action="SaveNote"
                                     asp-controller="Registrar"
@@ -165,7 +163,7 @@
             </div>
 
             <!-- RIGHT COLUMN -->
-            <div class="col-xl-6 h-auto">
+            <div class="col-xl-6 h-100 position-absolute end-0 obstacle-column">
                 <div class="card card-large shadow-sm h-100 mb-0">
                     <div class="card-header fw-semibold">Map Preview</div>
                     <div class="card-body h-100">

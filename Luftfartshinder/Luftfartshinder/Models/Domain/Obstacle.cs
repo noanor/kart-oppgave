@@ -7,6 +7,9 @@ namespace Luftfartshinder.Models.Domain
         // Unik ID for hver hindring
         public int Id { get; set; }
 
+        public int ReportId { get; set; }
+        public Report Report { get; set; }
+
         // Navn på hindringen – må fylles ut
         public string Type { get; set; } = "";
 
@@ -42,7 +45,9 @@ namespace Luftfartshinder.Models.Domain
         //[Required(ErrorMessage = "Obstacle description is required.")]
         public string? Description { get; set; }
 
+        // Registrar ting
         public string? RegistrarNote { get; set; }
-        public bool IsDraft { get; set; } = true;
+        public enum Statuses { Pending = 0, Approved = 1, Rejected = 2 }
+        public Statuses Status { get; set; } = Statuses.Pending;
     }
 }

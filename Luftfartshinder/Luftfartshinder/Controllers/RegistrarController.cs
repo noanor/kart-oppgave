@@ -7,10 +7,6 @@ namespace Luftfartshinder.Controllers
 {
     public class RegistrarController : Controller
     {
-
-
-        private static readonly Dictionary<int, ReviewStatus> _statuses = new();
-        private static readonly Dictionary<int, string> _notes = new();
         private readonly IReportRepository reportRepository;
         private readonly IObstacleRepository obstacleRepository;
 
@@ -75,10 +71,44 @@ namespace Luftfartshinder.Controllers
             return RedirectToAction("Details", new { id = editReportRequest.Id });
         }
 
+        public async Task<IActionResult> Approve(int id)
+        {
+            var obstacle = await obstacleRepository.GetObstacleById(id);
+
+
+            if (obstacle != null)
+            {
+                obstacle.Status = Obstacle.Statuses.Approved;
+
+                await obstacleRepository.UpdateObstacle(obstacle);
+
+                return RedirectToAction("Details", new { id = obstacle.ReportId });
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Reject(int id)
+        {
+            var obstacle = await obstacleRepository.GetObstacleById(id);
+
+
+            if (obstacle != null)
+            {
+                obstacle.Status = Obstacle.Statuses.Rejected;
+
+                await obstacleRepository.UpdateObstacle(obstacle);
+
+                return RedirectToAction("Details", new { id = obstacle.ReportId });
+            }
+
+            return RedirectToAction("Index");
+        }
+
     }
 
 
-    public enum ReviewStatus { Pending = 0, Approved = 1, Rejected = 2 }
+
 
 
 }

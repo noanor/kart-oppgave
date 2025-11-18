@@ -25,3 +25,15 @@
 .h-90 {
     height: 90%;
 }
+
+.obstacle-column {
+    width: 49.5%;
+}
+
+.left-col-card {
+    height: 49%;
+}
+
+.btn-save-note {
+    bottom: 5%;
+}
