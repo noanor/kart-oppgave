@@ -4,6 +4,6 @@ namespace Luftfartshinder.Repository
 {
     public interface IAccountRepository
     {
-        public Task<IEnumerable<Report>> GetReports();
+        public Task<List<Report>> GetReports();
     }
 }

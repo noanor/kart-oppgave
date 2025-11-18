@@ -4,7 +4,7 @@ namespace Luftfartshinder.Repository
 {
     public interface IReportRepository
     {
-        Task<IEnumerable<Report>> GetAllAsync();
+        Task<List<Report>> GetAllAsync();
         Task<Report?> GetByIdAsync(int id);
         Task<Report?> UpdateAsync(Report report);
         Task<Report> AddAsync(Report report);

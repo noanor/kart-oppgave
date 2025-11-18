@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Luftfartshinder.Migrations
 {
     /// <inheritdoc />
-    public partial class AuthDb : Migration
+    public partial class InitialAuthCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -218,7 +218,7 @@ namespace Luftfartshinder.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsApproved", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Organization", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3c1b1dcf-6345-42b9-90fe-45227eb5be5b", 0, "7e18e04d-dc0f-4cdc-9ceb-64df2b04047b", "superadmin@kartverket.no", false, "Super", true, "Admin", false, null, "SUPERADMIN@KARTVERKET.NO", "SUPERADMIN@KARTVERKET.NO", null, "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==", null, false, "4307a39f-9ba1-4feb-96f6-b27eb325aa54", false, "superadmin@kartverket.no" });
+                values: new object[] { "3c1b1dcf-6345-42b9-90fe-45227eb5be5b", 0, "0b15b0f2-fc79-4335-8249-306bb6aa00e6", "superadmin@kartverket.no", false, "Super", true, "Admin", false, null, "SUPERADMIN@KARTVERKET.NO", "SUPERADMIN@KARTVERKET.NO", null, "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==", null, false, "5d3405d2-7d05-4e18-85ae-68139b5cf237", false, "superadmin@kartverket.no" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
