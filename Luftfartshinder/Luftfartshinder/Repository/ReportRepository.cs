@@ -20,7 +20,7 @@ namespace Luftfartshinder.Repository
             return report;
         }
 
-        public async Task<IEnumerable<Report>> GetAllAsync()
+        public async Task<List<Report>> GetAllAsync()
         {
             return await context.Reports.Include(r => r.Obstacles).ToListAsync();
         }

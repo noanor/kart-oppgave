@@ -14,7 +14,7 @@ namespace Luftfartshinder.Repository
             this.reportRepository = reportRepository;
         }
 
-        public async Task<IEnumerable<Report>> GetReports()
+        public async Task<List<Report>> GetReports()
         {
             var reports = await reportRepository.GetAllAsync();
             return reports;
