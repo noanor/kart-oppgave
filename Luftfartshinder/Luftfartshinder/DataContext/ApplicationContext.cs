@@ -22,9 +22,10 @@ namespace Luftfartshinder.DataContext
 
             modelBuilder.Entity<Obstacle>()
                 .Property(o => o.Id).ValueGeneratedOnAdd();
-            
+
             modelBuilder.Entity<Report>()
                 .HasKey(pk => pk.Id); //Primary key for Data
+
         }
     }
 }

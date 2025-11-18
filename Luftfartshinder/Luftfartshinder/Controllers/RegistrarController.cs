@@ -63,6 +63,18 @@ namespace Luftfartshinder.Controllers
 
         }
 
+        public async Task<IActionResult> Delete(EditReportRequest editReportRequest)
+        {
+            var deletedReport = await reportRepository.DeleteAsync(editReportRequest.Id);
+
+            if (deletedReport != null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Details", new { id = editReportRequest.Id });
+        }
+
     }
 
 

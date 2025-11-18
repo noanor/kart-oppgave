@@ -1,6 +1,6 @@
 ﻿.obstacle-map {
-    width: 250px;
-    height: 200px;
+    height: 100%;
+    width: 100%;
 }
 
 .preview-map .leaflet-control-container{
@@ -10,3 +10,4 @@
 select option {
     font-size: 1.5em;
 }
+
