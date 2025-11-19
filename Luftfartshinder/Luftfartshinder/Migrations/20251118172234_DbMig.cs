@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Luftfartshinder.Migrations
 {
     /// <inheritdoc />
-    public partial class dbmigration : Migration
+    public partial class DbMig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
