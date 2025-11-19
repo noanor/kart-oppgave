@@ -50,8 +50,7 @@ public partial class ObstaclesController : Controller
             Description = dto.Description ?? "",
             Height = dto.Height,
             Latitude = dto.Latitude,
-            Longitude = dto.Longitude,
-            IsDraft = true
+            Longitude = dto.Longitude
         };
 
         draft.Obstacles.Add(o);
