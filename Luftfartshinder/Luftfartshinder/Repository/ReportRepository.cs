@@ -43,5 +43,25 @@ namespace Luftfartshinder.Repository
             }
             return null;
         }
+
+        public async Task<Report?> DeleteAsync(int id)
+        {
+            var existingReport = await context.Reports
+                .Include(r => r.Obstacles)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (existingReport != null)
+            {
+
+                context.Obstacles.RemoveRange(existingReport.Obstacles);
+                context.Reports.Remove(existingReport);
+
+                await context.SaveChangesAsync();
+                return existingReport;
+            }
+
+            return null;
+
+        }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Luftfartshinder.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20251118172234_DbMig")]
-    partial class DbMig
+    [Migration("20251119092416_dbmigration")]
+    partial class dbmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
