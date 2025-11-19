@@ -1,22 +1,23 @@
 ﻿using Luftfartshinder.DataContext;
 using Luftfartshinder.Models.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Luftfartshinder.Repository
 {
     public class AccountRepository : IAccountRepository
     {
         private readonly ApplicationContext context;
-        private readonly IReportRepository reportRepository;
 
-        public AccountRepository(ApplicationContext context, IReportRepository reportRepository)
+
+        public AccountRepository(ApplicationContext context)
         {
             this.context = context;
-            this.reportRepository = reportRepository;
+
         }
 
-        public async Task<List<Report>> GetReports()
+        public List<Report> GetUserReports(string userId)
         {
-            var reports = await reportRepository.GetAllAsync();
+            var reports = context.Reports.Include(r => r.Obstacles).Where(r => r.AuthorId == userId).ToList();
             return reports;
         }
     }
