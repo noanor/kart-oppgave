@@ -44,7 +44,7 @@ html {
 
 body {
     /* margin-bottom: 60px; */
-    background-color: #FAF8F1;
+/*    background-color: #FAF8F1;*/
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {

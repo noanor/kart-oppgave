@@ -19,8 +19,14 @@
 </head>
 
 <body>
-    <h2>Draft Obstacles </h2>
-    <p>Obstacles in draft: @Model.Obstacles.Count</p>
+    <div class="text-center mt-4 pt-4">
+        <div class="mb-2 h1">
+            Draft Obstacles
+        </div>
+        <p class="text-muted fw-semibold">Obstacles in draft: @Model.Obstacles.Count</p>
+
+    </div>
+
     <div style="overflow:auto;" class="container mt-3">
         @if (Model.Obstacles.Count == 0)
         {
@@ -41,11 +47,11 @@
             @for (var i = 0; i < Model.Obstacles.Count; i++)
             {
                 var o = Model.Obstacles[i];
-                <div class="card mb-3" style="width: 100%;">
+                <div class="card mb-4 box-shadow shadow" style="width: 100%;">
                     <div class="card-header">
                         <h4 class="card-title">@o.Name</h4>
                     </div>
-                    <div class="card-body" style="height: 50vh;">
+                    <div class="card-body" style="height: 45vh;">
                         <div class="row">
                             <div class="col">
                                 <dl class="row g-1 " style="width: 60%;">
@@ -93,7 +99,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <a class="btn btn-outline-primary" role="button"
+                        <a class="btn btn-outline-primary shadow" role="button"
                            asp-action="EditObstacle"
                            asp-controller="Obstacles"
                            asp-route-index="@i"
