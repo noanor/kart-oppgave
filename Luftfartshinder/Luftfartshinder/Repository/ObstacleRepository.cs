@@ -21,7 +21,7 @@ namespace Luftfartshinder.Repository
             return obstacleValue;
 
         }
-        public async Task<Obstacle> GetObstacleById(int id)
+        public async Task<Obstacle?> GetObstacleById(int id)
         {
             var findById = await _context.Obstacles.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (findById != null)

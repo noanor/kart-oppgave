@@ -1,4 +1,6 @@
-﻿namespace Luftfartshinder.Models.ViewModel
+﻿using Luftfartshinder.Models.Domain;
+
+namespace Luftfartshinder.Models.ViewModel
 {
     public class EditObstacleRequest
     {
@@ -23,6 +25,7 @@
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string Description { get; set; }
+        public Obstacle.Statuses Status { get; set; } = Obstacle.Statuses.Pending;
 
     }
 }
