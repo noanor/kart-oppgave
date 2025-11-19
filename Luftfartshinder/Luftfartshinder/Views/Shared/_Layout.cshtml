@@ -41,6 +41,32 @@
                                     asp-action="Index"
                                 >Home</a>
                             </li>
+
+                            @if (User.IsInRole("SuperAdmin"))
+                            {
+                                <li class="nav-item align-self-center">
+                                    <div class="dropdown">
+                                        <button class="btn dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Admin
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li class="dropdown-item">
+                                                <a class="nav-link"
+                                                   asp-area=""
+                                                   asp-controller="Account"
+                                                   asp-action="Dashboard">Dashboard</a>
+                                            </li>
+
+                                            <li class="dropdown-item">
+                                                <a class="nav-link"
+                                                   asp-area=""
+                                                   asp-controller="Registrar"
+                                                   asp-action="Index">Registrar</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            }
                             <li class="nav-item">
                                 <a class="nav-link text-white" 
                                     asp-area="" 
@@ -49,32 +75,7 @@
                                 >Draft</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-white" 
-                                    asp-area="" 
-                                    asp-controller="Feedback" 
-                                    asp-action="Index"
-                                >Feedback</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-white"
-                                   asp-area=""
-                                   asp-controller="Account"
-                                   asp-action="Dashboard">Dashboard</a>
-                            </li>
-
-                            @if (User.IsInRole("FlightCrew"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" 
-                                       href="#" 
-                                       id="tutorialNavButton"
-                                       style="cursor: pointer;">Tutorial</a>
-                                </li>
-                            }
-
-                            @if (User.IsInRole("Registrar"))
+                            @if (User.IsInRole("Registrar") && !User.IsInRole("SuperAdmin"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-white" 
@@ -85,27 +86,47 @@
                                 </li>
 
                             }
-                            @if (User.IsInRole("SuperAdmin"))
+                        </ul>
+
+                        <ul class="navbar-nav flex-grow-1 justify-content-end">
+                            @if (User.IsInRole("FlightCrew"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" 
-                                        asp-area="" 
-                                        asp-controller="Home" 
-                                        asp-action="SuperAdminHome"
-                                    >Superadmin Dashboard</a>
+                                    <a class="nav-link text-white"
+                                       href="#"
+                                       id="tutorialNavButton"
+                                       style="cursor: pointer;">Tutorial</a>
                                 </li>
                             }
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white"
+                                   asp-area=""
+                                   asp-controller="Feedback"
+                                   asp-action="Index">Feedback</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <div class="dropdown me-4">
+                                    <button class="btn dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        @User?.Identity?.Name
+                                    </button>
+
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Dashboard">Dashboard</a>
+                                        </li>
+                                        <li>
+                                            <button id="signoutButton" class="btn btn-outline-danger me-3 ms-3" data-bs-toggle="modal" data-bs-target="#logoutModal">Sign out</button>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </li>
                         </ul>
-                        <div class="d-flex align-items-center ms-auto text-light">
+                            
 
-                            @User?.Identity?.Name
-
-
-
-                            <a id="signoutButton" class="btn me-3 ms-3 bg-light text-dark" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">Sign out</a>
-
-
-                        </div>
+                        
                     </div>
                 </div>
             </nav>
@@ -189,7 +210,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <a id="confirmLogout" class="btn btn-danger">Sign out</a>
+                    <button id="confirmLogout" class="btn btn-danger">Sign out</button>
                 </div>
             </div>
         </div>
