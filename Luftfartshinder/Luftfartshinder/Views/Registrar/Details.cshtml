@@ -4,16 +4,17 @@
     ViewData["Title"] = "Registrar – Details";
 }
 
-<head>
+@section Styles {
     <link href="~/css/registrar.css" rel="stylesheet" />
     <link href="~/css/draft.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-          crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-            crossorigin=""></script>
-</head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+}
+
+@section Scripts {
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+}
+          
+
 
 
 <body>
@@ -208,193 +209,3 @@
     </div>
     <script src="~/js/draft.js"></script>
 </body>
-
-
-@* <div class="container-xxl details-shell">
-
-    <!-- PERFECTLY CENTERED HEADER -->
-    <div class="row align-items-center mb-4">
-
-        <!-- Left: Back to list -->
-        <div class="col-4 text-start">
-            <a href="@Url.Action("Index", "Registrar")" class="back-icon">
-                <i class="bi bi-arrow-left-circle"></i>
-            </a>
-        </div>
-
-        <!-- Center: Obstacle title -->
-        <div class="col-4 text-center">
-            <h1 class="page-title mb-0">@Model.Name</h1>
-        </div>
-
-        <!-- Right: Delete button -->
-        <div class="col-4 text-end">
-            <button type="button"
-                    class="btn btn-danger btn-sm d-inline-flex align-items-center gap-2"
-                    data-bs-toggle="modal" data-bs-target="#deleteModal">
-                <i class="bi bi-trash"></i>
-            </button>
-        </div>
-
-    </div>
-
-
-    <!-- META BOX (ID / Type / Status) -->
-    <div class="card meta-box mb-4">
-        <div class="card-body">
-            <div class="meta-grid">
-
-                <!-- ID -->
-                <div class="meta-item">
-                    <div class="meta-label">ID</div>
-                    <div class="meta-value">#@Model.Id</div>
-                </div>
-
-                <!-- Type -->
-                <div class="meta-item">
-                    <div class="meta-label">Type</div>
-                    <div class="meta-value">@Model.Type</div>
-                </div>
-
-                <!-- Status -->
-                <div class="meta-item">
-                    <div class="meta-label">Status</div>
-
-                    <div class="meta-actions">
-
-                        @switch (Model.Status)
-                        {
-                            case Luftfartshinder.Controllers.ReviewStatus.Approved:
-                                <span class="pill pill-approved">Approved</span>
-                                break;
-
-                            case Luftfartshinder.Controllers.ReviewStatus.Rejected:
-                                <span class="pill pill-rejected">Rejected</span>
-                                break;
-
-                            default:
-                                <span class="pill pill-pending">Pending</span>
-                                break;
-                        }
-
-                        <!-- Approve -->
-                        <form asp-controller="Registrar" asp-action="Approve" method="post" class="d-inline">
-                            @Html.AntiForgeryToken()
-                            <input type="hidden" name="id" value="@Model.Id" />
-                            <button type="submit" class="btn btn-success btn-pill">Approve</button>
-                        </form>
-
-                        <!-- Reject -->
-                        <form asp-controller="Registrar" asp-action="Reject" method="post" class="d-inline">
-                            @Html.AntiForgeryToken()
-                            <input type="hidden" name="id" value="@Model.Id" />
-                            <button type="submit" class="btn btn-danger btn-pill">Reject</button>
-                        </form>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row g-4">
-
-        <!-- LEFT COLUMN -->
-        <div class="col-xl-6">
-
-
-            <!-- Obstacle details -->
-            <div class="card card-large shadow-sm mb-4">
-                <div class="card-body">
-                    <dl class="info-grid mb-0">
-                        <dt>Latitude</dt>
-                        <dd>@Model.Latitude.ToString("0.######")</dd>
-
-                        <dt>Longitude</dt>
-                        <dd>@Model.Longitude.ToString("0.######")</dd>
-
-                        <dt>Height</dt>
-                        <dd>@((Model.Height?.ToString()) ?? "-")</dd>
-
-                        <dt>Reporter</dt>
-                        <dd>@(!string.IsNullOrWhiteSpace(Model.Reporter) ? Model.Reporter : "-")</dd>
-
-                        <dt>Date</dt>
-                        <dd>
-                            @(Model.CreatedAt.HasValue
-                                                        ? Model.CreatedAt.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm")
-                                                        : "-")
-                        </dd>
-
-                        <dt>Description</dt>
-                        <dd>@(!string.IsNullOrWhiteSpace(Model.Description) ? Model.Description : "-")</dd>
-                    </dl>
-                </div>
-            </div>
-
-            <!-- Registrar Note -->
-            <div class="card card-large shadow-sm">
-                <div class="card-header fw-semibold">Registrar Note</div>
-                <div class="card-body">
-                    <form asp-controller="Registrar" asp-action="SaveNote" method="post" class="row g-3">
-                        <input type="hidden" name="id" value="@Model.Id" />
-                        @Html.AntiForgeryToken()
-
-                        <div class="col-12">
-                            <textarea name="note" class="form-control" rows="4"
-                                      placeholder="Ask for more info, add internal remarks, etc.">@Model.Note</textarea>
-                        </div>
-
-                        <div class="col-12 d-flex align-items-center gap-3">
-                            <button type="submit" class="btn btn-primary btn-sm px-4 py-2">Save note</button>
-                            @if (noteSaved)
-                            {
-                                <span class="text-dark fw-semibold">✓ Saved</span>
-                            }
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- RIGHT COLUMN -->
-        <div class="col-xl-6">
-            <div class="card card-large shadow-sm">
-                <div class="card-header fw-semibold">Map Preview</div>
-                <div class="card-body">
-                    <div class="map-placeholder d-flex align-items-center justify-content-center">
-                        <div class="text-muted small">Map will appear here</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Delete confirmation modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Delete obstacle?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete <strong>@Model.Name</strong>? This action cannot be undone!
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                <form asp-controller="Registrar" asp-action="Delete" method="post" class="d-inline">
-                    <input type="hidden" name="id" value="@Model.Id" />
-                    @Html.AntiForgeryToken()
-                    <button type="submit" class="btn btn-danger">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> *@

@@ -178,6 +178,10 @@ namespace Luftfartshinder.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated && User.IsInRole("Registrar"))
+            {
+                return RedirectToAction("Dashboard");
+            }
             return View();
         }
 
@@ -209,10 +213,10 @@ namespace Luftfartshinder.Controllers
             var roles = await userManager.GetRolesAsync(user);
 
             if (roles.Contains("SuperAdmin"))
-                return RedirectToAction("SuperAdminHome", "Home");
+                return RedirectToAction("Dashboard");
 
             if (roles.Contains("Registrar"))
-                return RedirectToAction("RegistrarHome", "Home");
+                return RedirectToAction("Dashboard");
 
             if (roles.Contains("FlightCrew"))
                 return RedirectToAction("Index", "Home");

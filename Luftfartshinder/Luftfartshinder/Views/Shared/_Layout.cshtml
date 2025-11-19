@@ -32,7 +32,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between align-items-center">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
                                 <a class="nav-link text-white" 
@@ -46,7 +46,7 @@
                             {
                                 <li class="nav-item align-self-center">
                                     <div class="dropdown">
-                                        <button class="btn dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="btn dropdown-toggle text-light no-focus-outline" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             Admin
                                         </button>
                                         <ul class="dropdown-menu">
@@ -112,15 +112,25 @@
                                         @User?.Identity?.Name
                                     </button>
 
-                                    <ul class="dropdown-menu">
+                                    <ul class="dropdown-menu account-menu">
                                         <li>
-                                            <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Dashboard">Dashboard</a>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Dashboard">
+                                                Dashboard
+                                            </a>
                                         </li>
+
                                         <li>
-                                            <button id="signoutButton" class="btn btn-outline-danger me-3 ms-3" data-bs-toggle="modal" data-bs-target="#logoutModal">Sign out</button>
+                                            <a class="dropdown-item text-danger d-flex align-items-center gap-2"
+                                               href="#"
+                                               data-bs-toggle="modal"
+                                               data-bs-target="#logoutModal">
+                                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                                Sign out
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
+
 
                             </li>
                         </ul>
@@ -197,6 +207,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Styles", required: false)
 
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
