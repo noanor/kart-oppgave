@@ -14,7 +14,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Luftfartshinder.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f21e728132efb0d3bb9fd6a1eac76891e5231841")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8bf41d33937aaff5966e809bbf09d35c961b34ea")]
+>>>>>>> 7519d4f (Fungerende delete knapp og approve reject registrar details)
 [assembly: System.Reflection.AssemblyProductAttribute("Luftfartshinder.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Luftfartshinder.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
