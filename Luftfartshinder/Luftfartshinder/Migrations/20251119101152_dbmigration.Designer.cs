@@ -12,11 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Luftfartshinder.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-<<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251119092416_dbmigration.Designer.cs
-    [Migration("20251119092416_dbmigration")]
-========
-    [Migration("20251118164315_dbmigration")]
->>>>>>>> 8bf41d33937aaff5966e809bbf09d35c961b34ea:Luftfartshinder/Luftfartshinder/Migrations/20251118164315_dbmigration.Designer.cs
+    [Migration("20251119101152_dbmigration")]
     partial class dbmigration
     {
         /// <inheritdoc />
