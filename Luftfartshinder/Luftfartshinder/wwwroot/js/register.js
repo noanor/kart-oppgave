@@ -9,6 +9,11 @@ window.markInvalid = function(element) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+    const firstNameInput = document.getElementById("FirstName");
+    if (firstNameInput) {
+        firstNameInput.focus();
+    }
+    
     const passwordInput = document.getElementById("password");
     const submitBtn = document.getElementById("submitBtn");
 
@@ -65,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function toggleCustomOrg() {
         if (organizationSelect.value === "Other") {
             customOrganizationInput.style.display = "block";
-        } else {document
+        } else {
             customOrganizationInput.style.display = "none";
         }
         checkForm()
@@ -167,5 +172,13 @@ document.addEventListener("DOMContentLoaded", function () {
         cancelBtnAdmin.addEventListener("click", function () {
             confirmCancel("/Home/SuperAdminHome");
         });
+    }
+    const registerAlert = document.getElementById("registerAlert");
+    if (registerAlert) {
+        setTimeout(() => {
+            registerAlert.style.transition = "opacity 0.5s";
+            registerAlert.style.opacity = '0';
+            setTimeout(() => registerAlert.remove(), 500);
+        }, 6000);
     }
 });
