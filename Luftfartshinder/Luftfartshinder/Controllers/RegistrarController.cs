@@ -43,11 +43,16 @@ namespace Luftfartshinder.Controllers
                 return View(editReport);
 
             }
+<<<<<<< HEAD
             return NotFound();
+=======
+            return null;
+>>>>>>> 8bf41d33937aaff5966e809bbf09d35c961b34ea
         }
 
         public async Task<IActionResult> SaveNote(Obstacle obstacleData)
         {
+<<<<<<< HEAD
             var existingObstacle = await obstacleRepository.GetObstacleById(obstacleData.Id);
             if (existingObstacle != null)
             {
@@ -58,6 +63,15 @@ namespace Luftfartshinder.Controllers
             }
 
             return RedirectToAction("Details", new { id = obstacleData.ReportId });
+=======
+            var existingObstacle = obstacleRepository.GetObstacleById(obstacleData.Id).Result;
+            if (existingObstacle != null)
+            {
+                existingObstacle.RegistrarNote = obstacleData.RegistrarNote;
+            }
+
+            return RedirectToAction("Details", existingObstacle);
+>>>>>>> 8bf41d33937aaff5966e809bbf09d35c961b34ea
 
         }
 
@@ -77,6 +91,7 @@ namespace Luftfartshinder.Controllers
         {
             var obstacle = await obstacleRepository.GetObstacleById(id);
 
+<<<<<<< HEAD
             if (obstacle == null)
                 return NotFound(); // prevent NullReference
 
@@ -86,14 +101,30 @@ namespace Luftfartshinder.Controllers
             await obstacleRepository.UpdateObstacle(obstacle);
 
             return RedirectToAction("Details", new { id = obstacle.ReportId });
+=======
+
+            if (obstacle != null)
+            {
+                obstacle.Status = Obstacle.Statuses.Approved;
+
+                await obstacleRepository.UpdateObstacle(obstacle);
+
+                return RedirectToAction("Details", new { id = obstacle.ReportId });
+            }
+
+            return RedirectToAction("Index");
+>>>>>>> 8bf41d33937aaff5966e809bbf09d35c961b34ea
         }
 
         public async Task<IActionResult> Reject(int id)
         {
             var obstacle = await obstacleRepository.GetObstacleById(id);
 
+<<<<<<< HEAD
             if (obstacle == null)
                 return NotFound(); // prevent NullReference
+=======
+>>>>>>> 8bf41d33937aaff5966e809bbf09d35c961b34ea
 
             if (obstacle != null)
             {
@@ -115,4 +146,7 @@ namespace Luftfartshinder.Controllers
 
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8bf41d33937aaff5966e809bbf09d35c961b34ea

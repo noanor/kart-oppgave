@@ -45,6 +45,7 @@ public partial class ObstaclesController : Controller
 
         var o = new Obstacle
         {
+
             Type = dto.Type,
             Name = dto.Name ?? $"Obstacle {DateTime.UtcNow:HHmmss}",
             Description = dto.Description ?? "",
@@ -92,7 +93,25 @@ public partial class ObstaclesController : Controller
         foreach (var obstacle in draft.Obstacles)
         {
             newReport.Obstacles.Add(obstacle);
+<<<<<<< HEAD
 
+=======
+        }
+
+        try
+        {
+            // Send report to DB
+            await reportRepository.AddAsync(newReport);
+
+        }
+        catch (Exception ex)
+        {
+            // Log the exception (not shown here for brevity)
+            // Most MySQL details are here:
+            Console.WriteLine("DbUpdateException: " + ex.Message);
+            Console.WriteLine("Inner: " + ex.InnerException?.Message);
+            throw; // or return BadRequest with the inner message
+>>>>>>> 8bf41d33937aaff5966e809bbf09d35c961b34ea
         }
 
         try
@@ -156,7 +175,6 @@ public partial class ObstaclesController : Controller
 
         draft.Obstacles[index] = new Obstacle
         {
-            Id = editObstacleRequest.Id,
             Type = editObstacleRequest.Type,
             Name = editObstacleRequest.Name,
             Height = editObstacleRequest.Height,

@@ -13,7 +13,7 @@
     <header>
         <h2>Registrar - List of Reports</h2>
     </header>
-    <div class="container p-5">
+    <div class="container">
         <table class="table">
             <thead>
                 <tr>
@@ -39,7 +39,7 @@
                             <a class="btn btn-primary" role="button"
                                asp-action="Details"
                                asp-controller="Registrar"
-                               asp-route-id="@(i+1)"
+                               asp-route-id="@Model[i].Id"
                                style="vertical-align: middle; text-decoration: none;">
                                 View
                             </a>
