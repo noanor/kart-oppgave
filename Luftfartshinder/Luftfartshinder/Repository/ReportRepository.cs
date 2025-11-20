@@ -1,5 +1,6 @@
 ﻿using Luftfartshinder.DataContext;
 using Luftfartshinder.Models.Domain;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Luftfartshinder.Repository
@@ -53,6 +54,7 @@ namespace Luftfartshinder.Repository
             if (existingReport != null)
             {
 
+
                 context.Obstacles.RemoveRange(existingReport.Obstacles);
                 context.Reports.Remove(existingReport);
 
@@ -61,6 +63,7 @@ namespace Luftfartshinder.Repository
             }
 
             return null;
+
 
         }
     }

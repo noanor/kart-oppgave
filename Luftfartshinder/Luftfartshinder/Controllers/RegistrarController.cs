@@ -72,6 +72,7 @@ namespace Luftfartshinder.Controllers
             }
 
             return RedirectToAction("Details", new { id = editReportRequest.Id });
+<<<<<<< HEAD
         }
 
         public async Task<IActionResult> Approve(int id)
@@ -106,6 +107,8 @@ namespace Luftfartshinder.Controllers
             }
 
             return RedirectToAction("Index");
+=======
+>>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
         }
 
     }

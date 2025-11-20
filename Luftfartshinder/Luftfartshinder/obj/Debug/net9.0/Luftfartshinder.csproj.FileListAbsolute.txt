@@ -973,7 +973,6 @@ C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\q9y3tdv12i-px2b75sq1k.gz
-C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\5tmwaozt2g-5kn6rivk6b.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\it5k2btw20-5intmtvwrr.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\vylom24x76-y8933wx6wt.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\yorxud8s3o-i205jcmrqa.gz
@@ -1015,8 +1014,11 @@ C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\w7nuiw802i-9vr69e8ynj.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\tbra1yxt01-tkr943dwy6.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\fdxh007m95-tkr943dwy6.gz
+<<<<<<< HEAD
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\l5rfuj9o9x-yc6ffzbyxl.gz
 >>>>>>> f147bd9 (Preview kart details side registrar, og prøvde å implementere de andre funksjonene)
+=======
+>>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\appsettings.Development.json
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\appsettings.json
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Luftfartshinder.staticwebassets.runtime.json
@@ -2248,4 +2250,9 @@ C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug
 >>>>>>> 1f64686 (La til kart preview på registrar details side)
 =======
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\elfel0a0nb-{0}-9mj8g1blc4-9mj8g1blc4.gz
+<<<<<<< HEAD
 >>>>>>> f147bd9 (Preview kart details side registrar, og prøvde å implementere de andre funksjonene)
+=======
+C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\5tmwaozt2g-ideykflcn7.gz
+C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\l5rfuj9o9x-ptvoitmytk.gz
+>>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
