@@ -117,7 +117,7 @@
             <!-- LEFT COLUMN -->
             <div class="col-xl-6 h-100 position-absolute obstacle-column">
                 <!-- Obstacle details -->
-                <div class="card card-large shadow-sm mb-auto left-col-card w-100 position-absolute">
+                <div class="card card-large shadow-sm mb-auto w-100 position-absolute h-60 left-col-card">
                     <div class="card-header fw-semibold">General Information</div>
                     <div class="card-body">
                         <dl class="info-grid mb-0">
@@ -137,7 +137,7 @@
                 </div>
 
                 <!-- Registrar Note -->
-                <div class="card card-large shadow-sm bottom-0 position-absolute w-100 left-col-card">
+                <div class="card card-large shadow-sm bottom-0 position-absolute w-100 h-40 left-col-card">
                     <div class="card-header fw-semibold">Registrar Note</div>
                     <div class="card-body">
                         <form asp-controller="Registrar" asp-action="SaveNote" method="post" class="row g-3">
@@ -145,7 +145,7 @@
                             @Html.AntiForgeryToken()
 
                             <div class="col-12">
-                                <textarea name="RegistrarNote" class="form-control" rows="7"
+                                <textarea name="RegistrarNote" class="form-control" rows="2"
                                           placeholder="Ask for more info, add internal remarks, etc."
                                           
 

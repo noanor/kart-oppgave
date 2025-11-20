@@ -9,14 +9,11 @@
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 }
 
-@section Scripts {
-	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-}
-<body>
+
 
 	<div id="map"></div>
 
-	<div class="wheel">
+	<div class="wheel hidden">
 		<div class="arc" data-type="punkt"><i class="fa-solid fa-genderless"></i></div>
 		<div class="arc" data-type="mast"><i class="material-symbols-outlined">adjust</i></div>
 		<div class="arc" data-type="linje"><i class="material-symbols-outlined">show_chart</i></div>
@@ -63,6 +60,23 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="toast-container position-fixed end-0 p-3" style="z-index: 3000; top: 5vh;">
+		<div id="obstacleAddedToast" class="toast text-white bg-success border-0" role="alert">
+			<div class="toast-body">
+				Obstacle added to draft!
+			</div>
+		</div>
+	</div>
+
+	<div class="toast-container position-fixed end-0 p-3" style="z-index: 3000; top: 5vh;">
+		<div id="draftSubmittedToast" class="toast text-white bg-success border-0" role="alert">
+			<div class="toast-body">
+				Draft submitted!
+			</div>
+		</div>
+	</div>
+
 
 	<form method="post">
 		<div>
@@ -111,7 +125,8 @@
         </form>
     </section> *@
 
-
+@section Scripts {
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 	<script src="~/js/map.js" defer></script>
 	<script>
 		function showTutorialModal() {
@@ -146,5 +161,14 @@
 				});
 			}
 		});
+
+		document.addEventListener("DOMContentLoaded", function () {
+			const submitted = '@TempData["DraftSubmitted"]';
+			if (submitted === 'True') {
+				const toastEl = document.getElementById('draftSubmittedToast');
+				const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+				toast.show();
+			}
+		});
 	</script>
-</body>
+}

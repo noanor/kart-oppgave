@@ -119,7 +119,7 @@
                 <p class="text-muted">Review the obstacles above before submitting them for review.</p>
                 <form asp-action="SubmitDraft" asp-controller="Obstacles" method="post" class="d-inline">
                     @Html.AntiForgeryToken()
-                    <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+                    <button id="btnSubminDraft" class="btn btn-primary btn-sm" type="submit">Submit</button>
                 </form>
 
                 <form asp-action="ClearDraft" asp-controller="Obstacles" method="post" class="d-inline ms-2">

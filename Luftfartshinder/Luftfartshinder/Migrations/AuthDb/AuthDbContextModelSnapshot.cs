@@ -110,6 +110,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                             AccessFailedCount = 0,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                             ConcurrencyStamp = "a95ce37b-4ab4-4b0c-8f09-dcc6d21dea1f",
 =======
                             ConcurrencyStamp = "ee154f8b-bf64-4af0-87fb-5ec9e8538dba",
@@ -117,6 +118,9 @@ namespace Luftfartshinder.Migrations.AuthDb
 =======
                             ConcurrencyStamp = "dc6a9db0-e9e4-45ce-b55a-dec9fa9f5073",
 >>>>>>> 985ea00 (Delete, Approve, Reject, Save Note)
+=======
+                            ConcurrencyStamp = "009f29c6-becd-435a-bea1-737aba28dad5",
+>>>>>>> 1c7ee01 (La til success message (toast) på index, markers blir på kartet til draft er submitted. Litt registrar refaktorisering)
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -129,6 +133,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                             PhoneNumberConfirmed = false,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                             SecurityStamp = "d007283e-d252-4447-8610-43c161dce390",
 =======
                             SecurityStamp = "15e58774-a927-44b5-8747-a23f7fac098d",
@@ -136,6 +141,9 @@ namespace Luftfartshinder.Migrations.AuthDb
 =======
                             SecurityStamp = "04831698-e60f-43af-a6e2-d84b20d53fca",
 >>>>>>> 985ea00 (Delete, Approve, Reject, Save Note)
+=======
+                            SecurityStamp = "5d87a9be-dd39-4f67-853f-dcc0fdf41f57",
+>>>>>>> 1c7ee01 (La til success message (toast) på index, markers blir på kartet til draft er submitted. Litt registrar refaktorisering)
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         });

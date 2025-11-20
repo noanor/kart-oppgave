@@ -16,7 +16,7 @@ public partial class ObstaclesController : Controller
     private readonly IReportRepository reportRepository;
     private readonly IObstacleRepository obstacleRepository;
 
-    public record AddOneResponse(bool Ok, int Count);
+    public record AddOneResponse(bool Ok, int Count, int Index);
 
     public ObstaclesController(UserManager<ApplicationUser> userManager, IReportRepository reportRepository, IObstacleRepository obstacleRepository)
     {
@@ -60,7 +60,9 @@ public partial class ObstaclesController : Controller
         draft.Obstacles.Add(o);
         HttpContext.Session.Set(DraftKey, draft);
 
-        return Ok(new AddOneResponse(true, draft.Obstacles.Count));
+        var index = draft.Obstacles.Count - 1;
+
+        return Ok(new AddOneResponse(true, draft.Obstacles.Count, index));
     }
 
     // === POST: /obstacles/clear-draft ===
@@ -69,6 +71,25 @@ public partial class ObstaclesController : Controller
     {
         HttpContext.Session.Remove(DraftKey);
         return RedirectToAction("Draft");
+    }
+
+    [HttpGet("/obstacles/draft-json")]
+    public IActionResult DraftJson()
+    {
+        var draft = HttpContext.Session
+            .Get<SessionObstacleDraft>(DraftKey) ?? new SessionObstacleDraft();
+
+        var list = draft.Obstacles
+            .Select((o, idx) => new
+            {
+                index = idx,
+                type = o.Type,
+                latitude = o.Latitude,
+                longitude = o.Longitude,
+                name = o.Name
+            }).ToList();
+
+        return Ok(list);
     }
 
     // === POST: /obstacles/submit-draft ===
@@ -119,6 +140,8 @@ public partial class ObstaclesController : Controller
         }
         //applicationContext.SaveChanges();
         HttpContext.Session.Remove(DraftKey);
+
+        TempData["DraftSubmitted"] = true;
         return RedirectToAction("Index", "Home");
     }
 

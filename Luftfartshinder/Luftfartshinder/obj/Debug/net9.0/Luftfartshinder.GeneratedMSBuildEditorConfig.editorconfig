@@ -70,12 +70,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTdXBlckFkbWluSG9tZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Noa/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Obstacles/AdminEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2JzdGFjbGVzXEFkbWluRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Noa/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Obstacles/Draft.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2JzdGFjbGVzXERyYWZ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Noa/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Obstacles/EditObstacle.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2JzdGFjbGVzXEVkaXRPYnN0YWNsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Noa/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Obstacles/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2JzdGFjbGVzXExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Noa/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Obstacles/Report.cshtml]

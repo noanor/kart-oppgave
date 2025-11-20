@@ -1,3 +1,4 @@
+<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251119101206_authmig.cs
 <<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251118164323_authdbmigration.cs
 <<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251117183933_AuthDbMig.cs
 <<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251119092435_authdbmigration.cs
@@ -312,6 +313,8 @@ namespace Luftfartshinder.Migrations.AuthDb
 }
 <<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251117183933_AuthDbMig.cs
 ========
+=======
+>>>>>>> 1c7ee01 (La til success message (toast) på index, markers blir på kartet til draft er submitted. Litt registrar refaktorisering):Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251120091742_authmigration.cs
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -323,7 +326,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Luftfartshinder.Migrations.AuthDb
 {
     /// <inheritdoc />
+<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251119101206_authmig.cs
     public partial class AuthDbMig : Migration
+=======
+    public partial class authmigration : Migration
+>>>>>>> 1c7ee01 (La til success message (toast) på index, markers blir på kartet til draft er submitted. Litt registrar refaktorisering):Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251120091742_authmigration.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -532,7 +539,11 @@ namespace Luftfartshinder.Migrations.AuthDb
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsApproved", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Organization", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251119101206_authmig.cs
                 values: new object[] { "3c1b1dcf-6345-42b9-90fe-45227eb5be5b", 0, "401bfa3c-e784-48d5-abf2-44184f4155f4", "superadmin@kartverket.no", false, "Super", true, "Admin", false, null, "SUPERADMIN@KARTVERKET.NO", "SUPERADMIN@KARTVERKET.NO", null, "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==", null, false, "49b3d5ca-5838-4870-a6cb-eee0a4d98f2c", false, "superadmin@kartverket.no" });
+=======
+                values: new object[] { "3c1b1dcf-6345-42b9-90fe-45227eb5be5b", 0, "009f29c6-becd-435a-bea1-737aba28dad5", "superadmin@kartverket.no", false, "Super", true, "Admin", false, null, "SUPERADMIN@KARTVERKET.NO", "SUPERADMIN@KARTVERKET.NO", null, "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==", null, false, "5d87a9be-dd39-4f67-853f-dcc0fdf41f57", false, "superadmin@kartverket.no" });
+>>>>>>> 1c7ee01 (La til success message (toast) på index, markers blir på kartet til draft er submitted. Litt registrar refaktorisering):Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251120091742_authmigration.cs
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -608,6 +619,9 @@ namespace Luftfartshinder.Migrations.AuthDb
         }
     }
 }
+<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251119101206_authmig.cs
 >>>>>>>> 1f64686 (La til kart preview på registrar details side):Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251117183933_AuthDbMig.cs
 =======
 >>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page):Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251118164323_authdbmigration.cs
+=======
+>>>>>>> 1c7ee01 (La til success message (toast) på index, markers blir på kartet til draft er submitted. Litt registrar refaktorisering):Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251120091742_authmigration.cs

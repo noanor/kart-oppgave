@@ -1,3 +1,4 @@
+<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251119101152_dbmigration.cs
 <<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251117183818_DbMig.cs
 <<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251119092416_dbmigration.cs
 =======
@@ -92,6 +93,8 @@ namespace Luftfartshinder.Migrations
 }
 <<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251117183818_DbMig.cs
 ========
+=======
+>>>>>>> 1c7ee01 (La til success message (toast) på index, markers blir på kartet til draft er submitted. Litt registrar refaktorisering):Luftfartshinder/Luftfartshinder/Migrations/20251120091726_dbmigration.cs
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -101,7 +104,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Luftfartshinder.Migrations
 {
     /// <inheritdoc />
+<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251119101152_dbmigration.cs
     public partial class DbMig : Migration
+=======
+    public partial class dbmigration : Migration
+>>>>>>> 1c7ee01 (La til success message (toast) på index, markers blir på kartet til draft er submitted. Litt registrar refaktorisering):Luftfartshinder/Luftfartshinder/Migrations/20251120091726_dbmigration.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -137,6 +144,10 @@ namespace Luftfartshinder.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251119101152_dbmigration.cs
+=======
+                    ReportId = table.Column<int>(type: "int", nullable: false),
+>>>>>>> 1c7ee01 (La til success message (toast) på index, markers blir på kartet til draft er submitted. Litt registrar refaktorisering):Luftfartshinder/Luftfartshinder/Migrations/20251120091726_dbmigration.cs
                     Type = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Name = table.Column<string>(type: "longtext", nullable: false)
@@ -148,8 +159,12 @@ namespace Luftfartshinder.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     RegistrarNote = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251119101152_dbmigration.cs
                     IsDraft = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     ReportId = table.Column<int>(type: "int", nullable: true)
+=======
+                    Status = table.Column<int>(type: "int", nullable: false)
+>>>>>>> 1c7ee01 (La til success message (toast) på index, markers blir på kartet til draft er submitted. Litt registrar refaktorisering):Luftfartshinder/Luftfartshinder/Migrations/20251120091726_dbmigration.cs
                 },
                 constraints: table =>
                 {
@@ -158,7 +173,12 @@ namespace Luftfartshinder.Migrations
                         name: "FK_Obstacles_Reports_ReportId",
                         column: x => x.ReportId,
                         principalTable: "Reports",
+<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251119101152_dbmigration.cs
                         principalColumn: "Id");
+=======
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+>>>>>>> 1c7ee01 (La til success message (toast) på index, markers blir på kartet til draft er submitted. Litt registrar refaktorisering):Luftfartshinder/Luftfartshinder/Migrations/20251120091726_dbmigration.cs
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -179,6 +199,9 @@ namespace Luftfartshinder.Migrations
         }
     }
 }
+<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251119101152_dbmigration.cs
 >>>>>>>> 1f64686 (La til kart preview på registrar details side):Luftfartshinder/Luftfartshinder/Migrations/20251117183818_DbMig.cs
 =======
 >>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page):Luftfartshinder/Luftfartshinder/Migrations/20251118164315_dbmigration.cs
+=======
+>>>>>>> 1c7ee01 (La til success message (toast) på index, markers blir på kartet til draft er submitted. Litt registrar refaktorisering):Luftfartshinder/Luftfartshinder/Migrations/20251120091726_dbmigration.cs
