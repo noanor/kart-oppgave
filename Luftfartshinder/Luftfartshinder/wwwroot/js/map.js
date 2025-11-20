@@ -5,6 +5,26 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
+const draftMarkers = new Map();
+const obstacleMarkers = new Map();
+
+async function loadDraftObstacles() {
+    const res = await fetch('/obstacles/draft-json');
+    if (!res.ok) return;
+
+    const obstacles = await res.json(); // array of { index, type, latitude, longitude, name }
+
+    obstacles.forEach(o => {
+        const marker = L.marker([o.latitude, o.longitude]).addTo(map);
+        marker.draftIndex = o.index;
+        obstacleMarkers.set(o.index, marker);
+    });
+}
+
+// after map is initialized:
+loadDraftObstacles();
+
+
 // Optional: block default right-click menu on the map container
 document.getElementById('map').addEventListener('contextmenu', e => e.preventDefault());
 
@@ -36,7 +56,7 @@ function openWheel(x, y) {
 
 function closeWheel() {
     wheel.classList.remove('on');
-    setTimeout(() => wheel.classList.add('hidden'), 250);
+    setTimeout(() => wheel.classList.add('hidden'), 300);
     wheel.setAttribute('data-chosen', 0);
     isOpen = false;
 }
@@ -60,7 +80,9 @@ map.on('moveend', () => {
 });
 
 let lastClick = { lat: 0, lng: 0 };   // <— use consistent property names
-let marker = null;
+
+let tempMarker = null;
+let obstacleMerkers = [];
 
 function setLL(lat, lng) {
     // write to inputs (5–6 decimals ≈ 1–10 m precision)
@@ -70,10 +92,10 @@ function setLL(lat, lng) {
     if (lngInput) lngInput.value = lng.toFixed(6);
 
     // add/update a single marker
-    if (marker) marker.setLatLng([lat, lng]);
+    if (tempMarker) tempMarker.setLatLng([lat, lng]);
     else {
-        marker = L.marker([lat, lng], { draggable: true }).addTo(map);
-        marker.on('dragend', (e) => {
+        tempMarker = L.marker([lat, lng], { draggable: true }).addTo(map);
+        tempMarker.on('dragend', (e) => {
             const p = e.target.getLatLng();
             setLL(p.lat, p.lng);
         });
@@ -108,12 +130,32 @@ function obstacleTypeFromChoice(choice) {
     }
 }
 
+function createDraftObstacle(type, lat, lng) {
+    let draftId = 0;
+
+    const obstacleDraft = {
+        draftId,
+        type,
+        latitude: lat,
+        longitude: lng
+    }
+    draftObstacles.push(obstacleDraft);
+
+    const marker = L.marker([lat, lng]).addTo(map);
+    marker.draftId = draftId;
+    draftMarkers.set(draftId, marker);
+
+    return obstacleDraft;
+}
+
+
 async function addObstacle(type, lat, lng) {
     const payload = {
         type,
         latitude: lat,
         longitude: lng
     };
+
     const res = await fetch('/obstacles/add-one', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -128,6 +170,9 @@ async function addObstacle(type, lat, lng) {
 }
 
 // Click inside the wheel → pick the slice
+const toastEl = document.getElementById('toastObstacleAdded');
+const toast = new bootstrap.Toast(toastEl);
+
 wheel.addEventListener('click', async (e) => {
     const arc = e.target.closest('.arc');
     if (!arc) return;
@@ -143,7 +188,18 @@ wheel.addEventListener('click', async (e) => {
 
     if (type) {
         try {
-            await addObstacle(type, lastClick.lat, lastClick.lng);
+            const result = await addObstacle(type, lastClick.lat, lastClick.lng);
+            
+            const draftIndex = result.index;
+
+            const marker = L.marker([lastClick.lat, lastClick.lng]).addTo(map);
+            marker.draftIndex = draftIndex;
+            obstacleMarkers.set(draftIndex, marker);
+
+            if (toast) {
+                toast.show();
+            }
+
             console.log(`Added, lat: ${lastClick.lat} lng: ${lastClick.lng}`);
         } catch (err) {
             console.error(err);

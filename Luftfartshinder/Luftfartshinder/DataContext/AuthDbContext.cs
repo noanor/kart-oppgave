@@ -47,9 +47,9 @@ namespace Luftfartshinder.DataContext
             //Gjør klar for migrasjon
             builder.Entity<IdentityRole>().HasData(roller);
 
-            //SuperAdmin Bruker, Identity Bruker
-
+            //SuperAdmin Bruker, Identity Bruker + Pilot bruker
             var superAdminId = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b";
+            var pilotId = "1d3b44cf-5507-444f-b84c-842539f13e02";
 
             var superAdminUser = new ApplicationUser
             {
@@ -63,16 +63,28 @@ namespace Luftfartshinder.DataContext
                 IsApproved = true
             };
 
-            superAdminUser.PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==";
+            var pilotUser = new ApplicationUser
+            {
+                Id = pilotId,
+                UserName = "pilot",
+                NormalizedUserName = "PILOT",
+                Email = "pilot@kartverket.no",
+                NormalizedEmail = "PILOT@KARTVERKET.NO",
+                FirstName = "Kaptein",
+                LastName = "Pilot",
+                IsApproved = true
+            };
 
+            superAdminUser.PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==";
+            pilotUser.PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==";
 
             builder.Entity<ApplicationUser>().HasData(superAdminUser);
+            builder.Entity<ApplicationUser>().HasData(pilotUser);
 
 
 
 
-            // Gi alle brukerne til SuperAdmin,
-
+            // Gi alle rollene til SuperAdmin
             var superAdminRoles = new List<IdentityUserRole<string>>
             {
                 new IdentityUserRole<string>
@@ -91,7 +103,19 @@ namespace Luftfartshinder.DataContext
                     UserId = superAdminId
                 }
             };
+
+            // Gi pilot rolle til pilotbruker
+            var pilotRoles = new List<IdentityUserRole<string>>
+            {
+                new IdentityUserRole<string>
+                {
+                    RoleId = flightCrewRoleId,
+                    UserId = pilotId
+                }
+            };
+
             builder.Entity<IdentityUserRole<string>>().HasData(superAdminRoles);
+            builder.Entity<IdentityUserRole<string>>().HasData(pilotRoles);
         }
     }
 }

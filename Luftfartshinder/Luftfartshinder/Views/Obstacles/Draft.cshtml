@@ -5,187 +5,222 @@
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<head>
+@section Styles {
+    <link href="~/css/draft.css" rel="stylesheet" />
     <link href="~/css/draft.css" rel="stylesheet" />
 
     @* Leaflet *@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-        crossorigin=""></script>
-</head>
+}
 
-<body>
-    <h2>Draft Obstacles </h2>
-    <p>Obstacles in draft: @Model.Obstacles.Count</p>
-    <div style="overflow:auto;" class="container mt-3">
-        @if (Model.Obstacles.Count == 0)
+
+<div class="text-center mt-4 pt-4">
+    <div class="mb-2 h1">
+        Draft Obstacles
+    </div>
+    <p class="text-muted fw-semibold">Obstacles in draft: @Model.Obstacles.Count</p>
+
+</div>
+
+<div style="overflow:auto;" class="container mt-3">
+    @if (Model.Obstacles.Count == 0)
+    {
+        <p class="mb-3">
+            Obstacle draft is empty.<br />
+            Add obstacles through the map.
+        </p>
+
+        <a class="btn btn-lg btn-primary" role="button"
+            asp-area=""
+            asp-controller="Home"
+            asp-action="Index"    
+        >Back to Map</a>
+
+    }
+    else
+    {
+        @for (var i = 0; i < Model.Obstacles.Count; i++)
         {
-            <p class="mb-3">
-                Obstacle draft is empty.<br />
-                Add obstacles through the map.
-            </p>
+            var o = Model.Obstacles[i];
+            <div class="card mb-4 box-shadow shadow" style="width: 100%;">
+                <div class="card-header">
+                    <h4 class="card-title">@o.Name</h4>
+                </div>
+                <div class="card-body" style="height: 45vh;">
+                    <div class="row">
+                        <div class="col">
+                            <dl class="row g-1 " style="width: 60%;">
+                                <dt class="col-lg-6">#</dt>
+                                <dd class="col-lg-6">@(i + 1)</dd>
 
-            <a class="btn btn-lg btn-primary" role="button"
-                asp-area=""
-                asp-controller="Home"
-                asp-action="Index"    
-            >Back to Map</a>
+                                <dt class="col-lg-6">Type</dt>
+                                <dd class="col-lg-6">@o.Type</dd>
 
-        }
-        else
-        {
-            @for (var i = 0; i < Model.Obstacles.Count; i++)
-            {
-                var o = Model.Obstacles[i];
-                <div class="card mb-3" style="width: 100%;">
-                    <div class="card-header">
-                        <h4 class="card-title">@o.Name</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <dl class="row g-1 " style="width: 60%;">
-                                    <dt class="col-lg-6">#</dt>
-                                    <dd class="col-lg-6">@(i + 1)</dd>
+                                <dt class="col-lg-6">Height</dt>
+                                <dd class="col-lg-6 ">@o.Height</dd>
 
-                                    <dt class="col-lg-6">Type</dt>
-                                    <dd class="col-lg-6">@o.Type</dd>
+                                <dt class="col-lg-6">Description</dt>
+                                <dd class="col-lg-6">@o.Description</dd>
+                            </dl>
 
-                                    <dt class="col-lg-6">Height</dt>
-                                    <dd class="col-lg-6 ">@o.Height</dd>
+                        </div>
 
-                                    <dt class="col-lg-6">Description</dt>
-                                    <dd class="col-lg-6">@o.Description</dd>
-                                </dl>
-
+                        <div class="col" style="height: 30vh;">
+                            <div class="col-md-6 h-100 w-100">
+                            <!-- unique container for this obstacle -->
+                                <div class="obstacle-map"
+                                        data-lat="@o.Latitude.ToString(CultureInfo.InvariantCulture)"
+                                        data-lng="@o.Longitude.ToString(CultureInfo.InvariantCulture)"
+                                        id="map-@i">
+                                </div>
                             </div>
 
-                            <div class="col">
-                                <div class="col-md-6">
-                                <!-- unique container for this obstacle -->
-                                    <div class="obstacle-map"
-                                         data-lat="@o.Latitude.ToString(CultureInfo.InvariantCulture)"
-                                         data-lng="@o.Longitude.ToString(CultureInfo.InvariantCulture)"
-                                         id="map-@i">
-                                    </div>
-                                </div>
-
-                                @{
-                                    var latitude = o.GetType().GetProperty("Latitude")?.GetValue(o);
-                                    var longitude = o.GetType().GetProperty("Longitude")?.GetValue(o);
-
-                                    string formattedLatitude = String.Format("{0:0.000000}", latitude);
-                                    string formattedLongitude = String.Format("{0:0.000000}", longitude);
-                                }
+                            @{
+                                string formattedLatitude = String.Format("{0:0.000000}", o.Latitude);
+                                string formattedLongitude = String.Format("{0:0.000000}", o.Longitude);
+                            }
                                 
 
-                                <p>
-                                    <strong>Latitude:</strong> @formattedLatitude <br>
-                                    <strong>Longitude:</strong> @formattedLongitude
-                                </p>
+                            <p>
+                                <strong>Latitude:</strong> @formattedLatitude <br>
+                                <strong>Longitude:</strong> @formattedLongitude
+                            </p>
 
-                            </div>
                         </div>
                     </div>
-
-                    <div class="card-footer">
-                        <a class="btn btn-outline-primary" role="button"
-                           asp-action="EditObstacle"
-                           asp-controller="Obstacles"
-                           asp-route-index="@i"
-                           style="vertical-align: middle; text-decoration: none;">
-                            Edit
-                            <span class="material-symbols-outlined inline-icon">
-                                edit
-                            </span>
-                        </a>
-
-                    </div>
                 </div>
-            }
 
-            @* <table class="table table-striped table-hover hidden">
-                <caption>Obstacles in current Session</caption>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Type</th>
-                        <th>Name</th>
-                        <th>Height</th>
-                        <th>Latitude</th>
-                        <th>Longitude</th>
-                        <th>Description</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                    @for (var i = 0; i < Model.Obstacles.Count; i++)
-                    {
-                        var o = Model.Obstacles[i];
-                        <tr>
-                            <td>@(i + 1)</td>
-                            <td>@o.Type</td>
-                            <td>@(o.Name ?? o.GetType().GetProperty("Name")?.GetValue(o) ?? "")</td>
-                            <td>
-                                @{
-                                    // Try both property names in case your Obstacle uses a different one
-                                    var hProp = o.GetType().GetProperty("ViewObstacleHeight") ?? o.GetType().GetProperty("Height");
-                                    var hVal = hProp?.GetValue(o);
-                                }
-                                @hVal
-                            </td>
-                            <td>
-                                @{
-                                    var latitude = o.GetType().GetProperty("Latitude")?.GetValue(o);
-                                    string formattedLatitude = String.Format("{0:0.000000}", latitude);
-                                }
-                                @formattedLatitude
-                            </td>
-                            <td>
-                                @{
-                                    var longitude = o.GetType().GetProperty("Longitude")?.GetValue(o);
-                                    string formattedLongitude = String.Format("{0:0.000000}", longitude);
-                                }
-                                @formattedLongitude
-                            </td>
-                            <td>@(o.Description ?? o.GetType().GetProperty("Description")?.GetValue(o) ?? "")</td>
-                            <td>
-                                <a class="btn btn-outline-primary" role="button"
-                                   asp-action="EditObstacle"
-                                   asp-controller="Obstacles"
-                                   asp-route-index="@i"
-                                   style="vertical-align: middle; text-decoration: none;">
-                                    Edit 
-                                    <span class="material-symbols-outlined inline-icon">
-                                        edit
-                                    </span>
-                                </a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table> *@
+                <div class="card-footer">
+                    <a class="btn btn-outline-primary shadow" role="button"
+                        asp-action="EditObstacle"
+                        asp-controller="Obstacles"
+                        asp-route-index="@i"
+                        style="vertical-align: middle; text-decoration: none;">
+                        Edit
+                        <span class="material-symbols-outlined inline-icon">
+                            edit
+                        </span>
+                    </a>
 
-
-            // Submit or Clear
-            <div class="mb-5">
-                <p class="text-muted">Review the obstacles above before submitting them for review.</p>
-                <form asp-action="SubmitDraft" asp-controller="Obstacles" method="post" class="d-inline">
-                    @Html.AntiForgeryToken()
-                    <button class="btn btn-primary btn-sm" type="submit">Submit</button>
-                </form>
-
-                <form asp-action="ClearDraft" asp-controller="Obstacles" method="post" class="d-inline ms-2">
-                    @Html.AntiForgeryToken()
-                    <button class="btn btn-outline-danger btn-sm" type="submit">Clear Draft</button>
-                </form>
+                </div>
             </div>
         }
 
-    </div>
+        // Submit or Clear
+        <div class="mb-5">
+            <p class="text-muted">Review the obstacles above before submitting them for review.</p>
+            @Html.AntiForgeryToken()
+            <button 
+                id="btnSubminDraft" 
+                class="btn btn-primary" 
+                type="submit" 
+                data-bs-toggle="modal" 
+                data-bs-target="#modalSubmitDraft"
+                >Submit
+            </button>
 
+            @Html.AntiForgeryToken()
+            <button
+                    class="btn btn-outline-danger"
+                    type="submit"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalClearDraft">
+                Clear Draft
+            </button>
+            
+        </div>
+    }
+
+</div>
+
+<!-- Modal Submit Draft -->
+<div class="modal fade" id="modalSubmitDraft" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="labelSubmitDraft" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="labelSubmitDraft">Submit Draft</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Have you filled out all information? If not, go back and do so.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form method="post" 
+                      asp-action="SubmitDraft"
+                      asp-controller="Obstacles">
+                    @Html.AntiForgeryToken()
+                    <button 
+                            id="btnSubminDraft"
+                            class="btn btn-primary"
+                            type="submit"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalSubmitDraft">
+                        Submit
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Clear Draft -->
+<div class="modal fade" id="modalClearDraft" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalClearDraft" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Clear Draft</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to clear the obstacles in this draft? All information tied to the obstacles will be deleted forever.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                <form method="post"
+                      asp-controller="Obstacles"
+                      asp-action="ClearDraft">
+                    @Html.AntiForgeryToken()
+                    <button 
+                            class="btn btn-danger"
+                            type="submit"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalClearDraft">
+                        Clear Draft
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast-container position-fixed end-0 p-3" style="z-index: 3000; top: 5vh;">
+    <div id="toastDraftCleared" class="toast text-white bg-danger border-0 opacity-75" role="alert">
+        <div class="toast-body">
+            Draft cleared.
+        </div>
+    </div>
+</div>
+
+@section Scripts {
     <script src="~/js/draft.js"></script>
-</body>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin="">
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const submitted = '@TempData["DraftCleared"]';
+            if (submitted === 'True') {
+                const toastEl = document.getElementById('toastDraftCleared');
+                const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+                toast.show();
+            }
+        });
+    </script>
+}

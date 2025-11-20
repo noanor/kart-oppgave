@@ -52,3 +52,29 @@ button.accept-policy {
     white-space: nowrap;
     line-height: 60px;
 }
+
+
+.account-menu {
+    min-width: 220px;
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
+}
+
+
+.account-menu .dropdown-item {
+    padding: 0.45rem 1rem;
+    font-size: 0.9rem;
+}
+
+
+.account-menu .dropdown-item:hover {
+    background-color: #f5f7fa;
+}
+
+
+.account-menu .dropdown-item.text-danger:hover {
+    background-color: #fff2f2;
+}
+
+

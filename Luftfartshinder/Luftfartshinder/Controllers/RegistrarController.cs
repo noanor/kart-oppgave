@@ -1,24 +1,34 @@
-﻿using System.Globalization;
-using System.Reflection;
-using Microsoft.AspNetCore.Mvc;
-using Luftfartshinder.DataContext;
-using Luftfartshinder.Models.Domain;
-using Luftfartshinder.Repository;
+<<<<<<< HEAD
+﻿using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Repository;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Luftfartshinder.Controllers
 {
     public class RegistrarController : Controller
     {
-        
-        
-        private static readonly Dictionary<int, ReviewStatus> _statuses = new();
-        private static readonly Dictionary<int, string> _notes = new();
         private readonly IReportRepository reportRepository;
-
-        public RegistrarController(IReportRepository reportRepository)
+        private readonly IObstacleRepository obstacleRepository;
+        public RegistrarController(IReportRepository reportRepository, IObstacleRepository obstacleRepository)
         {
+=======
+﻿using Luftfartshinder.Models.Domain;
+using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Repository;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Luftfartshinder.Controllers
+{
+    public class RegistrarController : Controller
+    {
+        private readonly IReportRepository reportRepository;
+        private readonly IObstacleRepository obstacleRepository;
+        public RegistrarController(IReportRepository reportRepository, IObstacleRepository obstacleRepository)
+        {
+>>>>>>> 9be7fd20e1fcd6731d8c1ae1553aba716be92fb2
             this.reportRepository = reportRepository;
+            this.obstacleRepository = obstacleRepository;
         }
 
         // GET /Registrar
@@ -49,16 +59,74 @@ namespace Luftfartshinder.Controllers
                 return View(editReport);
 
             }
-            return null;
+            return NotFound();
+        }
 
+        public async Task<IActionResult> SaveNote(Obstacle obstacleData)
+        {
+            var existingObstacle = await obstacleRepository.GetObstacleById(obstacleData.Id);
+            if (existingObstacle != null)
+            {
+                existingObstacle.RegistrarNote = obstacleData.RegistrarNote;
+                await obstacleRepository.UpdateObstacle(existingObstacle);
+
+                TempData["NoteSaved"] = true;
+                return RedirectToAction("Details", new { id = existingObstacle.ReportId });
+            }
+
+            return RedirectToAction("Details", new { id = obstacleData.ReportId });
+
+        }
+
+        public async Task<IActionResult> Delete(EditReportRequest editReportRequest)
+        {
+            var deletedReport = await reportRepository.DeleteAsync(editReportRequest.Id);
+
+            if (deletedReport != null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Details", new { id = editReportRequest.Id });
+        }
+
+        public async Task<IActionResult> Approve(int id)
+        {
+            var obstacle = await obstacleRepository.GetObstacleById(id);
+            if (obstacle == null)
+                return NotFound(); // prevent NullReference
+
+
+            obstacle.Status = Obstacle.Statuses.Approved;
+
+            await obstacleRepository.UpdateObstacle(obstacle);
+
+            return RedirectToAction("Details", new { id = obstacle.ReportId });
+        }
+
+        public async Task<IActionResult> Reject(int id)
+        {
+            var obstacle = await obstacleRepository.GetObstacleById(id);
+
+            if (obstacle == null)
+                return NotFound(); // prevent NullReference
+
+            if (obstacle != null)
+            {
+                obstacle.Status = Obstacle.Statuses.Rejected;
+
+                await obstacleRepository.UpdateObstacle(obstacle);
+
+                return RedirectToAction("Details", new { id = obstacle.ReportId });
+            }
+
+            return RedirectToAction("Index");
         }
 
     }
 
 
-    public enum ReviewStatus { Pending = 0, Approved = 1, Rejected = 2 }
 
-    
+
+
 }
-
-        

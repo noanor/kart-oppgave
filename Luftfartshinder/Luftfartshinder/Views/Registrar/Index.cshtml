@@ -3,17 +3,23 @@
     ViewData["Title"] = "Registrar List";
 }
 
-<head>
+@section Styles {
     <link href="~/css/registrar.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-</head>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+}
+
 
 <body>
-    <header>
-        <h2>Registrar - List of Reports</h2>
+    <header class="mb-5">
+        <div class="h1 text-center">
+            List of Reports
+        </div>
     </header>
-    <div class="container p-5">
+    <div class="container">
         <table class="table">
             <thead>
                 <tr>
@@ -39,7 +45,7 @@
                             <a class="btn btn-primary" role="button"
                                asp-action="Details"
                                asp-controller="Registrar"
-                               asp-route-id="@(i+1)"
+                               asp-route-id="@Model[i].Id"
                                style="vertical-align: middle; text-decoration: none;">
                                 View
                             </a>
