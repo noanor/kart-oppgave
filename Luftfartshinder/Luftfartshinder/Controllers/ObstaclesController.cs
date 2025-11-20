@@ -45,6 +45,7 @@ public partial class ObstaclesController : Controller
 
         var o = new Obstacle
         {
+
             Type = dto.Type,
             Name = dto.Name ?? $"Obstacle {DateTime.UtcNow:HHmmss}",
             Description = dto.Description ?? "",
@@ -158,7 +159,6 @@ public partial class ObstaclesController : Controller
 
         draft.Obstacles[index] = new Obstacle
         {
-            Id = editObstacleRequest.Id,
             Type = editObstacleRequest.Type,
             Name = editObstacleRequest.Name,
             Height = editObstacleRequest.Height,

@@ -49,10 +49,14 @@ namespace Luftfartshinder.Migrations
                     b.Property<string>("RegistrarNote")
                         .HasColumnType("longtext");
 
+<<<<<<< HEAD
                     b.Property<int>("ReportId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
+=======
+                    b.Property<int?>("ReportId")
+>>>>>>> 1f64686 (La til kart preview på registrar details side)
                         .HasColumnType("int");
 
                     b.Property<string>("Type")

@@ -1,8 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Luftfartshinder.Models;
-using System;
-using System.Collections.Generic;
-using System.Reflection.Emit;
 using Luftfartshinder.Models.Domain;
 
 namespace Luftfartshinder.DataContext
@@ -23,6 +19,9 @@ namespace Luftfartshinder.DataContext
 
             modelBuilder.Entity<Obstacle>()
                 .HasKey(pk => pk.Id); //Primary key for Data
+
+            modelBuilder.Entity<Obstacle>()
+                .Property(o => o.Id).ValueGeneratedOnAdd();
             
             modelBuilder.Entity<Report>()
                 .HasKey(pk => pk.Id); //Primary key for Data
