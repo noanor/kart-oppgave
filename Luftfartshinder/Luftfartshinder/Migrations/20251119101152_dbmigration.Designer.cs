@@ -16,11 +16,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Luftfartshinder.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
+<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251118164315_dbmigration.Designer.cs
 <<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251117183818_DbMig.Designer.cs
     [Migration("20251119092416_dbmigration")]
 =======
     [Migration("20251118164315_dbmigration")]
 >>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page):Luftfartshinder/Luftfartshinder/Migrations/20251118164315_dbmigration.Designer.cs
+=======
+    [Migration("20251119101152_dbmigration")]
+>>>>>>> 985ea00 (Delete, Approve, Reject, Save Note):Luftfartshinder/Luftfartshinder/Migrations/20251119101152_dbmigration.Designer.cs
     partial class dbmigration
     {
         /// <inheritdoc />

@@ -13,8 +13,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Luftfartshinder.Migrations.AuthDb
 {
     [DbContext(typeof(AuthDbContext))]
+<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251119092435_authdbmigration.Designer.cs
     [Migration("20251119092435_authdbmigration")]
     partial class authdbmigration
+=======
+    [Migration("20251119101206_authmig")]
+    partial class authmig
+>>>>>>> 985ea00 (Delete, Approve, Reject, Save Note):Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251119101206_authmig.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,7 +113,11 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             Id = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             AccessFailedCount = 0,
+<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251119092435_authdbmigration.Designer.cs
                             ConcurrencyStamp = "a95ce37b-4ab4-4b0c-8f09-dcc6d21dea1f",
+=======
+                            ConcurrencyStamp = "dc6a9db0-e9e4-45ce-b55a-dec9fa9f5073",
+>>>>>>> 985ea00 (Delete, Approve, Reject, Save Note):Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251119101206_authmig.Designer.cs
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -119,7 +128,11 @@ namespace Luftfartshinder.Migrations.AuthDb
                             NormalizedUserName = "SUPERADMIN@KARTVERKET.NO",
                             PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==",
                             PhoneNumberConfirmed = false,
+<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251119092435_authdbmigration.Designer.cs
                             SecurityStamp = "d007283e-d252-4447-8610-43c161dce390",
+=======
+                            SecurityStamp = "04831698-e60f-43af-a6e2-d84b20d53fca",
+>>>>>>> 985ea00 (Delete, Approve, Reject, Save Note):Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251119101206_authmig.Designer.cs
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         });

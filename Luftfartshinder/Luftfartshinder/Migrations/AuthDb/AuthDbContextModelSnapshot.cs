@@ -109,10 +109,14 @@ namespace Luftfartshinder.Migrations.AuthDb
                             Id = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             AccessFailedCount = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
                             ConcurrencyStamp = "a95ce37b-4ab4-4b0c-8f09-dcc6d21dea1f",
 =======
                             ConcurrencyStamp = "ee154f8b-bf64-4af0-87fb-5ec9e8538dba",
 >>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
+=======
+                            ConcurrencyStamp = "dc6a9db0-e9e4-45ce-b55a-dec9fa9f5073",
+>>>>>>> 985ea00 (Delete, Approve, Reject, Save Note)
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -124,10 +128,14 @@ namespace Luftfartshinder.Migrations.AuthDb
                             PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==",
                             PhoneNumberConfirmed = false,
 <<<<<<< HEAD
+<<<<<<< HEAD
                             SecurityStamp = "d007283e-d252-4447-8610-43c161dce390",
 =======
                             SecurityStamp = "15e58774-a927-44b5-8747-a23f7fac098d",
 >>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
+=======
+                            SecurityStamp = "04831698-e60f-43af-a6e2-d84b20d53fca",
+>>>>>>> 985ea00 (Delete, Approve, Reject, Save Note)
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         });

@@ -94,7 +94,10 @@ public partial class ObstaclesController : Controller
         foreach (var obstacle in draft.Obstacles)
         {
             newReport.Obstacles.Add(obstacle);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 985ea00 (Delete, Approve, Reject, Save Note)
         }
 
         try
