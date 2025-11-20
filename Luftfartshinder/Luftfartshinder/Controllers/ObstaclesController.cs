@@ -65,6 +65,7 @@ public partial class ObstaclesController : Controller
     public IActionResult ClearDraft()
     {
         HttpContext.Session.Remove(DraftKey);
+        TempData["DraftCleared"] = true;
         return RedirectToAction("Draft");
     }
 
@@ -113,6 +114,7 @@ public partial class ObstaclesController : Controller
         }
         //applicationContext.SaveChanges();
         HttpContext.Session.Remove(DraftKey);
+        TempData["DraftSubmitted"] = true;
         return RedirectToAction("Index", "Home");
     }
 
