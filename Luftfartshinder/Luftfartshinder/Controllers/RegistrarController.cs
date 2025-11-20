@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿using Luftfartshinder.Models.Domain;
+using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Models.ViewModel;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -12,21 +11,6 @@ namespace Luftfartshinder.Controllers
         private readonly IObstacleRepository obstacleRepository;
         public RegistrarController(IReportRepository reportRepository, IObstacleRepository obstacleRepository)
         {
-=======
-﻿using Luftfartshinder.Models.Domain;
-using Luftfartshinder.Models.ViewModel;
-using Luftfartshinder.Repository;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Luftfartshinder.Controllers
-{
-    public class RegistrarController : Controller
-    {
-        private readonly IReportRepository reportRepository;
-        private readonly IObstacleRepository obstacleRepository;
-        public RegistrarController(IReportRepository reportRepository, IObstacleRepository obstacleRepository)
-        {
->>>>>>> 9be7fd20e1fcd6731d8c1ae1553aba716be92fb2
             this.reportRepository = reportRepository;
             this.obstacleRepository = obstacleRepository;
         }

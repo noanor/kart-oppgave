@@ -116,13 +116,6 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json"
-=======
-=======
->>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(, 4.7.32767]",
@@ -408,13 +401,6 @@
             "System.Xml.XPath": "(, 4.3.32767]",
             "System.Xml.XPath.XDocument": "(, 5.0.32767]"
           }
-<<<<<<< HEAD
->>>>>>> f147bd9 (Preview kart details side registrar, og prøvde å implementere de andre funksjonene)
-=======
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
->>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
-=======
->>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
         }
       }
     },
@@ -509,13 +495,6 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json"
-=======
-=======
->>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(, 9.0.32767]",
@@ -939,13 +918,6 @@
             "System.Xml.XPath": "(, 4.3.32767]",
             "System.Xml.XPath.XDocument": "(, 5.0.32767]"
           }
-<<<<<<< HEAD
->>>>>>> f147bd9 (Preview kart details side registrar, og prøvde å implementere de andre funksjonene)
-=======
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
->>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
-=======
->>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
         }
       }
     }

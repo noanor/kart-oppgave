@@ -60,7 +60,8 @@ namespace Luftfartshinder.DataContext
                 NormalizedEmail = "SUPERADMIN@KARTVERKET.NO",
                 FirstName = "Super",
                 LastName = "Admin",
-                IsApproved = true
+                IsApproved = true,
+                Organization = "Kartverket"
             };
 
             var pilotUser = new ApplicationUser
@@ -72,7 +73,8 @@ namespace Luftfartshinder.DataContext
                 NormalizedEmail = "PILOT@KARTVERKET.NO",
                 FirstName = "Kaptein",
                 LastName = "Pilot",
-                IsApproved = true
+                IsApproved = true,
+                Organization = "Norwegian Armed Forces"
             };
 
             superAdminUser.PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==";

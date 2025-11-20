@@ -21,6 +21,11 @@ body {
     top: 60px;
 }
 
+/*.leaflet-control-locate {
+    bottom: 50px;
+    z-index: 3000;
+}*/
+
 span {
     z-index: 1000;
 }

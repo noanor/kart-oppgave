@@ -117,8 +117,8 @@
 
 @section Scripts
 {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     <script>
         // Auto-dismiss success message after 5 seconds
         setTimeout(function() {
@@ -128,6 +128,8 @@
                 alert.close();
             }
         }, 5000);
+
+        
     </script>
 }
 

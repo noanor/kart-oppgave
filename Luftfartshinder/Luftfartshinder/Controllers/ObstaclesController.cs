@@ -175,6 +175,25 @@ public partial class ObstaclesController : Controller
 
     }
 
+    [HttpGet("/obstacles/draft-json")]
+    public IActionResult DraftJson()
+    {
+        var draft = HttpContext.Session
+            .Get<SessionObstacleDraft>(DraftKey) ?? new SessionObstacleDraft();
+
+        var list = draft.Obstacles
+            .Select((o, idx) => new
+            {
+                index = idx,
+                type = o.Type,
+                latitude = o.Latitude,
+                longitude = o.Longitude,
+                name = o.Name
+            }).ToList();
+
+        return Ok(list);
+    }
+
     // DTO for JSON requests
     public class AddObstacleRequest
     {
