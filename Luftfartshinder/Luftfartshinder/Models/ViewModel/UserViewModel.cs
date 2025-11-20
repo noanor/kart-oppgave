@@ -2,6 +2,6 @@
 {
     public class UserViewModel
     {
-        public  List <User> Users { get; set; }
+        public  List<User> Users { get; set; }
     }
 }

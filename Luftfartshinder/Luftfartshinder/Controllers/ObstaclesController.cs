@@ -70,6 +70,7 @@ public partial class ObstaclesController : Controller
     public IActionResult ClearDraft()
     {
         HttpContext.Session.Remove(DraftKey);
+        TempData["DraftCleared"] = true;
         return RedirectToAction("Draft");
     }
 

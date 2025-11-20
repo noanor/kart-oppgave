@@ -54,6 +54,7 @@ namespace Luftfartshinder.Controllers
                 existingObstacle.RegistrarNote = obstacleData.RegistrarNote;
                 await obstacleRepository.UpdateObstacle(existingObstacle);
 
+                TempData["NoteSaved"] = true;
                 return RedirectToAction("Details", new { id = existingObstacle.ReportId });
             }
 
