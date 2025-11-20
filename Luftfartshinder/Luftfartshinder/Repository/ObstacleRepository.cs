@@ -23,7 +23,9 @@ namespace Luftfartshinder.Repository
         }
         public async Task<Obstacle?> GetObstacleById(int id)
         {
-            var findById = await _context.Obstacles.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var findById = await _context.Obstacles
+                .Include(o => o.Report)
+                .FirstOrDefaultAsync(o => o.Id == id);
             if (findById != null)
             {
                 return findById;
@@ -34,6 +36,14 @@ namespace Luftfartshinder.Repository
                 return null;
             }
         }
+
+        public async Task<List<Obstacle>> GetAllAsync()
+        {
+            return await _context.Obstacles
+                .Include(o => o.Report)
+                .ToListAsync();
+        }
+
         public async Task<Obstacle> DeleteById(int id)
         {
             var elementById = await _context.Obstacles.FindAsync(id);
@@ -53,11 +63,6 @@ namespace Luftfartshinder.Repository
             _context.Obstacles.Update(obstacleData);
             await _context.SaveChangesAsync();
             return obstacleData;
-        }
-        public async Task<IEnumerable<Obstacle>> GetAllObstacles(Obstacle obstacleData)
-        {
-            var getAllData = await _context.Obstacles.Take(50).ToListAsync();
-            return getAllData;
         }
     }
 }

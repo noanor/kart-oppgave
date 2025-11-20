@@ -8,7 +8,7 @@ namespace Luftfartshinder.Repository
 
         Task<Obstacle> GetObstacleById(int id);
 
-        Task<IEnumerable<Obstacle>> GetAllObstacles(Obstacle obstacleData);
+        Task<List<Obstacle>> GetAllAsync();
 
         Task<Obstacle> DeleteById(int id);
 

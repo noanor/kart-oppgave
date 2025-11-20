@@ -84,11 +84,8 @@
                                 </div>
 
                                 @{
-                                    var latitude = o.GetType().GetProperty("Latitude")?.GetValue(o);
-                                    var longitude = o.GetType().GetProperty("Longitude")?.GetValue(o);
-
-                                    string formattedLatitude = String.Format("{0:0.000000}", latitude);
-                                    string formattedLongitude = String.Format("{0:0.000000}", longitude);
+                                    string formattedLatitude = String.Format("{0:0.000000}", o.Latitude);
+                                    string formattedLongitude = String.Format("{0:0.000000}", o.Longitude);
                                 }
                                 
 
