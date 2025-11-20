@@ -18,13 +18,6 @@ async function loadDraftObstacles() {
         const marker = L.marker([o.latitude, o.longitude]).addTo(map);
         marker.draftIndex = o.index;
         obstacleMarkers.set(o.index, marker);
-
-         //Optional: show type/name in popup, with link to edit page
-         //marker.bindPopup(`
-         //    <strong>${o.name || 'Obstacle'}</strong><br/>
-         //    Type: ${o.type}<br/>
-         //    <a href="/Obstacles/EditObstacle?index=${o.index}">Edit details</a>
-         //`);
     });
 }
 
@@ -63,7 +56,7 @@ function openWheel(x, y) {
 
 function closeWheel() {
     wheel.classList.remove('on');
-    setTimeout(() => wheel.classList.add('hidden'), 250);
+    setTimeout(() => wheel.classList.add('hidden'), 300);
     wheel.setAttribute('data-chosen', 0);
     isOpen = false;
 }
@@ -177,7 +170,7 @@ async function addObstacle(type, lat, lng) {
 }
 
 // Click inside the wheel → pick the slice
-const toastEl = document.getElementById('obstacleAddedToast');
+const toastEl = document.getElementById('toastObstacleAdded');
 const toast = new bootstrap.Toast(toastEl);
 
 wheel.addEventListener('click', async (e) => {

@@ -3,6 +3,10 @@
 @{
 }
 
+@section Styles {
+    <link href="~/css/registrar.css" rel="stylesheet" />
+}
+
 <div class="container mt-5">
     <div class="h1 text-center py-5">
         List of Obstacles
@@ -46,7 +50,24 @@
                     <td>@formattedLatitude</td>
                     <td>@formattedLongitude</td>
                     <td>@o.RegistrarNote</td>
-                    <td>@o.Status</td>
+
+                    <td>
+                        @switch (o.Status)
+                        {
+                            case Luftfartshinder.Models.Domain.Obstacle.Statuses.Approved:
+                                <span class="pill pill-approved">Approved</span>
+                                break;
+
+                            case Luftfartshinder.Models.Domain.Obstacle.Statuses.Rejected:
+                                <span class="pill pill-rejected">Rejected</span>
+                                break;
+
+                            case Luftfartshinder.Models.Domain.Obstacle.Statuses.Pending:
+                                <span class="pill pill-pending">Pending</span>
+                                break;
+                        }
+                    </td>
+
                     <td>
                         <a class="btn btn-outline-primary shadow" role="button"
                            asp-action="Edit"

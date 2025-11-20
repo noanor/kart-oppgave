@@ -111,6 +111,7 @@ namespace Luftfartshinder.Migrations.AuthDb
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                             ConcurrencyStamp = "a95ce37b-4ab4-4b0c-8f09-dcc6d21dea1f",
 =======
                             ConcurrencyStamp = "ee154f8b-bf64-4af0-87fb-5ec9e8538dba",
@@ -121,6 +122,9 @@ namespace Luftfartshinder.Migrations.AuthDb
 =======
                             ConcurrencyStamp = "009f29c6-becd-435a-bea1-737aba28dad5",
 >>>>>>> 1c7ee01 (La til success message (toast) på index, markers blir på kartet til draft er submitted. Litt registrar refaktorisering)
+=======
+                            ConcurrencyStamp = "bf060dbb-f309-4295-afea-ad694a945fa0",
+>>>>>>> 9be7fd2 (La til flere toasts og modals)
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -134,6 +138,7 @@ namespace Luftfartshinder.Migrations.AuthDb
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                             SecurityStamp = "d007283e-d252-4447-8610-43c161dce390",
 =======
                             SecurityStamp = "15e58774-a927-44b5-8747-a23f7fac098d",
@@ -144,8 +149,30 @@ namespace Luftfartshinder.Migrations.AuthDb
 =======
                             SecurityStamp = "5d87a9be-dd39-4f67-853f-dcc0fdf41f57",
 >>>>>>> 1c7ee01 (La til success message (toast) på index, markers blir på kartet til draft er submitted. Litt registrar refaktorisering)
+=======
+                            SecurityStamp = "d35b80e2-0eab-44f7-b5c7-3e1b6d25688f",
+>>>>>>> 9be7fd2 (La til flere toasts og modals)
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
+                        },
+                        new
+                        {
+                            Id = "1d3b44cf-5507-444f-b84c-842539f13e02",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0cb27bac-8f93-40b8-8835-a1e4d95a1a13",
+                            Email = "pilot@kartverket.no",
+                            EmailConfirmed = false,
+                            FirstName = "Kaptein",
+                            IsApproved = true,
+                            LastName = "Pilot",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PILOT@KARTVERKET.NO",
+                            NormalizedUserName = "PILOT",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "59a10fb2-ae05-434f-89de-3d9767f37fb2",
+                            TwoFactorEnabled = false,
+                            UserName = "pilot"
                         });
                 });
 
@@ -299,6 +326,11 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             UserId = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             RoleId = "66eeb3d3-c3a2-4c2a-8e47-d6513739f417"
+                        },
+                        new
+                        {
+                            UserId = "1d3b44cf-5507-444f-b84c-842539f13e02",
+                            RoleId = "d0fe1bc1-1838-48db-b483-a31510e5a2f6"
                         });
                 });
 

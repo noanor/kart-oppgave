@@ -9,121 +9,84 @@
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 }
 
+<div id="map"></div>
+
+<div class="wheel hidden">
+	<div class="arc" data-type="punkt"><i class="fa-solid fa-genderless"></i></div>
+	<div class="arc" data-type="mast"><i class="material-symbols-outlined">adjust</i></div>
+	<div class="arc" data-type="linje"><i class="material-symbols-outlined">show_chart</i></div>
+	<div class="arc" data-type="luftspenn"><i class="material-symbols-outlined">diagonal_line</i></div>
+	<div class="arc" data-type="flate"><i class="material-symbols-outlined">crop_square</i></div>
+</div>
 
 
-	<div id="map"></div>
-
-	<div class="wheel hidden">
-		<div class="arc" data-type="punkt"><i class="fa-solid fa-genderless"></i></div>
-		<div class="arc" data-type="mast"><i class="material-symbols-outlined">adjust</i></div>
-		<div class="arc" data-type="linje"><i class="material-symbols-outlined">show_chart</i></div>
-		<div class="arc" data-type="luftspenn"><i class="material-symbols-outlined">diagonal_line</i></div>
-		<div class="arc" data-type="flate"><i class="material-symbols-outlined">crop_square</i></div>
-	</div>
-
-    <div class="modal fade" id="tutorialModal" tabindex="-1" aria-labelledby="tutorialModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header text-white" style="background-color: #34656D;">
-                    <h5 class="modal-title" id="tutorialModalLabel" style="font-size: 1.3rem;">
-                        <i class="fas fa-info-circle me-2"></i>
-                        How to Report an Obstacle
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" style="padding: 1.5rem; font-size: 1rem; max-height: 70vh; overflow-y: auto;">
-					<div class="mb-3">
-						<h6 class="fw-bold mb-2" style="font-size: 1.1rem;">Step 1: Click on the Map</h6>
-						<p class="mb-0" style="font-size: 1rem;">Click anywhere on the map where you want to report an obstacle.</p>
-					</div>
-
-					<div class="mb-3">
-						<h6 class="fw-bold mb-2" style="font-size: 1.1rem;">Step 2: Select Obstacle Type</h6>
-						<p class="mb-2" style="font-size: 1rem;">A selection wheel will appear in the center of your screen with 5 options:</p>
-						<ul class="list-unstyled ms-3" style="font-size: 1rem;">
-							<li class="mb-2"><i class="fas fa-bullseye me-2" style="color: #000000;"></i><strong>Point</strong> - For point obstacles</li>
-							<li class="mb-2"><i class="fas fa-circle me-2" style="color: #000000;"></i><strong>Mast</strong> - For mast or pole structures</li>
-							<li class="mb-2"><span class="material-symbols-outlined" style="color: #000000; margin-right: 0.5rem; vertical-align: middle;">show_chart</span><strong>Line</strong> - For linear obstacles</li>
-							<li class="mb-2"><span class="material-symbols-outlined" style="color: #000000; margin-right: 0.5rem; vertical-align: middle;">diagonal_line</span><strong>Power Line</strong> - For power lines or cables</li>
-							<li class="mb-2"><i class="fas fa-square me-2" style="color: #000000;"></i><strong>Area</strong> - For area obstacles</li>
-						</ul>
-					</div>
-
-					<div class="mb-2">
-						<h6 class="fw-bold mb-2" style="font-size: 1.1rem;">Step 3: Complete the Form</h6>
-						<p class="mb-0" style="font-size: 1rem;">After selecting a type, fill in the obstacle details and submit your report.</p>
-					</div>
+<div class="modal fade" id="tutorialModal" tabindex="-1" aria-labelledby="tutorialModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background-color: #34656D;">
+                <h5 class="modal-title" id="tutorialModalLabel" style="font-size: 1.3rem;">
+                    <i class="fas fa-info-circle me-2"></i>
+                    How to Report an Obstacle
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="padding: 1.5rem; font-size: 1rem; max-height: 70vh; overflow-y: auto;">
+				<div class="mb-3">
+					<h6 class="fw-bold mb-2" style="font-size: 1.1rem;">Step 1: Click on the Map</h6>
+					<p class="mb-0" style="font-size: 1rem;">Click anywhere on the map where you want to report an obstacle.</p>
 				</div>
-				<div class="modal-footer" style="padding: 1rem 1.5rem;">
-					<button type="button" class="btn text-white" data-bs-dismiss="modal" style="background-color: #0d6efd; font-size: 1rem; padding: 0.6rem 1.5rem; min-height: 44px;">Skip</button>
+
+				<div class="mb-3">
+					<h6 class="fw-bold mb-2" style="font-size: 1.1rem;">Step 2: Select Obstacle Type</h6>
+					<p class="mb-2" style="font-size: 1rem;">A selection wheel will appear in the center of your screen with 5 options:</p>
+					<ul class="list-unstyled ms-3" style="font-size: 1rem;">
+						<li class="mb-2"><i class="fas fa-bullseye me-2" style="color: #000000;"></i><strong>Point</strong> - For point obstacles</li>
+						<li class="mb-2"><i class="fas fa-circle me-2" style="color: #000000;"></i><strong>Mast</strong> - For mast or pole structures</li>
+						<li class="mb-2"><span class="material-symbols-outlined" style="color: #000000; margin-right: 0.5rem; vertical-align: middle;">show_chart</span><strong>Line</strong> - For linear obstacles</li>
+						<li class="mb-2"><span class="material-symbols-outlined" style="color: #000000; margin-right: 0.5rem; vertical-align: middle;">diagonal_line</span><strong>Power Line</strong> - For power lines or cables</li>
+						<li class="mb-2"><i class="fas fa-square me-2" style="color: #000000;"></i><strong>Area</strong> - For area obstacles</li>
+					</ul>
+				</div>
+
+				<div class="mb-2">
+					<h6 class="fw-bold mb-2" style="font-size: 1.1rem;">Step 3: Complete the Form</h6>
+					<p class="mb-0" style="font-size: 1rem;">After selecting a type, fill in the obstacle details and submit your report.</p>
 				</div>
 			</div>
-		</div>
-	</div>
-
-	<div class="toast-container position-fixed end-0 p-3" style="z-index: 3000; top: 5vh;">
-		<div id="obstacleAddedToast" class="toast text-white bg-success border-0" role="alert">
-			<div class="toast-body">
-				Obstacle added to draft!
+			<div class="modal-footer" style="padding: 1rem 1.5rem;">
+				<button type="button" class="btn text-white" data-bs-dismiss="modal" style="background-color: #0d6efd; font-size: 1rem; padding: 0.6rem 1.5rem; min-height: 44px;">Skip</button>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<div class="toast-container position-fixed end-0 p-3" style="z-index: 3000; top: 5vh;">
-		<div id="draftSubmittedToast" class="toast text-white bg-success border-0" role="alert">
-			<div class="toast-body">
-				Draft submitted!
-			</div>
+<div class="toast-container position-fixed end-0 p-3" style="z-index: 3000; top: 5vh;">
+	<div id="toastObstacleAdded" class="toast text-white bg-success border-0 opacity-75" role="alert">
+		<div class="toast-body">
+			Obstacle added to draft!
 		</div>
 	</div>
+</div>
 
-
-	<form method="post">
-		<div>
-			<input type="hidden" asp-for="Longitude" id="longitude" />
-			<input type="hidden" asp-for="Latitude" id="latitude" />
+<div class="toast-container position-fixed end-0 p-3" style="z-index: 3000; top: 5vh;">
+	<div id="toastDraftSubmitted" class="toast text-white bg-success border-0 opacity-75" role="alert">
+		<div class="toast-body">
+			Draft submitted!
 		</div>
+	</div>
+</div>
 
-		<div>
-			<input type="hidden" asp-for="Type" id="obstacletype" />
-		</div>
+<form method="post">
+	<div>
+		<input type="hidden" asp-for="Longitude" id="longitude" />
+		<input type="hidden" asp-for="Latitude" id="latitude" />
+	</div>
 
+	<div>
+		<input type="hidden" asp-for="Type" id="obstacletype" />
+	</div>
+</form>
 
-
-	</form>
-
-
-
-
-	@* <section>
-        <h1 class="text-center">Registrer nytt hinder</h1>
-        <p class="text-center">Vennligst fyll inn data om nytt hinder</p>
-        <p class="text-center">Trykk på kart for plassering</p>
-        <form asp-action="DataForm" method="POST" class="text-center">
-
-            <div>
-                <label asp-for="Coords">Hinder koordinater</label>
-                <input asp-for="Coords" id="coords" />
-            </div>
-
-            <div>
-                <label>Hinder navn</label>
-                <input asp-for="Name" />
-            </div>
-
-            <div>
-                <label>Hinder høyde</label>
-                <input asp-for="Height" />
-            </div>
-
-            <div>
-                <label>Hinder beskrivelse</label>
-                <input asp-for="Description" />
-            </div>
-
-            <button id="btnSubmit" type="submit">Ferdig</button>
-        </form>
-    </section> *@
 
 @section Scripts {
 	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -163,9 +126,9 @@
 		});
 
 		document.addEventListener("DOMContentLoaded", function () {
-			const submitted = '@TempData["DraftSubmitted"]';
+			const submitted = '@TempData["DraftCleared"]';
 			if (submitted === 'True') {
-				const toastEl = document.getElementById('draftSubmittedToast');
+				const toastEl = document.getElementById('toastDraftCleared');
 				const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
 				toast.show();
 			}

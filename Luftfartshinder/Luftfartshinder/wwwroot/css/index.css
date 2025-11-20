@@ -104,6 +104,16 @@ h1 {
   transform-origin: 0% 0%;
   z-index: 600;
 }
+
+.wheel.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.wheel:not(.on) {
+    pointer-events: none;
+}
+
 .wheel.on .arc {
   opacity: 0.8;
   transform: scale(1) rotate(var(--rotation)) !important;
