@@ -104,7 +104,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             Id = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f784d96b-8d93-4d2b-9531-b0eca352bc4e",
+                            ConcurrencyStamp = "854f529c-3021-47c0-bfc2-e79285e781af",
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -116,15 +116,35 @@ namespace Luftfartshinder.Migrations.AuthDb
                             Organization = "Kartverket",
                             PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "52da109a-7fec-49f0-bf04-60db305a36b5",
+                            SecurityStamp = "ca7626cd-e1c1-4ca7-a017-f36c44f8c406",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         },
                         new
                         {
+                            Id = "322acd53-a201-47c6-a7e0-6695690ce677",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "aaeed564-c9b7-48ec-bf69-2dc711baa0b3",
+                            Email = "registrar@kartverket.no",
+                            EmailConfirmed = false,
+                            FirstName = "Regi",
+                            IsApproved = true,
+                            LastName = "Strar",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "REGISTRAR@KARTVERKET.NO",
+                            NormalizedUserName = "REGISTRAR",
+                            Organization = "Kartverket",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "db840838-d426-4592-81e1-ed11763ce363",
+                            TwoFactorEnabled = false,
+                            UserName = "registrar"
+                        },
+                        new
+                        {
                             Id = "1d3b44cf-5507-444f-b84c-842539f13e02",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "62bc6710-45b9-4540-8aa2-1e5cb29c0220",
+                            ConcurrencyStamp = "a18f8f5e-ec81-4bbe-96a9-968f11369cff",
                             Email = "pilot@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Kaptein",
@@ -136,7 +156,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                             Organization = "Norwegian Armed Forces",
                             PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d6aeeeaa-aefc-4da7-94a3-d40a6720c43f",
+                            SecurityStamp = "43e294cb-835f-4681-a8a5-e04bc3d3e427",
                             TwoFactorEnabled = false,
                             UserName = "pilot"
                         });
@@ -292,6 +312,11 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             UserId = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             RoleId = "66eeb3d3-c3a2-4c2a-8e47-d6513739f417"
+                        },
+                        new
+                        {
+                            UserId = "322acd53-a201-47c6-a7e0-6695690ce677",
+                            RoleId = "89b2d41d-faa8-45fe-8601-1925778c4c30"
                         },
                         new
                         {

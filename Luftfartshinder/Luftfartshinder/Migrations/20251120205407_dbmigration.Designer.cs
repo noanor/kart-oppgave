@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Luftfartshinder.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20251120185643_dbmigration")]
+    [Migration("20251120205407_dbmigration")]
     partial class dbmigration
     {
         /// <inheritdoc />

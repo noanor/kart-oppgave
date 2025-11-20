@@ -112,7 +112,7 @@
                                         @User?.Identity?.Name
                                     </button>
 
-                                    <ul class="dropdown-menu account-menu">
+                                    <ul class="dropdown-menu dropdown-menu-end account-menu">
                                         <li>
                                             <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Dashboard">
                                                 Dashboard
@@ -189,6 +189,13 @@
                                            style="cursor: pointer;">Tutorial</a>
                                     </li>
                                 }
+
+                                <li class="nav-item mb-3">
+                                    <a class=" nav-link btn btn-dark active text-light" aria-current="page" role="button"
+                                       asp-area=""
+                                       asp-controller="Account"
+                                       asp-action="Dashboard">Dashboard</a>
+                                </li>
 
                             </ul>
                         </div>

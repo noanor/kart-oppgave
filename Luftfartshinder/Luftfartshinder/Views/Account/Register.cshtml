@@ -10,129 +10,123 @@
 }
 
 
-<div class="container-fluid">
-    <div class="auth-page">
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <div class="auth-card">
-                    <h1 class="mt-3 mb-3 h3 text-center">Create a New User Account</h1>
+<div class="container mt-5">
+    <div>
+        <div class="h1 mt-3 pt-5 mb-3 text-center">Create a New User Account</div>
 
-                    <p class="text-center text-muted mb-3">
-                        Use this form to create a new user account in the system.
-                    </p>
+        <p class="text-center text-muted mb-3">
+            Use this form to create a new user account in the system.
+        </p>
 
-                    <p class="text-center text-muted mb-4">
-                        Ensure all required fields, marked with <span class="text-danger">*</span>, are completed.
-                    </p>
+        <p class="text-center text-muted mb-4">
+            Ensure all required fields, marked with <span class="text-danger">*</span>, are completed.
+        </p>
 
-                    @if (ViewData.ModelState.ContainsKey(string.Empty) && ViewData.ModelState[string.Empty].Errors.Count > 0)
-                    {
-                        <div class="alert alert-danger">
-                            @foreach (var error in ViewData.ModelState[string.Empty].Errors)
-                            {
-                                <div>@error.ErrorMessage</div>
-                            }
-                        </div>
-                    }
+        @if (ViewData.ModelState.ContainsKey(string.Empty) && ViewData.ModelState[string.Empty].Errors.Count > 0)
+        {
+            <div class="alert alert-danger">
+                @foreach (var error in ViewData.ModelState[string.Empty].Errors)
+                {
+                    <div>@error.ErrorMessage</div>
+                }
+            </div>
+        }
 
-                    @if (TempData["RegistrationSuccess"] != null)
-                    {
-                        <div id="registerAlert" class="alert alert-success alert-dismissible fade show" role="alert">
-                            @TempData["RegistrationSuccess"]
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    }
+        @if (TempData["RegistrationSuccess"] != null)
+        {
+            <div id="registerAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["RegistrationSuccess"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
 
-                    <form id="registerForm" method="post">
-                        @Html.AntiForgeryToken()
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <label asp-for="FirstName" class="form-label">First Name <span class="text-danger">*</span></label>
-                                <input asp-for="FirstName" class="form-control" required/>
-                                <span asp-validation-for="FirstName" class="text-danger"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label asp-for="LastName" class="form-label">Last Name <span class="text-danger">*</span></label>
-                                <input asp-for="LastName" class="form-control" required/>
-                                <span asp-validation-for="LastName" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <label asp-for="Email" class="form-label">E-mail <span class="text-danger">*</span></label>
-                                <input asp-for="Email" class="form-control" placeholder="e.g. ola.nordmann@company.com" required/>
-                                <span asp-validation-for="Email" class="text-danger"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label asp-for="Username" class="form-label">Username <span class="text-danger">*</span></label>
-                                <input asp-for="Username" class="form-control" placeholder="Enter username" required/>
-                                <span asp-validation-for="Username" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="Password" class="form-label">Password <span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <input type="password" id="password" class="form-control" asp-for="Password"/>
-                                <span class="input-group-text" id="togglePassword" style="cursor:pointer;">
-                                    <i class="bi bi-eye"></i>
-                                </span>
-                            </div>
-
-                            <span class="text-danger" asp-validation-for="Password"></span>
-                            <div id="passwordRequirements" class="mt-2 p-2 border rounded bg-light text-muted small">
-                                <strong>Password must:</strong>
-                                <ul class="mb-0 mt-1">
-                                    <li id="length" class="text-muted">Be at least 8 characters</li>
-                                    <li id="uppercase" class="text-muted">Include at least one uppercase letter</li>
-                                    <li id="lowercase" class="text-muted">Include at least one lowercase letter</li>
-                                    <li id="number" class="text-muted">Include at least one number</li>
-                                    <li id="special" class="text-muted">Include at least one special character</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <label asp-for="SelectedRole" class="form-label"> Role <span class="text-danger">*</span></label>
-                                <select id="role" asp-for="SelectedRole" class="form-select">
-                                    <option value="">-- Select a role --</option>
-                                    <option value="Registrar">Registrar</option>
-                                    <option value="FlightCrew">Flight Crew</option>
-                                </select>
-                                <span class="text-danger" asp-validation-for="SelectedRole"></span>
-                            </div>
-                            <div class="col-md-6" id="organizationDiv" style="display:none;">
-                                <label asp-for="Organization" class="form-label">Organization <span class="text-danger">*</span></label>
-                                <select id="organization" class="form-select">
-                                    <option value="">-- Select organization --</option>
-                                    <option value="Norwegian Air Ambulance">Norwegian Air Ambulance</option>
-                                    <option value="Police">Police</option>
-                                    <option value="Norwegian Armed Forces">Norwegian Armed Forces</option>
-                                    <option value="Avinor">Avinor</option>
-                                    <option value="Other">Other</option>
-                                </select>
-
-                                <input type="text" id="customOrganization" class="form-control mt-2" placeholder="Enter organization name" style="display:none;">
-                                <input type="hidden" id="hiddenOrganization" name="Organization"/>
-
-                                <script>
-                            document.getElementById('organization').addEventListener('change', function() {
-                                document.getElementById('customOrganization').style.display = (this.value === 'Other') ? 'block' : 'none';
-                            });
-                        </script>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <button type="button" id="cancelBtnAdmin" class="btn-auth-secondary me-2">Cancel</button>
-                            <button type="submit" id="submitBtn" class="btn-auth-primary">Create account</button>
-                        </div>
-                    </form>
+        <form id="registerForm" method="post">
+            @Html.AntiForgeryToken()
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label asp-for="FirstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                    <input asp-for="FirstName" class="form-control" required/>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="LastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                    <input asp-for="LastName" class="form-control" required/>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
             </div>
-        </div>
+
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label asp-for="Email" class="form-label">E-mail <span class="text-danger">*</span></label>
+                    <input asp-for="Email" class="form-control" placeholder="e.g. ola.nordmann@company.com" required/>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Username" class="form-label">Username <span class="text-danger">*</span></label>
+                    <input asp-for="Username" class="form-control" placeholder="Enter username" required/>
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">Password <span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <input type="password" id="password" class="form-control" asp-for="Password"/>
+                    <span class="input-group-text" id="togglePassword" style="cursor:pointer;">
+                        <i class="bi bi-eye"></i>
+                    </span>
+                </div>
+
+                <span class="text-danger" asp-validation-for="Password"></span>
+                <div id="passwordRequirements" class="mt-2 p-2 border rounded bg-light text-muted small">
+                    <strong>Password must:</strong>
+                    <ul class="mb-0 mt-1">
+                        <li id="length" class="text-muted">Be at least 8 characters</li>
+                        <li id="uppercase" class="text-muted">Include at least one uppercase letter</li>
+                        <li id="lowercase" class="text-muted">Include at least one lowercase letter</li>
+                        <li id="number" class="text-muted">Include at least one number</li>
+                        <li id="special" class="text-muted">Include at least one special character</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label asp-for="SelectedRole" class="form-label"> Role <span class="text-danger">*</span></label>
+                    <select id="role" asp-for="SelectedRole" class="form-select">
+                        <option value="">-- Select a role --</option>
+                        <option value="Registrar">Registrar</option>
+                        <option value="FlightCrew">Flight Crew</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="SelectedRole"></span>
+                </div>
+                <div class="col-md-6" id="organizationDiv" style="display:none;">
+                    <label asp-for="Organization" class="form-label">Organization <span class="text-danger">*</span></label>
+                    <select id="organization" class="form-select">
+                        <option value="">-- Select organization --</option>
+                        <option value="Norwegian Air Ambulance">Norwegian Air Ambulance</option>
+                        <option value="Police">Police</option>
+                        <option value="Norwegian Armed Forces">Norwegian Armed Forces</option>
+                        <option value="Avinor">Avinor</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <input type="text" id="customOrganization" class="form-control mt-2" placeholder="Enter organization name" style="display:none;">
+                    <input type="hidden" id="hiddenOrganization" name="Organization"/>
+
+                    <script>
+                document.getElementById('organization').addEventListener('change', function() {
+                    document.getElementById('customOrganization').style.display = (this.value === 'Other') ? 'block' : 'none';
+                });
+            </script>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <button type="button" id="cancelBtnAdmin" class="btn-auth-secondary me-2">Cancel</button>
+                <button type="submit" id="submitBtn" class="btn-auth-primary">Create account</button>
+            </div>
+        </form>
     </div>
 </div>
 
