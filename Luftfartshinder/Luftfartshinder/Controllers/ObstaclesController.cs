@@ -13,13 +13,15 @@ public partial class ObstaclesController : Controller
     private const string DraftKey = "ObstacleDraft";
     private readonly UserManager<ApplicationUser> userManager;
     private readonly IReportRepository reportRepository;
+    private readonly IObstacleRepository obstacleRepository;
 
     public record AddOneResponse(bool Ok, int Count);
 
-    public ObstaclesController(UserManager<ApplicationUser> userManager, IReportRepository reportRepository)
+    public ObstaclesController(UserManager<ApplicationUser> userManager, IReportRepository reportRepository, IObstacleRepository obstacleRepository)
     {
         this.userManager = userManager;
         this.reportRepository = reportRepository;
+        this.obstacleRepository = obstacleRepository;
     }
 
     // === GET: /obstacles/draft ===
@@ -148,6 +150,13 @@ public partial class ObstaclesController : Controller
 
     }
 
+    [HttpGet]
+    public async Task<IActionResult> List()
+    {
+        var obstacles = await obstacleRepository.GetAllAsync();
+        return View(obstacles);
+    }
+
     // === POST: /obstacles/edit-obstacle ===
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -194,6 +203,33 @@ public partial class ObstaclesController : Controller
             }).ToList();
 
         return Ok(list);
+    }
+
+    public async Task<IActionResult> Edit(int id)
+    {
+        var existingObstacle = await obstacleRepository.GetObstacleById(id);
+
+        if (existingObstacle == null)
+        {
+            return NotFound();
+        }
+
+        var editObstacleRequest = new EditObstacleRequest()
+        {
+            Id = existingObstacle.Id,
+            Type = existingObstacle.Type,
+            Height = existingObstacle.Height,
+            Description = existingObstacle.Description,
+            Latitude = existingObstacle.Latitude,
+            Longitude = existingObstacle.Longitude,
+            Report = existingObstacle.Report,
+            ReportId = existingObstacle.ReportId,
+            Name = existingObstacle.Name,
+            RegistrarNote = existingObstacle.RegistrarNote,
+            Status = existingObstacle.Status
+        };
+
+        return View("AdminEdit", editObstacleRequest);
     }
 
     // DTO for JSON requests

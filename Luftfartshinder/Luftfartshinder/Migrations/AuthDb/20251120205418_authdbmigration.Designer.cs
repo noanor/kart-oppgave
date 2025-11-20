@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Luftfartshinder.Migrations.AuthDb
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20251120185654_authmigration")]
-    partial class authmigration
+    [Migration("20251120205418_authdbmigration")]
+    partial class authdbmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,7 +107,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             Id = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3cbb98b4-3f5a-4b55-9c6b-34e651834e99",
+                            ConcurrencyStamp = "854f529c-3021-47c0-bfc2-e79285e781af",
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -116,17 +116,38 @@ namespace Luftfartshinder.Migrations.AuthDb
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@KARTVERKET.NO",
                             NormalizedUserName = "SUPERADMIN@KARTVERKET.NO",
+                            Organization = "Kartverket",
                             PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bd4a01f5-87b6-4a4b-aa7f-cea1d375959c",
+                            SecurityStamp = "ca7626cd-e1c1-4ca7-a017-f36c44f8c406",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         },
                         new
                         {
+                            Id = "322acd53-a201-47c6-a7e0-6695690ce677",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "aaeed564-c9b7-48ec-bf69-2dc711baa0b3",
+                            Email = "registrar@kartverket.no",
+                            EmailConfirmed = false,
+                            FirstName = "Regi",
+                            IsApproved = true,
+                            LastName = "Strar",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "REGISTRAR@KARTVERKET.NO",
+                            NormalizedUserName = "REGISTRAR",
+                            Organization = "Kartverket",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "db840838-d426-4592-81e1-ed11763ce363",
+                            TwoFactorEnabled = false,
+                            UserName = "registrar"
+                        },
+                        new
+                        {
                             Id = "1d3b44cf-5507-444f-b84c-842539f13e02",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3640ea2f-ddda-4112-bbcd-e8b171cf2ae0",
+                            ConcurrencyStamp = "a18f8f5e-ec81-4bbe-96a9-968f11369cff",
                             Email = "pilot@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Kaptein",
@@ -135,9 +156,10 @@ namespace Luftfartshinder.Migrations.AuthDb
                             LockoutEnabled = false,
                             NormalizedEmail = "PILOT@KARTVERKET.NO",
                             NormalizedUserName = "PILOT",
+                            Organization = "Norwegian Armed Forces",
                             PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1679493f-7a90-409c-8d8e-ea4b4758e2bb",
+                            SecurityStamp = "43e294cb-835f-4681-a8a5-e04bc3d3e427",
                             TwoFactorEnabled = false,
                             UserName = "pilot"
                         });
@@ -293,6 +315,11 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             UserId = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             RoleId = "66eeb3d3-c3a2-4c2a-8e47-d6513739f417"
+                        },
+                        new
+                        {
+                            UserId = "322acd53-a201-47c6-a7e0-6695690ce677",
+                            RoleId = "89b2d41d-faa8-45fe-8601-1925778c4c30"
                         },
                         new
                         {

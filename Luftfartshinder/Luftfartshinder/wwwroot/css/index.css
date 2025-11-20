@@ -18,13 +18,8 @@ body {
 }
 
 .leaflet-control-zoom {
-    top: 60px;
+    display: none;
 }
-
-/*.leaflet-control-locate {
-    bottom: 50px;
-    z-index: 3000;
-}*/
 
 span {
     z-index: 1000;

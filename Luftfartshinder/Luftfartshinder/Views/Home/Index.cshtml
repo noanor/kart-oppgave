@@ -127,6 +127,15 @@
 		});
 
 		document.addEventListener("DOMContentLoaded", function () {
+			const submitted = '@TempData["DraftSubmitted"]';
+			if (submitted === 'True') {
+				const toastEl = document.getElementById('toastDraftSubmitted');
+				const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+				toast.show();
+			}
+		});
+
+		document.addEventListener("DOMContentLoaded", function () {
 			const submitted = '@TempData["DraftCleared"]';
 			if (submitted === 'True') {
 				const toastEl = document.getElementById('toastDraftCleared');

@@ -27,6 +27,7 @@ namespace Luftfartshinder.Models.ViewModel
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string Description { get; set; }
+        public string? RegistrarNote { get; set; }
         public Obstacle.Statuses Status { get; set; } = Obstacle.Statuses.Pending;
 
     }

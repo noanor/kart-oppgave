@@ -1,6 +1,7 @@
 wwwroot\css\auth.css
 wwwroot\css\dashboard.css
 wwwroot\css\draft.css
+wwwroot\css\index.css
 wwwroot\css\login.css
 wwwroot\css\overview.css
 wwwroot\css\registrar.css
@@ -16,6 +17,7 @@ wwwroot\js\draft.js
 wwwroot\js\geolet.js
 wwwroot\js\list.js
 wwwroot\js\login.js
+wwwroot\js\map.js
 wwwroot\js\register.js
 wwwroot\js\site.js
 wwwroot\js\superadminhome.js
@@ -79,8 +81,6 @@ wwwroot\lib\jquery\dist\jquery.slim.js
 wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
-wwwroot\css\index.css
-wwwroot\js\map.js
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\auth.css
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\dashboard.css
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\draft.css
@@ -91,9 +91,9 @@ C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\site
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\superadminhome.css
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\favicon.ico
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\draft.js
-C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\geolet.js
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\list.js
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\login.js
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\geolet.js
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\register.js
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\site.js
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\superadminhome.js

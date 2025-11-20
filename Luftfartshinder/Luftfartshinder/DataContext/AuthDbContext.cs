@@ -47,8 +47,9 @@ namespace Luftfartshinder.DataContext
             //Gjør klar for migrasjon
             builder.Entity<IdentityRole>().HasData(roller);
 
-            //SuperAdmin Bruker, Identity Bruker + Pilot bruker
+            //SuperAdmin Bruker, Identity Bruker + Registrar og Pilot bruker
             var superAdminId = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b";
+            var registrarId = "322acd53-a201-47c6-a7e0-6695690ce677";
             var pilotId = "1d3b44cf-5507-444f-b84c-842539f13e02";
 
             var superAdminUser = new ApplicationUser
@@ -60,6 +61,19 @@ namespace Luftfartshinder.DataContext
                 NormalizedEmail = "SUPERADMIN@KARTVERKET.NO",
                 FirstName = "Super",
                 LastName = "Admin",
+                IsApproved = true,
+                Organization = "Kartverket"
+            };
+
+            var registrarUser = new ApplicationUser
+            {
+                Id = registrarId,
+                UserName = "registrar",
+                NormalizedUserName = "REGISTRAR",
+                Email = "registrar@kartverket.no",
+                NormalizedEmail = "REGISTRAR@KARTVERKET.NO",
+                FirstName = "Regi",
+                LastName = "Strar",
                 IsApproved = true,
                 Organization = "Kartverket"
             };
@@ -78,9 +92,11 @@ namespace Luftfartshinder.DataContext
             };
 
             superAdminUser.PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==";
+            registrarUser.PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==";
             pilotUser.PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==";
 
             builder.Entity<ApplicationUser>().HasData(superAdminUser);
+            builder.Entity<ApplicationUser>().HasData(registrarUser);
             builder.Entity<ApplicationUser>().HasData(pilotUser);
 
 
@@ -106,6 +122,16 @@ namespace Luftfartshinder.DataContext
                 }
             };
 
+            // Gi registrar rolle til registrar
+            var registrarRoles = new List<IdentityUserRole<string>>
+            {
+                new IdentityUserRole<String>
+                {
+                    RoleId = registrarRoleId,
+                    UserId = registrarId
+                }
+            };
+
             // Gi pilot rolle til pilotbruker
             var pilotRoles = new List<IdentityUserRole<string>>
             {
@@ -117,6 +143,7 @@ namespace Luftfartshinder.DataContext
             };
 
             builder.Entity<IdentityUserRole<string>>().HasData(superAdminRoles);
+            builder.Entity<IdentityUserRole<string>>().HasData(registrarRoles);
             builder.Entity<IdentityUserRole<string>>().HasData(pilotRoles);
         }
     }
