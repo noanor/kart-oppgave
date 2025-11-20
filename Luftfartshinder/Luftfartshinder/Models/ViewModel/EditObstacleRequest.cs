@@ -5,6 +5,8 @@ namespace Luftfartshinder.Models.ViewModel
     public class EditObstacleRequest
     {
         public int Id { get; set; }
+        public int ReportId { get; set; }
+        public Report Report { get; set; }
         public string Type { get; set; } = "";
         public string Name { get; set; }
 

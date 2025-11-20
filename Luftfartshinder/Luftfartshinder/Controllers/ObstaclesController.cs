@@ -7,19 +7,22 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 public partial class ObstaclesController : Controller
 {
     private const string DraftKey = "ObstacleDraft";
     private readonly UserManager<ApplicationUser> userManager;
     private readonly IReportRepository reportRepository;
+    private readonly IObstacleRepository obstacleRepository;
 
     public record AddOneResponse(bool Ok, int Count);
 
-    public ObstaclesController(UserManager<ApplicationUser> userManager, IReportRepository reportRepository)
+    public ObstaclesController(UserManager<ApplicationUser> userManager, IReportRepository reportRepository, IObstacleRepository obstacleRepository)
     {
         this.userManager = userManager;
         this.reportRepository = reportRepository;
+        this.obstacleRepository = obstacleRepository;
     }
 
     // === GET: /obstacles/draft ===
@@ -170,6 +173,43 @@ public partial class ObstaclesController : Controller
 
         return RedirectToAction("Draft");
 
+    }
+
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> Edit(int id)
+    { 
+        var existingObstacle = await obstacleRepository.GetObstacleById(id);
+
+        if(existingObstacle == null)
+        {
+            return NotFound();
+        }
+
+        var editObstacleRequest = new EditObstacleRequest
+        {
+            Id = existingObstacle.Id,
+            ReportId = existingObstacle.ReportId,
+            Report = existingObstacle.Report,
+            Type = existingObstacle.Type,
+            Name = existingObstacle.Name,
+            Height = existingObstacle.Height,
+            Latitude = existingObstacle.Latitude,
+            Longitude = existingObstacle.Longitude,
+            Description = existingObstacle.Description,
+            Status = existingObstacle.Status
+        };
+
+        return View("AdminEdit", editObstacleRequest);
+
+        
+    }
+
+    public async Task<IActionResult> List()
+    {
+        var obstacles = await obstacleRepository.GetAllAsync();
+
+        return View(obstacles);
     }
 
     // DTO for JSON requests

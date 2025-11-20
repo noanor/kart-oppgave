@@ -1,0 +1,135 @@
+﻿@model List<Luftfartshinder.Models.Domain.Obstacle>
+
+@{
+}
+
+<div class="container mt-5">
+    <div class="h1 text-center py-5">
+        List of Obstacles
+    </div>
+
+    <div class="mb-3">
+        <input id="obstacleSearch" class="form-control" placeholder="Search obstacles..." />
+    </div>
+
+    <table id="obstacleTable" class="table table-hover mb-5">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Reporter</th>
+                <th scope="col">Type</th>
+                <th scope="col">Name</th>
+                <th scope="col">Height</th>
+                <th scope="col">Lat</th>
+                <th scope="col">Lon</th>
+                <th scope="col">Registrar Note</th>
+                <th scope="col">Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @foreach (var o in Model)
+            {
+                
+                <tr>
+                    <th scope="row">@o.Id</th>
+                    <td>@o.Report.Author</td>
+                    <td>@o.Type</td>
+                    <td>@o.Name</td>
+                    <td>@o.Height</td>
+
+                    @{
+                        string formattedLatitude = String.Format("{0:0.000000}", o.Latitude);
+                        string formattedLongitude = String.Format("{0:0.000000}", o.Longitude);
+                    }
+
+                    <td>@formattedLatitude</td>
+                    <td>@formattedLongitude</td>
+                    <td>@o.RegistrarNote</td>
+                    <td>@o.Status</td>
+                    <td>
+                        <a class="btn btn-outline-primary shadow" role="button"
+                           asp-action="Edit"
+                           asp-controller="Obstacles"
+                           asp-route-id="@o.Id"
+                           style="vertical-align: middle; text-decoration: none;">
+                            Edit
+                            <span class="material-symbols-outlined inline-icon">
+                                edit
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+                
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        const searchInput = document.getElementById('obstacleSearch');
+        const table = document.getElementById('obstacleTable');
+        const rows = table.querySelectorAll('tbody tr');
+
+        searchInput.addEventListener('input', function () {
+            const term = this.value.toLowerCase();
+
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(term) ? '' : 'none';
+            });
+        });
+
+        (function () {
+            const table = document.getElementById('obstacleTable');
+            if (!table) return;
+
+            const headers = table.querySelectorAll('thead th');
+            const numericCols = [0, 3, 4, 5]; // Id, Height, Lat, Lon
+
+            // Store original header text once
+            headers.forEach((th, index) => {
+                th.dataset.label = th.textContent.trim(); // save clean label
+                th.style.cursor = 'pointer';
+
+                th.addEventListener('click', () => {
+                    const tbody = table.tBodies[0];
+                    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+                    // Determine sort direction for this header
+                    const isAsc = th.dataset.sort === 'asc';
+                    const newDir = isAsc ? 'desc' : 'asc';
+
+                    // Reset all headers: remove sort + restore original label
+                    headers.forEach(h => {
+                        h.removeAttribute('data-sort');
+                        h.innerHTML = h.dataset.label;
+                    });
+
+                    // Set active header state
+                    th.dataset.sort = newDir;
+                    const arrow = newDir === 'asc' ? ' ▲' : ' ▼';
+                    th.innerHTML = th.dataset.label + arrow;
+
+                    // Sort rows
+                    rows.sort((a, b) => {
+                        let aText = a.children[index].textContent.trim();
+                        let bText = b.children[index].textContent.trim();
+
+                        if (numericCols.includes(index)) {
+                            const aVal = parseFloat(aText.replace(',', '.')) || 0;
+                            const bVal = parseFloat(bText.replace(',', '.')) || 0;
+                            return (aVal - bVal) * (newDir === 'asc' ? 1 : -1);
+                        } else {
+                            return aText.localeCompare(bText) * (newDir === 'asc' ? 1 : -1);
+                        }
+                    });
+
+                    // Re-attach sorted rows
+                    rows.forEach(row => tbody.appendChild(row));
+                });
+            });
+        })();
+    </script>
+}

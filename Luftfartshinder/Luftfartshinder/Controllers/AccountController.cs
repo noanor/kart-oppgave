@@ -236,6 +236,7 @@ namespace Luftfartshinder.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Dashboard()
         {
             string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -252,6 +253,7 @@ namespace Luftfartshinder.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> FlightCrewObstacles()
         {
             string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

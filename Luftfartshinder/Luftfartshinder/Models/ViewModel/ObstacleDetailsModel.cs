@@ -48,7 +48,6 @@ namespace Luftfartshinder.Models.ViewModel
 
             // Registrar ting
             public string? RegistrarNote { get; set; }
-            public enum Statuses { Pending = 0, Approved = 1, Rejected = 2 }
-            public Statuses Status { get; set; } = Statuses.Pending;
+            public Obstacle.Statuses Status { get; set; } = Obstacle.Statuses.Pending;
         }
     }
