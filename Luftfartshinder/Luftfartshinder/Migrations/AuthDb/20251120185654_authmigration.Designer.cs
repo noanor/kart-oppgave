@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Luftfartshinder.Migrations.AuthDb
 {
     [DbContext(typeof(AuthDbContext))]
-<<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251120154634_authdbmigration2.Designer.cs
-    [Migration("20251120154634_authdbmigration2")]
-    partial class authdbmigration2
-========
-    [Migration("20251120152955_authdbmigration")]
-    partial class authdbmigration
->>>>>>>> 9be7fd20e1fcd6731d8c1ae1553aba716be92fb2:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251120152955_authdbmigration.Designer.cs
+    [Migration("20251120185654_authmigration")]
+    partial class authmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,11 +107,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             Id = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251120154634_authdbmigration2.Designer.cs
-                            ConcurrencyStamp = "bf060dbb-f309-4295-afea-ad694a945fa0",
-========
-                            ConcurrencyStamp = "ade99e60-ec20-4977-b153-f87f84791676",
->>>>>>>> 9be7fd20e1fcd6731d8c1ae1553aba716be92fb2:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251120152955_authdbmigration.Designer.cs
+                            ConcurrencyStamp = "3cbb98b4-3f5a-4b55-9c6b-34e651834e99",
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -127,8 +118,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                             NormalizedUserName = "SUPERADMIN@KARTVERKET.NO",
                             PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==",
                             PhoneNumberConfirmed = false,
-<<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251120154634_authdbmigration2.Designer.cs
-                            SecurityStamp = "d35b80e2-0eab-44f7-b5c7-3e1b6d25688f",
+                            SecurityStamp = "bd4a01f5-87b6-4a4b-aa7f-cea1d375959c",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         },
@@ -136,7 +126,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             Id = "1d3b44cf-5507-444f-b84c-842539f13e02",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0cb27bac-8f93-40b8-8835-a1e4d95a1a13",
+                            ConcurrencyStamp = "3640ea2f-ddda-4112-bbcd-e8b171cf2ae0",
                             Email = "pilot@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Kaptein",
@@ -147,14 +137,9 @@ namespace Luftfartshinder.Migrations.AuthDb
                             NormalizedUserName = "PILOT",
                             PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "59a10fb2-ae05-434f-89de-3d9767f37fb2",
+                            SecurityStamp = "1679493f-7a90-409c-8d8e-ea4b4758e2bb",
                             TwoFactorEnabled = false,
                             UserName = "pilot"
-========
-                            SecurityStamp = "63f4c9f8-aa59-4467-8da6-c2bb9b57f6c3",
-                            TwoFactorEnabled = false,
-                            UserName = "superadmin@kartverket.no"
->>>>>>>> 9be7fd20e1fcd6731d8c1ae1553aba716be92fb2:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251120152955_authdbmigration.Designer.cs
                         });
                 });
 
@@ -308,14 +293,11 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             UserId = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             RoleId = "66eeb3d3-c3a2-4c2a-8e47-d6513739f417"
-<<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251120154634_authdbmigration2.Designer.cs
                         },
                         new
                         {
                             UserId = "1d3b44cf-5507-444f-b84c-842539f13e02",
                             RoleId = "d0fe1bc1-1838-48db-b483-a31510e5a2f6"
-========
->>>>>>>> 9be7fd20e1fcd6731d8c1ae1553aba716be92fb2:Luftfartshinder/Luftfartshinder/Migrations/AuthDb/20251120152955_authdbmigration.Designer.cs
                         });
                 });
 

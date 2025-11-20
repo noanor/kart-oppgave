@@ -5,6 +5,11 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
+L.geolet({
+	position: 'bottomleft'
+}).addTo(map);
+
+
 const draftMarkers = new Map();
 const obstacleMarkers = new Map();
 

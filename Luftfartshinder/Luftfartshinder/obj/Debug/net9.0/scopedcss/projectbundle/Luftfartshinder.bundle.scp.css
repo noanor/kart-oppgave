@@ -53,3 +53,29 @@ button.accept-policy[b-nnup2x4dar] {
     white-space: nowrap;
     line-height: 60px;
 }
+
+
+.account-menu[b-nnup2x4dar] {
+    min-width: 220px;
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
+}
+
+
+.account-menu .dropdown-item[b-nnup2x4dar] {
+    padding: 0.45rem 1rem;
+    font-size: 0.9rem;
+}
+
+
+.account-menu .dropdown-item:hover[b-nnup2x4dar] {
+    background-color: #f5f7fa;
+}
+
+
+.account-menu .dropdown-item.text-danger:hover[b-nnup2x4dar] {
+    background-color: #fff2f2;
+}
+
+
