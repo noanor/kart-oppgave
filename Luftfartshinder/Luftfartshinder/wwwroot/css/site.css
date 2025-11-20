@@ -334,9 +334,28 @@ textarea.form-control {
     cursor: pointer;
 }
 
-    .back-icon i:hover {
-        color: #0d6efd; 
+.back-icon i:hover {
+    color: #0d6efd; 
        
-    }
+}
 
+.admin-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border-radius: 12px;
+}
 
+.admin-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2) !important;
+}
+
+.admin-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.admin-card .card-body i {
+    font-size: 2.5em;
+}

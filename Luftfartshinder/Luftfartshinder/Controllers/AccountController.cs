@@ -1,9 +1,11 @@
 ﻿using Luftfartshinder.Models;
+using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Models.ViewModel;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Luftfartshinder.Controllers
 {
@@ -12,11 +14,14 @@ namespace Luftfartshinder.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IAccountRepository accountRepository;
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository)
+        private readonly IReportRepository reportRepository;
+
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository, IReportRepository reportRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.accountRepository = accountRepository;
+            this.reportRepository = reportRepository;
         }
 
         [HttpGet]
@@ -78,8 +83,8 @@ namespace Luftfartshinder.Controllers
 
                 if (roleResult.Succeeded)
                 {
-                    TempData["RegistrationSuccess"] = "The user has been successfully registered.";
-                    return RedirectToAction("SuperAdminHome", "Home");
+                    TempData["RegistrationSuccess"] = "User registered successfully!";
+                    return RedirectToAction("Dashboard");
                 }
             }
 
@@ -232,10 +237,28 @@ namespace Luftfartshinder.Controllers
         [HttpGet]
         public async Task<IActionResult> Dashboard()
         {
-            var reports = await accountRepository.GetReports();
-            //.Include(r => r.Obstacles)
-            //.ToList();
+            string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var reports = new List<Report>();
+            if (!User.IsInRole("Registrar") && !User.IsInRole("SuperAdmin"))
+            {
+                reports = accountRepository.GetUserReports(userId);
+            }
+            else
+            {
+                reports = await reportRepository.GetAllAsync();
+            }
             return View(reports);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> FlightCrewObstacles()
+        {
+            string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var obstacles = new List<Report>();
+
+            obstacles = await reportRepository.GetAllAsync();
+
+            return View(obstacles);
         }
 
 

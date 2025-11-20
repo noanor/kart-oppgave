@@ -1,63 +1,137 @@
 ﻿@using System.Security.Claims
-@model List<Luftfartshinder.Models.Domain.Report>
 
 @{
 }
 
-<div class="container mt-5 py-5">
+<div class="container mt-5">
     
-    <div class="d-flex flex-row h1">
-        @if (User.IsInRole("SuperAdmin"))
-        {
-            <div>Admin Dashboard</div>
-        }
-        else if (User.IsInRole("Registrar"))
-        {
-            <div>Registrar Dashboard</div>
-        }
-        else
-        {
-            <div>Dashboard</div>
-        }
-
+    <div class="h1">
+        <div class="container-fluid py-5">
+            @if (User.IsInRole("SuperAdmin"))
+            {
+                <div>Admin Dashboard</div>
+            }
+            else if (User.IsInRole("Registrar") && !User.IsInRole("SuperAdmin"))
+            {
+                <div>Registrar Dashboard</div>
+            }
+            else
+            {
+                <div>Dashboard</div>
+            }
+        </div>
     </div>
 
-    <div>
-        <h4>Your obstacles:</h4>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Height</th>
-                        <th scope="col">Lat</th>
-                        <th scope="col">Lon</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var r in Model)
-                    {
-                        if (r.AuthorId == User.FindFirstValue(ClaimTypes.NameIdentifier))
-                        {
-                            @foreach (var o in r.Obstacles)
-                            {
-                                <tr>
-                                    <th scope="row">@o.Id</th>
-                                    <td>@o.Type</td>
-                                    <td>@o.Name</td>
-                                    <td>@o.Height</td>
-                                    <td>@o.Latitude</td>
-                                    <td>@o.Longitude</td>
-                                    <td>@o.Status</td>
-                                </tr>
-                            }
-                        }
-                    }
-            </tbody>
-        </table>
+
+        <div class="container">
+            @if (TempData["RegistrationSuccess"] != null)
+            {
+                <div id="registerAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["RegistrationSuccess"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            @if (User.IsInRole("SuperAdmin"))
+            {
+                <div class="row justify-content-center align-items-center mb-5" style="min-height: 20vh;">
+                    <div class="col-12 col-md-5 mb-4 mb-md-0">
+                        <a asp-controller="SuperAdmin" asp-action="List" class="text-decoration-none">
+                            <div class="card shadow-lg border-0 admin-card">
+                                <div class="card-body text-center p-5">
+                                    <div class="mb-4">
+                                        <i class="fas fa-users-cog fa-5x" style="color: #2c5f8d;"></i>
+                                    </div>
+                                    <h3 class="card-title fw-bold text-dark mb-3">Manage Users</h3>
+                                    <p class="card-text text-muted fs-5">View and manage all users</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-12 col-md-5">
+                        <a asp-controller="Account" asp-action="Register" class="text-decoration-none">
+                            <div class="card shadow-lg border-0 admin-card h-100">
+                                <div class="card-body text-center p-5">
+                                    <div class="mb-4">
+                                        <i class="fas fa-user-plus fa-5x" style="color: #4a9b5f;"></i>
+                                    </div>
+                                    <h3 class="card-title fw-bold text-dark mb-3">Create Users</h3>
+                                    <p class="card-text text-muted fs-5">Add a new user to the system</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                
+
+            }
+
+            @if (User.IsInRole("Registrar"))
+            {
+                <div class="row justify-content-center align-items-center" style="min-height: 20vh;">
+                    <div class="col-12 col-md-5 mb-4 mb-md-0">
+                        <a asp-controller="Registrar" asp-action="Index" class="text-decoration-none">
+                            <div class="card shadow-lg border-0 admin-card">
+                                <div class="card-body text-center p-5">
+                                    <div class="mb-4">
+                                        <i class="fa-solid fa-clipboard-list" style="color: burlywood;"></i>
+                                    </div>
+                                    <h3 class="card-title fw-bold text-dark mb-3">Manage Reports</h3>
+                                    <p class="card-text text-muted fs-5">View and manage all reports</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-12 col-md-5">
+                        <a asp-controller="#" asp-action="#" class="text-decoration-none">
+                            <div class="card shadow-lg border-0 admin-card h-100">
+                                <div class="card-body text-center p-5">
+                                    <div class="mb-4">
+                                        <i class="fa-solid fa-road-barrier" style="color: coral;"></i>
+                                    </div>
+                                    <h3 class="card-title fw-bold text-dark mb-3">Manage Obstacles</h3>
+                                    <p class="card-text text-muted fs-5">View and manage all obstacles</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row justify-content-center align-items-center" style="min-height: 20vh;">
+                    <div class="col-12 col-md-5 mb-4 mb-md-0">
+                        <a asp-controller="Account" asp-action="FlightCrewObstacles" class="text-decoration-none">
+                            <div class="card shadow-lg border-0 admin-card">
+                                <div class="card-body text-center p-5">
+                                    <div class="mb-4">
+                                        <i class="fa-solid fa-clipboard-list" style="color: burlywood;"></i>
+                                    </div>
+                                    <h3 class="card-title fw-bold text-dark mb-3">Manage Reports</h3>
+                                    <p class="card-text text-muted fs-5">View and manage all reports</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-12 col-md-5">
+                        <a asp-controller="Home" asp-action="Index" class="text-decoration-none">
+                            <div class="card shadow-lg border-0 admin-card h-100">
+                                <div class="card-body text-center p-5">
+                                    <div class="mb-4">
+                                    <i class="fa-solid fa-map-location-dot" style="color: darkslategray;"></i>
+                                    </div>
+                                    <h3 class="card-title fw-bold text-dark mb-3">Report Obstacles</h3>
+                                    <p class="card-text text-muted fs-5">Report obstacles through the map</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
     </div>
-    
 </div>
 
