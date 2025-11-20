@@ -51,18 +51,24 @@ namespace Luftfartshinder.Migrations
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
+=======
+>>>>>>> 9be7fd20e1fcd6731d8c1ae1553aba716be92fb2
                     b.Property<int>("ReportId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
                     b.Property<int?>("ReportId")
 >>>>>>> 1f64686 (La til kart preview på registrar details side)
 =======
 >>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
+=======
+>>>>>>> 9be7fd20e1fcd6731d8c1ae1553aba716be92fb2
                         .HasColumnType("int");
 
                     b.Property<string>("Type")

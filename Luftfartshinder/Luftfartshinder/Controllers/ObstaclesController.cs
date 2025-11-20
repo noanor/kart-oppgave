@@ -7,22 +7,19 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 public partial class ObstaclesController : Controller
 {
     private const string DraftKey = "ObstacleDraft";
     private readonly UserManager<ApplicationUser> userManager;
     private readonly IReportRepository reportRepository;
-    private readonly IObstacleRepository obstacleRepository;
 
-    public record AddOneResponse(bool Ok, int Count, int Index);
+    public record AddOneResponse(bool Ok, int Count);
 
-    public ObstaclesController(UserManager<ApplicationUser> userManager, IReportRepository reportRepository, IObstacleRepository obstacleRepository)
+    public ObstaclesController(UserManager<ApplicationUser> userManager, IReportRepository reportRepository)
     {
         this.userManager = userManager;
         this.reportRepository = reportRepository;
-        this.obstacleRepository = obstacleRepository;
     }
 
     // === GET: /obstacles/draft ===
@@ -60,9 +57,7 @@ public partial class ObstaclesController : Controller
         draft.Obstacles.Add(o);
         HttpContext.Session.Set(DraftKey, draft);
 
-        var index = draft.Obstacles.Count - 1;
-
-        return Ok(new AddOneResponse(true, draft.Obstacles.Count, index));
+        return Ok(new AddOneResponse(true, draft.Obstacles.Count));
     }
 
     // === POST: /obstacles/clear-draft ===
@@ -70,27 +65,7 @@ public partial class ObstaclesController : Controller
     public IActionResult ClearDraft()
     {
         HttpContext.Session.Remove(DraftKey);
-        TempData["DraftCleared"] = true;
         return RedirectToAction("Draft");
-    }
-
-    [HttpGet("/obstacles/draft-json")]
-    public IActionResult DraftJson()
-    {
-        var draft = HttpContext.Session
-            .Get<SessionObstacleDraft>(DraftKey) ?? new SessionObstacleDraft();
-
-        var list = draft.Obstacles
-            .Select((o, idx) => new
-            {
-                index = idx,
-                type = o.Type,
-                latitude = o.Latitude,
-                longitude = o.Longitude,
-                name = o.Name
-            }).ToList();
-
-        return Ok(list);
     }
 
     // === POST: /obstacles/submit-draft ===
@@ -119,10 +94,7 @@ public partial class ObstaclesController : Controller
         foreach (var obstacle in draft.Obstacles)
         {
             newReport.Obstacles.Add(obstacle);
-<<<<<<< HEAD
 
-=======
->>>>>>> 985ea00 (Delete, Approve, Reject, Save Note)
         }
 
         try
@@ -141,8 +113,6 @@ public partial class ObstaclesController : Controller
         }
         //applicationContext.SaveChanges();
         HttpContext.Session.Remove(DraftKey);
-
-        TempData["DraftSubmitted"] = true;
         return RedirectToAction("Index", "Home");
     }
 
@@ -203,43 +173,6 @@ public partial class ObstaclesController : Controller
 
         return RedirectToAction("Draft");
 
-    }
-
-    [HttpGet]
-    [Authorize]
-    public async Task<IActionResult> Edit(int id)
-    { 
-        var existingObstacle = await obstacleRepository.GetObstacleById(id);
-
-        if(existingObstacle == null)
-        {
-            return NotFound();
-        }
-
-        var editObstacleRequest = new EditObstacleRequest
-        {
-            Id = existingObstacle.Id,
-            ReportId = existingObstacle.ReportId,
-            Report = existingObstacle.Report,
-            Type = existingObstacle.Type,
-            Name = existingObstacle.Name,
-            Height = existingObstacle.Height,
-            Latitude = existingObstacle.Latitude,
-            Longitude = existingObstacle.Longitude,
-            Description = existingObstacle.Description,
-            Status = existingObstacle.Status
-        };
-
-        return View("AdminEdit", editObstacleRequest);
-
-        
-    }
-
-    public async Task<IActionResult> List()
-    {
-        var obstacles = await obstacleRepository.GetAllAsync();
-
-        return View(obstacles);
     }
 
     // DTO for JSON requests

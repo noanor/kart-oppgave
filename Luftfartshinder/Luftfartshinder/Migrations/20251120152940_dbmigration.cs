@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251120091726_dbmigration.cs
 <<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251119101152_dbmigration.cs
 <<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251117183818_DbMig.cs
@@ -6,6 +7,8 @@
 >>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page):Luftfartshinder/Luftfartshinder/Migrations/20251118164315_dbmigration.cs
 =======
 >>>>>>> 9be7fd2 (La til flere toasts og modals):Luftfartshinder/Luftfartshinder/Migrations/20251120152940_dbmigration.cs
+=======
+>>>>>>> 9be7fd20e1fcd6731d8c1ae1553aba716be92fb2
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -94,6 +97,7 @@ namespace Luftfartshinder.Migrations
         }
     }
 }
+<<<<<<< HEAD
 <<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251120091726_dbmigration.cs
 <<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251117183818_DbMig.cs
 ========
@@ -211,3 +215,5 @@ namespace Luftfartshinder.Migrations
 >>>>>>> 1c7ee01 (La til success message (toast) på index, markers blir på kartet til draft er submitted. Litt registrar refaktorisering):Luftfartshinder/Luftfartshinder/Migrations/20251120091726_dbmigration.cs
 =======
 >>>>>>> 9be7fd2 (La til flere toasts og modals):Luftfartshinder/Luftfartshinder/Migrations/20251120152940_dbmigration.cs
+=======
+>>>>>>> 9be7fd20e1fcd6731d8c1ae1553aba716be92fb2

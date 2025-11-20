@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Models.ViewModel;
 using Luftfartshinder.Repository;
@@ -11,6 +12,21 @@ namespace Luftfartshinder.Controllers
         private readonly IObstacleRepository obstacleRepository;
         public RegistrarController(IReportRepository reportRepository, IObstacleRepository obstacleRepository)
         {
+=======
+﻿using Luftfartshinder.Models.Domain;
+using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Repository;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Luftfartshinder.Controllers
+{
+    public class RegistrarController : Controller
+    {
+        private readonly IReportRepository reportRepository;
+        private readonly IObstacleRepository obstacleRepository;
+        public RegistrarController(IReportRepository reportRepository, IObstacleRepository obstacleRepository)
+        {
+>>>>>>> 9be7fd20e1fcd6731d8c1ae1553aba716be92fb2
             this.reportRepository = reportRepository;
             this.obstacleRepository = obstacleRepository;
         }
@@ -77,7 +93,6 @@ namespace Luftfartshinder.Controllers
         public async Task<IActionResult> Approve(int id)
         {
             var obstacle = await obstacleRepository.GetObstacleById(id);
-
             if (obstacle == null)
                 return NotFound(); // prevent NullReference
 

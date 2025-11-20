@@ -22,6 +22,7 @@ namespace Luftfartshinder.Controllers
             this.signInManager = signInManager;
             this.accountRepository = accountRepository;
             this.reportRepository = reportRepository;
+
         }
 
         [HttpGet]

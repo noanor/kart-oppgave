@@ -53,8 +53,6 @@ namespace Luftfartshinder.Repository
 
             if (existingReport != null)
             {
-
-
                 context.Obstacles.RemoveRange(existingReport.Obstacles);
                 context.Reports.Remove(existingReport);
 
@@ -63,8 +61,6 @@ namespace Luftfartshinder.Repository
             }
 
             return null;
-
-
         }
     }
 }

@@ -132,6 +132,13 @@
     margin-bottom: 2px;
 }
 
+#passwordRequirements .text-success {
+    color: green;
+}
+
+#passwordRequirements .text-muted {
+    color: #999;
+}
 
 /* ------8. Success message pop-up---------*/
 #registerAlert {
@@ -142,11 +149,5 @@
     transition: opacity 0.5s ease-out;
 }
 
-#passwordRequirements .text-success {
-    color: green;
-}
 
-#passwordRequirements .text-muted {
-    color: #999;
-}
 
