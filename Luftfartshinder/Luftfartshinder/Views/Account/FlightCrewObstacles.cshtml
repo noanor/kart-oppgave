@@ -37,8 +37,14 @@
                             <td>@o.Type</td>
                             <td>@o.Name</td>
                             <td>@o.Height</td>
-                            <td>@o.Latitude</td>
-                            <td>@o.Longitude</td>
+
+                            @{
+                                string formattedLatitude = String.Format("{0:0.000000}", o.Latitude);
+                                string formattedLongitude = String.Format("{0:0.000000}", o.Longitude);
+                            }
+
+                            <td>@formattedLatitude</td>
+                            <td>@formattedLongitude</td>
                             <td>@o.RegistrarNote</td>
                             <td>@o.Status</td>
                         </tr>

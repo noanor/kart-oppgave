@@ -104,7 +104,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             Id = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc6a9db0-e9e4-45ce-b55a-dec9fa9f5073",
+                            ConcurrencyStamp = "009f29c6-becd-435a-bea1-737aba28dad5",
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -115,7 +115,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                             NormalizedUserName = "SUPERADMIN@KARTVERKET.NO",
                             PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "04831698-e60f-43af-a6e2-d84b20d53fca",
+                            SecurityStamp = "5d87a9be-dd39-4f67-853f-dcc0fdf41f57",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         });

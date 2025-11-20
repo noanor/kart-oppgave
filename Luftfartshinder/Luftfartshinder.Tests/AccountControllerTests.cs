@@ -17,6 +17,7 @@ namespace Luftfartshinder.Tests
         private readonly Mock<SignInManager<ApplicationUser>> signInManagerMock;
         private readonly AccountController controller;
         private readonly IAccountRepository accountRepository;
+        private IReportRepository reportRepository;
 
         public AccountControllerTests()
         {
@@ -36,7 +37,7 @@ namespace Luftfartshinder.Tests
                 claimsFactoryMock.Object,
                 null, null, null, null);
 
-            controller = new AccountController(userManagerMock.Object, signInManagerMock.Object, accountRepository);
+            controller = new AccountController(userManagerMock.Object, signInManagerMock.Object, accountRepository, reportRepository);
         }
 
         [Fact]
