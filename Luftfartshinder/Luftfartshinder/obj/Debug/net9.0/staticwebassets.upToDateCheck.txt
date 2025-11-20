@@ -83,6 +83,7 @@ wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\auth.css
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\draft.css
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\index.css
@@ -314,6 +315,12 @@ C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\c
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\LICENSE.txt
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\auth.css
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\draft.css
+=======
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\auth.css
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\draft.css
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\LICENSE.txt
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\overview.css
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\dist\jquery.slim.min.map
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\dist\jquery.slim.min.js
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\dist\jquery.slim.js
@@ -370,6 +377,7 @@ C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\boot
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
+<<<<<<< HEAD
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\site.css
@@ -460,3 +468,18 @@ C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\l
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\registrar.css
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\auth.css
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
+=======
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\draft.js
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\site.js
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\site.css
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\login.js
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\list.js
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\registrar.css
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\favicon.ico
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\map.js
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\register.js
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\superadminhome.js
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\index.css
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)

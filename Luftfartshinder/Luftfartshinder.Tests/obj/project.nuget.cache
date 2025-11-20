@@ -2,6 +2,7 @@
   "version": 2,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "dgSpecHash": "7ai3YXlwL+8=",
 =======
   "dgSpecHash": "6cO8tK0MFgI=",
@@ -9,10 +10,16 @@
 =======
   "dgSpecHash": "S5sQBMKFmZQ=",
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
+=======
+  "dgSpecHash": "6cO8tK0MFgI=",
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
   "success": true,
-  "projectFilePath": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
+  "projectFilePath": "C:\\Users\\Noa\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
   "expectedPackageFiles": [
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
     "C:\\Users\\Noa\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\Noa\\.nuget\\packages\\coverlet.collector\\6.0.2\\coverlet.collector.6.0.2.nupkg.sha512",
     "C:\\Users\\Noa\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
@@ -81,9 +88,12 @@
     "C:\\Users\\Noa\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\9.0.0\\pomelo.entityframeworkcore.mysql.9.0.0.nupkg.sha512",
     "C:\\Users\\Noa\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "C:\\Users\\Noa\\.nuget\\packages\\system.collections.immutable\\7.0.0\\system.collections.immutable.7.0.0.nupkg.sha512",
 =======
 >>>>>>> f147bd9 (Preview kart details side registrar, og prøvde å implementere de andre funksjonene)
+=======
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
     "C:\\Users\\Noa\\.nuget\\packages\\system.composition\\7.0.0\\system.composition.7.0.0.nupkg.sha512",
     "C:\\Users\\Noa\\.nuget\\packages\\system.composition.attributedmodel\\7.0.0\\system.composition.attributedmodel.7.0.0.nupkg.sha512",
     "C:\\Users\\Noa\\.nuget\\packages\\system.composition.convention\\7.0.0\\system.composition.convention.7.0.0.nupkg.sha512",
@@ -92,6 +102,7 @@
     "C:\\Users\\Noa\\.nuget\\packages\\system.composition.typedparts\\7.0.0\\system.composition.typedparts.7.0.0.nupkg.sha512",
     "C:\\Users\\Noa\\.nuget\\packages\\system.diagnostics.eventlog\\9.0.0\\system.diagnostics.eventlog.9.0.0.nupkg.sha512",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "C:\\Users\\Noa\\.nuget\\packages\\system.io.pipelines\\7.0.0\\system.io.pipelines.7.0.0.nupkg.sha512",
     "C:\\Users\\Noa\\.nuget\\packages\\system.reflection.metadata\\7.0.0\\system.reflection.metadata.7.0.0.nupkg.sha512",
     "C:\\Users\\Noa\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
@@ -99,6 +110,8 @@
     "C:\\Users\\Noa\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512",
 =======
 >>>>>>> f147bd9 (Preview kart details side registrar, og prøvde å implementere de andre funksjonene)
+=======
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
     "C:\\Users\\Noa\\.nuget\\packages\\xunit\\2.9.2\\xunit.2.9.2.nupkg.sha512",
     "C:\\Users\\Noa\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
     "C:\\Users\\Noa\\.nuget\\packages\\xunit.analyzers\\1.16.0\\xunit.analyzers.1.16.0.nupkg.sha512",
@@ -107,6 +120,7 @@
     "C:\\Users\\Noa\\.nuget\\packages\\xunit.extensibility.core\\2.9.2\\xunit.extensibility.core.2.9.2.nupkg.sha512",
     "C:\\Users\\Noa\\.nuget\\packages\\xunit.extensibility.execution\\2.9.2\\xunit.extensibility.execution.2.9.2.nupkg.sha512",
     "C:\\Users\\Noa\\.nuget\\packages\\xunit.runner.visualstudio\\2.8.2\\xunit.runner.visualstudio.2.8.2.nupkg.sha512"
+<<<<<<< HEAD
 =======
     "C:\\Users\\noano\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\noano\\.nuget\\packages\\coverlet.collector\\6.0.2\\coverlet.collector.6.0.2.nupkg.sha512",
@@ -197,6 +211,8 @@
     "C:\\Users\\noano\\.nuget\\packages\\xunit.extensibility.execution\\2.9.2\\xunit.extensibility.execution.2.9.2.nupkg.sha512",
     "C:\\Users\\noano\\.nuget\\packages\\xunit.runner.visualstudio\\2.8.2\\xunit.runner.visualstudio.2.8.2.nupkg.sha512"
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
+=======
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
   ],
   "logs": []
 }

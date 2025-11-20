@@ -40,9 +40,9 @@ namespace Luftfartshinder.Models.Domain
         public double Latitude { get; set; }
         [Required(ErrorMessage = "Obstacle longitude is required.")]
         public double Longitude { get; set; }
-
         // Beskrivelse av hindringen – må fylles ut
         //[Required(ErrorMessage = "Obstacle description is required.")]
+
         public string? Description { get; set; }
 
         // Registrar ting
@@ -51,3 +51,4 @@ namespace Luftfartshinder.Models.Domain
         public Statuses Status { get; set; } = Statuses.Pending;
     }
 }
+

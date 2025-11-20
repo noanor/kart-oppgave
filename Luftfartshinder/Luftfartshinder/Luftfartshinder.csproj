@@ -9,12 +9,19 @@
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
   <ItemGroup>
     <Compile Remove="Views\Map\**" />
     <Content Remove="Views\Map\**" />
     <EmbeddedResource Remove="Views\Map\**" />
+<<<<<<< HEAD
     <None Remove="Views\Map\**" />
+=======
+    <None Remove="Views\Map\**" />
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
   </ItemGroup>
 
   <ItemGroup>
@@ -31,4 +38,8 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
   </ItemGroup>
 
+<<<<<<< HEAD
 </Project>
+=======
+</Project>
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)

@@ -1,4 +1,7 @@
+<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251117183818_DbMig.cs
 <<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251119092416_dbmigration.cs
+=======
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page):Luftfartshinder/Luftfartshinder/Migrations/20251118164315_dbmigration.cs
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -87,6 +90,7 @@ namespace Luftfartshinder.Migrations
         }
     }
 }
+<<<<<<< HEAD:Luftfartshinder/Luftfartshinder/Migrations/20251117183818_DbMig.cs
 ========
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -176,3 +180,5 @@ namespace Luftfartshinder.Migrations
     }
 }
 >>>>>>>> 1f64686 (La til kart preview på registrar details side):Luftfartshinder/Luftfartshinder/Migrations/20251117183818_DbMig.cs
+=======
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page):Luftfartshinder/Luftfartshinder/Migrations/20251118164315_dbmigration.cs

@@ -173,6 +173,7 @@
         "dependencies": {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
           "Microsoft.CodeAnalysis.Analyzers": "3.3.4",
@@ -185,6 +186,9 @@
 >>>>>>> f147bd9 (Preview kart details side registrar, og prøvde å implementere de andre funksjonene)
 =======
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
+=======
+          "Microsoft.CodeAnalysis.Analyzers": "3.3.4"
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
         },
         "compile": {
           "lib/net7.0/_._": {
@@ -363,6 +367,7 @@
           "Microsoft.CodeAnalysis.Common": "[4.8.0]",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           "System.Composition": "7.0.0",
           "System.IO.Pipelines": "7.0.0",
           "System.Threading.Channels": "7.0.0"
@@ -374,6 +379,9 @@
           "System.IO.Pipelines": "7.0.0",
           "System.Threading.Channels": "7.0.0"
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
+=======
+          "System.Composition": "7.0.0"
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
         },
         "compile": {
           "lib/net7.0/_._": {
@@ -434,6 +442,7 @@
           "Microsoft.CodeAnalysis.Common": "[4.8.0]",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           "Microsoft.CodeAnalysis.Workspaces.Common": "[4.8.0]",
           "System.Text.Json": "7.0.3"
 =======
@@ -443,6 +452,9 @@
           "Microsoft.CodeAnalysis.Workspaces.Common": "[4.8.0]",
           "System.Text.Json": "7.0.3"
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
+=======
+          "Microsoft.CodeAnalysis.Workspaces.Common": "[4.8.0]"
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
         },
         "compile": {
           "lib/net7.0/_._": {
@@ -566,6 +578,7 @@
           "Microsoft.Extensions.Logging": "9.0.9",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           "Mono.TextTemplating": "3.0.0",
           "System.Text.Json": "9.0.9"
 =======
@@ -575,6 +588,9 @@
           "Mono.TextTemplating": "3.0.0",
           "System.Text.Json": "9.0.9"
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
+=======
+          "Mono.TextTemplating": "3.0.0"
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
         },
         "compile": {
           "lib/net8.0/_._": {
@@ -1327,6 +1343,7 @@
         "type": "package",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "dependencies": {
           "System.Reflection.Metadata": "1.6.0"
         },
@@ -1337,6 +1354,8 @@
           "System.Reflection.Metadata": "1.6.0"
         },
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
+=======
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
         "compile": {
           "lib/netcoreapp3.1/Microsoft.TestPlatform.CoreUtilities.dll": {},
           "lib/netcoreapp3.1/Microsoft.TestPlatform.PlatformAbstractions.dll": {},
@@ -1679,6 +1698,7 @@
       },
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
       "System.Collections.Immutable/7.0.0": {
@@ -1702,6 +1722,8 @@
 >>>>>>> f147bd9 (Preview kart details side registrar, og prøvde å implementere de andre funksjonene)
 =======
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
+=======
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
       "System.Composition/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -1840,6 +1862,7 @@
       },
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
       "System.IO.Pipelines/7.0.0": {
@@ -1930,6 +1953,8 @@
 >>>>>>> f147bd9 (Preview kart details side registrar, og prøvde å implementere de andre funksjonene)
 =======
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
+=======
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
       "xunit/2.9.2": {
         "type": "package",
         "dependencies": {
@@ -4769,6 +4794,7 @@
     },
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
     "System.Collections.Immutable/7.0.0": {
@@ -4804,6 +4830,8 @@
 >>>>>>> f147bd9 (Preview kart details side registrar, og prøvde å implementere de andre funksjonene)
 =======
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
+=======
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
     "System.Composition/7.0.0": {
       "sha512": "tRwgcAkDd85O8Aq6zHDANzQaq380cek9lbMg5Qma46u5BZXq/G+XvIYmu+UI+BIIZ9zssXLYrkTykEqxxvhcmg==",
       "type": "package",
@@ -4997,6 +5025,7 @@
     },
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
     "System.IO.Pipelines/7.0.0": {
@@ -5184,6 +5213,8 @@
 >>>>>>> f147bd9 (Preview kart details side registrar, og prøvde å implementere de andre funksjonene)
 =======
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
+=======
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
     "xunit/2.9.2": {
       "sha512": "7LhFS2N9Z6Xgg8aE5lY95cneYivRMfRI8v+4PATa4S64D5Z/Plkg0qa8dTRHSiGRgVZ/CL2gEfJDE5AUhOX+2Q==",
       "type": "package",
@@ -5350,23 +5381,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\noano\\.nuget\\packages\\": {},
+    "C:\\Users\\Noa\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\Noa\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
       "projectName": "Luftfartshinder.Tests",
-      "projectPath": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
-      "packagesPath": "C:\\Users\\noano\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\obj\\",
+      "projectPath": "C:\\Users\\Noa\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\Luftfartshinder.Tests.csproj",
+      "packagesPath": "C:\\Users\\Noa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Noa\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\noano\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Noa\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5375,14 +5406,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Luftfartshinder.csproj": {
-              "projectPath": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Luftfartshinder.csproj"
+            "C:\\Users\\Noa\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Luftfartshinder.csproj": {
+              "projectPath": "C:\\Users\\Noa\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Luftfartshinder.csproj"
             }
           }
         }
@@ -5397,7 +5429,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -5466,8 +5498,11 @@
         },
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json"
 =======
+=======
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(, 4.7.32767]",
@@ -5753,10 +5788,13 @@
           "System.Xml.XPath": "(, 4.3.32767]",
           "System.Xml.XPath.XDocument": "(, 5.0.32767]"
         }
+<<<<<<< HEAD
 >>>>>>> f147bd9 (Preview kart details side registrar, og prøvde å implementere de andre funksjonene)
 =======
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
 >>>>>>> 9189e1a (Fikset funksjon for delete report på registrar side)
+=======
+>>>>>>> 8bf41d3 (Fungerende approve og reject knapper registrar details page)
       }
     }
   }
