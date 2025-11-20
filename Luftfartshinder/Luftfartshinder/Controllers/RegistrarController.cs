@@ -44,6 +44,7 @@ namespace Luftfartshinder.Controllers
 
             }
             return NotFound();
+
         }
 
         public async Task<IActionResult> SaveNote(Obstacle obstacleData)
@@ -114,5 +115,3 @@ namespace Luftfartshinder.Controllers
 
 
 }
-
-
