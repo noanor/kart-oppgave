@@ -1,0 +1,25 @@
+.filter-chip {
+    display: inline-flex; 
+    align-items: center;
+    padding: 5px 10px;
+    margin: 2px;
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    user-select: none;
+}
+
+.filter-chip:hover {
+    background-color: #0b5ed7;
+}
+
+.filter-chip .remove-chip {
+    margin-left: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.filter-chip .remove-chip:hover {
+    color: #ffcccc;
+}

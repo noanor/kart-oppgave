@@ -51,6 +51,14 @@ document.addEventListener('DOMContentLoaded', function() {
     setupConfirmationForms();
 });
 
+function updateUserCount() {
+    const rows = document.querySelectorAll('table tbody tr');
+    const visibleUsers = Array.from(rows).filter(row => row.style.display !== 'none').length;
+    const totalUsers = document.getElementById('userCount').getAttribute('data-total');
+    document.getElementById('userCount').textContent = `Showing ${visibleUsers} of ${totalUsers} users`;
+}
+
+
 function filterUsers() {
     const searchText = document.getElementById('userSearch').value.toLowerCase();
     const roleFilter = document.getElementById('filterRole').value;
@@ -69,11 +77,28 @@ function filterUsers() {
         let matchesSearch = username.includes(searchText) || email.includes(searchText) || organization.toLowerCase().includes(searchText);
         let matchesRole = roleFilter === "" || role === roleFilter;
         let matchesStatus = statusFilter === "" || status === statusFilterValue;
-        let matchesOrganization = organizationFilter === "" || organization === organizationFilter;
+        let matchesOrganization = false;
+
+        if (!organizationFilter || organizationFilter === "") {
+            matchesOrganization = true;
+        } else if (organizationFilter === "Other") {
+            const knownOrgs = ["Police", "Norwegian Air Ambulance", "Avinor", "Norwegian Armed Forces"];
+            matchesOrganization = !knownOrgs.includes(organization);
+        } else {
+            matchesOrganization = organization === organizationFilter;
+        }
 
         row.style.display = (matchesSearch && matchesRole && matchesStatus && matchesOrganization) ? "" : "none";
     });
+
+    updateUserCount();
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    autoDismissAlerts();
+    setupConfirmationForms();
+    filterUsers(); 
+});
 
 
 document.getElementById('userSearch').addEventListener('input', filterUsers);
@@ -104,3 +129,55 @@ document.getElementById('resetFilters').addEventListener('click', function() {
     const baseUrl = window.location.pathname.split('?')[0];
     window.location.href = baseUrl + '?roleFilter=All';
 });
+
+function updateFilterChips() {
+    const chipContainer = document.getElementById('activeFilters');
+    chipContainer.innerHTML = '';
+
+    const roleFilter = document.getElementById('filterRole').value;
+    const statusFilter = document.getElementById('filterStatus').value;
+    const organizationFilter = document.getElementById('filterOrganization').value;
+
+    if (roleFilter && roleFilter !== "All") {
+        createChip('Role', roleFilter);
+    }
+    if (statusFilter) {
+        createChip('Status', statusFilter);
+    }
+    if (organizationFilter) {
+        createChip('Organization', organizationFilter);
+    }
+}
+
+function createChip(type, value) {
+    const chipContainer = document.getElementById('activeFilters');
+    const chip = document.createElement('div');
+    chip.className = 'filter-chip';
+    chip.dataset.type = type;
+    
+    const textNode = document.createTextNode(value);
+    chip.appendChild(textNode);
+    
+    const removeBtn = document.createElement('span');
+    removeBtn.className = 'remove-chip';
+    removeBtn.textContent = '×';
+
+    removeBtn.addEventListener('click', function(e) {
+        e.stopPropagation(); 
+        if (type === 'Role') document.getElementById('filterRole').value = '';
+        if (type === 'Status') document.getElementById('filterStatus').value = '';
+        if (type === 'Organization') document.getElementById('filterOrganization').value = '';
+
+        const params = new URLSearchParams(window.location.search);
+        if (type === 'Role') params.delete('roleFilter');
+        if (type === 'Status') params.delete('statusFilter');
+        if (type === 'Organization') params.delete('organizationFilter');
+        window.location.href = window.location.pathname + '?' + params.toString();
+    });
+
+    chip.appendChild(removeBtn);
+    chipContainer.appendChild(chip);
+}
+
+document.addEventListener('DOMContentLoaded', updateFilterChips);
+document.getElementById('applyFilters').addEventListener('click', updateFilterChips);
