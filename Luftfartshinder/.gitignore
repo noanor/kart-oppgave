@@ -38,7 +38,6 @@ appsettings.Local.json
 *.env
 
 # ---- Entity Framework ----
-Migrations/obj/
 *.dbmdl
 # Local databases (if you use SQLite/SQL Server localdb)
 *.db
