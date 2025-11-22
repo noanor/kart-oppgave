@@ -2,6 +2,10 @@
 @{
 }
 
+@section Styles {
+	<link rel="stylesheet" href="~/css/userlist.css" />
+}
+
 @* Success/Error Messages *@
 @if (TempData["Success"] != null)
 {
@@ -127,6 +131,11 @@
 
 		@if (Model.Users != null || Model.Users.Any())
 		{
+			<div id="activeFilters" class="d-flex flex-wrap gap-2 mb-3"></div>
+			
+			<span id="userCount" data-total="@ViewBag.TotalUsers">Showing @Model.Users.Count() of @ViewBag.TotalUsers users</span>
+
+			
 			<table class="table table-hover">
 				<thead>
 				<tr>
@@ -166,6 +175,9 @@
 								      data-confirm="Are you sure you want to approve @user.UserName?"
 								      data-action-type="approve">
 									@Html.AntiForgeryToken()
+									<input type="hidden" name="roleFilter" value="@ViewBag.CurrentFilter" />
+									<input type="hidden" name="statusFilter" value="@ViewBag.StatusFilter" />
+									<input type="hidden" name="organizationFilter" value="@ViewBag.OrganizationFilter" />
 									<button class="btn btn-success btn-sm" type="submit">Approve</button>
 								</form>
 								<form method="post" style="display:inline;"
@@ -175,6 +187,9 @@
 								      data-confirm="Are you sure you want to decline @user.UserName? This will remove the user from the system."
 								      data-action-type="decline">
 									@Html.AntiForgeryToken()
+									<input type="hidden" name="roleFilter" value="@ViewBag.CurrentFilter" />
+									<input type="hidden" name="statusFilter" value="@ViewBag.StatusFilter" />
+									<input type="hidden" name="organizationFilter" value="@ViewBag.OrganizationFilter" />
 									<button class="btn btn-danger btn-sm" type="submit">Decline</button>
 								</form>
 							}
@@ -187,6 +202,9 @@
 								      data-confirm="Are you sure you want to delete @user.UserName?"
 								      data-action-type="delete">
 									@Html.AntiForgeryToken()
+									<input type="hidden" name="roleFilter" value="@ViewBag.CurrentFilter" />
+									<input type="hidden" name="statusFilter" value="@ViewBag.StatusFilter" />
+									<input type="hidden" name="organizationFilter" value="@ViewBag.OrganizationFilter" />
 									<button class="btn btn-danger btn-sm" type="submit">Delete</button>
 								</form>
 							}

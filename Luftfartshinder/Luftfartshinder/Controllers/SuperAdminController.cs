@@ -44,9 +44,21 @@ namespace Luftfartshinder.Controllers
                     }
                 }
                 
-                if (!string.IsNullOrEmpty(organizationFilter) && user.Organization != organizationFilter)
+                var knownOrgs = new List<string> { "Police", "Norwegian Air Ambulance", "Avinor", "Norwegian Armed Forces" };
+
+                if (!string.IsNullOrEmpty(organizationFilter))
                 {
-                    continue;
+                    if (organizationFilter == "Other")
+                    {
+                        if (knownOrgs.Contains(user.Organization))
+                        {
+                            continue; 
+                        }
+                    }
+                    else if (user.Organization != organizationFilter)
+                    {
+                        continue;
+                    }
                 }
                 
                 if (!string.IsNullOrEmpty(user.Organization))
@@ -71,12 +83,14 @@ namespace Luftfartshinder.Controllers
             ViewBag.OrganizationFilter = organizationFilter;
             ViewBag.Organizations = uniqueOrganizations.OrderBy(o => o).ToList();
             
+            ViewBag.TotalUsers = allUsers.Count();
+            
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id, string roleFilter, string statusFilter, string organizationFilter)
         {
             var user = await userManager.FindByIdAsync(id.ToString());
 
@@ -91,12 +105,12 @@ namespace Luftfartshinder.Controllers
                 }
             }
 
-            return RedirectToAction("List");
+            return RedirectToAction("List", new { roleFilter, statusFilter, organizationFilter });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Approve(Guid id)
+        public async Task<IActionResult> Approve(Guid id, string roleFilter, string statusFilter, string organizationFilter)
         {
             var user = await userManager.FindByIdAsync(id.ToString());
 
@@ -111,12 +125,12 @@ namespace Luftfartshinder.Controllers
                 }
             }
 
-            return RedirectToAction("List");
+            return RedirectToAction("List", new { roleFilter, statusFilter, organizationFilter });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Decline(Guid id)
+        public async Task<IActionResult> Decline(Guid id, string roleFilter, string statusFilter, string organizationFilter)
         {
             var user = await userManager.FindByIdAsync(id.ToString());
 
@@ -131,7 +145,7 @@ namespace Luftfartshinder.Controllers
                 }
             }
 
-            return RedirectToAction("List");
+            return RedirectToAction("List", new { roleFilter, statusFilter, organizationFilter });
         }
     }
 }

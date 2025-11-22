@@ -3,7 +3,7 @@ setTimeout(function () {
     if (alertEl) {
         alertEl.classList.remove('show');
         setTimeout(function() {
-            alertEl.remove(); 
-        }, 500); 
+            alertEl.remove();
+        }, 500);
     }
-}, 3500);
+}, 2000);

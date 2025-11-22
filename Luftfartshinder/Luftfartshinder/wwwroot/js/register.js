@@ -31,6 +31,23 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    const confirmPasswordInput = document.getElementById("ConfirmPassword");
+    const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+
+    if (toggleConfirmPassword && confirmPasswordInput) {
+        toggleConfirmPassword.addEventListener("click", function () {
+            const icon = this.querySelector("i");
+
+            if (confirmPasswordInput.type === "password") {
+                confirmPasswordInput.type = "text";
+                icon.classList.replace("bi-eye", "bi-eye-slash");
+            } else {
+                confirmPasswordInput.type = "password";
+                icon.classList.replace("bi-eye-slash", "bi-eye");
+            }
+        });
+    }
+
     const requirements = {
         length: document.getElementById("length"),
         uppercase: document.getElementById("uppercase"),
@@ -120,14 +137,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         }
-        
-        const canSubmit = passwordValid && allFieldsValid && roleAndOrgValid;
+
+        let confirmMatches = false;
+        if (confirmPasswordInput) {
+            confirmMatches = confirmPasswordInput.value === passwordInput.value;
+
+            if (confirmMatches) {
+                confirmPasswordInput.classList.remove("is-invalid");
+            } else {
+                confirmPasswordInput.classList.add("is-invalid");
+            }
+        }
+
+        const canSubmit = passwordValid && allFieldsValid && roleAndOrgValid && (confirmPasswordInput ? confirmMatches : true);
+
         submitBtn.disabled = !canSubmit;
         submitBtn.classList.toggle("btn-dark", canSubmit);
         submitBtn.classList.toggle("btn-secondary", !canSubmit);
     }
 
     passwordInput.addEventListener("input", checkForm);
+    if (confirmPasswordInput) {
+        confirmPasswordInput.addEventListener("input", checkForm);
+    }
 
     customOrganizationInput.addEventListener("input", checkForm);
     customOrganizationInput.addEventListener("change", checkForm);
@@ -149,30 +181,39 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         return false;
     }
-
-    function confirmCancel(redirectUrl) {
-        if (hasUserInput()) {
-            if (confirm("You have unsaved information. Are you sure you want to cancel the registration?")) {
-                window.location.href = redirectUrl;
-            }
-        } else {
-            window.location.href = redirectUrl;
-        }
-    }
     
     const cancelBtnUser = document.getElementById("cancelBtnUser");
     if (cancelBtnUser) {
         cancelBtnUser.addEventListener("click", function () {
-            confirmCancel("/Account/Login");
+            if (hasUserInput()) { 
+                var cancelModal = new bootstrap.Modal(document.getElementById('cancelModal'));
+                cancelModal.show();
+                document.getElementById("confirmCancelBtn").dataset.redirect = "/Account/Login";
+            } else {
+                window.location.href = "/Account/Login"; 
+            }
         });
     }
-    
+
+
     const cancelBtnAdmin = document.getElementById("cancelBtnAdmin");
     if (cancelBtnAdmin) {
         cancelBtnAdmin.addEventListener("click", function () {
-            confirmCancel("/Home/SuperAdminHome");
+            if (hasUserInput()) { 
+                var cancelModal = new bootstrap.Modal(document.getElementById('cancelModal'));
+                cancelModal.show();
+                document.getElementById("confirmCancelBtn").dataset.redirect = "/Account/Dashboard";
+            } else {
+                window.location.href = "/Account/Dashboard"; 
+            }
         });
     }
+
+    document.getElementById("confirmCancelBtn").addEventListener("click", function () {
+        var url = this.dataset.redirect;
+        window.location.href = url;
+    });
+    
     const registerAlert = document.getElementById("registerAlert");
     if (registerAlert) {
         setTimeout(() => {

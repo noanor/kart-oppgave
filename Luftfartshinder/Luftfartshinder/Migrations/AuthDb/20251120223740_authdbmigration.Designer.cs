@@ -4,6 +4,7 @@ using Luftfartshinder.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Luftfartshinder.Migrations.AuthDb
 {
     [DbContext(typeof(AuthDbContext))]
-    partial class AuthDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251120223740_authdbmigration")]
+    partial class authdbmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,7 +107,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             Id = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "768eac4f-7df5-4b98-b24b-cef038b612da",
+                            ConcurrencyStamp = "77254413-3565-40c9-b50a-456e1e66c316",
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -116,7 +119,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                             Organization = "Kartverket",
                             PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ff5dc959-17ab-435b-8a14-42d915c41ee5",
+                            SecurityStamp = "8b477784-7be0-4224-a64a-7519a811c4eb",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         },
@@ -124,7 +127,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             Id = "322acd53-a201-47c6-a7e0-6695690ce677",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "14385f7e-6d92-4d88-9ebd-52026d7d905b",
+                            ConcurrencyStamp = "7caf726a-aecc-4d54-b24b-3fdb8ba2d99e",
                             Email = "registrar@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Regi",
@@ -136,7 +139,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                             Organization = "Kartverket",
                             PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "605a3130-1d34-4419-a2c5-b8edca8c6d03",
+                            SecurityStamp = "36280c83-3255-4699-8c9d-8467cf86041a",
                             TwoFactorEnabled = false,
                             UserName = "registrar"
                         },
@@ -144,7 +147,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                         {
                             Id = "1d3b44cf-5507-444f-b84c-842539f13e02",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7ba42857-f72b-462f-91fa-795b5ef2a326",
+                            ConcurrencyStamp = "99c45d76-15df-46a6-b215-ae2779e46588",
                             Email = "pilot@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Kaptein",
@@ -156,7 +159,7 @@ namespace Luftfartshinder.Migrations.AuthDb
                             Organization = "Norwegian Armed Forces",
                             PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dbac7351-9716-48f3-bae6-71494ea4dbd1",
+                            SecurityStamp = "ee175caa-ce0b-4d82-881c-c85a91ca962e",
                             TwoFactorEnabled = false,
                             UserName = "pilot"
                         });

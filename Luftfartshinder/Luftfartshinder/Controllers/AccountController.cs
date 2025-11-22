@@ -85,7 +85,7 @@ namespace Luftfartshinder.Controllers
                 if (roleResult.Succeeded)
                 {
                     TempData["RegistrationSuccess"] = "User registered successfully!";
-                    return RedirectToAction("Dashboard");
+                    return RedirectToAction("Dashboard", "Account");
                 }
             }
 
@@ -96,13 +96,13 @@ namespace Luftfartshinder.Controllers
         [AllowAnonymous]
         public IActionResult UserRegister()
         {
-            return View();
+            return View(new UserRegisterViewModel());
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UserRegister(RegisterViewModel model)
+        public async Task<IActionResult> UserRegister(UserRegisterViewModel model)
         {
             if (!ModelState.IsValid)
             {
