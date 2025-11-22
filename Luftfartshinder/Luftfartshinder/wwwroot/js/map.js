@@ -5,9 +5,74 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
-L.geolet({
-	position: 'bottomleft'
+const geoletControl = L.geolet({
+    position: 'bottomleft',
+    className: 'geolet-btn',
+    activeClassName: 'geolet-btn-active',
+    html: `
+      <span class="visually-hidden">Center map on my location</span>
+      <svg
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <circle
+          cx="12"
+          cy="12"
+          r="7"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        />
+        <circle
+          cx="12"
+          cy="12"
+          r="3"
+          fill="currentColor"
+        />
+        <line
+          x1="12"
+          y1="2"
+          x2="12"
+          y2="6"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+        <line
+          x1="12"
+          y1="18"
+          x2="12"
+          y2="22"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+        <line
+          x1="2"
+          y1="12"
+          x2="6"
+          y2="12"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+        <line
+          x1="18"
+          y1="12"
+          x2="22"
+          y2="12"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+      </svg>
+    `
 }).addTo(map);
+
+L.DomUtil.addClass(geoletControl.getContainer(), 'geolet-container');
 
 
 const draftMarkers = new Map();
@@ -48,6 +113,8 @@ window.addEventListener('resize', () => {
 let isOpen = false;
 let justOpened = false;
 
+let selectionMade = false;
+
 function openWheel(x, y) {
     wheel.style.setProperty('--x', `${x}px`);
     wheel.style.setProperty('--y', `${y}px`);
@@ -62,6 +129,17 @@ function openWheel(x, y) {
 function closeWheel() {
     wheel.classList.remove('on');
     setTimeout(() => wheel.classList.add('hidden'), 300);
+
+
+    if (!selectionMade && tempMarker) {
+        setTimeout(function removeMarker() {
+            map.removeLayer(tempMarker);
+            tempMarker = null;
+        }, 50)
+    }
+
+    selectionMade = false;
+
     wheel.setAttribute('data-chosen', 0);
     isOpen = false;
 }
