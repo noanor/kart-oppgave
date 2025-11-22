@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Luftfartshinder.Migrations.AuthDb
+namespace Luftfartshinder.Migrations
 {
     /// <inheritdoc />
-    public partial class authdbmigration : Migration
+    public partial class db : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -220,9 +220,9 @@ namespace Luftfartshinder.Migrations.AuthDb
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsApproved", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Organization", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1d3b44cf-5507-444f-b84c-842539f13e02", 0, "7ba42857-f72b-462f-91fa-795b5ef2a326", "pilot@kartverket.no", false, "Kaptein", true, "Pilot", false, null, "PILOT@KARTVERKET.NO", "PILOT", "Norwegian Armed Forces", "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==", null, false, "dbac7351-9716-48f3-bae6-71494ea4dbd1", false, "pilot" },
-                    { "322acd53-a201-47c6-a7e0-6695690ce677", 0, "14385f7e-6d92-4d88-9ebd-52026d7d905b", "registrar@kartverket.no", false, "Regi", true, "Strar", false, null, "REGISTRAR@KARTVERKET.NO", "REGISTRAR", "Kartverket", "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==", null, false, "605a3130-1d34-4419-a2c5-b8edca8c6d03", false, "registrar" },
-                    { "3c1b1dcf-6345-42b9-90fe-45227eb5be5b", 0, "768eac4f-7df5-4b98-b24b-cef038b612da", "superadmin@kartverket.no", false, "Super", true, "Admin", false, null, "SUPERADMIN@KARTVERKET.NO", "SUPERADMIN@KARTVERKET.NO", "Kartverket", "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==", null, false, "ff5dc959-17ab-435b-8a14-42d915c41ee5", false, "superadmin@kartverket.no" }
+                    { "1d3b44cf-5507-444f-b84c-842539f13e02", 0, "e6d061fd-6232-44d6-9fd9-480b3277614a", "pilot@kartverket.no", false, "Kaptein", true, "Pilot", false, null, "PILOT@KARTVERKET.NO", "PILOT", "Norwegian Armed Forces", "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==", null, false, "023f32cf-0aec-425f-adc4-c504424ae8f0", false, "pilot" },
+                    { "322acd53-a201-47c6-a7e0-6695690ce677", 0, "ba3b9483-2308-4539-abe6-33bf86fc2eab", "registrar@kartverket.no", false, "Regi", true, "Strar", false, null, "REGISTRAR@KARTVERKET.NO", "REGISTRAR", "Kartverket", "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==", null, false, "52013384-9253-4612-b0e3-fa3fa54f936b", false, "registrar" },
+                    { "3c1b1dcf-6345-42b9-90fe-45227eb5be5b", 0, "338c26ba-9307-4aa6-bb9a-7138c4accb16", "superadmin@kartverket.no", false, "Super", true, "Admin", false, null, "SUPERADMIN@KARTVERKET.NO", "SUPERADMIN@KARTVERKET.NO", "Kartverket", "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==", null, false, "d045fc18-3a61-4a52-bc40-84dfe1137d4d", false, "superadmin@kartverket.no" }
                 });
 
             migrationBuilder.InsertData(

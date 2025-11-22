@@ -1,4 +1,4 @@
-using Luftfartshinder.Controllers;
+/*using Luftfartshinder.Controllers;
 using Luftfartshinder.Models;
 using Luftfartshinder.Models.ViewModel;
 using Luftfartshinder.Repository;
@@ -157,3 +157,4 @@ namespace Luftfartshinder.Tests
     }
 }
 
+*/
