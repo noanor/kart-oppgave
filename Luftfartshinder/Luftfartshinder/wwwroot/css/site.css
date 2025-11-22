@@ -52,7 +52,8 @@ html {
 }
 
 .bg-detail {
-    background-color: #34656D;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background-color: #0f172a;
 }
 
 .bg-lightgray {

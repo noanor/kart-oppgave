@@ -655,3 +655,4 @@ C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luft
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\Luftfart.07673CF6.Up2Date
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\Luftfartshinder.genruntimeconfig.cache
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\ref\Luftfartshinder.dll
+C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\vylom24x76-62c3o98tk1.gz
