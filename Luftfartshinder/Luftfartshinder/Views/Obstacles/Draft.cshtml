@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
-@model Luftfartshinder.Models.ViewModel.SessionObstacleDraft
+@using Luftfartshinder.Models.ViewModel.Obstacles
+@model SessionObstacleDraft
 @{
 }
 
@@ -196,7 +197,7 @@
 </div>
 
 <div class="toast-container position-fixed end-0 p-3" style="z-index: 3000; top: 5vh;">
-    <div id="toastDraftCleared" class="toast text-white bg-danger border-0 opacity-75" role="alert">
+    <div id="toastDraftCleared" class="toast text-white bg-danger border-0" role="alert">
         <div class="toast-body">
             Draft cleared.
         </div>

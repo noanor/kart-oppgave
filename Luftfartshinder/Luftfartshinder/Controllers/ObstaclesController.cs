@@ -1,7 +1,7 @@
 using Luftfartshinder.Extensions;
-using Luftfartshinder.Models;
 using Luftfartshinder.Models.Domain;
-using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Models.ViewModel.Admin;
+using Luftfartshinder.Models.ViewModel.Obstacles;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -78,13 +78,27 @@ public partial class ObstaclesController : Controller
     {
         var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
 
+        // 1. Finn innlogget bruker
+        var user = await userManager.GetUserAsync(User);
+
+        if (user == null)
+        {
+            return Challenge(); // eller throw
+        }
+
+        if (user.OrganizationId == null)
+        {
+            return BadRequest("Brukeren er ikke knyttet til en organisasjon.");
+        }
+
         // Create new report
         var newReport = new Report()
         {
             ReportDate = DateTime.Now,
             Author = User.Identity.Name,
             AuthorId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-            Title = ""
+            Title = "",
+            OrganizationId = user.OrganizationId
         };
 
         if (draft is null || draft.Obstacles.Count == 0)
@@ -95,6 +109,7 @@ public partial class ObstaclesController : Controller
         // Assign obstacles to the report
         foreach (var obstacle in draft.Obstacles)
         {
+            obstacle.OrganizationId = user.OrganizationId;
             newReport.Obstacles.Add(obstacle);
 
         }
@@ -212,7 +227,7 @@ public partial class ObstaclesController : Controller
             return NotFound();
         }
 
-        var editObstacleRequest = new EditObstacleRequest()
+        var editObstacleRequest = new AdminEditObstacleRequest()
         {
             Id = existingObstacle.Id,
             Type = existingObstacle.Type,

@@ -1,6 +1,8 @@
-﻿using Luftfartshinder.Models;
+﻿using Luftfartshinder.DataContext;
 using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Models.ViewModel.Organization;
+using Luftfartshinder.Models.ViewModel.User;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -15,14 +17,17 @@ namespace Luftfartshinder.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IAccountRepository accountRepository;
         private readonly IReportRepository reportRepository;
+        private readonly IOrganizationRepository organizationRepository;
+        private readonly IObstacleRepository obstacleRepository;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository, IReportRepository reportRepository)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository, IReportRepository reportRepository, IOrganizationRepository organizationRepository, IObstacleRepository obstacleRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.accountRepository = accountRepository;
             this.reportRepository = reportRepository;
-
+            this.organizationRepository = organizationRepository;
+            this.obstacleRepository = obstacleRepository;
         }
 
         [HttpGet]
@@ -56,14 +61,16 @@ namespace Luftfartshinder.Controllers
                 return View(model);
             }
 
-            string? organization = null;
+            string? organizationName = null;
             if (model.SelectedRole == "FlightCrew")
             {
-                if (model.Organization == "Other" && !string.IsNullOrEmpty(model.OtherOrganization))
-                    organization = model.OtherOrganization;
+                if (model.OrganizationName == "Other" && !string.IsNullOrEmpty(model.OtherOrganizationName))
+                    organizationName = model.OtherOrganizationName;
                 else
-                    organization = model.Organization;
+                    organizationName = model.OrganizationName;
             }
+
+            var organization = await organizationRepository.GetByName(organizationName);
 
             var newUser = new ApplicationUser
             {
@@ -88,7 +95,7 @@ namespace Luftfartshinder.Controllers
                 }
             }
 
-            return View();
+            return RedirectToAction("List", "SuperadminHome");
         }
 
         [HttpGet]
@@ -100,14 +107,8 @@ namespace Luftfartshinder.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> UserRegister(UserRegisterViewModel model)
+        public async Task<IActionResult> UserRegister(RegisterViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-
             var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
             var existingUserByUsername = await userManager.FindByNameAsync(model.Username);
 
@@ -123,13 +124,39 @@ namespace Luftfartshinder.Controllers
                 return View(model);
             }
 
-            string? organization = null;
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            Organization? organization = null;
+
             if (model.SelectedRole == "FlightCrew")
             {
-                if (model.Organization == "Other" && !string.IsNullOrEmpty(model.OtherOrganization))
-                    organization = model.OtherOrganization;
+                string? orgName = null;
+
+                if (model.OrganizationName == "Other" &&
+                    !string.IsNullOrWhiteSpace(model.OtherOrganizationName))
+                {
+                    orgName = model.OtherOrganizationName;
+                }
                 else
-                    organization = model.Organization;
+                {
+                    orgName = model.OrganizationName;
+                }
+
+                if (!string.IsNullOrWhiteSpace(orgName))
+                {
+                    // look up existing org, or create new
+                    // depends on how you store organizations
+                    organization = await organizationRepository.GetByName(orgName);
+
+                    if (organization == null)
+                    {
+                        organization = new Organization { Name = orgName };
+                        await organizationRepository.Add(organization);
+                    }
+                }
             }
 
             var newUser = new ApplicationUser
@@ -138,42 +165,27 @@ namespace Luftfartshinder.Controllers
                 LastName = model.LastName,
                 Email = model.Email,
                 UserName = model.Username,
-                Organization = organization,
-                IsApproved = false
+                OrganizationId = organization.Id, // or Organization = organization if same DbContext
+                IsApproved = true
             };
 
             var createResult = await userManager.CreateAsync(newUser, model.Password);
 
-            if (!createResult.Succeeded)
+            if (createResult.Succeeded)
             {
-                ModelState.AddModelError(string.Empty, "Registration failed. Please correct the fields below.");
+                var roleResult = await userManager.AddToRoleAsync(newUser, model.SelectedRole);
 
-                foreach (var error in createResult.Errors)
+                if (roleResult.Succeeded)
                 {
-                    if (error.Code.Contains("DuplicateUserName"))
-                        ModelState.AddModelError("Username", "This username is already taken.");
-                    else if (error.Code.Contains("DuplicateEmail"))
-                        ModelState.AddModelError("Email", "This email is already taken.");
-                    else
-                        ModelState.AddModelError(string.Empty, error.Description);
+                    TempData["RegistrationSuccess"] = "User registered successfully!";
+                    return RedirectToAction("Dashboard", "Account");
                 }
-                return View(model);
             }
 
-            var roleResult = await userManager.AddToRoleAsync(newUser, model.SelectedRole);
-
-            if (!roleResult.Succeeded)
-            {
-                foreach (var error in roleResult.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
-                return View(model);
-            }
-
-            TempData["RegistrationSuccess"] = "Thank you for registering! Your account has been submitted for review and must be approved by an administrator before you can log in.";
-            return RedirectToAction("Login");
+            // Add any errors from createResult / roleResult to ModelState if you want
+            return View(model);
         }
+
 
         [HttpGet]
         [AllowAnonymous]
@@ -253,18 +265,54 @@ namespace Luftfartshinder.Controllers
             return View(reports);
         }
 
-        [HttpGet]
-        [Authorize]
+        //[HttpGet]
+        //[Authorize]
+        //public async Task<IActionResult> FlightCrewObstacles()
+        //{
+        //    string? userId = userManager.GetUserId(User);
+        //    var obstacles = new List<Report>();
+
+        //    obstacles = await reportRepository.GetAllAsync();
+
+        //    return View(obstacles);
+        //}
+
         public async Task<IActionResult> FlightCrewObstacles()
         {
-            string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var obstacles = new List<Report>();
+            // 1. Finn innlogget bruker
+            var user = await userManager.GetUserAsync(User);
 
-            obstacles = await reportRepository.GetAllAsync();
+            if (user == null)
+            {
+                // Ingen innlogget bruker → redirect eller forbidd, opp til deg
+                return Challenge(); // sender til login
+            }
 
-            return View(obstacles);
+            if (user.OrganizationId == null)
+            {
+                // Brukeren har ikke organisasjon
+                return Forbid(); // eller vis en egen side
+            }
+
+            var organization = await organizationRepository.GetById(user.OrganizationId);
+
+            var orgId = organization.Id;
+
+            // 2. Hent data fra Domain-DB via repos
+            var obstacles = await obstacleRepository.GetByOrgId(orgId);
+            var reports = await reportRepository.GetByOrgId(orgId);
+
+            // 3. Bygg viewmodel
+            var vm = new OrgDataViewModel
+            {
+                Organization = organization,
+                Obstacles = obstacles,
+                Reports = reports
+            };
+
+            // 4. Send til view
+            return View("FlightCrewObstacles", vm);
         }
-
 
     }
 }

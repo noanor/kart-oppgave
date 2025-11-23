@@ -1,4 +1,5 @@
-﻿@model Luftfartshinder.Models.ViewModel.EditObstacleRequest
+﻿@using Luftfartshinder.Models.ViewModel.Admin
+@model AdminEditObstacleRequest
 
 @{
 }
@@ -7,82 +8,87 @@
     <link href="~/css/adminEdit.css" rel="stylesheet" />
 }
 <div class="container py-5">
-    <div class="mt-5">
+    <div class="mt-5 mb-4">
         <div class="h1">
             Edit Obstacle #@Model.Id
         </div>
+        <div class="text-muted">Reported by: @Model.Report.Author</div>
     </div>
 
-    <form method="post" class="w-100">
-        <div class="w-100">
-            <div>
-                @Html.AntiForgeryToken()
-                <div class="mb-3">
+    <form id="adminEditObstacleForm" method="post">
+        @Html.AntiForgeryToken()
+        <div class="row g-3 mb-3">
+            <div class="col">
+                <label class="form-label">Name</label>
+                <input type="text" id="name" class="form-control" asp-for="Name"/>
+            </div>
+
+            <div class="col">
                 <label class="form-label" for="type">Type</label>
 
                 <select class="form-select" id="type" name="type"
                         asp-for="Type">
-                    <option value="Punkt">Punkt</option>
+                    <option value="Point">Point</option>
                     <option value="Mast">Mast</option>
-                    <option value="Linje">Linje</option>
-                    <option value="Luftspenn">Luftspenn</option>
-                    <option value="Flate">Flate</option>
+                    <option value="Line">Line</option>
+                    <option value="Powerline">Power line</option>
+                    <option value="Area">Area</option>
                 </select>
-                </div>
+            </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Name</label>
-                    <input type="text" id="name" class="form-control" asp-for="Name"/>
-                </div>
+        </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Height</label>
-                    <input type="text" id="height" class="form-control" asp-for="Height"/>
-                </div>
+        <div class="row g-3 mb-3">
+            <div class="col">
+                <label class="form-label">Latitude</label>
+                <input type="text" id="latitude" class="form-control" asp-for="Latitude" />
+            </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Latitude</label>
-                    <input type="text" id="latitude" class="form-control" asp-for="Latitude"/>
-                </div>
+            <div class="col">
+                <label class="form-label">Longitude</label>
+                <input type="text" id="longitude" class="form-control" asp-for="Longitude" />
+            </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Longitude</label>
-                    <input type="text" id="longitude" class="form-control" asp-for="Longitude"/>
-                </div>
+        </div>
 
-                <div class="mb-3">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col">
+                        <label class="form-label">Height</label>
+                        <input type="text" id="height" class="form-control" asp-for="Height"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+            <div class="row mb-3">
+                <div class="col">
                     <label class="form-label">Description</label>
                     <input type="text" id="decription" class="form-control" asp-for="Description"/>
                 </div>
-
             </div>
 
-            <div class="d-flex flex-column">
-                <div class="mb-3">
+            <div class="mb-3">
+                <div class="col">
                     <label class="form-label">Registrar Note</label>
-                    <input type="text" id="registrarNote" class="form-control" asp-for="RegistrarNote" />
-                </div>
+                    <textarea cols="7" id="registrarNote" class="form-control" asp-for="RegistrarNote">@Model.RegistrarNote</textarea>
 
-                <div class="mb-3">
-                    <label class="form-label">Reported by</label>
-                    <input type="disabled" id="registrarNote" class="form-control" asp-for="RegistrarNote" value="@Model.Report.Author" />
                 </div>
             </div>
         </div>
-        
 
-
-        <div class="mb-3">
-            <div class="d-flex">
-                <button type="submit" class="btn btn-primary">Update</button>
-
-                <button class="btn btn-danger ms-2" type="submit"
-                        asp-area=""
-                        asp-controller="AdminTags"
-                        asp-action="Delete">Delete</button>
-            </div>
-
-        </div>
     </form>
+
+    <div class="mb-3">
+        <div class="d-flex">
+            <button type="submit" form="adminEditObstacleForm" class="btn btn-primary">Update</button>
+
+            <button class="btn btn-danger ms-2" type="submit"
+                    asp-area=""
+                    asp-controller="AdminTags"
+                    asp-action="Delete">Delete</button>
+        </div>
+
+    </div>
 
 </div>

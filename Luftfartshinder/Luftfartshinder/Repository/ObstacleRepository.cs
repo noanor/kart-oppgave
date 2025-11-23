@@ -60,9 +60,29 @@ namespace Luftfartshinder.Repository
         }
         public async Task<Obstacle> UpdateObstacle(Obstacle obstacleData)
         {
-            _context.Obstacles.Update(obstacleData);
+            var existing = await _context.Obstacles.FindAsync(obstacleData.Id);
+
+            if (existing == null)
+                return null;
+
+            // Map values manually
+            existing.Type = obstacleData.Type;
+            existing.Name = obstacleData.Name;
+            existing.Description = obstacleData.Description;
+            existing.Height = obstacleData.Height;
+            existing.Latitude = obstacleData.Latitude;
+            existing.Longitude = obstacleData.Longitude;
+            existing.ReportId = obstacleData.ReportId;
+
             await _context.SaveChangesAsync();
-            return obstacleData;
+            return existing;
+        }
+
+        public async Task<List<Obstacle>> GetByOrgId(int id)
+        {
+            return await _context.Obstacles
+                        .Where(o => o.OrganizationId == id)
+                        .ToListAsync();
         }
     }
 }

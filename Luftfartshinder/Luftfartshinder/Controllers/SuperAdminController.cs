@@ -1,5 +1,5 @@
-﻿using Luftfartshinder.Models;
-using Luftfartshinder.Models.ViewModel;
+﻿using Luftfartshinder.Models.Domain;
+using Luftfartshinder.Models.ViewModel.User;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,11 +12,13 @@ namespace Luftfartshinder.Controllers
     {
         private readonly IUserRepository userRepository;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IOrganizationRepository organizationRepository;
 
-        public SuperAdminController(IUserRepository userRepository, UserManager<ApplicationUser> userManager)
+        public SuperAdminController(IUserRepository userRepository, UserManager<ApplicationUser> userManager, IOrganizationRepository organizationRepository)
         {
             this.userRepository = userRepository;
             this.userManager = userManager;
+            this.organizationRepository = organizationRepository;
         }
 
         public async Task<IActionResult> List(string roleFilter = "All", string statusFilter = "", string organizationFilter = "")
@@ -43,27 +45,35 @@ namespace Luftfartshinder.Controllers
                         continue;
                     }
                 }
-                
-                var knownOrgs = new List<string> { "Police", "Norwegian Air Ambulance", "Avinor", "Norwegian Armed Forces" };
+
+                var knownOrgs = organizationRepository.GetAll();
 
                 if (!string.IsNullOrEmpty(organizationFilter))
                 {
                     if (organizationFilter == "Other")
                     {
-                        if (knownOrgs.Contains(user.Organization))
+                        foreach (var o in knownOrgs)
                         {
-                            continue; 
+                            if (o.Name == organizationFilter)
+                            {
+                                continue;
+                            }
                         }
                     }
-                    else if (user.Organization != organizationFilter)
+                    else if (user.Organization.Name != organizationFilter)
                     {
                         continue;
                     }
                 }
                 
-                if (!string.IsNullOrEmpty(user.Organization))
+                if (!string.IsNullOrEmpty(user.Organization.Name))
                 {
-                    uniqueOrganizations.Add(user.Organization);
+                    var newUniqueOrganization = new Organization
+                    {
+                        Name = user.Organization.Name
+
+                    };
+                    uniqueOrganizations.Add(user.Organization.Name);
                 }
                 
                 filteredUsers.Add(new User

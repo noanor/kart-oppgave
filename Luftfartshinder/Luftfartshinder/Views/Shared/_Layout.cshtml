@@ -1,5 +1,6 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using System.Security.Claims
+﻿@using System.Security.Claims
+@using Luftfartshinder.Models.Domain
+@using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> signInManager
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Luftfartshinder.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
+    
 </head>
 
 <body>
@@ -217,6 +218,10 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    @if (signInManager.IsSignedIn(User))
+    {
+        <script src="~/js/dualNavbar.js"></script>
+    }
     @await RenderSectionAsync("Scripts", required: false)
     @await RenderSectionAsync("Styles", required: false)
 

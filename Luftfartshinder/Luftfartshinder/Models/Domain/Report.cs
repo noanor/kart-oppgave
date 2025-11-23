@@ -4,6 +4,8 @@
     {
         public Report() { }
         public int Id { get; set; }
+        public Organization Organization { get; set; }
+        public int OrganizationId { get; set; }
         public string Author { get; set; }
         public string AuthorId { get; set; }
         public DateTime ReportDate { get; set; }

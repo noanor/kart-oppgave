@@ -9,5 +9,6 @@ namespace Luftfartshinder.Repository
         Task<Report?> UpdateAsync(Report report);
         Task<Report> AddAsync(Report report);
         Task<Report?> DeleteAsync(int id);
+        Task<List<Report>> GetByOrgId(int organizationId);
     }
 }

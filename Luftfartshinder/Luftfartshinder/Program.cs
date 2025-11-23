@@ -1,5 +1,5 @@
 using Luftfartshinder.DataContext;
-using Luftfartshinder.Models;
+using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -44,6 +44,7 @@ builder.Services.AddScoped<IObstacleRepository, ObstacleRepository>();
 builder.Services.AddScoped<IReportRepository, ReportRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 
 var app = builder.Build();
 Console.WriteLine("[EF DB] " + builder.Configuration.GetConnectionString("DbConnection"));

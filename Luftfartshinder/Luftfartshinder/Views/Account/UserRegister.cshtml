@@ -1,4 +1,5 @@
-@model Luftfartshinder.Models.ViewModel.UserRegisterViewModel
+@using Luftfartshinder.Models.ViewModel.User
+@model UserRegisterViewModel
 
 @{
     Layout = "_Layout";
@@ -111,7 +112,7 @@
                                 <span class="text-danger" asp-validation-for="SelectedRole"></span>
                             </div>
                             <div class="col-md-6" id="organizationDiv" style="display:none;">
-                                <label asp-for="Organization" class="form-label">Organization <span class="text-danger">*</span></label>
+                                <label asp-for="OrganizationName" class="form-label">Organization <span class="text-danger">*</span></label>
                                 <select id="organization" class="form-select">
                                     <option value="">-- Select organization --</option>
                                     <option value="Norwegian Air Ambulance">Norwegian Air Ambulance</option>

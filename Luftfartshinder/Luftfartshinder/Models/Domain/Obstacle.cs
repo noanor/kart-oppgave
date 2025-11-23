@@ -6,7 +6,7 @@ namespace Luftfartshinder.Models.Domain
     {
         // Unik ID for hver hindring
         public int Id { get; set; }
-
+        public int OrganizationId { get; set; }
         public int ReportId { get; set; }
         public Report Report { get; set; }
 

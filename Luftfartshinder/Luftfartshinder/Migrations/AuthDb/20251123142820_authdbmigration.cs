@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Luftfartshinder.Migrations
+namespace Luftfartshinder.Migrations.AuthDb
 {
     /// <inheritdoc />
-    public partial class db : Migration
+    public partial class authdbmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,6 +37,46 @@ namespace Luftfartshinder.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Organizations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Organizations", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "AspNetRoleClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    RoleId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ClaimType = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ClaimValue = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -47,8 +87,7 @@ namespace Luftfartshinder.Migrations
                     LastName = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsApproved = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Organization = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OrganizationId = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -75,31 +114,41 @@ namespace Luftfartshinder.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Organizations_OrganizationId",
+                        column: x => x.OrganizationId,
+                        principalTable: "Organizations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
+                name: "Report",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    RoleId = table.Column<string>(type: "varchar(255)", nullable: false)
+                    OrganizationId = table.Column<int>(type: "int", nullable: false),
+                    Author = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ClaimType = table.Column<string>(type: "longtext", nullable: true)
+                    AuthorId = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ClaimValue = table.Column<string>(type: "longtext", nullable: true)
+                    ReportDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Title = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RegistrarNote = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_Report", x => x.Id);
+                    //table.ForeignKey(
+                    //    name: "FK_Report_Organizations_OrganizationId",
+                    //    column: x => x.OrganizationId,
+                    //    principalTable: "Organizations",
+                    //    principalColumn: "Id",
+                    //    onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -205,6 +254,39 @@ namespace Luftfartshinder.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "Obstacle",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    OrganizationId = table.Column<int>(type: "int", nullable: false),
+                    ReportId = table.Column<int>(type: "int", nullable: false),
+                    Type = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Height = table.Column<double>(type: "double", nullable: true),
+                    Latitude = table.Column<double>(type: "double", nullable: false),
+                    Longitude = table.Column<double>(type: "double", nullable: false),
+                    Description = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RegistrarNote = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Obstacle", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Obstacle_Report_ReportId",
+                        column: x => x.ReportId,
+                        principalTable: "Report",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
@@ -216,13 +298,25 @@ namespace Luftfartshinder.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsApproved", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Organization", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                table: "Organizations",
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { "1d3b44cf-5507-444f-b84c-842539f13e02", 0, "e6d061fd-6232-44d6-9fd9-480b3277614a", "pilot@kartverket.no", false, "Kaptein", true, "Pilot", false, null, "PILOT@KARTVERKET.NO", "PILOT", "Norwegian Armed Forces", "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==", null, false, "023f32cf-0aec-425f-adc4-c504424ae8f0", false, "pilot" },
-                    { "322acd53-a201-47c6-a7e0-6695690ce677", 0, "ba3b9483-2308-4539-abe6-33bf86fc2eab", "registrar@kartverket.no", false, "Regi", true, "Strar", false, null, "REGISTRAR@KARTVERKET.NO", "REGISTRAR", "Kartverket", "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==", null, false, "52013384-9253-4612-b0e3-fa3fa54f936b", false, "registrar" },
-                    { "3c1b1dcf-6345-42b9-90fe-45227eb5be5b", 0, "338c26ba-9307-4aa6-bb9a-7138c4accb16", "superadmin@kartverket.no", false, "Super", true, "Admin", false, null, "SUPERADMIN@KARTVERKET.NO", "SUPERADMIN@KARTVERKET.NO", "Kartverket", "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==", null, false, "d045fc18-3a61-4a52-bc40-84dfe1137d4d", false, "superadmin@kartverket.no" }
+                    { 1, "Kartverket" },
+                    { 2, "Norwegian Air Force" },
+                    { 3, "Police" },
+                    { 4, "Norwegian Air Ambulance" },
+                    { 5, "Avinor" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsApproved", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "OrganizationId", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "1d3b44cf-5507-444f-b84c-842539f13e02", 0, "2bd7d806-69ac-4eea-86dd-0f340ee4932b", "pilot@kartverket.no", false, "Kaptein", true, "Pilot", false, null, "PILOT@KARTVERKET.NO", "PILOT", 4, "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==", null, false, "5823ac38-55ba-4c69-a5a1-b779910dcfa2", false, "pilot" },
+                    { "322acd53-a201-47c6-a7e0-6695690ce677", 0, "8975dbbe-1f64-45be-8f7b-2e51892675d2", "registrar@kartverket.no", false, "Regi", true, "Strar", false, null, "REGISTRAR@KARTVERKET.NO", "REGISTRAR", 1, "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==", null, false, "485a334e-0dd4-4ffb-98ab-98e47747eb5e", false, "registrar" },
+                    { "3c1b1dcf-6345-42b9-90fe-45227eb5be5b", 0, "30e0839c-9856-4775-958a-e1bb3a25527e", "superadmin@kartverket.no", false, "Super", true, "Admin", false, null, "SUPERADMIN@KARTVERKET.NO", "SUPERADMIN@KARTVERKET.NO", 1, "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==", null, false, "04c20547-f3a3-43c0-9f4e-cbee0ced9700", false, "superadmin@kartverket.no" }
                 });
 
             migrationBuilder.InsertData(
@@ -269,10 +363,34 @@ namespace Luftfartshinder.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_OrganizationId",
+                table: "AspNetUsers",
+                column: "OrganizationId");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Obstacle_ReportId",
+                table: "Obstacle",
+                column: "ReportId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Report_OrganizationId",
+                table: "Report",
+                column: "OrganizationId");
+
+            migrationBuilder.Sql(@"
+                ALTER TABLE Reports
+                ADD CONSTRAINT FK_Reports_AuthOrganizations_OrganizationId
+                FOREIGN KEY (OrganizationId)
+                REFERENCES AuthKartverketdb.Organizations (Id)
+                ON DELETE CASCADE;
+            ");
+
         }
 
         /// <inheritdoc />
@@ -294,10 +412,24 @@ namespace Luftfartshinder.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Obstacle");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Report");
+
+            migrationBuilder.DropTable(
+                name: "Organizations");
+
+            migrationBuilder.Sql(@"
+                ALTER TABLE Reports
+                DROP FOREIGN KEY FK_Reports_AuthOrganizations_OrganizationId;
+            ");
         }
     }
 }

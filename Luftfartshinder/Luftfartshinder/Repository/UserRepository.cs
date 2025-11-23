@@ -1,5 +1,5 @@
 ﻿using Luftfartshinder.DataContext;
-using Luftfartshinder.Models;
+using Luftfartshinder.Models.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

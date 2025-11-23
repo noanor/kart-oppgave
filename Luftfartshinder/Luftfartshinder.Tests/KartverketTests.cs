@@ -15,7 +15,6 @@ namespace Luftfartshinder.Tests
     /// </summary>
     public class KartverketTests
     {
-        /
         // 1. ENHETSTESTING (Unit Testing)
         // Tester enkeltkomponenter isolert
       
@@ -42,7 +41,7 @@ namespace Luftfartshinder.Tests
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => obstacle.Height = 250.0);
         }
-        \
+
         // 2. SYSTEMSTESTING (System Testing)
         // Tester at hele systemet fungerer sammen
        

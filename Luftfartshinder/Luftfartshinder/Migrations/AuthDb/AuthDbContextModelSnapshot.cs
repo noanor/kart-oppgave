@@ -4,19 +4,16 @@ using Luftfartshinder.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Luftfartshinder.Migrations
+namespace Luftfartshinder.Migrations.AuthDb
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20251122203211_db")]
-    partial class db
+    partial class AuthDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +22,7 @@ namespace Luftfartshinder.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Luftfartshinder.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
@@ -69,8 +66,8 @@ namespace Luftfartshinder.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
-                    b.Property<string>("Organization")
-                        .HasColumnType("longtext");
+                    b.Property<int>("OrganizationId")
+                        .HasColumnType("int");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("longtext");
@@ -100,6 +97,8 @@ namespace Luftfartshinder.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
+                    b.HasIndex("OrganizationId");
+
                     b.ToTable("AspNetUsers", (string)null);
 
                     b.HasData(
@@ -107,7 +106,7 @@ namespace Luftfartshinder.Migrations
                         {
                             Id = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "338c26ba-9307-4aa6-bb9a-7138c4accb16",
+                            ConcurrencyStamp = "30e0839c-9856-4775-958a-e1bb3a25527e",
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -116,10 +115,10 @@ namespace Luftfartshinder.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@KARTVERKET.NO",
                             NormalizedUserName = "SUPERADMIN@KARTVERKET.NO",
-                            Organization = "Kartverket",
+                            OrganizationId = 1,
                             PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d045fc18-3a61-4a52-bc40-84dfe1137d4d",
+                            SecurityStamp = "04c20547-f3a3-43c0-9f4e-cbee0ced9700",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         },
@@ -127,7 +126,7 @@ namespace Luftfartshinder.Migrations
                         {
                             Id = "322acd53-a201-47c6-a7e0-6695690ce677",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ba3b9483-2308-4539-abe6-33bf86fc2eab",
+                            ConcurrencyStamp = "8975dbbe-1f64-45be-8f7b-2e51892675d2",
                             Email = "registrar@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Regi",
@@ -136,10 +135,10 @@ namespace Luftfartshinder.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "REGISTRAR@KARTVERKET.NO",
                             NormalizedUserName = "REGISTRAR",
-                            Organization = "Kartverket",
+                            OrganizationId = 1,
                             PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "52013384-9253-4612-b0e3-fa3fa54f936b",
+                            SecurityStamp = "485a334e-0dd4-4ffb-98ab-98e47747eb5e",
                             TwoFactorEnabled = false,
                             UserName = "registrar"
                         },
@@ -147,7 +146,7 @@ namespace Luftfartshinder.Migrations
                         {
                             Id = "1d3b44cf-5507-444f-b84c-842539f13e02",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e6d061fd-6232-44d6-9fd9-480b3277614a",
+                            ConcurrencyStamp = "2bd7d806-69ac-4eea-86dd-0f340ee4932b",
                             Email = "pilot@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Kaptein",
@@ -156,13 +155,140 @@ namespace Luftfartshinder.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PILOT@KARTVERKET.NO",
                             NormalizedUserName = "PILOT",
-                            Organization = "Norwegian Armed Forces",
+                            OrganizationId = 4,
                             PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "023f32cf-0aec-425f-adc4-c504424ae8f0",
+                            SecurityStamp = "5823ac38-55ba-4c69-a5a1-b779910dcfa2",
                             TwoFactorEnabled = false,
                             UserName = "pilot"
                         });
+                });
+
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.Obstacle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
+                    b.Property<double?>("Height")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("OrganizationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RegistrarNote")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("ReportId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReportId");
+
+                    b.ToTable("Obstacle");
+                });
+
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.Organization", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Organizations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Kartverket"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Norwegian Air Force"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Police"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Norwegian Air Ambulance"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Avinor"
+                        });
+                });
+
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.Report", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("AuthorId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("OrganizationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RegistrarNote")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("ReportDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("Report");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -347,6 +473,39 @@ namespace Luftfartshinder.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.ApplicationUser", b =>
+                {
+                    b.HasOne("Luftfartshinder.Models.Domain.Organization", "Organization")
+                        .WithMany("Users")
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
+                });
+
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.Obstacle", b =>
+                {
+                    b.HasOne("Luftfartshinder.Models.Domain.Report", "Report")
+                        .WithMany("Obstacles")
+                        .HasForeignKey("ReportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Report");
+                });
+
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.Report", b =>
+                {
+                    b.HasOne("Luftfartshinder.Models.Domain.Organization", "Organization")
+                        .WithMany("Reports")
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -358,7 +517,7 @@ namespace Luftfartshinder.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Luftfartshinder.Models.ApplicationUser", null)
+                    b.HasOne("Luftfartshinder.Models.Domain.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -367,7 +526,7 @@ namespace Luftfartshinder.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Luftfartshinder.Models.ApplicationUser", null)
+                    b.HasOne("Luftfartshinder.Models.Domain.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -382,7 +541,7 @@ namespace Luftfartshinder.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Luftfartshinder.Models.ApplicationUser", null)
+                    b.HasOne("Luftfartshinder.Models.Domain.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -391,11 +550,23 @@ namespace Luftfartshinder.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Luftfartshinder.Models.ApplicationUser", null)
+                    b.HasOne("Luftfartshinder.Models.Domain.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.Organization", b =>
+                {
+                    b.Navigation("Reports");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.Report", b =>
+                {
+                    b.Navigation("Obstacles");
                 });
 #pragma warning restore 612, 618
         }
