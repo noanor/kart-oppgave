@@ -46,17 +46,17 @@ Etter første migrasjon er følgende brukere opprettet:
 
 **SuperAdmin:**
 - **Brukernavn:** `superadmin@kartverket.no`
-- **Passord:** `Superadmin123`
+- **Passord:** `Superadmin123!`
 - **Rolle:** SuperAdmin (har tilgang til alle funksjoner)
 
 **Registrar:**
 - **Brukernavn:** `registrar`
-- **Passord:** `Password123` (eller samme som pilot)
+- **Passord:** `Passord123!`
 - **Rolle:** Registrar (kan godkjenne/avvise rapporterte hindre)
 
 **Pilot (FlightCrew):**
 - **Brukernavn:** `pilot`
-- **Passord:** `Password123` (eller samme som registrar)
+- **Passord:** `Passord123!`
 - **Rolle:** FlightCrew (kan rapportere nye luftfartshinder)
 
 
@@ -84,8 +84,8 @@ Etter første migrasjon er følgende brukere opprettet:
 - `AccountRepository` - Brukerrapporter
 
 **Databaser:**
-- `ApplicationContext` - Hoveddatabase (Kartverketdb) for hindre og rapporter
-- `AuthDbContext` - Autentiseringsdatabase (AuthKartverketdb) for brukere og roller
+- `KartverketDb` - Hoveddatabase (Datacontext: ApplicationContext) for hindre og rapporter
+- `AuthKartverketDb` - Autentiseringsdatabase (Datacontext: AuthDbContext) for brukere og roller
 
 **Autentisering:**
 - ASP.NET Core Identity med roller: SuperAdmin, Registrar, FlightCrew
