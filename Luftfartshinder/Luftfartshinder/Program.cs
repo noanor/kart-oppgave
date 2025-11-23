@@ -2,6 +2,7 @@ using Luftfartshinder.DataContext;
 using Luftfartshinder.Models;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Internal;
 
@@ -9,7 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+});
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
                options.UseMySql(builder.Configuration.GetConnectionString("DbConnection"),

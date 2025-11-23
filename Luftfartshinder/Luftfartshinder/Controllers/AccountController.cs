@@ -34,7 +34,6 @@ namespace Luftfartshinder.Controllers
 
         [HttpPost]
         [Authorize(Roles = "SuperAdmin")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
@@ -101,7 +100,6 @@ namespace Luftfartshinder.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UserRegister(UserRegisterViewModel model)
         {
             if (!ModelState.IsValid)
@@ -190,7 +188,6 @@ namespace Luftfartshinder.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)

@@ -23,7 +23,6 @@ namespace Luftfartshinder.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public IActionResult Index(FeedbackViewModel model)
         {
             if (!ModelState.IsValid)

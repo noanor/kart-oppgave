@@ -226,8 +226,6 @@ C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Luftfartshinder.dll
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Luftfartshinder.pdb
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Humanizer.dll
-C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
-C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Build.Locator.dll
@@ -241,18 +239,7 @@ C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
-C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
-C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
-C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
-C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
-C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
-C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
-C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
-C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
-C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
-C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
-C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Mono.TextTemplating.dll
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\MySqlConnector.dll
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\bin\Debug\net9.0\Pomelo.EntityFrameworkCore.MySql.dll
@@ -434,6 +421,7 @@ C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\wxw63y8p9g-{0}-bjet39j14t-bjet39j14t.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\a582dsn24r-{0}-bjet39j14t-bjet39j14t.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\swae.build.ex.cache
+<<<<<<< HEAD
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\lxql42msdv-{0}-wvkpg0lwca-wvkpg0lwca.gz
 C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\bvs801oyvp-{0}-fckftselh6-fckftselh6.gz
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\Luftfartshinder.csproj.AssemblyReference.cache
@@ -655,3 +643,7 @@ C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luft
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\ref\Luftfartshinder.dll
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\vylom24x76-62c3o98tk1.gz
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\xmlwy1bauz-bifis7ybd7.gz
+=======
+C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\lxql42msdv-{0}-itbxpt3cj4-itbxpt3cj4.gz
+C:\Users\noano\code\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\bvs801oyvp-{0}-3kxvh4bgof-3kxvh4bgof.gz
+>>>>>>> f2b9bab (La til automatisk ValidateForgeryToken og fjernet unødvendige AntiForgeryTokens)

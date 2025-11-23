@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"documents":{"C:\\Users\\Madalitso\\Documents\\Skole\\prosjekt-IT\\kart-oppgave\\*":"https://raw.githubusercontent.com/noanor/kart-oppgave/c931f08c258fe6003e61d1ddf8982789eede9b87/*"}}
+=======
+{"documents":{"C:\\Users\\noano\\code\\repos\\kart-oppgave\\*":"https://raw.githubusercontent.com/noanor/kart-oppgave/38fbe4cc29cd782e75c01b006d2d976c3e174fbb/*"}}
+>>>>>>> f2b9bab (La til automatisk ValidateForgeryToken og fjernet unødvendige AntiForgeryTokens)

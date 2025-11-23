@@ -89,7 +89,6 @@ namespace Luftfartshinder.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(Guid id, string roleFilter, string statusFilter, string organizationFilter)
         {
             var user = await userManager.FindByIdAsync(id.ToString());
@@ -109,7 +108,6 @@ namespace Luftfartshinder.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Approve(Guid id, string roleFilter, string statusFilter, string organizationFilter)
         {
             var user = await userManager.FindByIdAsync(id.ToString());
@@ -129,7 +127,6 @@ namespace Luftfartshinder.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Decline(Guid id, string roleFilter, string statusFilter, string organizationFilter)
         {
             var user = await userManager.FindByIdAsync(id.ToString());

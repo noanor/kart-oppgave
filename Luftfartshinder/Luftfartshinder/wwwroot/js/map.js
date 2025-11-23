@@ -340,6 +340,7 @@ function createDraftObstacle(type, lat, lng) {
 }
 
 
+const token = document.querySelector('#antiForgeryForm input[name="__RequestVerificationToken"').value;
 async function addObstacle(type, lat, lng) {
     const payload = {
         type,
@@ -349,7 +350,10 @@ async function addObstacle(type, lat, lng) {
 
     const res = await fetch('/obstacles/add-one', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'RequestVerificationToken': token
+        },
         body: JSON.stringify(payload)
     });
     console.log(payload);

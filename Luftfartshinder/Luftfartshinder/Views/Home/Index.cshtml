@@ -87,6 +87,7 @@
 </div>
 
 <form method="post">
+	@Html.AntiForgeryToken()
 	<div>
 		<input type="hidden" asp-for="Longitude" id="longitude" />
 		<input type="hidden" asp-for="Latitude" id="latitude" />
@@ -97,6 +98,9 @@
 	</div>
 </form>
 
+<form id="antiForgeryForm" class="hidden">
+	@Html.AntiForgeryToken()
+</form>
 
 @section Scripts {
 	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
