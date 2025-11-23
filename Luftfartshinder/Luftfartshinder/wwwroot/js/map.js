@@ -167,6 +167,35 @@ let lastClick = { lat: 0, lng: 0 };   // <— use consistent property names
 let tempMarker = null;
 let obstacleMerkers = [];
 
+// Line drawing state for luftspenn
+let isDrawingLine = false;
+let lineStartPoint = null;
+let tempPolyline = null;
+let lineStartMarker = null;
+
+// Function to update preview line while drawing
+function updateLinePreview(e) {
+    if (!isDrawingLine || !lineStartPoint) return;
+    
+    const { lat, lng } = e.latlng;
+    
+    // Remove old preview line
+    if (tempPolyline) {
+        map.removeLayer(tempPolyline);
+    }
+    
+    // Create new preview line
+    tempPolyline = L.polyline([
+        [lineStartPoint.lat, lineStartPoint.lng],
+        [lat, lng]
+    ], {
+        color: '#ff0000',
+        weight: 2,
+        opacity: 0.5,
+        dashArray: '5, 5'
+    }).addTo(map);
+}
+
 function setLL(lat, lng) {
     // write to inputs (5–6 decimals ≈ 1–10 m precision)
     const latInput = document.getElementById('latitude');
@@ -192,6 +221,85 @@ function setLL(lat, lng) {
 
 map.on('click', (e) => {
     if (isPanning || justEndedPan || isOpen) return;
+
+    // If drawing a line (luftspenn), handle line drawing
+    if (isDrawingLine) {
+        const { lat, lng } = e.latlng;
+        
+        if (!lineStartPoint) {
+            // First click - set start point
+            lineStartPoint = { lat, lng };
+            lineStartMarker = L.marker([lat, lng], { 
+                icon: L.divIcon({
+                    className: 'line-start-marker',
+                    html: '<div style="width: 12px; height: 12px; background-color: #ff0000; border: 2px solid white; border-radius: 50%;"></div>',
+                    iconSize: [12, 12],
+                    iconAnchor: [6, 6]
+                })
+            }).addTo(map);
+            
+            // Show instruction
+            if (toastEl) {
+                toastEl.querySelector('.toast-body').textContent = 'Click again to set the end point of the line';
+                toast.show();
+            }
+            
+            // Add mouse move handler to show preview line
+            map.on('mousemove', updateLinePreview);
+        } else {
+            // Second click - complete the line
+            const endPoint = { lat, lng };
+            
+            // Remove temporary polyline if exists
+            if (tempPolyline) {
+                map.removeLayer(tempPolyline);
+            }
+            
+            // Create the line
+            const polyline = L.polyline([
+                [lineStartPoint.lat, lineStartPoint.lng],
+                [endPoint.lat, endPoint.lng]
+            ], {
+                color: '#ff0000',
+                weight: 3,
+                opacity: 0.8
+            }).addTo(map);
+            
+            // Add end marker
+            const endMarker = L.marker([endPoint.lat, endPoint.lng], {
+                icon: L.divIcon({
+                    className: 'line-end-marker',
+                    html: '<div style="width: 12px; height: 12px; background-color: #ff0000; border: 2px solid white; border-radius: 50%;"></div>',
+                    iconSize: [12, 12],
+                    iconAnchor: [6, 6]
+                })
+            }).addTo(map);
+            
+            // Store line data
+            polyline.lineStartPoint = lineStartPoint;
+            polyline.lineEndPoint = endPoint;
+            polyline.lineStartMarker = lineStartMarker;
+            polyline.lineEndMarker = endMarker;
+            
+            // Save both points as obstacles
+            saveLineObstacles(lineStartPoint, endPoint, polyline);
+            
+            // Reset line drawing state
+            isDrawingLine = false;
+            lineStartPoint = null;
+            tempPolyline = null;
+            lineStartMarker = null;
+            
+            // Remove mouse move handler
+            map.off('mousemove', updateLinePreview);
+            
+            if (toastEl) {
+                toastEl.querySelector('.toast-body').textContent = 'Line added to draft!';
+                toast.show();
+            }
+        }
+        return;
+    }
 
     const { lat, lng } = e.latlng;
     setLL(lat, lng);
@@ -252,6 +360,34 @@ async function addObstacle(type, lat, lng) {
     return res.json();
 }
 
+async function saveLineObstacles(startPoint, endPoint, polyline) {
+    try {
+        // Save start point
+        const startResult = await addObstacle('luftspenn', startPoint.lat, startPoint.lng);
+        const startMarker = L.marker([startPoint.lat, startPoint.lng]).addTo(map);
+        startMarker.draftIndex = startResult.index;
+        obstacleMarkers.set(startResult.index, startMarker);
+        
+        // Save end point
+        const endResult = await addObstacle('luftspenn', endPoint.lat, endPoint.lng);
+        const endMarker = L.marker([endPoint.lat, endPoint.lng]).addTo(map);
+        endMarker.draftIndex = endResult.index;
+        obstacleMarkers.set(endResult.index, endMarker);
+        
+        // Store polyline reference with markers
+        polyline.startDraftIndex = startResult.index;
+        polyline.endDraftIndex = endResult.index;
+        
+        console.log(`Line added: start (${startPoint.lat}, ${startPoint.lng}), end (${endPoint.lat}, ${endPoint.lng})`);
+    } catch (err) {
+        console.error('Error saving line obstacles:', err);
+        alert('Failed to save line: ' + err.message);
+        // Remove the line if save failed
+        if (polyline) map.removeLayer(polyline);
+        if (lineStartMarker) map.removeLayer(lineStartMarker);
+    }
+}
+
 // Click inside the wheel → pick the slice
 const toastEl = document.getElementById('toastObstacleAdded');
 const toast = new bootstrap.Toast(toastEl);
@@ -270,6 +406,21 @@ wheel.addEventListener('click', async (e) => {
     closeWheel();
 
     if (type) {
+        // Special handling for luftspenn - enter line drawing mode
+        if (type === 'luftspenn') {
+            isDrawingLine = true;
+            lineStartPoint = null;
+            tempPolyline = null;
+            lineStartMarker = null;
+            
+            if (toastEl) {
+                toastEl.querySelector('.toast-body').textContent = 'Click on the map to set the start point of the line';
+                toast.show();
+            }
+            return;
+        }
+        
+        // Normal obstacle handling for other types
         try {
             const result = await addObstacle(type, lastClick.lat, lastClick.lng);
             
@@ -297,7 +448,28 @@ document.addEventListener('click', (e) => {
     if (!e.target.closest('.wheel')) closeWheel();
 });
 
-// Esc to close
+// Esc to close wheel or cancel line drawing
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isOpen) closeWheel();
+    if (e.key === 'Escape') {
+        if (isOpen) {
+            closeWheel();
+        } else if (isDrawingLine) {
+            // Cancel line drawing
+            isDrawingLine = false;
+            if (tempPolyline) {
+                map.removeLayer(tempPolyline);
+                tempPolyline = null;
+            }
+            if (lineStartMarker) {
+                map.removeLayer(lineStartMarker);
+                lineStartMarker = null;
+            }
+            lineStartPoint = null;
+            map.off('mousemove', updateLinePreview);
+            if (toastEl) {
+                toastEl.querySelector('.toast-body').textContent = 'Line drawing cancelled';
+                toast.show();
+            }
+        }
+    }
 });

@@ -1,100 +1,154 @@
-# Kjøreinstruksjoner
+# Luftfartshinder - Kartverket
 
-## Forutsetninger
+## Kjøre Applikasjonen med Docker
 
-- .NET 9.0 SDK
-- MariaDB/MySQL (versjon 11.8 eller nyere)
-- Visual Studio 2022 eller nyere (anbefalt)
-- Docker Desktop (valgfritt, for containerisering)
+### Forutsetninger
+- **Docker Desktop** installert og kjørende
+- **Git** (for å klone repository)
+- Ingen annen programvare nødvendig (ikke Visual Studio, .NET SDK, eller MySQL)
 
-## Database Setup
+### Hente Applikasjonen fra GitHub
 
-1. Start MariaDB/MySQL server på port 3307
-
-2. Opprett to databaser:
-   ```sql
-   CREATE DATABASE Kartverketdb;
-   CREATE DATABASE AuthKartverketdb;
-   ```
-
-3. Oppdater connection strings i `appsettings.json` hvis nødvendig:
-   ```json
-   "ConnectionStrings": {
-     "DbConnection": "Server=127.0.0.1;Port=3307;Database=Kartverketdb;User=root;Password=root123",
-     "AuthConnection": "Server=localhost;Port=3307;Database=AuthKartverketdb;User=root;Password=root123"
-   }
-   ```
-
-4. Kjør migrasjoner:
+1. **Klone repository:**
    ```bash
-   dotnet ef database update --context ApplicationContext
-   dotnet ef database update --context AuthDbContext
-   ```
-
-## Kjøre Applikasjonen
-
-### Metode 1: Visual Studio
-
-1. Åpne `Luftfartshinder.sln` i Visual Studio
-2. Trykk `F5` eller klikk "Run"
-3. Applikasjonen starter på `https://localhost:7258` (eller porten som er konfigurert)
-
-### Metode 2: .NET CLI
-
-1. Naviger til prosjektmappen:
-   ```bash
+   git clone <github-repo-url>
    cd Luftfartshinder
    ```
 
-2. Restore pakker:
+   **Forklaring:** Dette henter hele prosjektet fra GitHub, inkludert all kode, konfigurasjoner og Docker-filer.
+
+### Enkel Kjøring
+
+1. **Naviger til prosjektmappen** (der `docker-compose.yml` ligger)
+
+2. **Start applikasjonen:**
    ```bash
-   dotnet restore
+   docker-compose up
    ```
 
-3. Kjør applikasjonen:
-   ```bash
-   dotnet run
-   ```
+3. **Vent til applikasjonen starter** (kan ta 1-2 minutter første gang mens Docker bygger image og setter opp databasen)
 
-4. Åpne nettleseren og gå til URL-en som vises i konsollen (vanligvis `https://localhost:7258`)
+4. **Åpne nettleser:**
+   - Gå til `http://localhost:8080`
 
-### Metode 3: Docker
+**Forklaring:** `docker-compose up` bygger automatisk Docker image, starter MariaDB database, kjører migrasjoner, og starter applikasjonen. Alt er konfigurert og klar til bruk uten manuell oppsett.
 
-1. Bygg Docker image:
-   ```bash
-   docker build -t luftfartshinder:latest .
-   ```
+### Stoppe Applikasjonen
 
-2. Kjør container:
-   ```bash
-   docker run -p 8080:8080 luftfartshinder:latest
-   ```
+Trykk `Ctrl+C` i terminalen, eller kjør:
+```bash
+docker-compose down
+```
 
-3. Åpne nettleseren og gå til `http://localhost:8080`
+### Standard Brukere
 
-**Merk:** Med Docker må du også kjøre MariaDB i en egen container og oppdatere connection strings.
+Etter første migrasjon er følgende brukere opprettet:
 
-## Standard Bruker
-
-Etter første migrasjon er følgende SuperAdmin-bruker opprettet:
-
+**SuperAdmin:**
 - **Brukernavn:** `superadmin@kartverket.no`
-- **Passord:** `Superadmin123`
+- **Passord:** `Superadmin123!`
+- **Rolle:** SuperAdmin (har tilgang til alle funksjoner)
 
-Denne brukeren har tilgang til alle funksjoner og kan opprette nye brukere.
+**Registrar:**
+- **Brukernavn:** `registrar`
+- **Passord:** `Passord123!`
+- **Rolle:** Registrar (kan godkjenne/avvise rapporterte hindre)
 
-## Roller
+**Pilot (FlightCrew):**
+- **Brukernavn:** `pilot`
+- **Passord:** `Passord123!`
+- **Rolle:** FlightCrew (kan rapportere nye luftfartshinder)
 
-- **SuperAdmin:** Full tilgang, kan administrere brukere
-- **Registrar:** Kan godkjenne/avvise rapporterte hindre
-- **FlightCrew:** Kan rapportere nye hindre
+
+
+## Systemarkitektur
+
+### Arkitekturmønstre
+- **MVC (Model-View-Controller):** Separasjon mellom data, visning og logikk
+- **Repository Pattern:** Abstraherer dataaksesslaget
+- **Dependency Injection:** Løs kobling mellom komponenter
+
+### Komponenter
+
+**Controllers:**
+- `HomeController` - Hjemmeside og rollbasert routing
+- `AccountController` - Autentisering og registrering
+- `SuperAdminController` - Brukeradministrasjon
+- `ObstaclesController` - Håndtering av luftfartshinder
+- `RegistrarController` - Godkjenning av rapporter
+
+**Repositories:**
+- `ObstacleRepository` - CRUD-operasjoner for hindre
+- `ReportRepository` - Håndtering av rapporter
+- `UserRepository` - Brukerdata
+- `AccountRepository` - Brukerrapporter
+
+**Databaser:**
+- `KartverketDb` - Hoveddatabase (Datacontext: ApplicationContext) for hindre og rapporter
+- `AuthKartverketDb` - Autentiseringsdatabase (Datacontext: AuthDbContext) for brukere og roller
+
+**Autentisering:**
+- ASP.NET Core Identity med roller: SuperAdmin, Registrar, FlightCrew
+- Rollbasert autorisering med `[Authorize(Roles = "...")]`
+
+---
+
+## Drift
+
+### Database Migrasjoner
+Migrasjoner kjøres automatisk ved oppstart via `Program.cs`. Hvis manuell migrasjon trengs:
+
+```bash
+dotnet ef database update --context ApplicationContext
+dotnet ef database update --context AuthDbContext
+```
+
+### Logging
+Applikasjonen logger database-tilkoblinger og feil til konsollen.
+
+### Miljøvariabler
+Connection strings konfigureres i `appsettings.json`:
+```json
+"ConnectionStrings": {
+  "DbConnection": "Server=127.0.0.1;Port=3307;Database=Kartverketdb;User=root;Password=root123",
+  "AuthConnection": "Server=localhost;Port=3307;Database=AuthKartverketdb;User=root;Password=root123"
+}
+```
+
+---
 
 ## Testing
 
-For detaljert testing-dokumentasjon, se [TESTING.md](TESTING.md).
+### Testscenarier
 
-Testene kan kjøres med:
-```bash
-cd Luftfartshinder.Tests
-dotnet test
+**Login Testing:**
+1.  Login GET returnerer view
+2.  Ugyldige credentials avvises
+3.  Ikke-godkjente brukere kan ikke logge inn
+4.  Gyldige credentials redirecter korrekt
+5.  SuperAdmin redirecter til SuperAdminHome
+
+**SuperAdmin Testing:**
+1.  Liste viser alle brukere
+2.  Filtrering etter rolle fungerer
+3.  Approve oppdaterer brukerstatus
+4.  Approve håndterer ikke-eksisterende brukere
+5.  Delete sletter brukere
+6.  Decline sletter ventende brukere
+
+### Testresultater
+
 ```
+Total tests: 12
+Passed: 12
+Failed: 0
+
+
+
+
+
+## Roller
+
+- **SuperAdmin:** Full tilgang, brukeradministrasjon
+- **Registrar:** Godkjenner/avviser rapporterte hindre
+- **FlightCrew:** Rapporterer nye luftfartshinder

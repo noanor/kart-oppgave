@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Luftfartshinder.Migrations
+namespace Luftfartshinder.Migrations.Application
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20251120223734_dbmigration")]
-    partial class dbmigration
+    [Migration("20251122203407_Adb")]
+    partial class Adb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
