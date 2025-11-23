@@ -582,7 +582,6 @@ C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luft
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\mgnamf1ycb-s3t3qui1kt.gz
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\e3doprob5o-jjf51eq9bs.gz
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\sjpsi82st5-nvc742ewl8.gz
-C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\xmlwy1bauz-614j4xgxah.gz
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\t109ldr17b-ashaz6ijlq.gz
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\y2wki64pw1-dxehs3x0k2.gz
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\ey42wd3uwf-t1cqhe9u97.gz
@@ -655,3 +654,4 @@ C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luft
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\Luftfartshinder.genruntimeconfig.cache
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\ref\Luftfartshinder.dll
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\vylom24x76-62c3o98tk1.gz
+C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\xmlwy1bauz-bifis7ybd7.gz

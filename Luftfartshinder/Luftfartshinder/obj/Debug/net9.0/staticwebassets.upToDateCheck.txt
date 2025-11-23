@@ -22,7 +22,6 @@ wwwroot\js\draft.js
 wwwroot\js\geolet.js
 wwwroot\js\list.js
 wwwroot\js\login.js
-wwwroot\js\map.js
 wwwroot\js\register.js
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
@@ -85,6 +84,7 @@ wwwroot\lib\jquery\dist\jquery.slim.js
 wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\js\map.js
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\adminEdit.css
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\auth.css
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\dashboard.css
@@ -94,6 +94,7 @@ C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luft
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\login.css
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\overview.css
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\registrar.css
+C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\site.css
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\userlist.css
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\favicon.ico
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\dashboard.js
@@ -101,7 +102,6 @@ C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luft
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\geolet.js
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\list.js
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\login.js
-C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\map.js
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\register.js
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\site.js
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
@@ -163,4 +163,4 @@ C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luft
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\dist\jquery.slim.min.js
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\dist\jquery.slim.min.map
 C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\LICENSE.txt
-C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\css\site.css
+C:\Users\Madalitso\Documents\Skole\prosjekt-IT\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\map.js
