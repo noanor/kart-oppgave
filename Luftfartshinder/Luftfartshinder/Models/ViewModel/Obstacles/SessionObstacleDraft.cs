@@ -1,10 +1,10 @@
 ﻿using Luftfartshinder.Models.Domain;
 using System.Collections.Generic;
 
-namespace Luftfartshinder.Models.ViewModel
+namespace Luftfartshinder.Models.ViewModel.Obstacles
 {
     public class SessionObstacleDraft
     {
-        public List<Obstacle> Obstacles { get; set; } = new();
+        public List<Domain.Obstacle> Obstacles { get; set; } = new();
     }
 }

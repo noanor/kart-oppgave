@@ -1,7 +1,8 @@
 using Luftfartshinder.DataContext;
-using Luftfartshinder.Models;
+using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Internal;
 
@@ -9,7 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+});
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
                options.UseMySql(builder.Configuration.GetConnectionString("DbConnection"),
@@ -40,6 +44,7 @@ builder.Services.AddScoped<IObstacleRepository, ObstacleRepository>();
 builder.Services.AddScoped<IReportRepository, ReportRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 
 var app = builder.Build();
 Console.WriteLine("[EF DB] " + builder.Configuration.GetConnectionString("DbConnection"));
@@ -53,13 +58,57 @@ using (var scope = app.Services.CreateScope())
         var authContext = services.GetRequiredService<AuthDbContext>();
         var appplicationContext = services.GetRequiredService<ApplicationContext>();
 
-        authContext.Database.Migrate();
-        appplicationContext.Database.Migrate();
-        
-    } catch(Exception ex)
+        // Try to migrate AuthDbContext
+        try
+        {
+            authContext.Database.Migrate();
+        }
+        catch (Exception ex) when (ex.Message.Contains("already exists") || ex.InnerException?.Message?.Contains("already exists") == true)
+        {
+            // Tables exist but migrations not recorded - mark them as applied
+            Console.WriteLine("Tables already exist in AuthDbContext. Marking migrations as applied...");
+            var migrations = authContext.Database.GetMigrations().ToList();
+            foreach (var migration in migrations)
+            {
+                try
+                {
+                    // Try to mark migration as applied
+                    var sql = $"INSERT IGNORE INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`) VALUES ('{migration}', '9.0.9');";
+                    authContext.Database.ExecuteSqlRaw(sql);
+                }
+                catch { /* Ignore if already exists */ }
+            }
+            Console.WriteLine("Migrations marked as applied for AuthDbContext.");
+        }
+
+        // Try to migrate ApplicationContext
+        try
+        {
+            appplicationContext.Database.Migrate();
+        }
+        catch (Exception ex) when (ex.Message.Contains("already exists") || ex.InnerException?.Message?.Contains("already exists") == true)
+        {
+            // Tables exist but migrations not recorded - mark them as applied
+            Console.WriteLine("Tables already exist in ApplicationContext. Marking migrations as applied...");
+            var migrations = appplicationContext.Database.GetMigrations().ToList();
+            foreach (var migration in migrations)
+            {
+                try
+                {
+                    // Try to mark migration as applied
+                    var sql = $"INSERT IGNORE INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`) VALUES ('{migration}', '9.0.9');";
+                    appplicationContext.Database.ExecuteSqlRaw(sql);
+                }
+                catch { /* Ignore if already exists */ }
+            }
+            Console.WriteLine("Migrations marked as applied for ApplicationContext.");
+        }
+
+    }
+    catch (Exception ex)
     {
         Console.WriteLine($"An error occured in the database: {ex}");
-        Environment.Exit(1);
+        throw;
     }
 
 }

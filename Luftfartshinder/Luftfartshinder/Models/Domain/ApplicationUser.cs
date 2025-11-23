@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace Luftfartshinder.Models
+namespace Luftfartshinder.Models.Domain
 {
     public class ApplicationUser : IdentityUser
     {
@@ -8,6 +8,7 @@ namespace Luftfartshinder.Models
         public string LastName { get; set; }
         public bool IsApproved { get; set; } = false;
         
-        public string? Organization { get; set; }
+        public int OrganizationId { get; set; }
+        public Organization Organization { get; set; }
     }
 }

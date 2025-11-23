@@ -1,4 +1,4 @@
-﻿using Luftfartshinder.Models;
+﻿using Luftfartshinder.Models.Domain;
 using Microsoft.AspNetCore.Identity;
 
 namespace Luftfartshinder.Repository

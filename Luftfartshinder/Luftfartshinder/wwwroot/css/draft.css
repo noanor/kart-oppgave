@@ -11,3 +11,115 @@ select option {
     font-size: 1.5em;
 }
 
+/* ===== DRAFT ACTION BUTTONS ===== */
+/* Container for Submit og Clear Draft knapper - kompakt design */
+.draft-actions-container {
+    position: sticky;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.88) 80%, transparent 100%);
+    padding: 1rem 0 0.75rem 0;
+    margin-top: 1rem;
+    border-top: 1px solid #e9ecef;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+}
+
+.draft-actions-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Kompakte, mindre påtrengende knapper */
+.draft-action-btn {
+    min-width: 160px;
+    min-height: 44px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.5rem 1.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    border-radius: 6px;
+}
+
+.draft-action-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+.draft-action-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+/* iPad-vennlig styling - fortsatt kompakt men touch-vennlig */
+body[data-layout-type="ipad"] .draft-action-btn {
+    min-width: 180px;
+    min-height: 48px;
+    font-size: 1rem;
+    padding: 0.625rem 1.5rem;
+}
+
+body[data-layout-type="ipad"] .draft-actions-container {
+    padding: 1.25rem 0 1rem 0;
+}
+
+/* Responsive for mindre skjermer */
+@media (max-width: 768px) {
+    .draft-actions-content {
+        padding: 0 0.5rem;
+    }
+    
+    .draft-action-btn {
+        min-width: 100%;
+        width: 100%;
+    }
+    
+    .d-flex.gap-3 {
+        flex-direction: column;
+        gap: 1rem !important;
+    }
+}
+
+/* ===== FLOATING BACK BUTTON (iPad only) ===== */
+/* Skjul back button som standard */
+.draft-back-button {
+    display: none;
+}
+
+/* Vis back button kun på iPad layout - moderne, subtil design */
+body[data-layout-type="ipad"] .draft-back-button {
+    display: flex;
+    position: fixed;
+    top: 75px;
+    left: 20px;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.85);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+    z-index: 999;
+    text-decoration: none;
+    color: #495057;
+    font-size: 1.5rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(12px);
+    touch-action: manipulation;
+}
+
+body[data-layout-type="ipad"] .draft-back-button:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
+    color: #212529;
+}
+
+body[data-layout-type="ipad"] .draft-back-button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background-color: rgba(248, 249, 250, 0.95);
+}
+

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Luftfartshinder.Models.Domain;
+using System.ComponentModel.DataAnnotations;
 
 namespace Luftfartshinder.Models.ViewModel
 {
@@ -28,8 +29,8 @@ namespace Luftfartshinder.Models.ViewModel
         [Required(ErrorMessage = "Please select a role")]
         public string SelectedRole {get; set;}
         
-        public string? Organization { get; set; }
+        public string? OrganizationName { get; set; }
         
-        public string? OtherOrganization { get; set; }
+        public string? OtherOrganizationName { get; set; }
     }
 }

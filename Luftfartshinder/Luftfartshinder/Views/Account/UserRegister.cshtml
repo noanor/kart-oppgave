@@ -1,4 +1,5 @@
-@model Luftfartshinder.Models.ViewModel.UserRegisterViewModel
+@using Luftfartshinder.Models.ViewModel.User
+@model UserRegisterViewModel
 
 @{
     Layout = "_Layout";
@@ -22,10 +23,10 @@
                         All fields marked with <span class="text-danger">*</span> are required.
                     </p>
 
-                    @if (ViewData.ModelState.ContainsKey(string.Empty) && ViewData.ModelState[string.Empty].Errors.Count > 0)
+                    @if (!ViewData.ModelState.IsValid)
                     {
                         <div class="alert alert-danger">
-                            @foreach (var error in ViewData.ModelState[string.Empty].Errors)
+                            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
                             {
                                 <div>@error.ErrorMessage</div>
                             }
@@ -111,8 +112,8 @@
                                 <span class="text-danger" asp-validation-for="SelectedRole"></span>
                             </div>
                             <div class="col-md-6" id="organizationDiv" style="display:none;">
-                                <label asp-for="Organization" class="form-label">Organization <span class="text-danger">*</span></label>
-                                <select id="organization" class="form-select">
+                                <label asp-for="OrganizationName" class="form-label">Organization <span class="text-danger">*</span></label>
+                                <select id="organization" asp-for="OrganizationName" class="form-select">
                                     <option value="">-- Select organization --</option>
                                     <option value="Norwegian Air Ambulance">Norwegian Air Ambulance</option>
                                     <option value="Police">Police</option>
@@ -120,15 +121,10 @@
                                     <option value="Avinor">Avinor</option>
                                     <option value="Other">Other</option>
                                 </select>
+                                <span class="text-danger" asp-validation-for="OrganizationName"></span>
 
-                                <input type="text" id="customOrganization" class="form-control mt-2" placeholder="Enter organization name" style="display:none;">
-                                <input type="hidden" id="hiddenOrganization" name="Organization"/>
-
-                                <script>
-                            document.getElementById('organization').addEventListener('change', function() {
-                                document.getElementById('customOrganization').style.display = (this.value === 'Other') ? 'block' : 'none';
-                            });
-                        </script>
+                                <input type="text" id="customOrganization" asp-for="OtherOrganizationName" class="form-control mt-2" placeholder="Enter organization name" style="display:none;">
+                                <span class="text-danger" asp-validation-for="OtherOrganizationName"></span>
                             </div>
                         </div>
 

@@ -22,7 +22,7 @@ namespace Luftfartshinder.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Luftfartshinder.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
@@ -66,8 +66,8 @@ namespace Luftfartshinder.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
-                    b.Property<string>("Organization")
-                        .HasColumnType("longtext");
+                    b.Property<int>("OrganizationId")
+                        .HasColumnType("int");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("longtext");
@@ -97,6 +97,8 @@ namespace Luftfartshinder.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
+                    b.HasIndex("OrganizationId");
+
                     b.ToTable("AspNetUsers", (string)null);
 
                     b.HasData(
@@ -104,7 +106,7 @@ namespace Luftfartshinder.Migrations
                         {
                             Id = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "338c26ba-9307-4aa6-bb9a-7138c4accb16",
+                            ConcurrencyStamp = "d1c69796-cb8d-4ec4-82b2-edc61e46f501",
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -113,10 +115,10 @@ namespace Luftfartshinder.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@KARTVERKET.NO",
                             NormalizedUserName = "SUPERADMIN@KARTVERKET.NO",
-                            Organization = "Kartverket",
+                            OrganizationId = 1,
                             PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d045fc18-3a61-4a52-bc40-84dfe1137d4d",
+                            SecurityStamp = "d6178404-3ba1-4d80-8bee-00b5a34090ce",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         },
@@ -124,7 +126,7 @@ namespace Luftfartshinder.Migrations
                         {
                             Id = "322acd53-a201-47c6-a7e0-6695690ce677",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ba3b9483-2308-4539-abe6-33bf86fc2eab",
+                            ConcurrencyStamp = "aadc510e-8578-48b5-961c-af902eb37548",
                             Email = "registrar@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Regi",
@@ -133,10 +135,10 @@ namespace Luftfartshinder.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "REGISTRAR@KARTVERKET.NO",
                             NormalizedUserName = "REGISTRAR",
-                            Organization = "Kartverket",
+                            OrganizationId = 1,
                             PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "52013384-9253-4612-b0e3-fa3fa54f936b",
+                            SecurityStamp = "caf52324-250b-432b-ad53-1a119a844b05",
                             TwoFactorEnabled = false,
                             UserName = "registrar"
                         },
@@ -144,7 +146,7 @@ namespace Luftfartshinder.Migrations
                         {
                             Id = "1d3b44cf-5507-444f-b84c-842539f13e02",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e6d061fd-6232-44d6-9fd9-480b3277614a",
+                            ConcurrencyStamp = "c1731d70-d186-4d72-a4fe-0d5250717f2e",
                             Email = "pilot@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Kaptein",
@@ -153,12 +155,56 @@ namespace Luftfartshinder.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PILOT@KARTVERKET.NO",
                             NormalizedUserName = "PILOT",
-                            Organization = "Norwegian Armed Forces",
+                            OrganizationId = 4,
                             PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "023f32cf-0aec-425f-adc4-c504424ae8f0",
+                            SecurityStamp = "414f24f4-bc20-4099-9f49-99595182027c",
                             TwoFactorEnabled = false,
                             UserName = "pilot"
+                        });
+                });
+
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.Organization", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Organizations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Kartverket"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Norwegian Air Force"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Police"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Norwegian Air Ambulance"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Avinor"
                         });
                 });
 
@@ -344,6 +390,17 @@ namespace Luftfartshinder.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.ApplicationUser", b =>
+                {
+                    b.HasOne("Luftfartshinder.Models.Domain.Organization", "Organization")
+                        .WithMany("Users")
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -355,7 +412,7 @@ namespace Luftfartshinder.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Luftfartshinder.Models.ApplicationUser", null)
+                    b.HasOne("Luftfartshinder.Models.Domain.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -364,7 +421,7 @@ namespace Luftfartshinder.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Luftfartshinder.Models.ApplicationUser", null)
+                    b.HasOne("Luftfartshinder.Models.Domain.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -379,7 +436,7 @@ namespace Luftfartshinder.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Luftfartshinder.Models.ApplicationUser", null)
+                    b.HasOne("Luftfartshinder.Models.Domain.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -388,11 +445,16 @@ namespace Luftfartshinder.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Luftfartshinder.Models.ApplicationUser", null)
+                    b.HasOne("Luftfartshinder.Models.Domain.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Luftfartshinder.Models.Domain.Organization", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

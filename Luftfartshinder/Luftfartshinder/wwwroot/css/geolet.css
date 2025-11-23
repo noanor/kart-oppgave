@@ -51,58 +51,58 @@
     justify-content: center;
     cursor: pointer;
     text-decoration: none;
-    color: inherit;
+/*    color: inherit;*/
 }
 
-    /* ================================================
-   3. Fix the SVG (this is the important bit)
-   Without this, the SVG creates the square box.
-   ================================================ */
-    /* Fix SVG centering (Leaflet + inline SVG size combo issue) */
-    .geolet-container .geolet-btn svg {
-        display: block !important;
-        margin: 0 !important;
-        position: relative;
-        left: 0;
-        top: 0;
-        /* Center it inside the circle */
-        transform: translate(0, 0);
-        /* Remove intrinsic dimensions */
-        width: auto !important;
-        height: auto !important;
-        transform: scale(3); /* scale up icon */
-        transform-origin: center center;
-    }
-
-    /* ================================================
-   4. Active state
-   ================================================ */
-    .geolet-container .geolet-btn.geolet-btn-active {
-        background-color: #111111;
-        border-color: #007bff;
-        color: #e24a0e;
-    }
-
-        .geolet-container .geolet-btn.geolet-btn-active svg {
-            color: #ee680f !important;
-        }
-
-    /* ================================================
-   5. Keyboard accessibility focus
-   ================================================ */
-    .geolet-container .geolet-btn:focus-visible {
-        outline: 3px solid #005fcc;
-        outline-offset: 3px;
-        border-radius: 25% !important;
-        
-    }
+/* ================================================
+3. Fix the SVG (this is the important bit)
+Without this, the SVG creates the square box.
+================================================ */
+/* Fix SVG centering (Leaflet + inline SVG size combo issue) */
+.geolet-container .geolet-btn svg {
+    display: block !important;
+    margin: 0 !important;
+    position: relative;
+    left: 0;
+    top: 0;
+    /* Center it inside the circle */
+    transform: translate(0, 0);
+    /* Remove intrinsic dimensions */
+    width: auto !important;
+    height: auto !important;
+    transform: scale(3); /* scale up icon */
+    transform-origin: center center;
+}
 
 /* ================================================
-   6. Reduced motion
-   ================================================ */
+4. Active state
+================================================ */
+.geolet-container .geolet-btn.geolet-btn-active {
+    background-color: #111111;
+    border-color: #007bff;
+    color: #e24a0e;
+}
+
+.geolet-container .geolet-btn.geolet-btn-active svg {
+    color: #0ca8f4 !important;
+}
+
+/* ================================================
+5. Keyboard accessibility focus
+================================================ */
+.geolet-container .geolet-btn:focus-visible {
+    outline: 3px solid #005fcc;
+    outline-offset: 3px;
+    border-radius: 25% !important;
+        
+}
+
+/* ================================================
+6. Reduced motion
+================================================ */
 @media (prefers-reduced-motion: reduce) {
-    .geolet-container .geolet-btn,
-    .geolet-container .geolet-btn.geolet-btn-active {
-        transition: none;
-    }
+.geolet-container .geolet-btn,
+.geolet-container .geolet-btn.geolet-btn-active {
+    transition: none;
+}
 }

@@ -1,0 +1,49 @@
+@{
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/css/auth.css" />
+
+<div class="container-fluid">
+    <div class="auth-page">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="auth-card">
+                    <div class="text-center mb-4">
+                        <i class="bi bi-hourglass-split" style="font-size: 4rem; color: #0d6efd;"></i>
+                    </div>
+                    
+                    <h1 class="mt-3 mb-3 h3 text-center">Registration Received</h1>
+
+                    <div class="alert alert-info mb-4">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-info-circle me-2" style="font-size: 1.5rem;"></i>
+                            <div>
+                                <strong>Your registration has been submitted successfully!</strong>
+                                <p class="mb-0 mt-2">
+                                    Your account registration is now pending approval by an administrator. 
+                                    You will be able to log in once your account has been reviewed and approved.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mb-4">
+                        <p class="text-muted">
+                            We will review your registration and notify you once your account has been approved. 
+                            This process typically takes 1-2 business days.
+                        </p>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <a href="@Url.Action("Login", "Account")" class="btn btn-primary btn-lg">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+                            Return to Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

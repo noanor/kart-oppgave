@@ -1,13 +1,13 @@
 ﻿using Luftfartshinder.Models.Domain;
 
-namespace Luftfartshinder.Models.ViewModel
+namespace Luftfartshinder.Models.ViewModel.Obstacles
 {
     public class EditObstacleRequest
     {
         public int Id { get; set; }
         public int ReportId { get; set; }
         public Report Report { get; set; }
-        public string Type { get; set; } = "";
+        public string Type { get; set; }
         public string Name { get; set; }
 
         private double? _height;
@@ -27,8 +27,7 @@ namespace Luftfartshinder.Models.ViewModel
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string Description { get; set; }
-        public string? RegistrarNote { get; set; }
-        public Obstacle.Statuses Status { get; set; } = Obstacle.Statuses.Pending;
+        public Domain.Obstacle.Statuses Status { get; set; } = Domain.Obstacle.Statuses.Pending;
 
     }
 }

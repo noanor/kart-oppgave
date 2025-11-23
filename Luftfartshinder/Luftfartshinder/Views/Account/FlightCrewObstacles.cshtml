@@ -1,7 +1,12 @@
 ﻿@using System.Security.Claims
-@model List<Luftfartshinder.Models.Domain.Report>
+@using Luftfartshinder.Models.Domain
+@using Microsoft.AspNetCore.Identity
+@model Luftfartshinder.Models.ViewModel.Organization.OrgDataViewModel
+
+@inject UserManager<ApplicationUser> userManager
 
 @{
+    var userId = userManager.GetUserId(User);
 }
 
 <div class="container mt-5 py-5">
@@ -26,11 +31,11 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            @foreach (var r in Model)
+            @foreach (var r in Model.Reports)
             {
-                if (r.AuthorId == User.FindFirstValue(ClaimTypes.NameIdentifier))
+                if(r.AuthorId == userId)
                 {
-                    @foreach (var o in r.Obstacles)
+                    foreach (var o in r.Obstacles)
                     {
                         <tr>
                             <th scope="row">@o.Id</th>
@@ -48,7 +53,9 @@
                             <td>@o.RegistrarNote</td>
                             <td>@o.Status</td>
                         </tr>
+                        
                     }
+                    
                 }
             }
         </tbody>
@@ -68,7 +75,7 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            @foreach (var r in Model)
+            @foreach (var r in Model.Reports)
             {
                 if (r.AuthorId == User.FindFirstValue(ClaimTypes.NameIdentifier))
                 {
@@ -81,6 +88,45 @@
                     </tr>
                     
                 }
+            }
+        </tbody>
+    </table>
+
+    <subheader class="display-6">
+        @Model.Organization.Name Obstacles:
+    </subheader>
+    <table class="table table-hover mb-5">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Type</th>
+                <th scope="col">Name</th>
+                <th scope="col">Height</th>
+                <th scope="col">Lat</th>
+                <th scope="col">Lon</th>
+                <th scope="col">Registrar Note</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @foreach (var o in Model.Obstacles)
+            {
+                <tr>
+                    <th scope="row">@o.Id</th>
+                    <td>@o.Type</td>
+                    <td>@o.Name</td>
+                    <td>@o.Height</td>
+
+                    @{
+                        string formattedLatitude = String.Format("{0:0.000000}", o.Latitude);
+                        string formattedLongitude = String.Format("{0:0.000000}", o.Longitude);
+                    }
+
+                    <td>@formattedLatitude</td>
+                    <td>@formattedLongitude</td>
+                    <td>@o.RegistrarNote</td>
+                    <td>@o.Status</td>
+                </tr>
             }
         </tbody>
     </table>

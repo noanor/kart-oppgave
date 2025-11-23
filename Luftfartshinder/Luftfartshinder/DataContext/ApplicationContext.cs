@@ -9,7 +9,7 @@ namespace Luftfartshinder.DataContext
         { 
         }
         public DbSet<Obstacle> Obstacles { get; set; } //Table in the database
-        public DbSet<Report> Reports { get; set; } //Table in the database
+        public DbSet<Report> Reports { get; set; } //Table in the databa
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,6 +26,16 @@ namespace Luftfartshinder.DataContext
             modelBuilder.Entity<Report>()
                 .HasKey(pk => pk.Id); //Primary key for Data
 
+            modelBuilder.Entity<Report>() 
+                .HasMany(r => r.Obstacles)
+                .WithOne(o => o.Report)
+                .HasForeignKey(o => o.ReportId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Organization is in AuthDbContext, not here
+            // Ignore the navigation property to avoid FK conflicts
+            modelBuilder.Entity<Report>()
+                .Ignore(r => r.Organization);
         }
     }
 }

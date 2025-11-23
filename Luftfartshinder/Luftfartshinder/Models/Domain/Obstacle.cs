@@ -6,7 +6,7 @@ namespace Luftfartshinder.Models.Domain
     {
         // Unik ID for hver hindring
         public int Id { get; set; }
-
+        public int OrganizationId { get; set; }
         public int ReportId { get; set; }
         public Report Report { get; set; }
 
@@ -40,6 +40,7 @@ namespace Luftfartshinder.Models.Domain
         public double Latitude { get; set; }
         [Required(ErrorMessage = "Obstacle longitude is required.")]
         public double Longitude { get; set; }
+
         // Beskrivelse av hindringen – må fylles ut
         //[Required(ErrorMessage = "Obstacle description is required.")]
         public string? Description { get; set; }

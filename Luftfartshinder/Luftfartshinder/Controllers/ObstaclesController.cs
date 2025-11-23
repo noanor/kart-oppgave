@@ -1,7 +1,7 @@
 using Luftfartshinder.Extensions;
-using Luftfartshinder.Models;
 using Luftfartshinder.Models.Domain;
-using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Models.ViewModel.Admin;
+using Luftfartshinder.Models.ViewModel.Obstacles;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -25,9 +25,11 @@ public partial class ObstaclesController : Controller
     }
 
     // === GET: /obstacles/draft ===
+    // Draft-visning: iPad-vennlig layout
     [HttpGet("/obstacles/draft")]
     public IActionResult Draft()
     {
+        ViewData["LayoutType"] = "ipad";
         // Get existing draft from session, or create a new one
         var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey)
                    ?? new SessionObstacleDraft();
@@ -47,7 +49,6 @@ public partial class ObstaclesController : Controller
 
         var o = new Obstacle
         {
-
             Type = dto.Type,
             Name = dto.Name ?? $"Obstacle {DateTime.UtcNow:HHmmss}",
             Description = dto.Description ?? "",
@@ -74,10 +75,22 @@ public partial class ObstaclesController : Controller
     // === POST: /obstacles/submit-draft ===
     [Authorize]
     [HttpPost("/obstacles/submit-draft")]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> SubmitDraft()
     {
         var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
+
+        // 1. Finn innlogget bruker
+        var user = await userManager.GetUserAsync(User);
+
+        if (user == null)
+        {
+            return Challenge(); // eller throw
+        }
+
+        if (user.OrganizationId == null)
+        {
+            return BadRequest("Brukeren er ikke knyttet til en organisasjon.");
+        }
 
         // Create new report
         var newReport = new Report()
@@ -85,7 +98,8 @@ public partial class ObstaclesController : Controller
             ReportDate = DateTime.Now,
             Author = User.Identity.Name,
             AuthorId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-            Title = ""
+            Title = "",
+            OrganizationId = user.OrganizationId
         };
 
         if (draft is null || draft.Obstacles.Count == 0)
@@ -96,6 +110,7 @@ public partial class ObstaclesController : Controller
         // Assign obstacles to the report
         foreach (var obstacle in draft.Obstacles)
         {
+            obstacle.OrganizationId = user.OrganizationId;
             newReport.Obstacles.Add(obstacle);
 
         }
@@ -120,9 +135,11 @@ public partial class ObstaclesController : Controller
         return RedirectToAction("Index", "Home");
     }
 
+    // Edit draft obstacle: iPad-vennlig layout
     [HttpGet]
     public IActionResult EditObstacle(int index)
     {
+        ViewData["LayoutType"] = "ipad";
         var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
         if (draft is null || index < 0 || index >= draft.Obstacles.Count)
         {
@@ -146,20 +163,19 @@ public partial class ObstaclesController : Controller
         }
 
         return View(null);
-
-
     }
 
+    // Obstacle liste: PC-vennlig layout (tabell-visning)
     [HttpGet]
     public async Task<IActionResult> List()
     {
+        ViewData["LayoutType"] = "pc";
         var obstacles = await obstacleRepository.GetAllAsync();
         return View(obstacles);
     }
 
     // === POST: /obstacles/edit-obstacle ===
     [HttpPost]
-    [ValidateAntiForgeryToken]
     public IActionResult EditObstacle(EditObstacleRequest editObstacleRequest, int index)
     {
         var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
@@ -205,8 +221,10 @@ public partial class ObstaclesController : Controller
         return Ok(list);
     }
 
+    // Admin edit obstacle: PC-vennlig layout
     public async Task<IActionResult> Edit(int id)
     {
+        ViewData["LayoutType"] = "pc";
         var existingObstacle = await obstacleRepository.GetObstacleById(id);
 
         if (existingObstacle == null)
@@ -214,7 +232,7 @@ public partial class ObstaclesController : Controller
             return NotFound();
         }
 
-        var editObstacleRequest = new EditObstacleRequest()
+        var editObstacleRequest = new AdminEditObstacleRequest()
         {
             Id = existingObstacle.Id,
             Type = existingObstacle.Type,

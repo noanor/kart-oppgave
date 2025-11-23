@@ -1,6 +1,8 @@
-﻿using Luftfartshinder.Models;
+﻿using Luftfartshinder.DataContext;
 using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Models.ViewModel.Organization;
+using Luftfartshinder.Models.ViewModel.User;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -15,26 +17,30 @@ namespace Luftfartshinder.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IAccountRepository accountRepository;
         private readonly IReportRepository reportRepository;
+        private readonly IOrganizationRepository organizationRepository;
+        private readonly IObstacleRepository obstacleRepository;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository, IReportRepository reportRepository)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository, IReportRepository reportRepository, IOrganizationRepository organizationRepository, IObstacleRepository obstacleRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.accountRepository = accountRepository;
             this.reportRepository = reportRepository;
-
+            this.organizationRepository = organizationRepository;
+            this.obstacleRepository = obstacleRepository;
         }
 
+        // Admin brukerregistrering: PC-vennlig layout
         [HttpGet]
         [Authorize(Roles = "SuperAdmin")]
         public IActionResult Register()
         {
+            ViewData["LayoutType"] = "pc";
             return View();
         }
 
         [HttpPost]
         [Authorize(Roles = "SuperAdmin")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
@@ -57,13 +63,38 @@ namespace Luftfartshinder.Controllers
                 return View(model);
             }
 
-            string? organization = null;
+            Organization? organization = null;
+
             if (model.SelectedRole == "FlightCrew")
             {
-                if (model.Organization == "Other" && !string.IsNullOrEmpty(model.OtherOrganization))
-                    organization = model.OtherOrganization;
+                string? organizationName = null;
+                if (model.OrganizationName == "Other" && !string.IsNullOrEmpty(model.OtherOrganizationName))
+                    organizationName = model.OtherOrganizationName;
                 else
-                    organization = model.Organization;
+                    organizationName = model.OrganizationName;
+
+                if (!string.IsNullOrWhiteSpace(organizationName))
+                {
+                    organization = await organizationRepository.GetByName(organizationName);
+                }
+            }
+            else if (model.SelectedRole == "Registrar")
+            {
+                // Registrar brukere tilhører Kartverket organisasjonen
+                organization = await organizationRepository.GetByName("Kartverket");
+
+                if (organization == null)
+                {
+                    // Hvis Kartverket ikke finnes, opprett den
+                    organization = new Organization { Name = "Kartverket" };
+                    await organizationRepository.Add(organization);
+                }
+            }
+
+            if (organization == null)
+            {
+                ModelState.AddModelError("", "Unable to set organization. Please try again.");
+                return View(model);
             }
 
             var newUser = new ApplicationUser
@@ -89,26 +120,28 @@ namespace Luftfartshinder.Controllers
                 }
             }
 
-            return View();
+            return RedirectToAction("List", "SuperadminHome");
         }
 
+        // Brukerregistrering: iPad-vennlig layout
         [HttpGet]
         [AllowAnonymous]
         public IActionResult UserRegister()
         {
+            ViewData["LayoutType"] = "ipad";
             return View(new UserRegisterViewModel());
         }
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UserRegister(UserRegisterViewModel model)
         {
+            ViewData["LayoutType"] = "ipad";
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-
 
             var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
             var existingUserByUsername = await userManager.FindByNameAsync(model.Username);
@@ -125,13 +158,54 @@ namespace Luftfartshinder.Controllers
                 return View(model);
             }
 
-            string? organization = null;
+            Organization? organization = null;
+
             if (model.SelectedRole == "FlightCrew")
             {
-                if (model.Organization == "Other" && !string.IsNullOrEmpty(model.OtherOrganization))
-                    organization = model.OtherOrganization;
+                string? orgName = null;
+
+                if (model.OrganizationName == "Other" &&
+                    !string.IsNullOrWhiteSpace(model.OtherOrganizationName))
+                {
+                    orgName = model.OtherOrganizationName;
+                }
                 else
-                    organization = model.Organization;
+                {
+                    orgName = model.OrganizationName;
+                }
+
+                if (string.IsNullOrWhiteSpace(orgName))
+                {
+                    ModelState.AddModelError("OrganizationName", "Organization is required for FlightCrew role.");
+                    return View(model);
+                }
+
+                // look up existing org, or create new
+                organization = await organizationRepository.GetByName(orgName);
+
+                if (organization == null)
+                {
+                    organization = new Organization { Name = orgName };
+                    await organizationRepository.Add(organization);
+                }
+            }
+            else if (model.SelectedRole == "Registrar")
+            {
+                // Registrar brukere tilhører Kartverket organisasjonen
+                organization = await organizationRepository.GetByName("Kartverket");
+
+                if (organization == null)
+                {
+                    // Hvis Kartverket ikke finnes, opprett den
+                    organization = new Organization { Name = "Kartverket" };
+                    await organizationRepository.Add(organization);
+                }
+            }
+
+            if (organization == null)
+            {
+                ModelState.AddModelError("", "Unable to set organization. Please try again.");
+                return View(model);
             }
 
             var newUser = new ApplicationUser
@@ -146,37 +220,46 @@ namespace Luftfartshinder.Controllers
 
             var createResult = await userManager.CreateAsync(newUser, model.Password);
 
-            if (!createResult.Succeeded)
+            if (createResult.Succeeded)
             {
-                ModelState.AddModelError(string.Empty, "Registration failed. Please correct the fields below.");
+                var roleResult = await userManager.AddToRoleAsync(newUser, model.SelectedRole);
 
+                if (roleResult.Succeeded)
+                {
+                    return RedirectToAction("RegistrationPending", "Account");
+                }
+                else
+                {
+                    // Add role assignment errors to ModelState
+                    foreach (var error in roleResult.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            else
+            {
+                // Add user creation errors to ModelState
                 foreach (var error in createResult.Errors)
                 {
-                    if (error.Code.Contains("DuplicateUserName"))
-                        ModelState.AddModelError("Username", "This username is already taken.");
-                    else if (error.Code.Contains("DuplicateEmail"))
-                        ModelState.AddModelError("Email", "This email is already taken.");
-                    else
-                        ModelState.AddModelError(string.Empty, error.Description);
+                    ModelState.AddModelError("", error.Description);
                 }
-                return View(model);
             }
 
-            var roleResult = await userManager.AddToRoleAsync(newUser, model.SelectedRole);
-
-            if (!roleResult.Succeeded)
-            {
-                foreach (var error in roleResult.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
-                return View(model);
-            }
-
-            TempData["RegistrationSuccess"] = "Thank you for registering! Your account has been submitted for review and must be approved by an administrator before you can log in.";
-            return RedirectToAction("Login");
+            return View(model);
         }
 
+        // Registrering venter på godkjenning
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult RegistrationPending()
+        {
+            ViewData["LayoutType"] = "ipad";
+            return View();
+        }
+
+
+        // Login-side: iPad-vennlig layout
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login()
@@ -185,12 +268,12 @@ namespace Luftfartshinder.Controllers
             {
                 return RedirectToAction("Dashboard");
             }
+            ViewData["LayoutType"] = "ipad";
             return View();
         }
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
@@ -239,10 +322,21 @@ namespace Luftfartshinder.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        // Dashboard: iPad-vennlig layout for FlightCrew, PC-vennlig for admin/registrar
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Dashboard()
         {
+            // FlightCrew (pilot) skal ha iPad-navbar på alle sider
+            if (User.IsInRole("FlightCrew") && !User.IsInRole("SuperAdmin"))
+            {
+                ViewData["LayoutType"] = "ipad";
+            }
+            else
+            {
+                ViewData["LayoutType"] = "pc";
+            }
+
             string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var reports = new List<Report>();
             if (!User.IsInRole("Registrar") && !User.IsInRole("SuperAdmin"))
@@ -256,18 +350,57 @@ namespace Luftfartshinder.Controllers
             return View(reports);
         }
 
-        [HttpGet]
-        [Authorize]
+        //[HttpGet]
+        //[Authorize]
+        //public async Task<IActionResult> FlightCrewObstacles()
+        //{
+        //    string? userId = userManager.GetUserId(User);
+        //    var obstacles = new List<Report>();
+
+        //    obstacles = await reportRepository.GetAllAsync();
+
+        //    return View(obstacles);
+        //}
+
+        // FlightCrew obstacles: iPad-vennlig layout for FlightCrew
         public async Task<IActionResult> FlightCrewObstacles()
         {
-            string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var obstacles = new List<Report>();
+            // FlightCrew (pilot) skal ha iPad-navbar på alle sider
+            ViewData["LayoutType"] = "ipad";
+            // 1. Finn innlogget bruker
+            var user = await userManager.GetUserAsync(User);
 
-            obstacles = await reportRepository.GetAllAsync();
+            if (user == null)
+            {
+                // Ingen innlogget bruker → redirect eller forbidd, opp til deg
+                return Challenge(); // sender til login
+            }
 
-            return View(obstacles);
+            if (user.OrganizationId == null)
+            {
+                // Brukeren har ikke organisasjon
+                return Forbid(); // eller vis en egen side
+            }
+
+            var organization = await organizationRepository.GetById(user.OrganizationId);
+
+            var orgId = organization.Id;
+
+            // 2. Hent data fra Domain-DB via repos
+            var obstacles = await obstacleRepository.GetByOrgId(orgId);
+            var reports = await reportRepository.GetByOrgId(orgId);
+
+            // 3. Bygg viewmodel
+            var vm = new OrgDataViewModel
+            {
+                Organization = organization,
+                Obstacles = obstacles,
+                Reports = reports
+            };
+
+            // 4. Send til view
+            return View("FlightCrewObstacles", vm);
         }
-
 
     }
 }

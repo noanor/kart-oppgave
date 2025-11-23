@@ -46,6 +46,9 @@ namespace Luftfartshinder.Migrations.Application
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("OrganizationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("RegistrarNote")
                         .HasColumnType("longtext");
 
@@ -82,6 +85,9 @@ namespace Luftfartshinder.Migrations.Application
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("OrganizationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("RegistrarNote")
                         .HasColumnType("longtext");
 
@@ -102,7 +108,7 @@ namespace Luftfartshinder.Migrations.Application
                     b.HasOne("Luftfartshinder.Models.Domain.Report", "Report")
                         .WithMany("Obstacles")
                         .HasForeignKey("ReportId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Report");

@@ -9,10 +9,12 @@ namespace Luftfartshinder.Controllers
 {
     public class FeedbackController : Controller
     {
+        // Feedback-side: iPad-vennlig layout
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Index()
         {
+            ViewData["LayoutType"] = "ipad";
             var model = new FeedbackViewModel();
             
             // Set Q&A data
@@ -23,9 +25,9 @@ namespace Luftfartshinder.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public IActionResult Index(FeedbackViewModel model)
         {
+            ViewData["LayoutType"] = "ipad";
             if (!ModelState.IsValid)
             {
                 ViewBag.QandA = GetQandAData();

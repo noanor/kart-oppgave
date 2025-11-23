@@ -1,4 +1,5 @@
-﻿@model Luftfartshinder.Models.ViewModel.UserViewModel
+﻿@using Luftfartshinder.Models.ViewModel.User
+@model UserViewModel
 @{
 }
 
@@ -153,7 +154,7 @@
 					<tr>
 						<td>@user.UserName</td>
 						<td>@user.EmailAdress</td>
-						<td>@user.Organization</td>
+						<td>@user.Organization.Name</td>
 						<td>@user.Role</td>
 						<td>
 							@if (user.IsApproved)

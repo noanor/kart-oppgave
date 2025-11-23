@@ -40,7 +40,7 @@
             </div>
         }
 
-        <form id="registerForm" method="post">
+        <form id="registerForm" asp-action="Register" asp-controller="Account" method="post">
             @Html.AntiForgeryToken()
             <div class="row g-3 mb-3">
                 <div class="col-md-6">
@@ -92,7 +92,9 @@
 
             <div class="row g-3 mb-3">
                 <div class="col-md-6">
-                    <label asp-for="SelectedRole" class="form-label"> Role <span class="text-danger">*</span></label>
+                    <label asp-for="SelectedRole" class="form-label">
+                        Role <span class="text-danger">*</span>
+                    </label>
                     <select id="role" asp-for="SelectedRole" class="form-select">
                         <option value="">-- Select a role --</option>
                         <option value="Registrar">Registrar</option>
@@ -100,9 +102,13 @@
                     </select>
                     <span class="text-danger" asp-validation-for="SelectedRole"></span>
                 </div>
+
                 <div class="col-md-6" id="organizationDiv" style="display:none;">
-                    <label asp-for="Organization" class="form-label">Organization <span class="text-danger">*</span></label>
-                    <select id="organization" class="form-select">
+                    <label asp-for="OrganizationName" class="form-label">
+                        Organization <span class="text-danger">*</span>
+                    </label>
+
+                    <select id="organization" asp-for="OrganizationName" class="form-select">
                         <option value="">-- Select organization --</option>
                         <option value="Norwegian Air Ambulance">Norwegian Air Ambulance</option>
                         <option value="Police">Police</option>
@@ -110,15 +116,16 @@
                         <option value="Avinor">Avinor</option>
                         <option value="Other">Other</option>
                     </select>
+                    <span class="text-danger" asp-validation-for="OrganizationName"></span>
 
-                    <input type="text" id="customOrganization" class="form-control mt-2" placeholder="Enter organization name" style="display:none;">
-                    <input type="hidden" id="hiddenOrganization" name="Organization"/>
-
-                    <script>
-                document.getElementById('organization').addEventListener('change', function() {
-                    document.getElementById('customOrganization').style.display = (this.value === 'Other') ? 'block' : 'none';
-                });
-            </script>
+                    <input asp-for="OtherOrganizationName"
+                           type="text"
+                           id="customOrganization"
+                           class="form-control mt-2"
+                           placeholder="Enter organization name"
+                           style="display:none;" />
+                    <span class="text-danger" asp-validation-for="OtherOrganizationName"></span>
+                    
                 </div>
             </div>
 
@@ -152,4 +159,44 @@
 {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     <script src="~/js/register.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const roleSelect = document.getElementById('role');
+            const organizationDiv = document.getElementById('organizationDiv');
+            const organizationSelect = document.getElementById('organization');
+            const customOrganizationInput = document.getElementById('customOrganization');
+
+            if (!roleSelect || !organizationDiv || !organizationSelect || !customOrganizationInput) {
+                return;
+            }
+
+            function toggleOrganization() {
+                if (roleSelect.value === 'FlightCrew') {
+                    organizationDiv.style.display = 'block';
+                    toggleCustomOrg();
+                } else {
+                    organizationDiv.style.display = 'none';
+                    organizationSelect.value = '';
+                    customOrganizationInput.style.display = 'none';
+                    customOrganizationInput.value = '';
+                }
+            }
+
+            function toggleCustomOrg() {
+                if (organizationSelect.value === 'Other') {
+                    customOrganizationInput.style.display = 'block';
+                } else {
+                    customOrganizationInput.style.display = 'none';
+                    customOrganizationInput.value = '';
+                }
+            }
+
+            roleSelect.addEventListener('change', toggleOrganization);
+            organizationSelect.addEventListener('change', toggleCustomOrg);
+
+            // Run once so it’s correct on initial load
+            toggleOrganization();
+        });
+    </script>
 }

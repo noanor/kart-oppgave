@@ -1,5 +1,5 @@
 ﻿using Luftfartshinder.Extensions;
-using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Models.ViewModel.Obstacles;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Mvc;
 

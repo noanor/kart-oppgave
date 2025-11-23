@@ -1,17 +1,61 @@
-﻿using Luftfartshinder.Models;
+﻿using Luftfartshinder.Models.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace Luftfartshinder.DataContext
 {
     public class AuthDbContext : IdentityDbContext<ApplicationUser>
     {
         public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options) { }
+        public DbSet<Organization> Organizations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Organization>()
+                .HasKey(pk => pk.Id); // Primary key for Data
+            builder.Entity<Organization>()
+                .HasMany(o => o.Users)
+                .WithOne(u => u.Organization)
+                .HasForeignKey(u => u.OrganizationId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Organization>().Ignore(o => o.Reports);
+
+
+            // seed organisasjoner
+            var orgs = new List<Organization>
+            {
+                new Organization
+                {
+                    Id = 1,
+                    Name = "Kartverket"
+                },new Organization
+                {
+                    Id= 2,
+                    Name = "Norwegian Air Force"
+                },
+                new Organization
+                {
+                    Id = 3,
+                    Name = "Police"
+                },
+                new Organization
+                {
+                    Id = 4,
+                    Name = "Norwegian Air Ambulance"
+                },
+                new Organization
+                {
+                    Id = 5,
+                    Name = "Avinor"
+                }
+            };
+
+            builder.Entity<Organization>().HasData(orgs);
 
             //seed roller
 
@@ -62,7 +106,7 @@ namespace Luftfartshinder.DataContext
                 FirstName = "Super",
                 LastName = "Admin",
                 IsApproved = true,
-                Organization = "Kartverket"
+                OrganizationId = 1
             };
 
             var registrarUser = new ApplicationUser
@@ -75,7 +119,7 @@ namespace Luftfartshinder.DataContext
                 FirstName = "Regi",
                 LastName = "Strar",
                 IsApproved = true,
-                Organization = "Kartverket"
+                OrganizationId = 1
             };
 
             var pilotUser = new ApplicationUser
@@ -88,7 +132,7 @@ namespace Luftfartshinder.DataContext
                 FirstName = "Kaptein",
                 LastName = "Pilot",
                 IsApproved = true,
-                Organization = "Norwegian Armed Forces"
+                OrganizationId = 4
             };
 
             superAdminUser.PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==";

@@ -31,6 +31,13 @@ namespace Luftfartshinder.Repository
             return await context.Reports.Include(r => r.Obstacles).FirstAsync(r => r.Id == id);
         }
 
+        public async Task<List<Report>> GetByOrgId(int organizationId)
+        {
+            return await context.Reports
+                .Where(r => r.OrganizationId == organizationId)
+                .ToListAsync();
+        }
+
         public async Task<Report?> UpdateAsync(Report report)
         {
             var existingReport = await context.Reports.FindAsync(report.Id);

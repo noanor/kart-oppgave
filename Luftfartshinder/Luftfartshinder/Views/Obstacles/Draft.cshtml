@@ -1,12 +1,14 @@
 ﻿@using System.Globalization
-@model Luftfartshinder.Models.ViewModel.SessionObstacleDraft
+@using Luftfartshinder.Models.ViewModel.Obstacles
+@model SessionObstacleDraft
 @{
+    // Legg til klasse på body for å skjule global tilbake-knapp
+    ViewData["BodyClass"] = "page-draft";
 }
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @section Styles {
-    <link href="~/css/draft.css" rel="stylesheet" />
     <link href="~/css/draft.css" rel="stylesheet" />
 
     @* Leaflet *@
@@ -15,6 +17,14 @@
           crossorigin="" />
 }
 
+<!-- Floating back button for iPad views -->
+<a class="draft-back-button" 
+   asp-area="" 
+   asp-controller="Home" 
+   asp-action="Index"
+   aria-label="Back to Map">
+    <i class="bi bi-arrow-left-circle"></i>
+</a>
 
 <div class="text-center mt-4 pt-4">
     <div class="mb-2 h1">
@@ -108,28 +118,30 @@
             </div>
         }
 
-        // Submit or Clear
-        <div class="mb-5">
-            <p class="text-muted">Review the obstacles above before submitting them for review.</p>
-            
-            <button 
-                id="btnSubminDraft" 
-                class="btn btn-primary" 
-                type="submit" 
-                data-bs-toggle="modal" 
-                data-bs-target="#modalSubmitDraft"
-                >Submit
-            </button>
+        <!-- Submit or Clear - Sticky action buttons -->
+        <div class="draft-actions-container">
+            <div class="draft-actions-content">
+                <p class="text-muted mb-3">Review the obstacles above before submitting them for review.</p>
+                
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <button 
+                        id="btnSubminDraft" 
+                        class="btn btn-primary btn-lg draft-action-btn" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#modalSubmitDraft">
+                        <i class="fa-solid fa-paper-plane me-2"></i>
+                        Submit Draft
+                    </button>
 
-            @Html.AntiForgeryToken()
-            <button
-                    class="btn btn-outline-danger"
-                    type="submit"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalClearDraft">
-                Clear Draft
-            </button>
-            
+                    <button
+                        class="btn btn-outline-danger btn-lg draft-action-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalClearDraft">
+                        <i class="fa-solid fa-trash me-2"></i>
+                        Clear Draft
+                    </button>
+                </div>
+            </div>
         </div>
     }
 
@@ -199,7 +211,7 @@
 </div>
 
 <div class="toast-container position-fixed end-0 p-3" style="z-index: 3000; top: 5vh;">
-    <div id="toastDraftCleared" class="toast text-white bg-danger border-0 opacity-75" role="alert">
+    <div id="toastDraftCleared" class="toast text-white bg-danger border-0" role="alert">
         <div class="toast-body">
             Draft cleared.
         </div>

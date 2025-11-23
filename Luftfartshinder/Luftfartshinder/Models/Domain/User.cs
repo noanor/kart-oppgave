@@ -1,4 +1,4 @@
-﻿namespace Luftfartshinder.Models.ViewModel
+﻿namespace Luftfartshinder.Models.Domain
 {
     public class User
     {
@@ -13,6 +13,7 @@
         
         public string Role { get; set; }
         
-        public string Organization { get; set; }
+        public int OrganizationId { get; set; }
+        public Organization Organization { get; set; }
     }
 }
