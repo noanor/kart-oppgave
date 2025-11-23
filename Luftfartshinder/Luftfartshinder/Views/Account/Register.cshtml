@@ -125,17 +125,7 @@
                            placeholder="Enter organization name"
                            style="display:none;" />
                     <span class="text-danger" asp-validation-for="OtherOrganizationName"></span>
-                    <script>
-                        document.getElementById('organization').addEventListener('change', function () {
-                            const custom = document.getElementById('customOrganization');
-                            if (this.value === 'Other') {
-                                custom.style.display = 'block';
-                            } else {
-                                custom.style.display = 'none';
-                                custom.value = '';
-                            }
-                        });
-                    </script>
+                    
                 </div>
             </div>
 
@@ -169,4 +159,44 @@
 {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     <script src="~/js/register.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const roleSelect = document.getElementById('role');
+            const organizationDiv = document.getElementById('organizationDiv');
+            const organizationSelect = document.getElementById('organization');
+            const customOrganizationInput = document.getElementById('customOrganization');
+
+            if (!roleSelect || !organizationDiv || !organizationSelect || !customOrganizationInput) {
+                return;
+            }
+
+            function toggleOrganization() {
+                if (roleSelect.value === 'FlightCrew') {
+                    organizationDiv.style.display = 'block';
+                    toggleCustomOrg();
+                } else {
+                    organizationDiv.style.display = 'none';
+                    organizationSelect.value = '';
+                    customOrganizationInput.style.display = 'none';
+                    customOrganizationInput.value = '';
+                }
+            }
+
+            function toggleCustomOrg() {
+                if (organizationSelect.value === 'Other') {
+                    customOrganizationInput.style.display = 'block';
+                } else {
+                    customOrganizationInput.style.display = 'none';
+                    customOrganizationInput.value = '';
+                }
+            }
+
+            roleSelect.addEventListener('change', toggleOrganization);
+            organizationSelect.addEventListener('change', toggleCustomOrg);
+
+            // Run once so it’s correct on initial load
+            toggleOrganization();
+        });
+    </script>
 }

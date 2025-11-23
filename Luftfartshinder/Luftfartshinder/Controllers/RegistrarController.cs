@@ -16,16 +16,20 @@ namespace Luftfartshinder.Controllers
         }
 
         // GET /Registrar
+        // Report liste: PC-vennlig layout (tabell-visning)
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            ViewData["LayoutType"] = "pc";
             var reports = await reportRepository.GetAllAsync();
             return View("Index", reports);
         }
 
+        // Report detaljer: PC-vennlig layout
         [HttpGet]
         public IActionResult Details(int id)
         {
+            ViewData["LayoutType"] = "pc";
             var report = reportRepository.GetByIdAsync(id).Result;
 
             if (report != null)

@@ -21,8 +21,10 @@ namespace Luftfartshinder.Controllers
             this.organizationRepository = organizationRepository;
         }
 
+        // Brukerliste: PC-vennlig layout (tabell-visning)
         public async Task<IActionResult> List(string roleFilter = "All", string statusFilter = "", string organizationFilter = "")
         {
+            ViewData["LayoutType"] = "pc";
             var allUsers = await userRepository.GetAll();
             var filteredUsers = new List<User>();
             var uniqueOrganizations = new HashSet<string>();

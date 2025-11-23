@@ -23,11 +23,7 @@ namespace Luftfartshinder.DataContext
                 .HasForeignKey(u => u.OrganizationId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Organization>()
-                .HasMany(o => o.Reports)
-                .WithOne(r => r.Organization)
-                .HasForeignKey(o => o.OrganizationId)
-                .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Organization>().Ignore(o => o.Reports);
 
 
             // seed organisasjoner

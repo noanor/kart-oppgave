@@ -3,11 +3,13 @@ html {
 }
 
 @media (min-width: 768px) {
-      html {
+    html {
         font-size: 16px;
-      }
+    }
 }
 
+/* ===== NAVBAR STYLING ===== */
+/* PC-navbar: vises på skjermer større enn 1024px (med mindre layout-type overstyrer) */
 @media (min-width: 1025px) {
     #navbarIPAD {
         display: none;
@@ -18,7 +20,8 @@ html {
     }
 }
 
-@media (max-width: 1025px) {
+/* iPad-navbar: vises på skjermer mindre enn eller lik 1024px (med mindre layout-type overstyrer) */
+@media (max-width: 1024px) {
     #navbarIPAD {
         display: block;
         font-size: 2rem;
@@ -33,6 +36,61 @@ html {
     }
 }
 
+/* ===== LAYOUT TYPE STYLING ===== */
+/* PC-vennlig layout: optimalisert for desktop */
+body[data-layout-type="pc"] {
+    --touch-target-size: auto;
+    --font-size-base: 1rem;
+}
+
+/* iPad-vennlig layout: optimalisert for touch */
+body[data-layout-type="ipad"] {
+    --touch-target-size: 44px; /* Minimum touch target size for iOS/Android */
+    --font-size-base: 1.2rem;
+}
+
+/* Touch-vennlige knapper for iPad-layout */
+body[data-layout-type="ipad"] .btn {
+    min-height: var(--touch-target-size);
+    padding: 0.75rem 1.5rem;
+    font-size: var(--font-size-base);
+    touch-action: manipulation; /* Forbedrer touch-respons */
+}
+
+/* Touch-vennlige navigasjonslenker for iPad-layout */
+body[data-layout-type="ipad"] .nav-link {
+    min-height: var(--touch-target-size);
+    padding: 0.75rem 1rem;
+    font-size: var(--font-size-base);
+    touch-action: manipulation;
+}
+
+/* Touch-vennlige form-elementer for iPad-layout */
+body[data-layout-type="ipad"] .form-control,
+body[data-layout-type="ipad"] .form-select {
+    min-height: var(--touch-target-size);
+    font-size: var(--font-size-base);
+    touch-action: manipulation;
+}
+
+/* Touch-vennlige dropdown-items for iPad-layout */
+body[data-layout-type="ipad"] .dropdown-item {
+    min-height: var(--touch-target-size);
+    padding: 0.75rem 1rem;
+    font-size: var(--font-size-base);
+}
+
+/* Forbedret spacing for iPad-layout */
+body[data-layout-type="ipad"] .card {
+    margin-bottom: 1.5rem;
+}
+
+body[data-layout-type="ipad"] .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* ===== GENEREL STYLING ===== */
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -57,7 +115,7 @@ html {
 }
 
 .bg-lightgray {
-    background-color: lightgray
+    background-color: lightgray;
 }
 
 .inline-icon {
@@ -65,3 +123,50 @@ html {
     vertical-align: text-bottom;
 }
 
+/* ===== GLOBAL IPAD BACK BUTTON ===== */
+/* Skjul tilbake-knapp som standard */
+.ipad-back-button {
+    display: none;
+}
+
+/* Vis tilbake-knapp kun på iPad layout, men ikke på Draft-siden */
+body[data-layout-type="ipad"] .ipad-back-button {
+    display: flex;
+    position: fixed;
+    top: 75px;
+    left: 20px;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.85);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+    z-index: 999;
+    color: #495057;
+    font-size: 1.5rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(12px);
+    touch-action: manipulation;
+    cursor: pointer;
+}
+
+body[data-layout-type="ipad"] .ipad-back-button:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
+    color: #212529;
+}
+
+body[data-layout-type="ipad"] .ipad-back-button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background-color: rgba(248, 249, 250, 0.95);
+}
+
+/* Skjul global tilbake-knapp på Draft-siden (som har egen knapp) og Home-siden */
+body.page-draft[data-layout-type="ipad"] .ipad-back-button,
+body.page-home[data-layout-type="ipad"] .ipad-back-button {
+    display: none !important;
+}

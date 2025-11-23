@@ -25,9 +25,11 @@ public partial class ObstaclesController : Controller
     }
 
     // === GET: /obstacles/draft ===
+    // Draft-visning: iPad-vennlig layout
     [HttpGet("/obstacles/draft")]
     public IActionResult Draft()
     {
+        ViewData["LayoutType"] = "ipad";
         // Get existing draft from session, or create a new one
         var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey)
                    ?? new SessionObstacleDraft();
@@ -47,7 +49,6 @@ public partial class ObstaclesController : Controller
 
         var o = new Obstacle
         {
-
             Type = dto.Type,
             Name = dto.Name ?? $"Obstacle {DateTime.UtcNow:HHmmss}",
             Description = dto.Description ?? "",
@@ -134,9 +135,11 @@ public partial class ObstaclesController : Controller
         return RedirectToAction("Index", "Home");
     }
 
+    // Edit draft obstacle: iPad-vennlig layout
     [HttpGet]
     public IActionResult EditObstacle(int index)
     {
+        ViewData["LayoutType"] = "ipad";
         var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
         if (draft is null || index < 0 || index >= draft.Obstacles.Count)
         {
@@ -160,13 +163,13 @@ public partial class ObstaclesController : Controller
         }
 
         return View(null);
-
-
     }
 
+    // Obstacle liste: PC-vennlig layout (tabell-visning)
     [HttpGet]
     public async Task<IActionResult> List()
     {
+        ViewData["LayoutType"] = "pc";
         var obstacles = await obstacleRepository.GetAllAsync();
         return View(obstacles);
     }
@@ -218,8 +221,10 @@ public partial class ObstaclesController : Controller
         return Ok(list);
     }
 
+    // Admin edit obstacle: PC-vennlig layout
     public async Task<IActionResult> Edit(int id)
     {
+        ViewData["LayoutType"] = "pc";
         var existingObstacle = await obstacleRepository.GetObstacleById(id);
 
         if (existingObstacle == null)

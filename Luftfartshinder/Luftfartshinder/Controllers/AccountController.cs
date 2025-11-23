@@ -30,10 +30,12 @@ namespace Luftfartshinder.Controllers
             this.obstacleRepository = obstacleRepository;
         }
 
+        // Admin brukerregistrering: PC-vennlig layout
         [HttpGet]
         [Authorize(Roles = "SuperAdmin")]
         public IActionResult Register()
         {
+            ViewData["LayoutType"] = "pc";
             return View();
         }
 
@@ -61,16 +63,39 @@ namespace Luftfartshinder.Controllers
                 return View(model);
             }
 
-            string? organizationName = null;
+            Organization? organization = null;
+
             if (model.SelectedRole == "FlightCrew")
             {
+                string? organizationName = null;
                 if (model.OrganizationName == "Other" && !string.IsNullOrEmpty(model.OtherOrganizationName))
                     organizationName = model.OtherOrganizationName;
                 else
                     organizationName = model.OrganizationName;
+
+                if (!string.IsNullOrWhiteSpace(organizationName))
+                {
+                    organization = await organizationRepository.GetByName(organizationName);
+                }
+            }
+            else if (model.SelectedRole == "Registrar")
+            {
+                // Registrar brukere tilhører Kartverket organisasjonen
+                organization = await organizationRepository.GetByName("Kartverket");
+
+                if (organization == null)
+                {
+                    // Hvis Kartverket ikke finnes, opprett den
+                    organization = new Organization { Name = "Kartverket" };
+                    await organizationRepository.Add(organization);
+                }
             }
 
-            var organization = await organizationRepository.GetByName(organizationName);
+            if (organization == null)
+            {
+                ModelState.AddModelError("", "Unable to set organization. Please try again.");
+                return View(model);
+            }
 
             var newUser = new ApplicationUser
             {
@@ -98,17 +123,26 @@ namespace Luftfartshinder.Controllers
             return RedirectToAction("List", "SuperadminHome");
         }
 
+        // Brukerregistrering: iPad-vennlig layout
         [HttpGet]
         [AllowAnonymous]
         public IActionResult UserRegister()
         {
+            ViewData["LayoutType"] = "ipad";
             return View(new UserRegisterViewModel());
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> UserRegister(RegisterViewModel model)
+        public async Task<IActionResult> UserRegister(UserRegisterViewModel model)
         {
+            ViewData["LayoutType"] = "ipad";
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
             var existingUserByUsername = await userManager.FindByNameAsync(model.Username);
 
@@ -121,11 +155,6 @@ namespace Luftfartshinder.Controllers
             if (existingUserByUsername != null)
             {
                 ModelState.AddModelError("Username", "Username is already taken");
-                return View(model);
-            }
-
-            if (!ModelState.IsValid)
-            {
                 return View(model);
             }
 
@@ -145,18 +174,38 @@ namespace Luftfartshinder.Controllers
                     orgName = model.OrganizationName;
                 }
 
-                if (!string.IsNullOrWhiteSpace(orgName))
+                if (string.IsNullOrWhiteSpace(orgName))
                 {
-                    // look up existing org, or create new
-                    // depends on how you store organizations
-                    organization = await organizationRepository.GetByName(orgName);
-
-                    if (organization == null)
-                    {
-                        organization = new Organization { Name = orgName };
-                        await organizationRepository.Add(organization);
-                    }
+                    ModelState.AddModelError("OrganizationName", "Organization is required for FlightCrew role.");
+                    return View(model);
                 }
+
+                // look up existing org, or create new
+                organization = await organizationRepository.GetByName(orgName);
+
+                if (organization == null)
+                {
+                    organization = new Organization { Name = orgName };
+                    await organizationRepository.Add(organization);
+                }
+            }
+            else if (model.SelectedRole == "Registrar")
+            {
+                // Registrar brukere tilhører Kartverket organisasjonen
+                organization = await organizationRepository.GetByName("Kartverket");
+
+                if (organization == null)
+                {
+                    // Hvis Kartverket ikke finnes, opprett den
+                    organization = new Organization { Name = "Kartverket" };
+                    await organizationRepository.Add(organization);
+                }
+            }
+
+            if (organization == null)
+            {
+                ModelState.AddModelError("", "Unable to set organization. Please try again.");
+                return View(model);
             }
 
             var newUser = new ApplicationUser
@@ -165,8 +214,8 @@ namespace Luftfartshinder.Controllers
                 LastName = model.LastName,
                 Email = model.Email,
                 UserName = model.Username,
-                OrganizationId = organization.Id, // or Organization = organization if same DbContext
-                IsApproved = true
+                Organization = organization,
+                IsApproved = false
             };
 
             var createResult = await userManager.CreateAsync(newUser, model.Password);
@@ -177,16 +226,40 @@ namespace Luftfartshinder.Controllers
 
                 if (roleResult.Succeeded)
                 {
-                    TempData["RegistrationSuccess"] = "User registered successfully!";
-                    return RedirectToAction("Dashboard", "Account");
+                    return RedirectToAction("RegistrationPending", "Account");
+                }
+                else
+                {
+                    // Add role assignment errors to ModelState
+                    foreach (var error in roleResult.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            else
+            {
+                // Add user creation errors to ModelState
+                foreach (var error in createResult.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
                 }
             }
 
-            // Add any errors from createResult / roleResult to ModelState if you want
             return View(model);
         }
 
+        // Registrering venter på godkjenning
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult RegistrationPending()
+        {
+            ViewData["LayoutType"] = "ipad";
+            return View();
+        }
 
+
+        // Login-side: iPad-vennlig layout
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login()
@@ -195,6 +268,7 @@ namespace Luftfartshinder.Controllers
             {
                 return RedirectToAction("Dashboard");
             }
+            ViewData["LayoutType"] = "ipad";
             return View();
         }
 
@@ -248,10 +322,21 @@ namespace Luftfartshinder.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        // Dashboard: iPad-vennlig layout for FlightCrew, PC-vennlig for admin/registrar
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Dashboard()
         {
+            // FlightCrew (pilot) skal ha iPad-navbar på alle sider
+            if (User.IsInRole("FlightCrew") && !User.IsInRole("SuperAdmin"))
+            {
+                ViewData["LayoutType"] = "ipad";
+            }
+            else
+            {
+                ViewData["LayoutType"] = "pc";
+            }
+
             string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var reports = new List<Report>();
             if (!User.IsInRole("Registrar") && !User.IsInRole("SuperAdmin"))
@@ -277,8 +362,11 @@ namespace Luftfartshinder.Controllers
         //    return View(obstacles);
         //}
 
+        // FlightCrew obstacles: iPad-vennlig layout for FlightCrew
         public async Task<IActionResult> FlightCrewObstacles()
         {
+            // FlightCrew (pilot) skal ha iPad-navbar på alle sider
+            ViewData["LayoutType"] = "ipad";
             // 1. Finn innlogget bruker
             var user = await userManager.GetUserAsync(User);
 

@@ -60,22 +60,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const organizationDiv = document.getElementById("organizationDiv");
     const organizationSelect = document.getElementById("organization");
     const customOrganizationInput = document.getElementById("customOrganization");
-    const hiddenOrganization = document.getElementById("hiddenOrganization");
 
     // Only run this code if all elements exist
-    if (roleSelect && organizationDiv && organizationSelect && customOrganizationInput && hiddenOrganization) {
-
-        function updateHiddenOrganization() {
-            let value = null;
-            if (roleSelect.value === "FlightCrew") {
-                value = (organizationSelect.value === "Other")
-                    ? customOrganizationInput.value.trim()
-                    : organizationSelect.value;
-            }
-            hiddenOrganization.value = value || "";
-        }
-
-        customOrganizationInput.addEventListener("input", updateHiddenOrganization);
+    if (roleSelect && organizationDiv && organizationSelect && customOrganizationInput) {
 
         function toggleOrganization() {
             if (roleSelect.value === "FlightCrew") {
@@ -85,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 organizationDiv.style.display = "none";
                 organizationSelect.value = "";
                 customOrganizationInput.style.display = "none";
+                customOrganizationInput.value = "";
             }
             checkForm();
         }
@@ -94,6 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 customOrganizationInput.style.display = "block";
             } else {
                 customOrganizationInput.style.display = "none";
+                customOrganizationInput.value = "";
             }
             checkForm();
         }
@@ -101,19 +90,20 @@ document.addEventListener("DOMContentLoaded", function () {
         roleSelect.addEventListener("change", toggleOrganization);
 
         organizationSelect.addEventListener("change", function () {
-            customOrganizationInput.style.display = (this.value === "Other") ? "block" : "none";
-            updateHiddenOrganization();
+            toggleCustomOrg();
+            checkForm();
         });
 
         const registerForm = document.getElementById("registerForm");
         if (registerForm) {
             registerForm.addEventListener("submit", function (e) {
-                updateHiddenOrganization();
-
-                if (roleSelect.value === "FlightCrew" && !hiddenOrganization.value) {
-                    e.preventDefault();
-                    alert("Please enter an organization name");
-                    return false;
+                if (roleSelect.value === "FlightCrew") {
+                    const orgValue = organizationSelect.value;
+                    if (!orgValue || (orgValue === "Other" && !customOrganizationInput.value.trim())) {
+                        e.preventDefault();
+                        alert("Please enter an organization name");
+                        return false;
+                    }
                 }
             });
         }
