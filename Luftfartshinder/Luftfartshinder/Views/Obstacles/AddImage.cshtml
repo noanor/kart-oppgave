@@ -1,0 +1,86 @@
+@{
+    ViewData["Title"] = "Add Image";
+    var isDraft = ViewData["IsDraft"] as bool? ?? false;
+    var obstacleIndex = ViewData["ObstacleIndex"] as int?;
+    var obstacleId = ViewData["ObstacleId"] as int?;
+}
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>Add Image to Obstacle</h1>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Upload Image</h5>
+                    
+                    <div class="mb-4">
+                        <label for="imageFile" class="form-label">Select Image</label>
+                        <input type="file" class="form-control" id="imageFile" accept="image/*" disabled>
+                        <div class="form-text">Image upload functionality is not yet implemented.</div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="imageDescription" class="form-label">Image Description (Optional)</label>
+                        <textarea class="form-control" id="imageDescription" rows="3" placeholder="Enter a description for this image..." disabled></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="border rounded p-3 bg-light text-center" style="min-height: 200px; display: flex; align-items: center; justify-content: center;">
+                            <div class="text-muted">
+                                <i class="fas fa-image fa-3x mb-3 d-block"></i>
+                                <p class="mb-0">Image preview will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-primary" disabled>
+                            <i class="fas fa-upload me-2"></i>Upload Image
+                        </button>
+                        @if (isDraft && obstacleIndex.HasValue)
+                        {
+                            <a class="btn btn-secondary" asp-controller="Obstacles" asp-action="EditObstacle" asp-route-index="@obstacleIndex.Value">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Edit
+                            </a>
+                        }
+                        else if (!isDraft && obstacleId.HasValue)
+                        {
+                            <a class="btn btn-secondary" asp-controller="Obstacles" asp-action="Edit" asp-route-id="@obstacleId.Value">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Edit
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mt-4">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-3">Uploaded Images</h6>
+                    <div class="text-center text-muted py-4">
+                        <i class="fas fa-images fa-2x mb-2 d-block"></i>
+                        <p class="mb-0">No images uploaded yet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Visual feedback only - not functional
+        document.getElementById('imageFile')?.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                console.log('File selected:', file.name);
+                // Preview functionality would go here if implemented
+            }
+        });
+    </script>
+}
+

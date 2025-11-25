@@ -140,6 +140,7 @@ public partial class ObstaclesController : Controller
     public IActionResult EditObstacle(int index)
     {
         ViewData["LayoutType"] = "ipad";
+        ViewData["ObstacleIndex"] = index;
         var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
         if (draft is null || index < 0 || index >= draft.Obstacles.Count)
         {
@@ -248,6 +249,30 @@ public partial class ObstaclesController : Controller
         };
 
         return View("AdminEdit", editObstacleRequest);
+    }
+
+    // Add Image view: Visual only, not functional
+    [HttpGet]
+    public IActionResult AddImage(int? index, int? id)
+    {
+        if (index.HasValue)
+        {
+            ViewData["LayoutType"] = "ipad";
+            ViewData["ObstacleIndex"] = index.Value;
+            ViewData["IsDraft"] = true;
+        }
+        else if (id.HasValue)
+        {
+            ViewData["LayoutType"] = "pc";
+            ViewData["ObstacleId"] = id.Value;
+            ViewData["IsDraft"] = false;
+        }
+        else
+        {
+            return BadRequest("Either index or id must be provided.");
+        }
+
+        return View();
     }
 
     // DTO for JSON requests
