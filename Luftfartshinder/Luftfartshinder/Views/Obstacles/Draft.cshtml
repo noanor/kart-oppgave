@@ -83,6 +83,8 @@
                                 <div class="obstacle-map"
                                         data-lat="@o.Latitude.ToString(CultureInfo.InvariantCulture)"
                                         data-lng="@o.Longitude.ToString(CultureInfo.InvariantCulture)"
+                                        data-type="@o.Type"
+                                        data-index="@i"
                                         id="map-@i">
                                 </div>
                             </div>
@@ -217,6 +219,11 @@
         </div>
     </div>
 </div>
+
+<!-- Hidden form for anti-forgery token -->
+<form id="antiForgeryForm" style="display: none;">
+    @Html.AntiForgeryToken()
+</form>
 
 @section Scripts {
     <script src="~/js/draft.js"></script>

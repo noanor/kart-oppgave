@@ -108,11 +108,28 @@ public partial class ObstaclesController : Controller
         }
 
         // Assign obstacles to the report
-        foreach (var obstacle in draft.Obstacles)
+        for (int i = 0; i < draft.Obstacles.Count; i++)
         {
+            var obstacle = draft.Obstacles[i];
             obstacle.OrganizationId = user.OrganizationId;
+            
+            // Save line points if they exist for this obstacle
+            if (draft.LinePoints != null && draft.LinePoints.ContainsKey(i) && draft.LinePoints[i] != null && draft.LinePoints[i].Count > 1)
+            {
+                try
+                {
+                    // Convert line points to JSON string
+                    var linePointsJson = System.Text.Json.JsonSerializer.Serialize(draft.LinePoints[i]);
+                    obstacle.LinePointsJson = linePointsJson;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error serializing line points for obstacle {i}: {ex.Message}");
+                    // Continue without line points if serialization fails
+                }
+            }
+            
             newReport.Obstacles.Add(obstacle);
-
         }
 
         try
@@ -216,10 +233,55 @@ public partial class ObstaclesController : Controller
                 type = o.Type,
                 latitude = o.Latitude,
                 longitude = o.Longitude,
-                name = o.Name
+                name = o.Name,
+                linePoints = draft.LinePoints.ContainsKey(idx) ? draft.LinePoints[idx] : null
             }).ToList();
 
         return Ok(list);
+    }
+
+    // === POST: /obstacles/save-line-points ===
+    [HttpPost("/obstacles/save-line-points")]
+    public IActionResult SaveLinePoints([FromBody] SaveLinePointsRequest request)
+    {
+        if (request == null || request.Index < 0)
+        {
+            return BadRequest("Invalid request");
+        }
+
+        var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey)
+                 ?? new SessionObstacleDraft();
+
+        if (request.Index >= draft.Obstacles.Count)
+        {
+            return BadRequest("Invalid obstacle index");
+        }
+
+        // Store line points for this obstacle index
+        if (draft.LinePoints == null)
+        {
+            draft.LinePoints = new Dictionary<int, List<double[]>>();
+        }
+
+        if (request.Points != null && request.Points.Count > 0)
+        {
+            draft.LinePoints[request.Index] = request.Points;
+        }
+        else
+        {
+            // Remove line points if empty
+            draft.LinePoints.Remove(request.Index);
+        }
+        
+        HttpContext.Session.Set(DraftKey, draft);
+
+        return Ok(new { success = true, pointCount = request.Points?.Count ?? 0 });
+    }
+
+    public class SaveLinePointsRequest
+    {
+        public int Index { get; set; }
+        public List<double[]>? Points { get; set; }
     }
 
     // Admin edit obstacle: PC-vennlig layout
