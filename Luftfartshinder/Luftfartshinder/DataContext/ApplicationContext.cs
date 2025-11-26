@@ -22,6 +22,12 @@ namespace Luftfartshinder.DataContext
 
             modelBuilder.Entity<Obstacle>()
                 .Property(o => o.Id).ValueGeneratedOnAdd();
+            
+            // LinePointsJson is optional and nullable
+            modelBuilder.Entity<Obstacle>()
+                .Property(o => o.LinePointsJson)
+                .HasColumnType("longtext")
+                .IsRequired(false);
 
             modelBuilder.Entity<Report>()
                 .HasKey(pk => pk.Id); //Primary key for Data

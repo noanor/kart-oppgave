@@ -60,7 +60,21 @@
                         asp-controller="AdminTags"
                         asp-action="Delete">Delete</button>
             </div>
+        </div>
 
+        <div class="mb-3">
+            @{
+                var obstacleIndex = ViewData["ObstacleIndex"] as int?;
+                if (obstacleIndex.HasValue)
+                {
+                    <a class="btn btn-secondary" 
+                       asp-controller="Obstacles" 
+                       asp-action="AddImage" 
+                       asp-route-index="@obstacleIndex.Value">
+                        <i class="fas fa-image me-2"></i>Add Image
+                    </a>
+                }
+            }
         </div>
     </form>
 

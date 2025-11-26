@@ -164,6 +164,8 @@
                     <div class="obstacle-map h-100"
                             data-lat="@o.Latitude.ToString(CultureInfo.InvariantCulture)"
                             data-lng="@o.Longitude.ToString(CultureInfo.InvariantCulture)"
+                            data-type="@(o.Type ?? "")"
+                            data-line-points="@(o.LinePointsJson ?? "")"
                             id="map-@i">
                     </div>
 
@@ -234,7 +236,7 @@
 
 </div>
 @section Scripts {
-    <script src="~/js/draft.js"></script>
+    <script src="~/js/registrar-details.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

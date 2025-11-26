@@ -49,5 +49,8 @@ namespace Luftfartshinder.Models.Domain
         public string? RegistrarNote { get; set; }
         public enum Statuses { Pending = 0, Approved = 1, Rejected = 2 }
         public Statuses Status { get; set; } = Statuses.Pending;
+
+        // Line points for powerline and line obstacles (stored as JSON string)
+        public string? LinePointsJson { get; set; }
     }
 }
