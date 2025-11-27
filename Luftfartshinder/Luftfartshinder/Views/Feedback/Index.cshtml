@@ -1,9 +1,7 @@
-@using Luftfartshinder.Models.ViewModel.User
 @model FeedbackViewModel
 
 @{
     ViewData["Title"] = "Feedback";
-    Layout = "_Layout";
     var qandA = ViewBag.QandA as List<QandAItem> ?? new List<QandAItem>();
 }
 

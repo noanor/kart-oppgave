@@ -27,10 +27,10 @@ namespace Luftfartshinder.Controllers
 
         // Report detaljer: PC-vennlig layout
         [HttpGet]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
             ViewData["LayoutType"] = "pc";
-            var report = reportRepository.GetByIdAsync(id).Result;
+            var report = await reportRepository.GetByIdAsync(id);
 
             if (report != null)
             {
@@ -39,6 +39,7 @@ namespace Luftfartshinder.Controllers
                     Id = report.Id,
                     Author = report.Author,
                     AuthorId = report.AuthorId,
+                    Title = report.Title,
                     Obstacles = report.Obstacles,
                     RegistrarNote = report.RegistrarNote,
                     ReportDate = report.ReportDate

@@ -1,9 +1,9 @@
-﻿using Luftfartshinder.DataContext;
-using Luftfartshinder.Models.Domain;
+﻿using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Models.ViewModel.Organization;
 using Luftfartshinder.Models.ViewModel.Shared;
 using Luftfartshinder.Models.ViewModel.User;
 using Luftfartshinder.Repository;
+using Luftfartshinder.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +11,9 @@ using System.Security.Claims;
 
 namespace Luftfartshinder.Controllers
 {
+    /// <summary>
+    /// Controller for handling user authentication, registration, and account management.
+    /// </summary>
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
@@ -19,8 +22,18 @@ namespace Luftfartshinder.Controllers
         private readonly IReportRepository reportRepository;
         private readonly IOrganizationRepository organizationRepository;
         private readonly IObstacleRepository obstacleRepository;
+        private readonly IOrganizationService organizationService;
+        private readonly IUserService userService;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IAccountRepository accountRepository, IReportRepository reportRepository, IOrganizationRepository organizationRepository, IObstacleRepository obstacleRepository)
+        public AccountController(
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            IAccountRepository accountRepository,
+            IReportRepository reportRepository,
+            IOrganizationRepository organizationRepository,
+            IObstacleRepository obstacleRepository,
+            IOrganizationService organizationService,
+            IUserService userService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -28,9 +41,13 @@ namespace Luftfartshinder.Controllers
             this.reportRepository = reportRepository;
             this.organizationRepository = organizationRepository;
             this.obstacleRepository = obstacleRepository;
+            this.organizationService = organizationService;
+            this.userService = userService;
         }
 
-        // Admin brukerregistrering: PC-vennlig layout
+        /// <summary>
+        /// Displays the admin user registration form.
+        /// </summary>
         [HttpGet]
         [Authorize(Roles = "SuperAdmin")]
         public IActionResult Register()
@@ -39,57 +56,31 @@ namespace Luftfartshinder.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Handles admin user registration.
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
-            var existingUserByUsername = await userManager.FindByNameAsync(model.Username);
-
-            if (existingUserByEmail != null)
-            {
-                ModelState.AddModelError("Email", "Email is already taken");
-                return View(model);
-            }
-
-            if (existingUserByUsername != null)
-            {
-                ModelState.AddModelError("Username", "Username is already taken");
-                return View(model);
-            }
+            ViewData["LayoutType"] = "pc";
 
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            Organization? organization = null;
-
-            if (model.SelectedRole == "FlightCrew")
+            var (isValid, errors) = await userService.ValidateUserAsync(model.Email, model.Username);
+            if (!isValid)
             {
-                string? organizationName = null;
-                if (model.OrganizationName == "Other" && !string.IsNullOrEmpty(model.OtherOrganizationName))
-                    organizationName = model.OtherOrganizationName;
-                else
-                    organizationName = model.OrganizationName;
-
-                if (!string.IsNullOrWhiteSpace(organizationName))
-                {
-                    organization = await organizationRepository.GetByName(organizationName);
-                }
+                AddValidationErrorsToModelState(errors);
+                return View(model);
             }
-            else if (model.SelectedRole == "Registrar")
-            {
-                // Registrar brukere tilhører Kartverket organisasjonen
-                organization = await organizationRepository.GetByName("Kartverket");
 
-                if (organization == null)
-                {
-                    // Hvis Kartverket ikke finnes, opprett den
-                    organization = new Organization { Name = "Kartverket" };
-                    await organizationRepository.Add(organization);
-                }
-            }
+            var organization = await organizationService.GetOrCreateOrganizationForRoleAsync(
+                model.SelectedRole,
+                model.OrganizationName,
+                model.OtherOrganizationName);
 
             if (organization == null)
             {
@@ -107,31 +98,32 @@ namespace Luftfartshinder.Controllers
                 IsApproved = true
             };
 
-            var createResult = await userManager.CreateAsync(newUser, model.Password);
+            var (success, result) = await userService.CreateUserAsync(newUser, model.Password, model.SelectedRole);
 
-            if (createResult.Succeeded)
+            if (success)
             {
-                var roleResult = await userManager.AddToRoleAsync(newUser, model.SelectedRole);
-
-                if (roleResult.Succeeded)
-                {
-                    TempData["RegistrationSuccess"] = "User registered successfully!";
-                    return RedirectToAction("Dashboard", "Account");
-                }
+                TempData["RegistrationSuccess"] = "User registered successfully!";
+                return RedirectToAction("Dashboard", "Account");
             }
 
-            return RedirectToAction("List", "SuperadminHome");
+            AddIdentityErrorsToModelState(result);
+            return View(model);
         }
 
-        // Brukerregistrering: iPad-vennlig layout
+        /// <summary>
+        /// Displays the public user registration form.
+        /// </summary>
         [HttpGet]
         [AllowAnonymous]
         public IActionResult UserRegister()
         {
             ViewData["LayoutType"] = "ipad";
-            return View(new UserRegisterViewModel());
+            return View(CreateEmptyUserRegisterViewModel());
         }
 
+        /// <summary>
+        /// Handles public user registration.
+        /// </summary>
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> UserRegister(UserRegisterViewModel model)
@@ -143,64 +135,25 @@ namespace Luftfartshinder.Controllers
                 return View(model);
             }
 
-            var existingUserByEmail = await userManager.FindByEmailAsync(model.Email);
-            var existingUserByUsername = await userManager.FindByNameAsync(model.Username);
-
-            if (existingUserByEmail != null)
+            var (isValid, errors) = await userService.ValidateUserAsync(model.Email, model.Username);
+            if (!isValid)
             {
-                ModelState.AddModelError("Email", "Email is already taken");
+                AddValidationErrorsToModelState(errors);
                 return View(model);
             }
 
-            if (existingUserByUsername != null)
+            if (model.SelectedRole == "FlightCrew" && 
+                string.IsNullOrWhiteSpace(model.OrganizationName) && 
+                string.IsNullOrWhiteSpace(model.OtherOrganizationName))
             {
-                ModelState.AddModelError("Username", "Username is already taken");
+                ModelState.AddModelError("OrganizationName", "Organization is required for FlightCrew role.");
                 return View(model);
             }
 
-            Organization? organization = null;
-
-            if (model.SelectedRole == "FlightCrew")
-            {
-                string? orgName = null;
-
-                if (model.OrganizationName == "Other" &&
-                    !string.IsNullOrWhiteSpace(model.OtherOrganizationName))
-                {
-                    orgName = model.OtherOrganizationName;
-                }
-                else
-                {
-                    orgName = model.OrganizationName;
-                }
-
-                if (string.IsNullOrWhiteSpace(orgName))
-                {
-                    ModelState.AddModelError("OrganizationName", "Organization is required for FlightCrew role.");
-                    return View(model);
-                }
-
-                // look up existing org, or create new
-                organization = await organizationRepository.GetByName(orgName);
-
-                if (organization == null)
-                {
-                    organization = new Organization { Name = orgName };
-                    await organizationRepository.Add(organization);
-                }
-            }
-            else if (model.SelectedRole == "Registrar")
-            {
-                // Registrar brukere tilhører Kartverket organisasjonen
-                organization = await organizationRepository.GetByName("Kartverket");
-
-                if (organization == null)
-                {
-                    // Hvis Kartverket ikke finnes, opprett den
-                    organization = new Organization { Name = "Kartverket" };
-                    await organizationRepository.Add(organization);
-                }
-            }
+            var organization = await organizationService.GetOrCreateOrganizationForRoleAsync(
+                model.SelectedRole,
+                model.OrganizationName,
+                model.OtherOrganizationName);
 
             if (organization == null)
             {
@@ -218,38 +171,20 @@ namespace Luftfartshinder.Controllers
                 IsApproved = false
             };
 
-            var createResult = await userManager.CreateAsync(newUser, model.Password);
+            var (success, result) = await userService.CreateUserAsync(newUser, model.Password, model.SelectedRole);
 
-            if (createResult.Succeeded)
+            if (success)
             {
-                var roleResult = await userManager.AddToRoleAsync(newUser, model.SelectedRole);
-
-                if (roleResult.Succeeded)
-                {
-                    return RedirectToAction("RegistrationPending", "Account");
-                }
-                else
-                {
-                    // Add role assignment errors to ModelState
-                    foreach (var error in roleResult.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-                }
-            }
-            else
-            {
-                // Add user creation errors to ModelState
-                foreach (var error in createResult.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
+                return RedirectToAction("RegistrationPending", "Account");
             }
 
+            AddIdentityErrorsToModelState(result);
             return View(model);
         }
 
-        // Registrering venter på godkjenning
+        /// <summary>
+        /// Displays the registration pending confirmation page.
+        /// </summary>
         [HttpGet]
         [AllowAnonymous]
         public IActionResult RegistrationPending()
@@ -258,13 +193,14 @@ namespace Luftfartshinder.Controllers
             return View();
         }
 
-
-        // Login-side: iPad-vennlig layout
+        /// <summary>
+        /// Displays the login form.
+        /// </summary>
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login()
         {
-            if (User.Identity.IsAuthenticated && User.IsInRole("Registrar"))
+            if (User.Identity?.IsAuthenticated == true && User.IsInRole("Registrar"))
             {
                 return RedirectToAction("Dashboard");
             }
@@ -272,62 +208,56 @@ namespace Luftfartshinder.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Handles user login authentication.
+        /// </summary>
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            ViewData["LayoutType"] = "ipad";
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
             var user = await userManager.FindByNameAsync(model.Username);
-
             if (user != null && !user.IsApproved)
             {
                 ModelState.AddModelError("", "Your account is pending approval by an administrator.");
-                return View();
+                return View(model);
             }
 
             var signInResult = await signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
-
             if (!signInResult.Succeeded)
             {
                 ModelState.AddModelError("", "Invalid username or password");
-                return View();
+                return View(model);
             }
 
-            var roles = await userManager.GetRolesAsync(user);
-
-            if (roles.Contains("SuperAdmin"))
-                return RedirectToAction("Dashboard");
-
-            if (roles.Contains("Registrar"))
-                return RedirectToAction("Dashboard");
-
-            if (roles.Contains("FlightCrew"))
-                return RedirectToAction("Index", "Home");
-
-            return RedirectToAction("Tutorial", "Home");
+            return await RedirectToDashboardByRoleAsync(user);
         }
 
+        /// <summary>
+        /// Handles user sign out.
+        /// </summary>
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> SignOut()
+        public new async Task<IActionResult> SignOut()
         {
             await signInManager.SignOutAsync();
-
             TempData["SignOutMessage"] = "You have been signed out successfully";
-
             return RedirectToAction("Login", "Account");
         }
 
-        // Dashboard: iPad-vennlig layout for FlightCrew, PC-vennlig for admin/registrar
+        /// <summary>
+        /// Displays the user dashboard with reports based on user role.
+        /// </summary>
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Dashboard()
         {
-            // FlightCrew (pilot) skal ha iPad-navbar på alle sider
             if (User.IsInRole("FlightCrew") && !User.IsInRole("SuperAdmin"))
             {
                 ViewData["LayoutType"] = "ipad";
@@ -336,71 +266,124 @@ namespace Luftfartshinder.Controllers
             {
                 ViewData["LayoutType"] = "pc";
             }
-
-            string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var reports = new List<Report>();
-            if (!User.IsInRole("Registrar") && !User.IsInRole("SuperAdmin"))
-            {
-                reports = accountRepository.GetUserReports(userId);
-            }
-            else
-            {
-                reports = await reportRepository.GetAllAsync();
-            }
+            var reports = await GetReportsForUserAsync();
             return View(reports);
         }
 
-        //[HttpGet]
-        //[Authorize]
-        //public async Task<IActionResult> FlightCrewObstacles()
-        //{
-        //    string? userId = userManager.GetUserId(User);
-        //    var obstacles = new List<Report>();
-
-        //    obstacles = await reportRepository.GetAllAsync();
-
-        //    return View(obstacles);
-        //}
-
-        // FlightCrew obstacles: iPad-vennlig layout for FlightCrew
+        /// <summary>
+        /// Displays obstacles and reports for FlightCrew users.
+        /// </summary>
+        [Authorize]
         public async Task<IActionResult> FlightCrewObstacles()
         {
-            // FlightCrew (pilot) skal ha iPad-navbar på alle sider
             ViewData["LayoutType"] = "ipad";
-            // 1. Finn innlogget bruker
-            var user = await userManager.GetUserAsync(User);
 
+            var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
-                // Ingen innlogget bruker → redirect eller forbidd, opp til deg
-                return Challenge(); // sender til login
+                return Challenge();
             }
 
-            if (user.OrganizationId == null)
+            if (user.OrganizationId == 0)
             {
-                // Brukeren har ikke organisasjon
-                return Forbid(); // eller vis en egen side
+                return Forbid();
             }
 
             var organization = await organizationRepository.GetById(user.OrganizationId);
+            if (organization == null)
+            {
+                return NotFound();
+            }
 
-            var orgId = organization.Id;
+            var obstacles = await obstacleRepository.GetByOrgId(organization.Id);
+            var reports = await reportRepository.GetByOrgId(organization.Id);
 
-            // 2. Hent data fra Domain-DB via repos
-            var obstacles = await obstacleRepository.GetByOrgId(orgId);
-            var reports = await reportRepository.GetByOrgId(orgId);
-
-            // 3. Bygg viewmodel
-            var vm = new OrgDataViewModel
+            var viewModel = new OrgDataViewModel
             {
                 Organization = organization,
                 Obstacles = obstacles,
                 Reports = reports
             };
 
-            // 4. Send til view
-            return View("FlightCrewObstacles", vm);
+            return View("FlightCrewObstacles", viewModel);
         }
 
+        // Private helper methods
+
+        private UserRegisterViewModel CreateEmptyUserRegisterViewModel()
+        {
+            return new UserRegisterViewModel
+            {
+                FirstName = string.Empty,
+                LastName = string.Empty,
+                Email = string.Empty,
+                Username = string.Empty,
+                Password = string.Empty,
+                SelectedRole = string.Empty,
+                ConfirmPassword = string.Empty
+            };
+        }
+
+        private void AddValidationErrorsToModelState(List<string> errors)
+        {
+            foreach (var error in errors)
+            {
+                if (error.Contains("Email"))
+                {
+                    ModelState.AddModelError("Email", error);
+                }
+                else if (error.Contains("Username"))
+                {
+                    ModelState.AddModelError("Username", error);
+                }
+                else
+                {
+                    ModelState.AddModelError("", error);
+                }
+            }
+        }
+
+        private void AddIdentityErrorsToModelState(IdentityResult? result)
+        {
+            if (result == null) return;
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+        }
+
+        private async Task<IActionResult> RedirectToDashboardByRoleAsync(ApplicationUser? user)
+        {
+            if (user == null)
+            {
+                return RedirectToAction("Tutorial", "Home");
+            }
+
+            var roles = await userManager.GetRolesAsync(user);
+
+            if (roles.Contains("SuperAdmin") || roles.Contains("Registrar"))
+            {
+                return RedirectToAction("Dashboard");
+            }
+
+            if (roles.Contains("FlightCrew"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("Tutorial", "Home");
+        }
+
+        private async Task<List<Report>> GetReportsForUserAsync()
+        {
+            if (User.IsInRole("Registrar") || User.IsInRole("SuperAdmin"))
+            {
+                return await reportRepository.GetAllAsync();
+            }
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return await accountRepository.GetUserReports(userId);
+        }
     }
 }

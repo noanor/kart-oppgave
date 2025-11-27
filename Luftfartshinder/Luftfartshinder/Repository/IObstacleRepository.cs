@@ -1,4 +1,4 @@
-﻿using Luftfartshinder.Models.Domain;
+using Luftfartshinder.Models.Domain;
 
 namespace Luftfartshinder.Repository
 {
@@ -18,3 +18,4 @@ namespace Luftfartshinder.Repository
 
     }
 }
+

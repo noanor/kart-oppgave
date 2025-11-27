@@ -15,7 +15,12 @@ namespace Luftfartshinder.Controllers
         public IActionResult Index()
         {
             ViewData["LayoutType"] = "ipad";
-            var model = new FeedbackViewModel();
+            var model = new FeedbackViewModel
+            {
+                Name = string.Empty,
+                Email = string.Empty,
+                Message = string.Empty
+            };
             
             // Set Q&A data
             ViewBag.QandA = GetQandAData();

@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Luftfartshinder.Controllers
 {
+    /// <summary>
+    /// Controller for SuperAdmin functionality including user management.
+    /// </summary>
     [Authorize(Roles = "SuperAdmin")]
     public class SuperAdminController(IUserRepository userRepository, UserManager<ApplicationUser> userManager, IOrganizationRepository organizationRepository) : Controller
     {
@@ -14,13 +17,16 @@ namespace Luftfartshinder.Controllers
         private readonly UserManager<ApplicationUser> userManager = userManager;
         private readonly IOrganizationRepository organizationRepository = organizationRepository;
 
-        // Brukerliste: PC-vennlig layout (tabell-visning)
+        /// <summary>
+        /// Displays a filtered list of users with role, status, and organization filters.
+        /// </summary>
         public async Task<IActionResult> List(string roleFilter = "All", string statusFilter = "", string organizationFilter = "")
         {
             ViewData["LayoutType"] = "pc";
             var allUsers = await userRepository.GetAll();
             var filteredUsers = new List<User>();
             var uniqueOrganizations = new HashSet<string>();
+            var knownOrgs = await organizationRepository.GetAll();
 
             foreach (var user in allUsers)
             {
@@ -41,33 +47,24 @@ namespace Luftfartshinder.Controllers
                     }
                 }
 
-                var knownOrgs = organizationRepository.GetAll();
-
                 if (!string.IsNullOrEmpty(organizationFilter))
                 {
                     if (organizationFilter == "Other")
                     {
-                        foreach (var o in knownOrgs)
+                        var isKnownOrg = knownOrgs.Any(o => o.Name == user.Organization?.Name);
+                        if (isKnownOrg)
                         {
-                            if (o.Name == organizationFilter)
-                            {
-                                continue;
-                            }
+                            continue;
                         }
                     }
-                    else if (user.Organization.Name != organizationFilter)
+                    else if (user.Organization?.Name != organizationFilter)
                     {
                         continue;
                     }
                 }
                 
-                if (!string.IsNullOrEmpty(user.Organization.Name))
+                if (!string.IsNullOrEmpty(user.Organization?.Name))
                 {
-                    var newUniqueOrganization = new Organization
-                    {
-                        Name = user.Organization.Name
-
-                    };
                     uniqueOrganizations.Add(user.Organization.Name);
                 }
                 
@@ -87,12 +84,14 @@ namespace Luftfartshinder.Controllers
             ViewBag.StatusFilter = statusFilter;
             ViewBag.OrganizationFilter = organizationFilter;
             ViewBag.Organizations = uniqueOrganizations.OrderBy(o => o).ToList();
-            
             ViewBag.TotalUsers = allUsers.Count();
             
             return View(viewModel);
         }
 
+        /// <summary>
+        /// Deletes a user by ID.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Delete(Guid id, string roleFilter, string statusFilter, string organizationFilter)
         {
@@ -112,6 +111,9 @@ namespace Luftfartshinder.Controllers
             return RedirectToAction("List", new { roleFilter, statusFilter, organizationFilter });
         }
 
+        /// <summary>
+        /// Approves a user, allowing them to log in.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Approve(Guid id, string roleFilter, string statusFilter, string organizationFilter)
         {
@@ -131,6 +133,9 @@ namespace Luftfartshinder.Controllers
             return RedirectToAction("List", new { roleFilter, statusFilter, organizationFilter });
         }
 
+        /// <summary>
+        /// Declines a user registration and removes them from the system.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Decline(Guid id, string roleFilter, string statusFilter, string organizationFilter)
         {

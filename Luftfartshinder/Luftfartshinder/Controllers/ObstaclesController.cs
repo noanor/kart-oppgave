@@ -87,7 +87,7 @@ public partial class ObstaclesController : Controller
             return Challenge(); // eller throw
         }
 
-        if (user.OrganizationId == null)
+        if (user.OrganizationId == 0)
         {
             return BadRequest("Brukeren er ikke knyttet til en organisasjon.");
         }

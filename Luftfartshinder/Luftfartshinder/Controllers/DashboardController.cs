@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Luftfartshinder.Models;
+using Luftfartshinder.Models.ViewModel.Shared;
 using System.Diagnostics;
 
 namespace Luftfartshinder.Controllers

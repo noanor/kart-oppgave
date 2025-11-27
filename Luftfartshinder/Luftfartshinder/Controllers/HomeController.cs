@@ -1,4 +1,4 @@
-using Luftfartshinder.Models;
+using Luftfartshinder.Models.ViewModel.Shared;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
