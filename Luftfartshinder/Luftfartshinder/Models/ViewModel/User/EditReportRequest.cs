@@ -1,6 +1,6 @@
 ﻿using Luftfartshinder.Models.Domain;
 
-namespace Luftfartshinder.Models.ViewModel
+namespace Luftfartshinder.Models.ViewModel.User
 {
     public class EditReportRequest
     {
@@ -12,6 +12,6 @@ namespace Luftfartshinder.Models.ViewModel
         public string Title { get; set; }
         public string RegistrarNote { get; set; }
 
-        public ICollection<Domain.Obstacle> Obstacles { get; set; } = [];
+        public ICollection<Obstacle> Obstacles { get; set; } = [];
     }
 }

@@ -16,7 +16,7 @@ namespace Luftfartshinder.Controllers
         }
         public async Task<IActionResult> Add()
         {
-            var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
+            var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey);
             if (draft is null || draft.Obstacles.Count == 0)
             {
                 return BadRequest("No draft to submit.");

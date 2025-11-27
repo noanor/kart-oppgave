@@ -1,5 +1,5 @@
 using Luftfartshinder.Models.Domain;
-using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Models.ViewModel.User;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Mvc;
 

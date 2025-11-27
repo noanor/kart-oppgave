@@ -31,8 +31,8 @@ public partial class ObstaclesController : Controller
     {
         ViewData["LayoutType"] = "ipad";
         // Get existing draft from session, or create a new one
-        var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey)
-                   ?? new SessionObstacleDraft();
+        var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey)
+                   ?? new ObstacleDraftViewModel();
 
         // Return the Razor view "Draft.cshtml" with the draft as the model
         return View("Draft", draft);
@@ -44,8 +44,8 @@ public partial class ObstaclesController : Controller
     {
         if (dto is null) return BadRequest("No data");
 
-        var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey)
-                 ?? new SessionObstacleDraft();
+        var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey)
+                 ?? new ObstacleDraftViewModel();
 
         var o = new Obstacle
         {
@@ -77,7 +77,7 @@ public partial class ObstaclesController : Controller
     [HttpPost("/obstacles/submit-draft")]
     public async Task<IActionResult> SubmitDraft()
     {
-        var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
+        var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey);
 
         // 1. Finn innlogget bruker
         var user = await userManager.GetUserAsync(User);
@@ -93,7 +93,7 @@ public partial class ObstaclesController : Controller
         }
 
         // Create new report
-        var newReport = new Report()
+        var newReport = new Report
         {
             ReportDate = DateTime.Now,
             Author = User.Identity.Name,
@@ -140,7 +140,7 @@ public partial class ObstaclesController : Controller
     public IActionResult EditObstacle(int index)
     {
         ViewData["LayoutType"] = "ipad";
-        var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
+        var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey);
         if (draft is null || index < 0 || index >= draft.Obstacles.Count)
         {
             return BadRequest("Invalid draft or index.");
@@ -178,7 +178,7 @@ public partial class ObstaclesController : Controller
     [HttpPost]
     public IActionResult EditObstacle(EditObstacleRequest editObstacleRequest, int index)
     {
-        var draft = HttpContext.Session.Get<SessionObstacleDraft>(DraftKey);
+        var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey);
         if (draft is null || index < 0 || index >= draft.Obstacles.Count)
         {
             return BadRequest("Invalid draft or index.");
@@ -206,7 +206,7 @@ public partial class ObstaclesController : Controller
     public IActionResult DraftJson()
     {
         var draft = HttpContext.Session
-            .Get<SessionObstacleDraft>(DraftKey) ?? new SessionObstacleDraft();
+            .Get<ObstacleDraftViewModel>(DraftKey) ?? new ObstacleDraftViewModel();
 
         var list = draft.Obstacles
             .Select((o, idx) => new

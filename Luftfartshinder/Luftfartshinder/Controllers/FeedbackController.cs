@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Luftfartshinder.Models.ViewModel;
 using System.Collections.Generic;
 using System;
 using System.Security.Cryptography;
+using Luftfartshinder.Models.ViewModel.User;
 
 namespace Luftfartshinder.Controllers
 {

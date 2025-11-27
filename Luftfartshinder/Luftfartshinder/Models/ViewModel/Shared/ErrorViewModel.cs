@@ -1,4 +1,4 @@
-namespace Luftfartshinder.Models
+namespace Luftfartshinder.Models.ViewModel.Shared
 {
     public class ErrorViewModel
     {
