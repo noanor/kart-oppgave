@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Luftfartshinder.Models.ViewModel
+namespace Luftfartshinder.Models.ViewModel.User
 {
     public class FeedbackViewModel
     {

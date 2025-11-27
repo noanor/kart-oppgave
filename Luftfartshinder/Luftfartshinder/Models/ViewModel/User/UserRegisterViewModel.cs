@@ -1,3 +1,4 @@
+using Luftfartshinder.Models.ViewModel.Shared;
 using System.ComponentModel.DataAnnotations;
 
 namespace Luftfartshinder.Models.ViewModel.User

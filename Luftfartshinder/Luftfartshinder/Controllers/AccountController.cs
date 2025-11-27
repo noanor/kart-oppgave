@@ -1,7 +1,7 @@
 ﻿using Luftfartshinder.DataContext;
 using Luftfartshinder.Models.Domain;
-using Luftfartshinder.Models.ViewModel;
 using Luftfartshinder.Models.ViewModel.Organization;
+using Luftfartshinder.Models.ViewModel.Shared;
 using Luftfartshinder.Models.ViewModel.User;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;

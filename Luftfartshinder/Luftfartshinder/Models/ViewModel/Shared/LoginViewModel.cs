@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
-namespace Luftfartshinder.Models.ViewModel
+namespace Luftfartshinder.Models.ViewModel.Shared
 {
     public class LoginViewModel
     {

@@ -8,18 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace Luftfartshinder.Controllers
 {
     [Authorize(Roles = "SuperAdmin")]
-    public class SuperAdminController : Controller
+    public class SuperAdminController(IUserRepository userRepository, UserManager<ApplicationUser> userManager, IOrganizationRepository organizationRepository) : Controller
     {
-        private readonly IUserRepository userRepository;
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly IOrganizationRepository organizationRepository;
-
-        public SuperAdminController(IUserRepository userRepository, UserManager<ApplicationUser> userManager, IOrganizationRepository organizationRepository)
-        {
-            this.userRepository = userRepository;
-            this.userManager = userManager;
-            this.organizationRepository = organizationRepository;
-        }
+        private readonly IUserRepository userRepository = userRepository;
+        private readonly UserManager<ApplicationUser> userManager = userManager;
+        private readonly IOrganizationRepository organizationRepository = organizationRepository;
 
         // Brukerliste: PC-vennlig layout (tabell-visning)
         public async Task<IActionResult> List(string roleFilter = "All", string statusFilter = "", string organizationFilter = "")
@@ -81,8 +74,8 @@ namespace Luftfartshinder.Controllers
                 filteredUsers.Add(new User
                 {
                     Id = Guid.Parse(user.Id),
-                    UserName = user.UserName,
-                    EmailAdress = user.Email,
+                    UserName = user.UserName ?? string.Empty,
+                    EmailAddress = user.Email ?? string.Empty,
                     IsApproved = user.IsApproved,
                     Role = userRole,
                     Organization = user.Organization
