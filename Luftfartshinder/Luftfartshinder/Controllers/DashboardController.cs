@@ -1,46 +1,72 @@
+using Luftfartshinder.Models.Domain;
+using Luftfartshinder.Models.ViewModel.Organization;
+using Luftfartshinder.Repository;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Luftfartshinder.Models;
-using System.Diagnostics;
 
 namespace Luftfartshinder.Controllers
 {
     public class DashboardController : Controller
     {
-        private readonly ILogger<DashboardController> _logger;
+        private readonly IReportRepository reportRepository;
+        private readonly IObstacleRepository obstacleRepository;
+        private readonly IOrganizationRepository organizationRepository;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public DashboardController(ILogger<DashboardController> logger)
+        public DashboardController(IReportRepository reportRepository, IObstacleRepository obstacleRepository, IOrganizationRepository organizationRepository)
         {
-            _logger = logger;
+            this.reportRepository = reportRepository;
+            this.obstacleRepository = obstacleRepository;
+            this.organizationRepository = organizationRepository;
         }
 
-        // Viser en hovedside for "Dashboard"
-        public IActionResult Main()
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Dashboard()
         {
-            ViewData["Message"] = "Velkommen til Dashboard!";
-            return View();
+
+            var reports = await reportRepository.GetAllAsync();
+
+            return View("~/Views/Account/Dashboard.cshtml", reports);
         }
 
-        // Viser en liste over ting (bare eksempel)
-        public IActionResult Items()
+        public async Task<IActionResult> FlightCrewObstacles()
         {
-            var demoItems = new List<string> { "Kart", "Hinder", "Checkpoint" };
-            return View(demoItems);
-        }
+            // 1. Finn innlogget bruker
+            var user = await userManager.GetUserAsync(User);
 
-        // Enkel About-side
-        public IActionResult About()
-        {
-            return View();
-        }
-
-        // Feilhåndtering
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel
+            if (user == null)
             {
-                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-            });
+                // Ingen innlogget bruker → redirect eller forbidd, opp til deg
+                return Challenge(); // sender til login
+            }
+
+            if (user.OrganizationId == null)
+            {
+                // Brukeren har ikke organisasjon
+                return Forbid(); // eller vis en egen side
+            }
+
+            var organization = await organizationRepository.GetById(user.OrganizationId);
+
+            var orgId = organization.Id;
+
+            // 2. Hent data fra Domain-DB via repos
+            var obstacles = await obstacleRepository.GetByOrgId(orgId);
+            var reports = await reportRepository.GetByOrgId(orgId);
+
+            // 3. Bygg viewmodel
+            var vm = new OrgDataViewModel
+            {
+                Organization = organization,
+                Obstacles = obstacles,
+                Reports = reports
+            };
+
+            // 4. Send til view
+            return View("FlightCrewObstacles", vm);
         }
+
     }
 }
