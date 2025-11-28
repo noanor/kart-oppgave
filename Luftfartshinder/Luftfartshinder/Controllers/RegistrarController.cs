@@ -18,11 +18,11 @@ namespace Luftfartshinder.Controllers
         // GET /Registrar
         // Report liste: PC-vennlig layout (tabell-visning)
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Overview()
         {
             ViewData["LayoutType"] = "pc";
             var reports = await reportRepository.GetAllAsync();
-            return View("Index", reports);
+            return View("Overview", reports);
         }
 
         // Report detaljer: PC-vennlig layout

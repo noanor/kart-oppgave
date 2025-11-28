@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+
 });
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
@@ -20,7 +21,7 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
                new MariaDbServerVersion(new Version(11, 8, 3))));
 builder.Services.AddSession();
 
-//////(legg til pakkene, og arv)
+//s(legg til pakkene, og arv)
 builder.Services.AddDbContext<AuthDbContext>(options =>
            options.UseMySql(builder.Configuration.GetConnectionString("AuthConnection"),
              new MySqlServerVersion(new Version(11, 8, 3))));
@@ -43,7 +44,6 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.AddScoped<IObstacleRepository, ObstacleRepository>();
 builder.Services.AddScoped<IReportRepository, ReportRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 
 var app = builder.Build();

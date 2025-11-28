@@ -12,7 +12,7 @@ namespace Luftfartshinder.Controllers
         // Feedback-side: iPad-vennlig layout
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Index()
+        public IActionResult Feedback()
         {
             ViewData["LayoutType"] = "ipad";
             var model = new FeedbackViewModel();
@@ -25,7 +25,7 @@ namespace Luftfartshinder.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Index(FeedbackViewModel model)
+        public IActionResult Feedback(FeedbackViewModel model)
         {
             ViewData["LayoutType"] = "ipad";
             if (!ModelState.IsValid)
