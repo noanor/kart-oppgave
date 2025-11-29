@@ -8,6 +8,6 @@ namespace Luftfartshinder.Models.ViewModel.Obstacles
     public class ObstacleDraftViewModel
     {
         /// <summary>List of obstacles in the current draft session.</summary>
-        public List<Domain.Obstacle> Obstacles { get; set; } = new();
+        public List<Domain.Obstacle> Obstacles { get; set; } = [];
     }
 }

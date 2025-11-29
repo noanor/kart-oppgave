@@ -3,14 +3,14 @@ using Luftfartshinder.Models.ViewModel.Obstacles;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Luftfartshinder.Controllers
+namespace Luftfartshinder.Controllers.Obstacles
 {
     public class ReportController : Controller
     {
         private const string DraftKey = "ObstacleDraft";
-        private readonly ObstacleRepository repository;
+        private readonly IObstacleRepository repository;
 
-        public ReportController(ObstacleRepository repository)
+        public ReportController(IObstacleRepository repository)
         {
             this.repository = repository;
         }

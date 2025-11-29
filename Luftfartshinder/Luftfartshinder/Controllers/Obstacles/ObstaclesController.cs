@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-public partial class ObstaclesController : Controller
+namespace Luftfartshinder.Controllers.Obstacles
+{
+    public partial class ObstaclesController : Controller
 {
     private const string DraftKey = "ObstacleDraft";
     private readonly UserManager<ApplicationUser> userManager;
@@ -87,7 +89,7 @@ public partial class ObstaclesController : Controller
             return Challenge(); // eller throw
         }
 
-        if (user.OrganizationId == null)
+        if (user.OrganizationId == 0)
         {
             return BadRequest("Brukeren er ikke knyttet til en organisasjon.");
         }
@@ -260,4 +262,5 @@ public partial class ObstaclesController : Controller
         public string? Name { get; set; }
         public string? Description { get; set; }
     }
+}
 }

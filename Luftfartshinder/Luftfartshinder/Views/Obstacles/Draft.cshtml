@@ -1,12 +1,9 @@
 ﻿@using System.Globalization
-@using Luftfartshinder.Models.ViewModel.Obstacles
 @model ObstacleDraftViewModel
 @{
     // Legg til klasse på body for å skjule global tilbake-knapp
     ViewData["BodyClass"] = "page-draft";
 }
-
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @section Styles {
     <link href="~/css/draft.css" rel="stylesheet" />

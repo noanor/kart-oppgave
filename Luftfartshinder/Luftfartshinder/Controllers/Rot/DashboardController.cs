@@ -4,8 +4,10 @@ using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Luftfartshinder.Models.ViewModel.Shared;
+using System.Diagnostics;
 
-namespace Luftfartshinder.Controllers
+namespace Luftfartshinder.Controllers.Rot
 {
     public class DashboardController : Controller
     {
@@ -14,11 +16,12 @@ namespace Luftfartshinder.Controllers
         private readonly IOrganizationRepository organizationRepository;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public DashboardController(IReportRepository reportRepository, IObstacleRepository obstacleRepository, IOrganizationRepository organizationRepository)
+        public DashboardController(IReportRepository reportRepository, IObstacleRepository obstacleRepository, IOrganizationRepository organizationRepository, UserManager<ApplicationUser> userManager)
         {
             this.reportRepository = reportRepository;
             this.obstacleRepository = obstacleRepository;
             this.organizationRepository = organizationRepository;
+            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -42,13 +45,18 @@ namespace Luftfartshinder.Controllers
                 return Challenge(); // sender til login
             }
 
-            if (user.OrganizationId == null)
+            if (user.OrganizationId == 0)
             {
                 // Brukeren har ikke organisasjon
                 return Forbid(); // eller vis en egen side
             }
 
             var organization = await organizationRepository.GetById(user.OrganizationId);
+
+            if (organization == null)
+            {
+                return NotFound();
+            }
 
             var orgId = organization.Id;
 

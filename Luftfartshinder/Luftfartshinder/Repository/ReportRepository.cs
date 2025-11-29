@@ -1,4 +1,4 @@
-﻿using Luftfartshinder.DataContext;
+using Luftfartshinder.DataContext;
 using Luftfartshinder.Models.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +28,7 @@ namespace Luftfartshinder.Repository
 
         public async Task<Report?> GetByIdAsync(int id)
         {
-            return await context.Reports.Include(r => r.Obstacles).FirstAsync(r => r.Id == id);
+            return await context.Reports.Include(r => r.Obstacles).FirstOrDefaultAsync(r => r.Id == id);
         }
 
         public async Task<List<Report>> GetByOrgId(int organizationId)

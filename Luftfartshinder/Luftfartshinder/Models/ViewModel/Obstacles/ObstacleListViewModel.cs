@@ -6,6 +6,6 @@
     public class ObstacleListViewModel
     {
         /// <summary>List of obstacle details to display.</summary>
-        public List<EditObstacleRequest> ObstacleDetailsModels { get; set; } = new List<EditObstacleRequest>();
+        public List<EditObstacleRequest> ObstacleDetailsModels { get; set; } = [];
     }
 }
