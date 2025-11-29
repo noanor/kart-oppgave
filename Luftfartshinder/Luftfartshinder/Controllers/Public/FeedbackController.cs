@@ -5,7 +5,7 @@ using System;
 using System.Security.Cryptography;
 using Luftfartshinder.Models.ViewModel.User;
 
-namespace Luftfartshinder.Controllers
+namespace Luftfartshinder.Controllers.Public
 {
     public class FeedbackController : Controller
     {

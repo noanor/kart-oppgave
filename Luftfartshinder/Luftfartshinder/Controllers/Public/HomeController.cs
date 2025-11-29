@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Luftfartshinder.Controllers
+namespace Luftfartshinder.Controllers.Public
 {
     public class HomeController : Controller
     {

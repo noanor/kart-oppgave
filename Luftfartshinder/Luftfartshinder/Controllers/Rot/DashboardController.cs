@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Luftfartshinder.Models.ViewModel.Shared;
 using System.Diagnostics;
 
-namespace Luftfartshinder.Controllers
+namespace Luftfartshinder.Controllers.Rot
 {
     public class DashboardController : Controller
     {

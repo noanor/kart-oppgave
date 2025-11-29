@@ -3,7 +3,7 @@ using Luftfartshinder.Models.ViewModel.User;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Luftfartshinder.Controllers
+namespace Luftfartshinder.Controllers.Admin
 {
     public class RegistrarController : Controller
     {

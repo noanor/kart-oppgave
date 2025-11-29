@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace Luftfartshinder.Controllers
+namespace Luftfartshinder.Controllers.Account
 {
     /// <summary>
     /// Controller for handling user authentication, registration, and account management.

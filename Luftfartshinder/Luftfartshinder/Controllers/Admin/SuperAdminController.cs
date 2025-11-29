@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Luftfartshinder.Controllers
+namespace Luftfartshinder.Controllers.Admin
 {
     /// <summary>
     /// Controller for SuperAdmin functionality including user management.

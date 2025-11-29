@@ -3,7 +3,7 @@ using Luftfartshinder.Models.ViewModel.Obstacles;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Luftfartshinder.Controllers
+namespace Luftfartshinder.Controllers.Obstacles
 {
     public class ReportController : Controller
     {
