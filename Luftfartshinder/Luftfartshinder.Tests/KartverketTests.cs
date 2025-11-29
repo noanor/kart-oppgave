@@ -1,5 +1,6 @@
 using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Models.ViewModel.Shared;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using Xunit;

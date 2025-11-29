@@ -53,10 +53,10 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li class="dropdown-item">
-                                                    <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Dashboard">Dashboard</a>
+                                                    <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>
                                                 </li>
                                                 <li class="dropdown-item">
-                                                    <a class="nav-link" asp-area="" asp-controller="Registrar" asp-action="Index">Registrar</a>
+                                                    <a class="nav-link" asp-area="" asp-controller="Registrar" asp-action="Overview">Registrar</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -70,46 +70,58 @@
                                 @if (User.IsInRole("Registrar") && !User.IsInRole("SuperAdmin"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" asp-area="" asp-controller="Registrar" asp-action="Index">Registrar</a>
+                                        <a class="nav-link text-white" asp-area="" asp-controller="Registrar" asp-action="Overview">Registrar</a>
                                     </li>
                                 }
                             </ul>
 
-                            <ul class="navbar-nav flex-grow-1 justify-content-end align-items-center">
-                                @if (User.IsInRole("FlightCrew"))
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Tutorial">Tutorial</a>
-                                    </li>
-                                }
-
+                        <ul class="navbar-nav flex-grow-1 justify-content-end align-items-center">
+                            @if (User.IsInRole("FlightCrew"))
+                            {
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="" asp-controller="Feedback" asp-action="Index">Feedback</a>
+                                    <a class="nav-link text-white"
+                                       href="#"
+                                       id="tutorialNavButton"
+                                       style="cursor: pointer;">Tutorial</a>
                                 </li>
+                            }
 
-                                <li class="nav-item">
-                                    <div class="dropdown me-4">
-                                        <button class="btn dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            @User?.Identity?.Name
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-end account-menu">
-                                            <li>
-                                                <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Dashboard">Dashboard</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item text-danger d-flex align-items-center gap-2"
-                                                href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
-                                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                                    Sign out
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                            <li class="nav-item">
+                                <a class="nav-link text-white"
+                                   asp-area=""
+                                   asp-controller="Feedback"
+                                   asp-action="Index">Feedback</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <div class="dropdown me-4">
+                                    <button class="btn dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        @User?.Identity?.Name
+                                    </button>
+
+                                    <ul class="dropdown-menu dropdown-menu-end account-menu">
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Dashboard" asp-action="Dashboard">
+                                                Dashboard
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a class="dropdown-item text-danger d-flex align-items-center gap-2"
+                                               href="#"
+                                               data-bs-toggle="modal"
+                                               data-bs-target="#logoutModal">
+                                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                                Sign out
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                </nav>
+                </div>
+            </nav>
 
                 <!-- iPad-navbar: optimalisert for touch-enheter -->
                 <nav id="navbarIPAD" class="navbar fixed-top">
@@ -149,14 +161,14 @@
 
                                     <li class="nav-item mb-3">
                                         <a class="nav-link btn btn-dark active text-light" aria-current="page" role="button"
-                                        asp-area="" asp-controller="Account" asp-action="Dashboard">Dashboard</a>
+                                        asp-area="" asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>
                                     </li>
 
                                     @if (User.IsInRole("SuperAdmin"))
                                     {
                                         <li class="nav-item mb-3">
                                             <a class="nav-link btn btn-dark active text-light" aria-current="page" role="button"
-                                            asp-area="" asp-controller="Registrar" asp-action="Index">Registrar</a>
+                                            asp-area="" asp-controller="Registrar" asp-action="Overview">Registrar</a>
                                         </li>
                                     }
 
