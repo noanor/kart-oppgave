@@ -6,7 +6,7 @@ namespace Luftfartshinder.Repository
     {
         Task<Obstacle> AddObstacle(Obstacle obstacleData);
 
-        Task<Obstacle> GetObstacleById(int id);
+        Task<Obstacle?> GetObstacleById(int id);
         Task<List<Obstacle>> GetByOrgId(int id);
 
         Task<List<Obstacle>> GetAllAsync();

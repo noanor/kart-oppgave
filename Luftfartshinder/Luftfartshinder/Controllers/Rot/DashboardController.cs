@@ -16,11 +16,12 @@ namespace Luftfartshinder.Controllers.Rot
         private readonly IOrganizationRepository organizationRepository;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public DashboardController(IReportRepository reportRepository, IObstacleRepository obstacleRepository, IOrganizationRepository organizationRepository)
+        public DashboardController(IReportRepository reportRepository, IObstacleRepository obstacleRepository, IOrganizationRepository organizationRepository, UserManager<ApplicationUser> userManager)
         {
             this.reportRepository = reportRepository;
             this.obstacleRepository = obstacleRepository;
             this.organizationRepository = organizationRepository;
+            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -44,13 +45,18 @@ namespace Luftfartshinder.Controllers.Rot
                 return Challenge(); // sender til login
             }
 
-            if (user.OrganizationId == null)
+            if (user.OrganizationId == 0)
             {
                 // Brukeren har ikke organisasjon
                 return Forbid(); // eller vis en egen side
             }
 
             var organization = await organizationRepository.GetById(user.OrganizationId);
+
+            if (organization == null)
+            {
+                return NotFound();
+            }
 
             var orgId = organization.Id;
 
