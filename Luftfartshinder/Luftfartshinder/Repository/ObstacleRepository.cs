@@ -1,4 +1,4 @@
-﻿using Luftfartshinder.DataContext;
+using Luftfartshinder.DataContext;
 using Luftfartshinder.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -86,3 +86,4 @@ namespace Luftfartshinder.Repository
         }
     }
 }
+

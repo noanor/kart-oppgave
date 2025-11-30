@@ -5,7 +5,7 @@ using System;
 using System.Security.Cryptography;
 using Luftfartshinder.Models.ViewModel.User;
 
-namespace Luftfartshinder.Controllers
+namespace Luftfartshinder.Controllers.Public
 {
     public class FeedbackController : Controller
     {
@@ -15,7 +15,12 @@ namespace Luftfartshinder.Controllers
         public IActionResult Feedback()
         {
             ViewData["LayoutType"] = "ipad";
-            var model = new FeedbackViewModel();
+            var model = new FeedbackViewModel
+            {
+                Name = string.Empty,
+                Email = string.Empty,
+                Message = string.Empty
+            };
             
             // Set Q&A data
             ViewBag.QandA = GetQandAData();

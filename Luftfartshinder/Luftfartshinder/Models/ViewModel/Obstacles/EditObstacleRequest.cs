@@ -14,13 +14,13 @@ namespace Luftfartshinder.Models.ViewModel.Obstacles
         public int ReportId { get; set; }
         
         /// <summary>The report entity this obstacle belongs to.</summary>
-        public Report Report { get; set; }
+        public Report? Report { get; set; }
         
         /// <summary>Type of obstacle (e.g., "Powerline", "Mast", "Line", "Point", "Luftspenn").</summary>
-        public string Type { get; set; }
+        public required string Type { get; set; }
         
         /// <summary>Name of the obstacle.</summary>
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         /// <summary>Height of the obstacle in meters.</summary>
         public double? Height { get; set; }
@@ -32,7 +32,7 @@ namespace Luftfartshinder.Models.ViewModel.Obstacles
         public double Longitude { get; set; }
         
         /// <summary>Description of the obstacle.</summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
         
         /// <summary>Current status of the obstacle review process.</summary>
         public Domain.Obstacle.Statuses Status { get; set; } = Domain.Obstacle.Statuses.Pending;
