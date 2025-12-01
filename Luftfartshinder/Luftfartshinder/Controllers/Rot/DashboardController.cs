@@ -39,10 +39,9 @@ namespace Luftfartshinder.Controllers
         
         /// <summary>
         /// Displays the dashboard view showing all reports.
-        /// Accessible to Registrar and SuperAdmin roles. They can see all obstacles and reports.
         /// </summary>
         [HttpGet]
-        [Authorize(Roles = "Registrar, SuperAdmin")]
+        [Authorize(Roles = "Registrar, SuperAdmin, FlightCrew")]
         public async Task<IActionResult> Dashboard()
         {
             var reports = await _reportRepository.GetAllAsync();
