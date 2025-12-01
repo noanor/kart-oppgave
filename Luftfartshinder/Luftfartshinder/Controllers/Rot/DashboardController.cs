@@ -86,7 +86,7 @@ namespace Luftfartshinder.Controllers
                 Reports = reports
             };
 
-            return View("~/Views/Account/FlightCrewObstacles.cshtml", viewModel);
+            return View("FlightCrewObstacles", viewModel);
         }
     }
 }
