@@ -4,77 +4,90 @@ using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Luftfartshinder.Models.ViewModel.Shared;
-using System.Diagnostics;
 
-namespace Luftfartshinder.Controllers.Rot
+namespace Luftfartshinder.Controllers
 {
+    /// <summary>
+    /// Controller for dashboard views and organization-related obstacle/report data.
+    /// Provides controlled access based on user and organization identity.
+    /// </summary>
     public class DashboardController : Controller
     {
-        private readonly IReportRepository reportRepository;
-        private readonly IObstacleRepository obstacleRepository;
-        private readonly IOrganizationRepository organizationRepository;
-        private readonly UserManager<ApplicationUser> userManager;
+        private readonly IReportRepository _reportRepository;
+        private readonly IObstacleRepository _obstacleRepository;
+        private readonly IOrganizationRepository _organizationRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public DashboardController(IReportRepository reportRepository, IObstacleRepository obstacleRepository, IOrganizationRepository organizationRepository, UserManager<ApplicationUser> userManager)
+        /// <summary>
+        /// Initializes a new instance of <see cref="DashboardController"/>.
+        /// </summary>
+        /// <param name="reportRepository">Repository for retrieving reports.</param>
+        /// <param name="obstacleRepository">Repository for retrieving obstacles.</param>
+        /// <param name="organizationRepository">Repository for retrieving organizations.</param>
+        /// <param name="userManager">User manager for accessing authenticated user data.</param>
+        public DashboardController(
+            IReportRepository reportRepository,
+            IObstacleRepository obstacleRepository,
+            IOrganizationRepository organizationRepository,
+            UserManager<ApplicationUser> userManager)
         {
-            this.reportRepository = reportRepository;
-            this.obstacleRepository = obstacleRepository;
-            this.organizationRepository = organizationRepository;
-            this.userManager = userManager;
+            _reportRepository = reportRepository;
+            _obstacleRepository = obstacleRepository;
+            _organizationRepository = organizationRepository;
+            _userManager = userManager;
         }
-
+        
+        /// <summary>
+        /// Displays the dashboard view showing all reports.
+        /// Accessible to Registrar and SuperAdmin roles. They can see all obstacles and reports.
+        /// </summary>
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Registrar, SuperAdmin")]
         public async Task<IActionResult> Dashboard()
         {
-
-            var reports = await reportRepository.GetAllAsync();
-
+            var reports = await _reportRepository.GetAllAsync();
             return View("~/Views/Account/Dashboard.cshtml", reports);
         }
 
+        /// <summary>
+        /// Displays obstacles and reports associated with the logged-in user's organization.
+        /// Accessible to FlightCrew, Registrar and SuperAdmin. FlightCrew users see only their organization's data.
+        /// </summary>
+        [Authorize(Roles = "FlightCrew, Registrar, SuperAdmin")]
         public async Task<IActionResult> FlightCrewObstacles()
         {
-            // 1. Finn innlogget bruker
-            var user = await userManager.GetUserAsync(User);
+            var user = await _userManager.GetUserAsync(User);
 
             if (user == null)
             {
-                // Ingen innlogget bruker → redirect eller forbidd, opp til deg
-                return Challenge(); // sender til login
+                return Challenge();
             }
 
-            if (user.OrganizationId == 0)
+            if (user.OrganizationId == null || user.OrganizationId == 0)
             {
-                // Brukeren har ikke organisasjon
-                return Forbid(); // eller vis en egen side
+                return Forbid();
             }
 
-            var organization = await organizationRepository.GetById(user.OrganizationId);
+            var organization = await _organizationRepository.GetById(user.OrganizationId);
 
             if (organization == null)
             {
-                return NotFound();
+                return NotFound("The organization linked to your account could not be found.");
             }
 
             var orgId = organization.Id;
 
-            // 2. Hent data fra Domain-DB via repos
-            var obstacles = await obstacleRepository.GetByOrgId(orgId);
-            var reports = await reportRepository.GetByOrgId(orgId);
+            var obstacles = await _obstacleRepository.GetByOrgId(orgId);
+            var reports = await _reportRepository.GetByOrgId(orgId);
 
-            // 3. Bygg viewmodel
-            var vm = new OrgDataViewModel
+            var viewModel = new OrgDataViewModel
             {
                 Organization = organization,
                 Obstacles = obstacles,
                 Reports = reports
             };
 
-            // 4. Send til view
-            return View("FlightCrewObstacles", vm);
+            return View("FlightCrewObstacles", viewModel);
         }
-
     }
 }
