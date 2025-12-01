@@ -1,10 +1,12 @@
 using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Models.ViewModel.User;
 using Luftfartshinder.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Luftfartshinder.Controllers.Admin
 {
+    [Authorize(Roles = "Registrar, SuperAdmin")]
     public class RegistrarController : Controller
     {
         private readonly IReportRepository reportRepository;
@@ -22,7 +24,7 @@ namespace Luftfartshinder.Controllers.Admin
         {
             ViewData["LayoutType"] = "pc";
             var reports = await reportRepository.GetAllAsync();
-            return View("Index", reports);
+            return View("Overview", reports);
         }
 
         // Report detaljer: PC-vennlig layout
@@ -40,7 +42,7 @@ namespace Luftfartshinder.Controllers.Admin
                     Author = report.Author,
                     AuthorId = report.AuthorId,
                     Title = report.Title,
-                    Obstacles = report.Obstacles,
+                    Obstacles = report.Obstacles ?? new List<Obstacle>(),
                     RegistrarNote = report.RegistrarNote,
                     ReportDate = report.ReportDate
                 };
@@ -51,6 +53,7 @@ namespace Luftfartshinder.Controllers.Admin
             return NotFound();
         }
 
+        [HttpPost]
         public async Task<IActionResult> SaveNote(Obstacle obstacleData)
         {
             var existingObstacle = await obstacleRepository.GetObstacleById(obstacleData.Id);
