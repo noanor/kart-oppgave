@@ -16,6 +16,7 @@ namespace Luftfartshinder.Controllers
         private readonly IReportRepository _reportRepository;
         private readonly IObstacleRepository _obstacleRepository;
         private readonly IOrganizationRepository _organizationRepository;
+        private readonly IAccountRepository _accountRepository;
         private readonly UserManager<ApplicationUser> _userManager;
 
         /// <summary>
@@ -24,16 +25,19 @@ namespace Luftfartshinder.Controllers
         /// <param name="reportRepository">Repository for retrieving reports.</param>
         /// <param name="obstacleRepository">Repository for retrieving obstacles.</param>
         /// <param name="organizationRepository">Repository for retrieving organizations.</param>
+        /// <param name="accountRepository">Repository for retrieving user-specific reports.</param>
         /// <param name="userManager">User manager for accessing authenticated user data.</param>
         public DashboardController(
             IReportRepository reportRepository,
             IObstacleRepository obstacleRepository,
             IOrganizationRepository organizationRepository,
+            IAccountRepository accountRepository,
             UserManager<ApplicationUser> userManager)
         {
             _reportRepository = reportRepository;
             _obstacleRepository = obstacleRepository;
             _organizationRepository = organizationRepository;
+            _accountRepository = accountRepository;
             _userManager = userManager;
         }
         
@@ -50,7 +54,7 @@ namespace Luftfartshinder.Controllers
 
         /// <summary>
         /// Displays obstacles and reports associated with the logged-in user's organization.
-        /// Accessible to FlightCrew, Registrar and SuperAdmin. FlightCrew users see only their organization's data.
+        /// Accessible to FlightCrew, Registrar and SuperAdmin. FlightCrew users see only their own reports.
         /// </summary>
         [Authorize(Roles = "FlightCrew, Registrar, SuperAdmin")]
         public async Task<IActionResult> FlightCrewObstacles()
@@ -77,7 +81,18 @@ namespace Luftfartshinder.Controllers
             var orgId = organization.Id;
 
             var obstacles = await _obstacleRepository.GetByOrgId(orgId);
-            var reports = await _reportRepository.GetByOrgId(orgId);
+            
+            // For FlightCrew users, get only their own reports; for Registrar/SuperAdmin, get all org reports
+            List<Report> reports;
+            if (User.IsInRole("FlightCrew") && !User.IsInRole("SuperAdmin") && !User.IsInRole("Registrar"))
+            {
+                var userId = user.Id.ToString();
+                reports = await _accountRepository.GetUserReports(userId);
+            }
+            else
+            {
+                reports = await _reportRepository.GetByOrgId(orgId);
+            }
 
             var viewModel = new OrgDataViewModel
             {
