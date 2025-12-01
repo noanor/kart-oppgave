@@ -4,8 +4,6 @@ using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Luftfartshinder.Models.ViewModel.Shared;
-using System.Diagnostics;
 
 namespace Luftfartshinder.Controllers.Rot
 {
@@ -23,7 +21,9 @@ namespace Luftfartshinder.Controllers.Rot
             this.organizationRepository = organizationRepository;
             this.userManager = userManager;
         }
-
+        /// <summary>
+        /// Displays the user dashboard with reports based on user role.
+        /// </summary>
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Dashboard()
@@ -34,6 +34,9 @@ namespace Luftfartshinder.Controllers.Rot
             return View("~/Views/Account/Dashboard.cshtml", reports);
         }
 
+        /// <summary>
+        /// Displays obstacles and reports for FlightCrew users.
+        /// </summary>
         public async Task<IActionResult> FlightCrewObstacles()
         {
             // 1. Finn innlogget bruker
