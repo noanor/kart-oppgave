@@ -56,7 +56,7 @@
                                                     <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>
                                                 </li>
                                                 <li class="dropdown-item">
-                                                    <a class="nav-link" asp-area="" asp-controller="Registrar" asp-action="Overview">Registrar</a>
+                                                    <a class="nav-link" asp-area="" asp-controller="Registrar" asp-action="Index">Registrar</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -70,13 +70,13 @@
                                 @if (User.IsInRole("Registrar") && !User.IsInRole("SuperAdmin"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" asp-area="" asp-controller="Registrar" asp-action="Overview">Registrar</a>
+                                        <a class="nav-link text-white" asp-area="" asp-controller="Registrar" asp-action="Index">Registrar</a>
                                     </li>
                                 }
                             </ul>
 
                         <ul class="navbar-nav flex-grow-1 justify-content-end align-items-center">
-                            @if (User.IsInRole("FlightCrew"))
+                            @if (User.IsInRole("FlightCrew") || User.IsInRole("SuperAdmin"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-white"
@@ -152,7 +152,7 @@
                                         asp-area="" asp-controller="Feedback" asp-action="Index">Feedback</a>
                                     </li>
 
-                                    @if (User.IsInRole("FlightCrew"))
+                                    @if (User.IsInRole("FlightCrew") || User.IsInRole("SuperAdmin"))
                                     {
                                         <li class="nav-item mb-3">
                                             <a class="nav-link btn btn-dark active text-light" asp-area="" asp-controller="Home" asp-action="Tutorial" role="button">Tutorial</a>
@@ -168,7 +168,7 @@
                                     {
                                         <li class="nav-item mb-3">
                                             <a class="nav-link btn btn-dark active text-light" aria-current="page" role="button"
-                                            asp-area="" asp-controller="Registrar" asp-action="Overview">Registrar</a>
+                                            asp-area="" asp-controller="Registrar" asp-action="Index">Registrar</a>
                                         </li>
                                     }
 
@@ -206,6 +206,27 @@
         {
             <script src="~/js/dualNavbar.js"></script>
         }
+        <script>
+            // Global handler for Tutorial button - works on all pages except Home/Index
+            document.addEventListener('DOMContentLoaded', function() {
+                const tutorialNavButton = document.getElementById('tutorialNavButton');
+                if (tutorialNavButton) {
+                    // Check if we're on Home/Index page (which has its own modal handler)
+                    const isHomeIndex = window.location.pathname === '/' || 
+                                       window.location.pathname === '/Home' || 
+                                       window.location.pathname === '/Home/Index' ||
+                                       window.location.pathname.includes('/Home/Index');
+                    
+                    if (!isHomeIndex) {
+                        // On all other pages, redirect to Tutorial page
+                        tutorialNavButton.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            window.location.href = '@Url.Action("Tutorial", "Home")';
+                        });
+                    }
+                }
+            });
+        </script>
         @await RenderSectionAsync("Scripts", required: false)
         @await RenderSectionAsync("Styles", required: false)
 
