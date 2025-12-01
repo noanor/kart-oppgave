@@ -1,12 +1,13 @@
-/*using Luftfartshinder.Controllers;
-using Luftfartshinder.DataContext;
-using Luftfartshinder.Models;
-using Luftfartshinder.Models.ViewModel;
+using Luftfartshinder.Controllers.Account;
+using Luftfartshinder.Models.Domain;
+using Luftfartshinder.Models.ViewModel.Shared;
 using Luftfartshinder.Repository;
+using Luftfartshinder.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Moq;
+using System.Security.Claims;
 using Xunit;
 
 namespace Luftfartshinder.Tests
@@ -15,16 +16,16 @@ namespace Luftfartshinder.Tests
     {
         private readonly Mock<UserManager<ApplicationUser>> userManagerMock;
         private readonly Mock<SignInManager<ApplicationUser>> signInManagerMock;
+        private readonly Mock<IAccountRepository> accountRepositoryMock;
+        private readonly Mock<IReportRepository> reportRepositoryMock;
+        private readonly Mock<IOrganizationRepository> organizationRepositoryMock;
+        private readonly Mock<IObstacleRepository> obstacleRepositoryMock;
+        private readonly Mock<IOrganizationService> organizationServiceMock;
+        private readonly Mock<IUserService> userServiceMock;
         private readonly AccountController controller;
-        private readonly IAccountRepository accountRepository;
-        private IReportRepository reportRepository;
 
         public AccountControllerTests()
         {
-            var options = new DbContextOptionsBuilder<ApplicationContext>()
-                .UseInMemoryDatabase(databaseName: "TestDb")
-                .Options;
-
             var userStoreMock = new Mock<IUserStore<ApplicationUser>>();
             userManagerMock = new Mock<UserManager<ApplicationUser>>(
                 userStoreMock.Object, null, null, null, null, null, null, null, null);
@@ -37,15 +38,45 @@ namespace Luftfartshinder.Tests
                 claimsFactoryMock.Object,
                 null, null, null, null);
 
-            controller = new AccountController(userManagerMock.Object, signInManagerMock.Object, accountRepository, reportRepository);
+            accountRepositoryMock = new Mock<IAccountRepository>();
+            reportRepositoryMock = new Mock<IReportRepository>();
+            organizationRepositoryMock = new Mock<IOrganizationRepository>();
+            obstacleRepositoryMock = new Mock<IObstacleRepository>();
+            organizationServiceMock = new Mock<IOrganizationService>();
+            userServiceMock = new Mock<IUserService>();
+
+            controller = new AccountController(
+                userManagerMock.Object,
+                signInManagerMock.Object,
+                accountRepositoryMock.Object,
+                reportRepositoryMock.Object,
+                organizationRepositoryMock.Object,
+                obstacleRepositoryMock.Object,
+                organizationServiceMock.Object,
+                userServiceMock.Object);
         }
 
         [Fact]
         public void Login_GET_ReturnsView()
         {
+            // Arrange - Mock HttpContext and User.Identity
+            var httpContextMock = new Mock<HttpContext>();
+            var identity = new ClaimsIdentity(); // Not authenticated
+            var principal = new ClaimsPrincipal(identity);
+            
+            httpContextMock.Setup(h => h.User).Returns(principal);
+            
+            controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = httpContextMock.Object
+            };
+
+            // Act
             var result = controller.Login();
+            
+            // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
-            Assert.Null(viewResult.ViewName);*//**//*
+            Assert.Null(viewResult.ViewName);
         }
 
         [Fact]
@@ -70,7 +101,9 @@ namespace Luftfartshinder.Tests
             var model = new LoginViewModel { Username = "testuser", Password = "password123" };
             var user = new ApplicationUser 
             { 
-                UserName = "testuser", 
+                UserName = "testuser",
+                FirstName = "Test",
+                LastName = "User",
                 IsApproved = false 
             };
 
@@ -89,7 +122,9 @@ namespace Luftfartshinder.Tests
             var model = new LoginViewModel { Username = "testuser", Password = "password123" };
             var user = new ApplicationUser 
             { 
-                UserName = "testuser", 
+                UserName = "testuser",
+                FirstName = "Test",
+                LastName = "User",
                 IsApproved = true 
             };
 
@@ -108,12 +143,14 @@ namespace Luftfartshinder.Tests
         }
 
         [Fact]
-        public async Task Login_POST_SuperAdmin_RedirectsToSuperAdminHome()
+        public async Task Login_POST_SuperAdmin_RedirectsToDashboard()
         {
             var model = new LoginViewModel { Username = "admin", Password = "password123" };
             var user = new ApplicationUser 
             { 
-                UserName = "admin", 
+                UserName = "admin",
+                FirstName = "Admin",
+                LastName = "User",
                 IsApproved = true 
             };
 
@@ -127,10 +164,9 @@ namespace Luftfartshinder.Tests
 
             var result = await controller.Login(model);
             var redirectResult = Assert.IsType<RedirectToActionResult>(result);
-            Assert.Equal("SuperAdminHome", redirectResult.ActionName);
-            Assert.Equal("Home", redirectResult.ControllerName);
+            Assert.Equal("Dashboard", redirectResult.ActionName);
+            // ControllerName is null when redirecting to action in same controller
+            Assert.Null(redirectResult.ControllerName);
         }
     }
 }
-
-*/

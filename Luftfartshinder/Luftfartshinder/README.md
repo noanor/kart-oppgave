@@ -138,14 +138,28 @@ Connection strings konfigureres i `appsettings.json`:
 
 ### Testresultater
 
+Alle tester kjører med `dotnet test` fra `Luftfartshinder.Tests`-mappen.
+
+**Siste testkjøring:**
 ```
-Total tests: 12
-Passed: 12
-Failed: 0
+Test summary: total: 17; failed: 0; succeeded: 17; skipped: 0; duration: 2,3s
+Build succeeded with 14 warning(s)
+```
 
+**Testkategorier:**
+- **Enhetstesting (Unit Testing):** 3 tester - Tester enkeltkomponenter isolert
+- **Systemstesting (System Testing):** 2 tester - Tester at hele systemet fungerer sammen  
+- **Sikkerhetstesting (Security Testing):** 2 tester - Tester sikkerhetsaspekter
+- **Brukervennlighetstesting (Usability Testing):** 2 tester - Tester brukervennlighet
+- **Controller Testing:** 8 tester - Tester AccountController og HomeController
 
+**Kjør tester:**
+```bash
+cd Luftfartshinder/Luftfartshinder.Tests
+dotnet test
+```
 
-
+**Note:** Det er 14 warnings knyttet til null-sjekker i testkoden. Disse påvirker ikke funksjonaliteten, men bør fikses for optimal kodekvalitet.
 
 ## Roller
 
