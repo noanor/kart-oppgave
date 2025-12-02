@@ -204,7 +204,7 @@ namespace Luftfartshinder.Controllers.Account
         {
             if (User.Identity?.IsAuthenticated == true && User.IsInRole("Registrar"))
             {
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("Dashboard", "Dashboard");
             }
             ViewData["LayoutType"] = "ipad";
             return View();

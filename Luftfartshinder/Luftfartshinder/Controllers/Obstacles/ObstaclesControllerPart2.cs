@@ -1,4 +1,5 @@
 ﻿using Luftfartshinder.Models.ViewModel.Admin;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Luftfartshinder.Controllers.Obstacles

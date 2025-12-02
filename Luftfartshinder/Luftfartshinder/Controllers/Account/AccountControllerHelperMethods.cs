@@ -63,7 +63,7 @@ namespace Luftfartshinder.Controllers.Account
 
             if (roles.Contains("SuperAdmin") || roles.Contains("Registrar"))
             {
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("Dashboard", "Dashboard");
             }
 
             if (roles.Contains("FlightCrew"))

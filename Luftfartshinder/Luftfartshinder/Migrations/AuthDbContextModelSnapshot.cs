@@ -43,14 +43,16 @@ namespace Luftfartshinder.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
 
                     b.Property<bool>("IsApproved")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
@@ -106,7 +108,7 @@ namespace Luftfartshinder.Migrations
                         {
                             Id = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d1c69796-cb8d-4ec4-82b2-edc61e46f501",
+                            ConcurrencyStamp = "7845d8e2-f712-4112-8bdb-899e27d22c74",
                             Email = "superadmin@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -118,7 +120,7 @@ namespace Luftfartshinder.Migrations
                             OrganizationId = 1,
                             PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d6178404-3ba1-4d80-8bee-00b5a34090ce",
+                            SecurityStamp = "caf82c13-ecd0-409c-98b2-0084bac49974",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@kartverket.no"
                         },
@@ -126,7 +128,7 @@ namespace Luftfartshinder.Migrations
                         {
                             Id = "322acd53-a201-47c6-a7e0-6695690ce677",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "aadc510e-8578-48b5-961c-af902eb37548",
+                            ConcurrencyStamp = "4441d56a-db05-490d-869a-e6947d3917a0",
                             Email = "registrar@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Regi",
@@ -138,7 +140,7 @@ namespace Luftfartshinder.Migrations
                             OrganizationId = 1,
                             PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "caf52324-250b-432b-ad53-1a119a844b05",
+                            SecurityStamp = "3a3c9c08-9a40-4c39-8f2f-754147377188",
                             TwoFactorEnabled = false,
                             UserName = "registrar"
                         },
@@ -146,7 +148,7 @@ namespace Luftfartshinder.Migrations
                         {
                             Id = "1d3b44cf-5507-444f-b84c-842539f13e02",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c1731d70-d186-4d72-a4fe-0d5250717f2e",
+                            ConcurrencyStamp = "0bfed2b7-28f9-4d6f-8091-00a175815758",
                             Email = "pilot@kartverket.no",
                             EmailConfirmed = false,
                             FirstName = "Kaptein",
@@ -158,7 +160,7 @@ namespace Luftfartshinder.Migrations
                             OrganizationId = 4,
                             PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "414f24f4-bc20-4099-9f49-99595182027c",
+                            SecurityStamp = "bbc13c99-5ddf-4806-bf5c-0249fbe67c46",
                             TwoFactorEnabled = false,
                             UserName = "pilot"
                         });
