@@ -40,9 +40,14 @@ namespace Luftfartshinder.Controllers
             _accountRepository = accountRepository;
             _userManager = userManager;
         }
+<<<<<<< HEAD
         
         /// <summary>
         /// Displays the dashboard view showing all reports.
+=======
+        /// <summary>
+        /// Displays the user dashboard with reports based on user role.
+>>>>>>> 50066bb (Refaktorering av obstacle controller og account controller)
         /// </summary>
         [HttpGet]
         [Authorize(Roles = "Registrar, SuperAdmin, FlightCrew")]
@@ -51,12 +56,19 @@ namespace Luftfartshinder.Controllers
             var reports = await _reportRepository.GetAllAsync();
             return View("~/Views/Account/Dashboard.cshtml", reports);
         }
+<<<<<<< HEAD
 
         /// <summary>
         /// Displays obstacles and reports associated with the logged-in user's organization.
         /// Accessible to FlightCrew, Registrar and SuperAdmin. FlightCrew users see only their own reports.
         /// </summary>
         [Authorize(Roles = "FlightCrew, Registrar, SuperAdmin")]
+=======
+
+        /// <summary>
+        /// Displays obstacles and reports for FlightCrew users.
+        /// </summary>
+>>>>>>> 50066bb (Refaktorering av obstacle controller og account controller)
         public async Task<IActionResult> FlightCrewObstacles()
         {
             var user = await _userManager.GetUserAsync(User);
