@@ -15,11 +15,11 @@ namespace Luftfartshinder.Repository
         }
         public async Task<IEnumerable<ApplicationUser>> GetAll()
         {
-            var users = await authDbContext.Users.ToListAsync();
-
-            var superAdminUser = await authDbContext.Users
-                .FirstOrDefaultAsync(x => x.Email == "superadmin@kartverket.no");
-
+            var users = await authDbContext.Users
+                .Include(u => u.Organization)
+                .ToListAsync();
+            
+            var superAdminUser = users.FirstOrDefault(x => x.Email == "superadmin@kartverket.no");
             if (superAdminUser != null)
             {
                 users.Remove(superAdminUser);

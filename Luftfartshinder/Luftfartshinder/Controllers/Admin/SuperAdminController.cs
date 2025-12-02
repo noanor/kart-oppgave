@@ -21,51 +21,62 @@ namespace Luftfartshinder.Controllers.Admin
         /// Displays a filtered list of users with role, status, and organization filters.
         /// </summary>
         public async Task<IActionResult> List(string roleFilter = "All", string statusFilter = "", string organizationFilter = "")
-        {
+        { 
             ViewData["LayoutType"] = "pc";
             var allUsers = await userRepository.GetAll();
             var filteredUsers = new List<User>();
-            var uniqueOrganizations = new HashSet<string>();
-            var knownOrgs = await organizationRepository.GetAll();
+            var uniqueOrganizations = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+    
+            var knownOrgNames = new[] {
+                "Avinor",
+                "Norwegian Air Ambulance",
+                "Norwegian Armed Forces",
+                "Police"
+            };
 
             foreach (var user in allUsers)
             {
                 var userRoles = await userManager.GetRolesAsync(user);
                 var userRole = userRoles.FirstOrDefault() ?? "No Role";
-                
+        
                 if (roleFilter != "All" && userRole != roleFilter)
                 {
                     continue;
                 }
-                
+        
                 if (!string.IsNullOrEmpty(statusFilter))
-                {
+                {   
                     bool isApproved = statusFilter == "Approved";
                     if (user.IsApproved != isApproved)
                     {
                         continue;
                     }
                 }
-
+        
                 if (!string.IsNullOrEmpty(organizationFilter))
                 {
+                    var userOrgName = user.Organization?.Name?.Trim();
+
                     if (organizationFilter == "Other")
                     {
-                        var isKnownOrg = knownOrgs.Any(o => o.Name == user.Organization?.Name);
-                        if (isKnownOrg)
+                        if (!string.IsNullOrEmpty(userOrgName)
+                            && knownOrgNames.Contains(userOrgName, StringComparer.OrdinalIgnoreCase))
+                        {
+                            continue; 
+                        }
+                    }
+                    else
+                    {
+                        if (!string.Equals(userOrgName, organizationFilter?.Trim(), StringComparison.OrdinalIgnoreCase))
                         {
                             continue;
                         }
                     }
-                    else if (user.Organization?.Name != organizationFilter)
-                    {
-                        continue;
-                    }
                 }
-                
+
                 if (!string.IsNullOrEmpty(user.Organization?.Name))
                 {
-                    uniqueOrganizations.Add(user.Organization.Name);
+                    uniqueOrganizations.Add(user.Organization.Name.Trim());
                 }
                 
                 filteredUsers.Add(new User
@@ -78,7 +89,7 @@ namespace Luftfartshinder.Controllers.Admin
                     Organization = user.Organization
                 });
             }
-            
+
             var viewModel = new UserViewModel { Users = filteredUsers };
             ViewBag.CurrentFilter = roleFilter;
             ViewBag.StatusFilter = statusFilter;
@@ -86,9 +97,45 @@ namespace Luftfartshinder.Controllers.Admin
             ViewBag.Organizations = uniqueOrganizations.OrderBy(o => o).ToList();
             ViewBag.TotalUsers = allUsers.Count();
             
+            if (!filteredUsers.Any())
+            {
+                var parts = new List<string>();
+
+                if (!string.IsNullOrEmpty(roleFilter) && roleFilter != "All")
+                {
+                    parts.Add($"Role: {roleFilter}");
+                }
+
+                if (!string.IsNullOrEmpty(statusFilter))
+                {
+                    parts.Add($"Status: {statusFilter}");
+                }
+
+                if (!string.IsNullOrEmpty(organizationFilter))
+                {
+                    parts.Add($"Organization: {organizationFilter}");
+                }
+
+                string message;
+                if (parts.Count == 0)
+                {
+                    message = "No users found.";
+                }
+                else
+                {
+                    message = "No users found matching " + string.Join(" and ", parts) + ".";
+                }
+
+                ViewBag.NoUsersMessage = message;
+            }
+            else
+            {
+                ViewBag.NoUsersMessage = null;
+            }
+            
             return View(viewModel);
         }
-
+        
         /// <summary>
         /// Deletes a user by ID.
         /// </summary>
