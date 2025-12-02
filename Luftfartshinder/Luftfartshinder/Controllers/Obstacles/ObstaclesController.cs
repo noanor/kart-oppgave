@@ -42,6 +42,7 @@ namespace Luftfartshinder.Controllers.Obstacles
 
     // === POST: /obstacles/add-one ===
     [HttpPost("/obstacles/add-one")]
+    [ValidateAntiForgeryToken]
     public IActionResult AddOne([FromBody] AddObstacleRequest dto)
     {
         if (dto is null) return BadRequest("No data");
