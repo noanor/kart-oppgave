@@ -32,56 +32,65 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            @foreach (var o in Model)
+            @if (Model != null && Model.Count > 0)
             {
-                
-                <tr>
-                    <th scope="row">@o.Id</th>
-                    <td>@o.Report.Author</td>
-                    <td>@o.Type</td>
-                    <td>@o.Name</td>
-                    <td>@o.Height</td>
+                @foreach (var o in Model)
+                {
+                    <tr>
+                        <th scope="row">@o.Id</th>
+                        <td>@(o.Report?.Author ?? "N/A")</td>
+                        <td>@o.Type</td>
+                        <td>@o.Name</td>
+                        <td>@o.Height</td>
 
-                    @{
-                        string formattedLatitude = String.Format("{0:0.000000}", o.Latitude);
-                        string formattedLongitude = String.Format("{0:0.000000}", o.Longitude);
-                    }
-
-                    <td>@formattedLatitude</td>
-                    <td>@formattedLongitude</td>
-                    <td>@o.RegistrarNote</td>
-
-                    <td>
-                        @switch (o.Status)
-                        {
-                            case Luftfartshinder.Models.Domain.Obstacle.Statuses.Approved:
-                                <span class="pill pill-approved">Approved</span>
-                                break;
-
-                            case Luftfartshinder.Models.Domain.Obstacle.Statuses.Rejected:
-                                <span class="pill pill-rejected">Rejected</span>
-                                break;
-
-                            case Luftfartshinder.Models.Domain.Obstacle.Statuses.Pending:
-                                <span class="pill pill-pending">Pending</span>
-                                break;
+                        @{
+                            string formattedLatitude = String.Format("{0:0.000000}", o.Latitude);
+                            string formattedLongitude = String.Format("{0:0.000000}", o.Longitude);
                         }
-                    </td>
 
-                    <td>
-                        <a class="btn btn-outline-primary shadow" role="button"
-                           asp-action="Edit"
-                           asp-controller="Obstacles"
-                           asp-route-id="@o.Id"
-                           style="vertical-align: middle; text-decoration: none;">
-                            Edit
-                            <span class="material-symbols-outlined inline-icon">
-                                edit
-                            </span>
-                        </a>
+                        <td>@formattedLatitude</td>
+                        <td>@formattedLongitude</td>
+                        <td>@o.RegistrarNote</td>
+
+                        <td>
+                            @switch (o.Status)
+                            {
+                                case Luftfartshinder.Models.Domain.Obstacle.Statuses.Approved:
+                                    <span class="pill pill-approved">Approved</span>
+                                    break;
+
+                                case Luftfartshinder.Models.Domain.Obstacle.Statuses.Rejected:
+                                    <span class="pill pill-rejected">Rejected</span>
+                                    break;
+
+                                case Luftfartshinder.Models.Domain.Obstacle.Statuses.Pending:
+                                    <span class="pill pill-pending">Pending</span>
+                                    break;
+                            }
+                        </td>
+
+                        <td>
+                            <a class="btn btn-outline-primary shadow" role="button"
+                               asp-action="Edit"
+                               asp-controller="Obstacles"
+                               asp-route-id="@o.Id"
+                               style="vertical-align: middle; text-decoration: none;">
+                                Edit
+                                <span class="material-symbols-outlined inline-icon">
+                                    edit
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="10" class="text-center text-muted py-4">
+                        No obstacles found. Obstacles will appear here after they have been submitted from the draft.
                     </td>
                 </tr>
-                
             }
         </tbody>
     </table>
