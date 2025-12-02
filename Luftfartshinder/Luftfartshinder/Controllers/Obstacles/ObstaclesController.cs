@@ -272,10 +272,10 @@ namespace Luftfartshinder.Controllers.Obstacles
 
         if (deletedObstacle != null)
         {
-            // Redirect to the report details page if we have a reportId, otherwise to list
-            if (reportId.HasValue)
+            // Redirect to the report details page if we have a reportId (which is always > 0 for valid obstacles)
+            if (reportId > 0)
             {
-                return RedirectToAction("Details", "Registrar", new { id = reportId.Value });
+                return RedirectToAction("Details", "Registrar", new { id = reportId });
             }
             return RedirectToAction("List");
         }
