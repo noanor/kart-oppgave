@@ -256,6 +256,33 @@ namespace Luftfartshinder.Controllers.Obstacles
         return View("AdminEdit", editObstacleRequest);
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var obstacle = await obstacleRepository.GetObstacleById(id);
+        
+        if (obstacle == null)
+        {
+            return NotFound();
+        }
+
+        var reportId = obstacle.ReportId;
+        var deletedObstacle = await obstacleRepository.DeleteById(id);
+
+        if (deletedObstacle != null)
+        {
+            // Redirect to the report details page if we have a reportId (which is always > 0 for valid obstacles)
+            if (reportId > 0)
+            {
+                return RedirectToAction("Details", "Registrar", new { id = reportId });
+            }
+            return RedirectToAction("List");
+        }
+
+        return RedirectToAction("Edit", new { id = id });
+    }
+
     // DTO for JSON requests
     public class AddObstacleRequest
     {

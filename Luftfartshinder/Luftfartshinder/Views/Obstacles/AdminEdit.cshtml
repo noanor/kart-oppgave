@@ -82,12 +82,36 @@
         <div class="d-flex">
             <button type="submit" form="adminEditObstacleForm" class="btn btn-primary">Update</button>
 
-            <button class="btn btn-danger ms-2" type="submit"
-                    asp-area=""
-                    asp-controller="AdminTags"
-                    asp-action="Delete">Delete</button>
+            <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                Delete
+            </button>
         </div>
 
+    </div>
+
+    <!-- Delete confirmation modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete obstacle?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete obstacle <strong>@Model.Name</strong>? This action cannot be undone!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form asp-controller="Obstacles" asp-action="Delete" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
