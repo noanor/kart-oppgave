@@ -85,16 +85,16 @@ namespace Luftfartshinder.Controllers.Admin
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(EditReportRequest editReportRequest)
+        public async Task<IActionResult> Delete(int id)
         {
-            var deletedReport = await reportRepository.DeleteAsync(editReportRequest.Id);
+            var deletedReport = await reportRepository.DeleteAsync(id);
 
             if (deletedReport != null)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Overview");
             }
 
-            return RedirectToAction("Details", new { id = editReportRequest.Id });
+            return RedirectToAction("Details", new { id = id });
         }
 
         [HttpPost]
