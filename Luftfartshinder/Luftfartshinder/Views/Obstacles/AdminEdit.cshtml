@@ -82,10 +82,11 @@
         <div class="d-flex">
             <button type="submit" form="adminEditObstacleForm" class="btn btn-primary">Update</button>
 
-            <button class="btn btn-danger ms-2" type="submit"
-                    asp-area=""
-                    asp-controller="AdminTags"
-                    asp-action="Delete">Delete</button>
+            <form asp-controller="Obstacles" asp-action="Delete" method="post" class="d-inline ms-2">
+                <input type="hidden" name="id" value="@Model.Id" />
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
         </div>
 
     </div>
