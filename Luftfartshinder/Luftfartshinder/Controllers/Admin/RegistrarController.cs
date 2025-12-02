@@ -65,6 +65,8 @@ namespace Luftfartshinder.Controllers.Admin
             return NotFound();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveNote(Obstacle obstacleData)
         {
             var existingObstacle = await obstacleRepository.GetObstacleById(obstacleData.Id);
@@ -81,6 +83,8 @@ namespace Luftfartshinder.Controllers.Admin
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(EditReportRequest editReportRequest)
         {
             var deletedReport = await reportRepository.DeleteAsync(editReportRequest.Id);
@@ -93,6 +97,8 @@ namespace Luftfartshinder.Controllers.Admin
             return RedirectToAction("Details", new { id = editReportRequest.Id });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Approve(int id)
         {
             var obstacle = await obstacleRepository.GetObstacleById(id);
@@ -107,6 +113,8 @@ namespace Luftfartshinder.Controllers.Admin
             return RedirectToAction("Details", new { id = obstacle.ReportId });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reject(int id)
         {
             var obstacle = await obstacleRepository.GetObstacleById(id);
