@@ -60,6 +60,7 @@ namespace Luftfartshinder.Controllers.Account
         /// Handles admin user registration.
         /// </summary>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -125,6 +126,7 @@ namespace Luftfartshinder.Controllers.Account
         /// Handles public user registration.
         /// </summary>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [AllowAnonymous]
         public async Task<IActionResult> UserRegister(UserRegisterViewModel model)
         {
@@ -212,6 +214,7 @@ namespace Luftfartshinder.Controllers.Account
         /// Handles user login authentication.
         /// </summary>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model)
         {

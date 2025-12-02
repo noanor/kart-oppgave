@@ -1,10 +1,12 @@
 using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Models.ViewModel.User;
 using Luftfartshinder.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Luftfartshinder.Controllers.Admin
 {
+    [Authorize(Roles = "SuperAdmin,Registrar")]
     public class RegistrarController : Controller
     {
         private readonly IReportRepository reportRepository;
@@ -23,6 +25,18 @@ namespace Luftfartshinder.Controllers.Admin
             ViewData["LayoutType"] = "pc";
             var reports = await reportRepository.GetAllAsync();
             return View("Index", reports);
+        }
+
+        /// <summary>
+        /// Overview action for SuperAdmin and Registrar to view all reports.
+        /// </summary>
+        [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Registrar")]
+        public async Task<IActionResult> Overview()
+        {
+            ViewData["LayoutType"] = "pc";
+            var reports = await reportRepository.GetAllAsync();
+            return View("Overview", reports);
         }
 
         // Report detaljer: PC-vennlig layout
@@ -51,6 +65,8 @@ namespace Luftfartshinder.Controllers.Admin
             return NotFound();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveNote(Obstacle obstacleData)
         {
             var existingObstacle = await obstacleRepository.GetObstacleById(obstacleData.Id);
@@ -67,6 +83,8 @@ namespace Luftfartshinder.Controllers.Admin
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(EditReportRequest editReportRequest)
         {
             var deletedReport = await reportRepository.DeleteAsync(editReportRequest.Id);
@@ -79,6 +97,8 @@ namespace Luftfartshinder.Controllers.Admin
             return RedirectToAction("Details", new { id = editReportRequest.Id });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Approve(int id)
         {
             var obstacle = await obstacleRepository.GetObstacleById(id);
@@ -93,6 +113,8 @@ namespace Luftfartshinder.Controllers.Admin
             return RedirectToAction("Details", new { id = obstacle.ReportId });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reject(int id)
         {
             var obstacle = await obstacleRepository.GetObstacleById(id);

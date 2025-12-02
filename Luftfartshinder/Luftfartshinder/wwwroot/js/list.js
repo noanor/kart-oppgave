@@ -60,30 +60,32 @@ function updateUserCount() {
 
 
 function filterUsers() {
-    const searchText = document.getElementById('userSearch').value.toLowerCase();
-    const roleFilter = document.getElementById('filterRole').value;
-    const statusFilter = document.getElementById('filterStatus').value;
-    const organizationFilter = document.getElementById('filterOrganization').value;
+    const searchText = (document.getElementById('userSearch').value || '').toLowerCase().trim();
+    const roleFilter = (document.getElementById('filterRole').value || '').trim();
+    const statusFilter = (document.getElementById('filterStatus').value || '').trim();
+    const organizationFilter = (document.getElementById('filterOrganization').value || '').trim();
 
     const rows = document.querySelectorAll('table tbody tr');
     rows.forEach(row => {
-        const username = row.cells[0].textContent.toLowerCase();
-        const email = row.cells[1].textContent.toLowerCase();
-        const organization = row.cells[2].textContent.trim();
-        const role = row.cells[3].textContent;
-        const status = row.cells[4].textContent.trim().toLowerCase();
+        const username = (row.cells[0].textContent || '').toLowerCase().trim();
+        const email = (row.cells[1].textContent || '').toLowerCase().trim();
+        const organization = (row.cells[2].textContent || '').trim();
+        const role = (row.cells[3].textContent || '').trim();
+        const status = (row.cells[4].textContent || '').toLowerCase().trim();
         const statusFilterValue = statusFilter.toLowerCase();
 
         let matchesSearch = username.includes(searchText) || email.includes(searchText) || organization.toLowerCase().includes(searchText);
-        let matchesRole = roleFilter === "" || role === roleFilter;
-        let matchesStatus = statusFilter === "" || status === statusFilterValue;
+        let matchesRole = !roleFilter || role === roleFilter;
+        let matchesStatus = !statusFilter || status === statusFilterValue;
         let matchesOrganization = false;
 
-        if (!organizationFilter || organizationFilter === "") {
+        if (!organizationFilter) {
             matchesOrganization = true;
         } else if (organizationFilter === "Other") {
-            const knownOrgs = ["Police", "Norwegian Air Ambulance", "Avinor", "Norwegian Armed Forces"];
-            matchesOrganization = !knownOrgs.includes(organization);
+            const knownOrgs = ["Police", "Norwegian Air Ambulance", "Avinor", "Norwegian Armed Forces"]
+                .map(o => o.toLowerCase());
+            const orgNameNorm = organization.toLowerCase();
+            matchesOrganization = !knownOrgs.includes(orgNameNorm);
         } else {
             matchesOrganization = organization === organizationFilter;
         }
