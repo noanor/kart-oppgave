@@ -67,6 +67,7 @@ namespace Luftfartshinder.Controllers.Obstacles
 
     // === POST: /obstacles/clear-draft ===
     [HttpPost("/obstacles/clear-draft")]
+    [ValidateAntiForgeryToken]
     public IActionResult ClearDraft()
     {
         HttpContext.Session.Remove(DraftKey);
@@ -77,6 +78,7 @@ namespace Luftfartshinder.Controllers.Obstacles
     // === POST: /obstacles/submit-draft ===
     [Authorize]
     [HttpPost("/obstacles/submit-draft")]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> SubmitDraft()
     {
         var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey);
@@ -178,6 +180,7 @@ namespace Luftfartshinder.Controllers.Obstacles
 
     // === POST: /obstacles/edit-obstacle ===
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult EditObstacle(EditObstacleRequest editObstacleRequest, int index)
     {
         var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey);

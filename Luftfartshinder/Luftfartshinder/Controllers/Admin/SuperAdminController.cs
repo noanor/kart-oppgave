@@ -93,6 +93,7 @@ namespace Luftfartshinder.Controllers.Admin
         /// Deletes a user by ID.
         /// </summary>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(Guid id, string roleFilter, string statusFilter, string organizationFilter)
         {
             var user = await userManager.FindByIdAsync(id.ToString());
@@ -115,6 +116,7 @@ namespace Luftfartshinder.Controllers.Admin
         /// Approves a user, allowing them to log in.
         /// </summary>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Approve(Guid id, string roleFilter, string statusFilter, string organizationFilter)
         {
             var user = await userManager.FindByIdAsync(id.ToString());
@@ -137,6 +139,7 @@ namespace Luftfartshinder.Controllers.Admin
         /// Declines a user registration and removes them from the system.
         /// </summary>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Decline(Guid id, string roleFilter, string statusFilter, string organizationFilter)
         {
             var user = await userManager.FindByIdAsync(id.ToString());
