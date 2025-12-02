@@ -13,60 +13,58 @@
 }
 
 
-<body>
-    <header class="mb-5">
-        <div class="h1 text-center">
-            List of Reports
-        </div>
-    </header>
-    <div class="container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Author</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">No. of obstacles</th>
-                    <th scope="col">Pending</th>
-                    <th></th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @for (int i = 0; i < Model.Count; i++)
-                {
-                    var pendingCount = Model[i].Obstacles.Count(o => o.Status == Luftfartshinder.Models.Domain.Obstacle.Statuses.Pending);
-                    <tr>
-                        <td>@Model[i].Id</td>
-                        <td>@Model[i].Title</td>
-                        <td>@Model[i].Author</td>
-                        <td>@Model[i].ReportDate</td>
-                        <td>@Model[i].Obstacles.Count</td>
-                        <td>
-                            @if (pendingCount > 0)
-                            {
-                                <span class="badge bg-warning text-dark">@pendingCount</span>
-                            }
-                            else
-                            {
-                                <span class="text-muted">0</span>
-                            }
-                        </td>
-                        <td>
-                            <a class="btn btn-primary" role="button"
-                               asp-action="Details"
-                               asp-controller="Registrar"
-                               asp-route-id="@Model[i].Id"
-                               style="vertical-align: middle; text-decoration: none;">
-                                View
-                            </a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+<header class="mb-5">
+    <div class="h1 text-center">
+        List of Reports
     </div>
-</body>
+</header>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Date</th>
+                <th scope="col">No. of obstacles</th>
+                <th scope="col">Pending</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                var pendingCount = Model[i].Obstacles.Count(o => o.Status == Luftfartshinder.Models.Domain.Obstacle.Statuses.Pending);
+                <tr>
+                    <td>@Model[i].Id</td>
+                    <td>@Model[i].Title</td>
+                    <td>@Model[i].Author</td>
+                    <td>@Model[i].ReportDate</td>
+                    <td>@Model[i].Obstacles.Count</td>
+                    <td>
+                        @if (pendingCount > 0)
+                        {
+                            <span class="badge bg-warning text-dark">@pendingCount</span>
+                        }
+                        else
+                        {
+                            <span class="text-muted">0</span>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" role="button"
+                           asp-action="Details"
+                           asp-controller="Registrar"
+                           asp-route-id="@Model[i].Id"
+                           style="vertical-align: middle; text-decoration: none;">
+                            View
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 
