@@ -160,6 +160,7 @@ namespace Luftfartshinder.Controllers.Obstacles
                     Longitude = obstacle.Longitude,
                     Description = obstacle.Description
                 };
+                ViewBag.Index = index;
                 return View("EditObstacle", editObstacleRequest);
             }
 
@@ -213,6 +214,24 @@ namespace Luftfartshinder.Controllers.Obstacles
                 }).ToList();
 
             return Ok(list);
+        }
+
+        // Delete draft obstacle
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteDraftObstacle(int index)
+        {
+            var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey);
+            if (draft is null || index < 0 || index >= draft.Obstacles.Count)
+            {
+                return BadRequest("Invalid draft or index.");
+            }
+
+            draft.Obstacles.RemoveAt(index);
+            HttpContext.Session.Set(DraftKey, draft);
+
+            TempData["ObstacleDeleted"] = true;
+            return RedirectToAction("Draft");
         }
 
         // DTO for JSON requests

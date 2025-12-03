@@ -75,8 +75,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <form asp-controller="Obstacles" asp-action="Delete" method="post" class="d-inline">
-                        <input type="hidden" name="id" value="@Model.Id" />
+                    <form asp-controller="Obstacles" asp-action="DeleteDraftObstacle" method="post" class="d-inline">
+                        <input type="hidden" name="index" value="@ViewBag.Index" />
                         @Html.AntiForgeryToken()
                         <button type="submit" class="btn btn-danger">
                             <i class="bi bi-trash"></i> Delete
