@@ -78,3 +78,9 @@ input {
     margin: 0 0 12px 0;
     text-align: center;
 }
+
+/* Hide back button on login page */
+.ipad-back-button,
+.draft-back-button {
+    display: none !important;
+}

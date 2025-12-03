@@ -119,25 +119,6 @@
 				sessionStorage.setItem('tutorialShown', 'true');
 			}
 
-			const tutorialNavButton = document.getElementById('tutorialNavButton');
-			if (tutorialNavButton) {
-				tutorialNavButton.addEventListener('click', function(e) {
-					e.preventDefault();
-					showTutorialModal();
-				});
-			}
-
-			const tutorialNavButtonIPad = document.getElementById('tutorialNavButtonIPad');
-			if (tutorialNavButtonIPad) {
-				tutorialNavButtonIPad.addEventListener('click', function(e) {
-					e.preventDefault();
-					const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('offcanvasNavbar'));
-					if (offcanvas) {
-						offcanvas.hide();
-					}
-					showTutorialModal();
-				});
-			}
 		});
 
 		document.addEventListener("DOMContentLoaded", function () {

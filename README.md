@@ -62,8 +62,12 @@ Applikasjonen er pakket som en Docker-løsning for enkel kjøring og skalerbarhe
 
 **For lokal utvikling:**
 - .NET 9.0 SDK
-- MySQL/MariaDB (eller bruk Docker for database)
-- Visual Studio 2022 eller VS Code (anbefalt)
+- MySQL/MariaDB (or use Docker for database)
+- Visual Studio 2022 or VS Code (recommended)
+
+**For JavaScript testing:**
+- Node.js (version 18 or newer recommended)
+- npm (comes with Node.js)
 
 ### Kjøre med Docker (Anbefalt)
 
@@ -125,7 +129,64 @@ Etter første migrasjon er følgende testbrukere opprettet:
 - **Passord:** `Passord123!`
 - **Rolle:** FlightCrew (kan rapportere nye luftfartshinder)
 
-## Dokumentasjon
+## Testing
 
-- **Detaljert dokumentasjon:** Se [README.md](Luftfartshinder/Luftfartshinder/README.md) i Luftfartshinder/Luftfartshinder-mappen for systemarkitektur, drift og testing
-- **Testing:** Se [Testing-seksjonen](Luftfartshinder/Luftfartshinder/README.md#testing) i README.md for testdokumentasjon og resultater
+### C# Tests
+
+Run C# tests with:
+```bash
+cd Luftfartshinder/Luftfartshinder.Tests
+dotnet test
+```
+
+### JavaScript Tests
+
+The project also contains JavaScript tests for frontend functionality using **Jest**.
+
+#### Prerequisites
+
+To run JavaScript tests, you need:
+- **Node.js** installed (version 18 or newer recommended)
+- **npm** (comes with Node.js)
+
+#### Installing Node.js
+
+1. **Download Node.js:**
+   - Go to [https://nodejs.org/](https://nodejs.org/)
+   - Download the LTS version (Long Term Support)
+   - Install with default settings
+
+2. **Verify installation:**
+   ```bash
+   node --version
+   npm --version
+   ```
+
+#### Installing Dependencies
+
+Before running JavaScript tests for the first time, install dependencies:
+
+```bash
+# Navigate to project root (where package.json is located)
+npm install
+```
+
+#### Running JavaScript Tests
+
+After dependencies are installed, run the tests with:
+
+```bash
+# From project root
+npm test
+```
+
+This runs all JavaScript tests in `Luftfartshinder/Luftfartshinder/wwwroot/js/`:
+- `testHelperMap.test.js` - Tests map functionality
+- `testHelperUserAdmin.test.js` - Tests user administration functionality
+
+**Important:** JavaScript tests require Node.js and cannot be run without it. If you don't have Node.js installed, you must install it first.
+
+## Documentation
+
+- **Detailed documentation:** See [README.md](Luftfartshinder/Luftfartshinder/README.md) in the Luftfartshinder/Luftfartshinder folder for system architecture, operations, and testing
+- **Testing:** See the [Testing section](Luftfartshinder/Luftfartshinder/README.md#testing) in README.md for test documentation and results

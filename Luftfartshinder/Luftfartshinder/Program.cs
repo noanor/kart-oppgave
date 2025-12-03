@@ -167,7 +167,7 @@ app.Use(async (context, next) =>
     var csp = "default-src 'self'; " +
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://kit.fontawesome.com https://unpkg.com https://cdn.jsdelivr.net; " +
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://unpkg.com; " +
-              "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; " +
+              "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net https://use.fontawesome.com https://ka-f.fontawesome.com; " +
               "img-src 'self' data: https: blob:; " +
               "connect-src 'self' https:; " +
               "frame-ancestors 'none';";

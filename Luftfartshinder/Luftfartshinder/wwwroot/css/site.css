@@ -165,9 +165,11 @@ body[data-layout-type="ipad"] .ipad-back-button:active {
     background-color: rgba(248, 249, 250, 0.95);
 }
 
-/* Hide global back button on Draft page (which has its own button) and Home page */
+/* Hide global back button on Draft page (which has its own button), Home page and Login page */
 body.page-draft[data-layout-type="ipad"] .ipad-back-button,
-body.page-home[data-layout-type="ipad"] .ipad-back-button {
+body.page-home[data-layout-type="ipad"] .ipad-back-button,
+body.page-login[data-layout-type="ipad"] .ipad-back-button,
+body:has(.login-page) .ipad-back-button {
     display: none !important;
 }
 
