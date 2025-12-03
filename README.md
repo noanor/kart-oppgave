@@ -127,5 +127,5 @@ Etter første migrasjon er følgende testbrukere opprettet:
 
 ## Dokumentasjon
 
-- **Detaljert dokumentasjon:** Se [README.md](Luftfartshinder/Luftfartshinder/README.md) i Luftfartshinder-mappen for systemarkitektur, drift og testing
-- **Testing:** Se [TESTING.md](Luftfartshinder/TESTING.md) for testdokumentasjon og resultater
+- **Detaljert dokumentasjon:** Se [README.md](Luftfartshinder/Luftfartshinder/README.md) i Luftfartshinder/Luftfartshinder-mappen for systemarkitektur, drift og testing
+- **Testing:** Se [Testing-seksjonen](Luftfartshinder/Luftfartshinder/README.md#testing) i README.md for testdokumentasjon og resultater
