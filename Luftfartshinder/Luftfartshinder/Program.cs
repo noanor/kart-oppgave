@@ -130,15 +130,29 @@ if (!app.Environment.IsDevelopment())
 // Add Security Headers Middleware
 app.Use(async (context, next) =>
 {
-    // X-XSS-Protection header (legacy, but required for assignment)
-    // What: Tells old browsers to enable their built-in XSS filter
-    // Why: Provides basic protection against cross-site scripting attacks in older browsers
-    context.Response.Headers.Append("X-XSS-Protection", "1; mode=block");
+    // Strict-Transport-Security (HSTS)
+    // What: Forces browsers to use HTTPS for all future connections to this domain
+    // Why: Prevents man-in-the-middle attacks and ensures all traffic is encrypted
+    //      The browser remembers this for the specified time period (max-age)
+    //      includeSubDomains applies HSTS to all subdomains
+    //      preload allows the domain to be included in browser HSTS preload lists
+    if (!app.Environment.IsDevelopment())
+    {
+        context.Response.Headers.Append("Strict-Transport-Security", 
+            "max-age=31536000; includeSubDomains; preload");
+    }
     
     // X-Content-Type-Options: nosniff
     // What: Prevents browsers from guessing file types (MIME type sniffing)
     // Why: Stops attackers from serving malicious scripts as text files, which browsers might execute
+    //      Forces browser to respect the Content-Type header sent by the server
+    //      Without this, a file served as "text/plain" could be executed as JavaScript
     context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
+    
+    // X-XSS-Protection header (legacy, but required for assignment)
+    // What: Tells old browsers to enable their built-in XSS filter
+    // Why: Provides basic protection against cross-site scripting attacks in older browsers
+    context.Response.Headers.Append("X-XSS-Protection", "1; mode=block");
     
     // X-Frame-Options: DENY
     // What: Prevents this website from being loaded inside an iframe on other websites
