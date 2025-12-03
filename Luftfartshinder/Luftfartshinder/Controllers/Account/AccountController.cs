@@ -1,5 +1,4 @@
 ﻿using Luftfartshinder.Models.Domain;
-using Luftfartshinder.Models.ViewModel.Organization;
 using Luftfartshinder.Models.ViewModel.Shared;
 using Luftfartshinder.Models.ViewModel.User;
 using Luftfartshinder.Repository;
@@ -7,7 +6,6 @@ using Luftfartshinder.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace Luftfartshinder.Controllers.Account
 {
@@ -18,10 +16,6 @@ namespace Luftfartshinder.Controllers.Account
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly IAccountRepository accountRepository;
-        private readonly IReportRepository reportRepository;
-        private readonly IOrganizationRepository organizationRepository;
-        private readonly IObstacleRepository obstacleRepository;
         private readonly IOrganizationService organizationService;
         private readonly IUserService userService;
 
@@ -37,10 +31,6 @@ namespace Luftfartshinder.Controllers.Account
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.accountRepository = accountRepository;
-            this.reportRepository = reportRepository;
-            this.organizationRepository = organizationRepository;
-            this.obstacleRepository = obstacleRepository;
             this.organizationService = organizationService;
             this.userService = userService;
         }
@@ -252,9 +242,6 @@ namespace Luftfartshinder.Controllers.Account
             await signInManager.SignOutAsync();
             TempData["SignOutMessage"] = "You have been signed out successfully";
             return RedirectToAction("Login", "Account");
-        }
-
-
-        
+        }        
     }
 }
