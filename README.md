@@ -79,15 +79,48 @@ Før du kan kjøre applikasjonen, må du ha installert:
 
 Følg disse stegene i terminalen (Command Prompt på Windows, Terminal på Mac/Linux):
 
+**Hvis du ikke har prosjektet ennå:**
+
 1. **Klon prosjektet fra GitHub:**
    ```bash
    git clone https://github.com/noanor/kart-oppgave.git
    ```
+   
+   Dette lager en mappe kalt `kart-oppgave` i den mappen du er i nå.
 
-2. **Naviger inn i prosjektmappen:**
+**Hvis du allerede har prosjektet klonet:**
+
+1. **Finn hvor prosjektet er:**
+   - Søk etter `kart-oppgave` mappen på datamaskinen din
+   - Eller naviger til mappen der du klonet prosjektet tidligere
+
+2. **Naviger til prosjektmappen:**
+   
+   Først, sjekk hvor du er:
+   ```bash
+   pwd
+   ```
+   (På Windows PowerShell: `Get-Location` eller bare se på prompten)
+   
+   Deretter naviger til prosjektmappen. Du må være i samme mappe som `kart-oppgave` mappen:
+   ```bash
+   cd kart-oppgave
+   cd Luftfartshinder
+   ```
+   
+   **Eller i ett steg:**
    ```bash
    cd kart-oppgave/Luftfartshinder
    ```
+   
+   **Eksempel:** Hvis du klonet i `C:\Users\Madalitso\Documents`:
+   ```bash
+   cd Documents
+   cd kart-oppgave
+   cd Luftfartshinder
+   ```
+   
+   **Verifiser at du er i riktig mappe:** Du skal se `docker-compose.yml` filen hvis du kjører `ls` (eller `dir` på Windows).
 
 3. **Start applikasjonen med Docker:**
    ```bash
@@ -124,6 +157,15 @@ Følg disse stegene i terminalen (Command Prompt på Windows, Terminal på Mac/L
 - For å kjøre i bakgrunnen: `docker-compose up -d`
 - For å stoppe og fjerne alt (inkludert data): `docker-compose down -v`
 - Hvis noe går galt, prøv: `docker-compose down` og deretter `docker-compose up --build`
+
+**Feilsøking:**
+- **"Cannot find path" feil:** 
+  - Sjekk at du er i riktig mappe. Kjør `pwd` (eller `Get-Location` på Windows) for å se hvor du er
+  - Sjekk at `kart-oppgave` mappen eksisterer: Kjør `ls` (eller `dir` på Windows) for å se hvilke mapper som finnes
+  - Hvis `kart-oppgave` ikke finnes, må du først klone prosjektet med `git clone`
+  - Hvis du allerede har klonet prosjektet et annet sted, naviger dit først
+- **"docker-compose: command not found":** Prøv `docker compose` (uten bindestrek) - nyere versjoner av Docker bruker dette
+- **Port allerede i bruk:** Endre port 8080 til noe annet i `docker-compose.yml`, eller stopp den andre applikasjonen som bruker porten
 
 ### Kjøre lokalt (for utviklere)
 
