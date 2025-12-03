@@ -45,5 +45,22 @@ namespace Luftfartshinder.Controllers.Obstacles
 
             return View("AdminEdit", editObstacleRequest);
         }
+
+        // Delete obstacle
+        [Authorize(Roles = "Registrar, SuperAdmin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var deletedObstacle = await obstacleRepository.DeleteById(id);
+
+            if (deletedObstacle != null)
+            {
+                TempData["ObstacleDeleted"] = true;
+                return RedirectToAction("List");
+            }
+
+            return NotFound();
+        }
     }
 }
