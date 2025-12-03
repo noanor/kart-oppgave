@@ -165,8 +165,10 @@ body[data-layout-type="ipad"] .ipad-back-button:active {
     background-color: rgba(248, 249, 250, 0.95);
 }
 
-/* Skjul global tilbake-knapp på Draft-siden (som har egen knapp) og Home-siden */
+/* Skjul global tilbake-knapp på Draft-siden (som har egen knapp), Home-siden og Login-siden */
 body.page-draft[data-layout-type="ipad"] .ipad-back-button,
-body.page-home[data-layout-type="ipad"] .ipad-back-button {
+body.page-home[data-layout-type="ipad"] .ipad-back-button,
+body.page-login[data-layout-type="ipad"] .ipad-back-button,
+body:has(.login-page) .ipad-back-button {
     display: none !important;
 }

@@ -197,6 +197,7 @@ namespace Luftfartshinder.Controllers.Account
                 return RedirectToAction("Dashboard", "Dashboard");
             }
             ViewData["LayoutType"] = "ipad";
+            ViewData["BodyClass"] = "page-login";
             return View();
         }
 
