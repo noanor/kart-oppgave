@@ -86,10 +86,12 @@ cd kart-oppgave/Luftfartshinder
 
 **Steg 3: Start applikasjonen**
 ```bash
-docker-compose up
+docker-compose up --build
 ```
 
 **Vent 2-5 minutter** (første gang) mens Docker setter opp alt.
+
+**Merk:** `--build` sikrer at du alltid får de nyeste endringene fra prosjektet.
 
 **Når du ser:**
 ```
@@ -124,16 +126,18 @@ docker-compose down
 - Eller endre port i `docker-compose.yml`
 
 **Ser ikke de nyeste endringene:**
-- Docker cacher ofte gamle versjoner. For å få de nyeste endringene:
+- Hvis du allerede har kjørt applikasjonen før, kan Docker bruke cache. For å tvinge fullstendig ny bygging:
   1. Stopp applikasjonen: `docker-compose down`
   2. Bygg på nytt uten cache: `docker-compose build --no-cache`
-  3. Start på nytt: `docker-compose up`
+  3. Start på nytt: `docker-compose up --build`
   
   **Eller i ett steg:**
   ```bash
   docker-compose down
   docker-compose up --build --force-recreate
   ```
+  
+  **Merk:** Standard kommando `docker-compose up --build` skal normalt fungere, men hvis du fortsatt ser gamle endringer, bruk `--no-cache` eller `--force-recreate`.
 
 ### Testbrukere
 
