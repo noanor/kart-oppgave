@@ -1,9 +1,9 @@
-﻿using Luftfartshinder.Models.Domain;
+using Luftfartshinder.Models.Domain;
 
 namespace Luftfartshinder.Repository
 {
     public interface IAccountRepository
     {
-        public List<Report> GetUserReports(string userId);
+        Task<List<Report>> GetUserReports(string userId);
     }
 }

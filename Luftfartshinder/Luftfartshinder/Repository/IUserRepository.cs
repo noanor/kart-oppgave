@@ -1,4 +1,4 @@
-﻿using Luftfartshinder.Models.Domain;
+using Luftfartshinder.Models.Domain;
 using Microsoft.AspNetCore.Identity;
 
 namespace Luftfartshinder.Repository
@@ -8,3 +8,4 @@ namespace Luftfartshinder.Repository
         Task<IEnumerable<ApplicationUser>> GetAll();
     }
 }
+

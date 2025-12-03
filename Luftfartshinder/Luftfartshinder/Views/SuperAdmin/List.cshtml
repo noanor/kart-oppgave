@@ -1,5 +1,4 @@
-﻿@using Luftfartshinder.Models.ViewModel.User
-@model UserViewModel
+﻿@model UserViewModel
 @{
 }
 
@@ -57,7 +56,7 @@
 	<div class="container">
 		
 		<div class="mb-3">
-			<a asp-controller="Account" asp-action="Dashboard" class="btn btn-secondary">
+			<a asp-controller="Dashboard" asp-action="Dashboard" class="btn btn-secondary">
 				&larr; Back to Dashboard
 			</a>
 		</div>
@@ -130,7 +129,7 @@
 			</div>
 		</div>
 
-		@if (Model.Users != null || Model.Users.Any())
+		@if (Model.Users != null && Model.Users.Any())
 		{
 			<div id="activeFilters" class="d-flex flex-wrap gap-2 mb-3"></div>
 			
@@ -153,8 +152,8 @@
 				{
 					<tr>
 						<td>@user.UserName</td>
-						<td>@user.EmailAdress</td>
-						<td>@user.Organization.Name</td>
+						<td>@user.EmailAddress</td>
+						<td>@(user.Organization?.Name ?? String.Empty)</td>
 						<td>@user.Role</td>
 						<td>
 							@if (user.IsApproved)
@@ -218,8 +217,17 @@
 		else
 		{
 			<div class="alert alert-info" role="alert">
-				<i class="bi bi-info-circle"></i> No users found with role: <strong>@ViewBag.CurrentFilter</strong>
+				<i class="bi bi-info-circle"></i>
+				@if (!string.IsNullOrEmpty(ViewBag.NoUsersMessage))
+				{
+					@ViewBag.NoUsersMessage
+				}
+				else
+				{
+					<text>No users found.</text>
+				}
 			</div>
+
 		}
 
 

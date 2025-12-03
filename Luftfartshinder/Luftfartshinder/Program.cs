@@ -1,6 +1,7 @@
 using Luftfartshinder.DataContext;
 using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Repository;
+using Luftfartshinder.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+
 });
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
@@ -20,7 +22,7 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
                new MariaDbServerVersion(new Version(11, 8, 3))));
 builder.Services.AddSession();
 
-//////(legg til pakkene, og arv)
+//s(legg til pakkene, og arv)
 builder.Services.AddDbContext<AuthDbContext>(options =>
            options.UseMySql(builder.Configuration.GetConnectionString("AuthConnection"),
              new MySqlServerVersion(new Version(11, 8, 3))));
@@ -45,6 +47,10 @@ builder.Services.AddScoped<IReportRepository, ReportRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
+
+// Services
+builder.Services.AddScoped<IOrganizationService, OrganizationService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 Console.WriteLine("[EF DB] " + builder.Configuration.GetConnectionString("DbConnection"));
@@ -121,6 +127,60 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// Add Security Headers Middleware
+app.Use(async (context, next) =>
+{
+    // Strict-Transport-Security (HSTS)
+    // What: Forces browsers to use HTTPS for all future connections to this domain
+    // Why: Prevents man-in-the-middle attacks and ensures all traffic is encrypted
+    //      The browser remembers this for the specified time period (max-age)
+    //      includeSubDomains applies HSTS to all subdomains
+    //      preload allows the domain to be included in browser HSTS preload lists
+    if (!app.Environment.IsDevelopment())
+    {
+        context.Response.Headers.Append("Strict-Transport-Security", 
+            "max-age=31536000; includeSubDomains; preload");
+    }
+    
+    // X-Content-Type-Options: nosniff
+    // What: Prevents browsers from guessing file types (MIME type sniffing)
+    // Why: Stops attackers from serving malicious scripts as text files, which browsers might execute
+    //      Forces browser to respect the Content-Type header sent by the server
+    //      Without this, a file served as "text/plain" could be executed as JavaScript
+    context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
+    
+    // X-XSS-Protection header (legacy, but required for assignment)
+    // What: Tells old browsers to enable their built-in XSS filter
+    // Why: Provides basic protection against cross-site scripting attacks in older browsers
+    context.Response.Headers.Append("X-XSS-Protection", "1; mode=block");
+    
+    // X-Frame-Options: DENY
+    // What: Prevents this website from being loaded inside an iframe on other websites
+    // Why: Protects against clickjacking attacks where attackers embed your site in a hidden frame
+    //      and trick users into clicking on things they can't see
+    context.Response.Headers.Append("X-Frame-Options", "DENY");
+    
+    // Content-Security-Policy
+    // What: Controls which resources (scripts, styles, images, etc.) the browser is allowed to load
+    // Why: Prevents XSS attacks by blocking unauthorized scripts and resources from loading
+    //      This is the modern replacement for X-XSS-Protection
+    var csp = "default-src 'self'; " +
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://kit.fontawesome.com https://unpkg.com https://cdn.jsdelivr.net; " +
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://unpkg.com; " +
+              "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; " +
+              "img-src 'self' data: https: blob:; " +
+              "connect-src 'self' https:; " +
+              "frame-ancestors 'none';";
+    context.Response.Headers.Append("Content-Security-Policy", csp);
+    
+    // Referrer-Policy: strict-origin-when-cross-origin
+    // What: Controls how much referrer information is sent to other websites
+    // Why: Protects user privacy by limiting what information is leaked when users navigate away
+    context.Response.Headers.Append("Referrer-Policy", "strict-origin-when-cross-origin");
+    
+    await next();
+});
+
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseSession();
@@ -136,3 +196,6 @@ app.MapControllerRoute(
     .WithStaticAssets();
 
 app.Run();
+
+// Make Program class accessible for integration testing
+public partial class Program { }

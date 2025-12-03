@@ -1,6 +1,5 @@
-﻿using Luftfartshinder.DataContext;
+using Luftfartshinder.DataContext;
 using Luftfartshinder.Models.Domain;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace Luftfartshinder.Repository
@@ -21,9 +20,9 @@ namespace Luftfartshinder.Repository
             return organization;
         }
 
-        public List<Organization> GetAll()
+        public async Task<List<Organization>> GetAll()
         {
-            return context.Organizations.ToList();
+            return await context.Organizations.ToListAsync();
         }
         public async Task<Organization?> GetById(int id)
         {

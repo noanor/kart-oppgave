@@ -1,7 +1,11 @@
 ﻿namespace Luftfartshinder.Models.ViewModel.Obstacles
 {
+    /// <summary>
+    /// ViewModel for displaying a list of obstacles with their details.
+    /// </summary>
     public class ObstacleListViewModel
     {
-        public List<EditObstacleRequest> obstacleDetailsModels { get; set; } = new List<EditObstacleRequest>();
+        /// <summary>List of obstacle details to display.</summary>
+        public List<EditObstacleRequest> ObstacleDetailsModels { get; set; } = [];
     }
 }

@@ -1,4 +1,4 @@
-﻿using Luftfartshinder.DataContext;
+using Luftfartshinder.DataContext;
 using Luftfartshinder.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,10 +15,12 @@ namespace Luftfartshinder.Repository
 
         }
 
-        public List<Report> GetUserReports(string userId)
+        public async Task<List<Report>> GetUserReports(string userId)
         {
-            var reports = context.Reports.Include(r => r.Obstacles).Where(r => r.AuthorId == userId).ToList();
-            return reports;
+            return await context.Reports
+                .Include(r => r.Obstacles)
+                .Where(r => r.AuthorId == userId)
+                .ToListAsync();
         }
     }
 }

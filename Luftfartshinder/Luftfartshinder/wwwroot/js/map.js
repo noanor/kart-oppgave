@@ -188,10 +188,23 @@ function obstacleTypeFromChoice(choice) {
 }
 
 // ===== OBSTACLE HANDLING =====
-const token = document.querySelector('#antiForgeryForm input[name="__RequestVerificationToken"]').value;
+// Get Anti-Forgery token from form
+function getAntiForgeryToken() {
+    const tokenInput = document.querySelector('#antiForgeryForm input[name="__RequestVerificationToken"]');
+    if (!tokenInput) {
+        console.error('Anti-Forgery token not found');
+        return null;
+    }
+    return tokenInput.value;
+}
 
 // Sends obstacle to server and saves in draft
 async function addObstacle(type, lat, lng) {
+    const token = getAntiForgeryToken();
+    if (!token) {
+        throw new Error('Anti-Forgery token is required');
+    }
+
     const payload = {
         type: type,
         latitude: lat,
