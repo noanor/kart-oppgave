@@ -125,6 +125,71 @@ Etter første migrasjon er følgende testbrukere opprettet:
 - **Passord:** `Passord123!`
 - **Rolle:** FlightCrew (kan rapportere nye luftfartshinder)
 
+## Testing
+
+### C# Testing (Backend)
+
+Kjør C#-testene med:
+```bash
+cd Luftfartshinder/Luftfartshinder.Tests
+dotnet test
+```
+
+### JavaScript Testing (Frontend)
+
+Prosjektet inneholder også JavaScript-tester for frontend-funksjonalitet. Disse testene bruker **Jest** som testrammeverk.
+
+#### Forutsetninger
+
+For å kjøre JavaScript-testene må du ha:
+- **Node.js** installert (versjon 18 eller nyere anbefalt)
+- **npm** (kommer med Node.js)
+
+#### Installere Node.js
+
+1. **Last ned Node.js:**
+   - Gå til [https://nodejs.org/](https://nodejs.org/)
+   - Last ned LTS-versjonen (Long Term Support)
+   - Installer med standard innstillinger
+
+2. **Verifiser installasjon:**
+   ```bash
+   node --version
+   npm --version
+   ```
+
+#### Installere avhengigheter
+
+Før første gang du kjører JavaScript-testene, må du installere avhengighetene:
+
+```bash
+# Naviger til prosjektets rotmappe (der package.json ligger)
+npm install
+```
+
+Dette installerer Jest og jest-environment-jsdom som er definert i `package.json`.
+
+#### Kjøre JavaScript-testene
+
+Etter at avhengighetene er installert, kan du kjøre testene med:
+
+```bash
+# Fra prosjektets rotmappe
+npm test
+```
+
+Dette kjører alle JavaScript-testene i `Luftfartshinder/Luftfartshinder/wwwroot/js/`-mappen:
+- `testHelperMap.test.js` - Tester kart-funksjonalitet
+- `testHelperUserAdmin.test.js` - Tester brukeradministrasjons-funksjonalitet
+
+#### Teststruktur
+
+JavaScript-testene er organisert i `wwwroot/js/`:
+- **Testfiler:** `*.test.js` - Inneholder testene
+- **Helper-filer:** `testHelper*.js` - Inneholder funksjoner som testes
+
+**Viktig:** JavaScript-testene krever Node.js og kan ikke kjøres uten det. Hvis du ikke har Node.js installert, må du installere det først (se instruksjoner over).
+
 ## Dokumentasjon
 
 - **Detaljert dokumentasjon:** Se [README.md](Luftfartshinder/Luftfartshinder/README.md) i Luftfartshinder/Luftfartshinder-mappen for systemarkitektur, drift og testing
