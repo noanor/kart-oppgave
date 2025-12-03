@@ -131,28 +131,37 @@ if (!app.Environment.IsDevelopment())
 app.Use(async (context, next) =>
 {
     // X-XSS-Protection header (legacy, but required for assignment)
+    // What: Tells old browsers to enable their built-in XSS filter
+    // Why: Provides basic protection against cross-site scripting attacks in older browsers
     context.Response.Headers.Append("X-XSS-Protection", "1; mode=block");
     
-    // X-Frame-Options: Prevents clickjacking attacks by blocking the page from being embedded in frames
-    // DENY = Never allow framing, SAMEORIGIN = Allow framing from same origin only
-    // Using DENY for maximum security (change to SAMEORIGIN if you need to embed pages)
+    // X-Content-Type-Options: nosniff
+    // What: Prevents browsers from guessing file types (MIME type sniffing)
+    // Why: Stops attackers from serving malicious scripts as text files, which browsers might execute
+    context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
+    
+    // X-Frame-Options: DENY
+    // What: Prevents this website from being loaded inside an iframe on other websites
+    // Why: Protects against clickjacking attacks where attackers embed your site in a hidden frame
+    //      and trick users into clicking on things they can't see
     context.Response.Headers.Append("X-Frame-Options", "DENY");
     
-    // Content-Security-Policy: Modern defense against XSS, data injection, and other attacks
-    // This policy restricts which resources (scripts, styles, fonts, etc.) can be loaded
+    // Content-Security-Policy
+    // What: Controls which resources (scripts, styles, images, etc.) the browser is allowed to load
+    // Why: Prevents XSS attacks by blocking unauthorized scripts and resources from loading
+    //      This is the modern replacement for X-XSS-Protection
     var csp = "default-src 'self'; " +
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://kit.fontawesome.com https://unpkg.com; " +
-              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; " +
-              "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:; " +
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://kit.fontawesome.com https://unpkg.com https://cdn.jsdelivr.net; " +
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://unpkg.com; " +
+              "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; " +
               "img-src 'self' data: https: blob:; " +
               "connect-src 'self' https:; " +
-              "frame-ancestors 'none'; " +
-              "base-uri 'self'; " +
-              "form-action 'self';";
+              "frame-ancestors 'none';";
     context.Response.Headers.Append("Content-Security-Policy", csp);
     
-    // Additional recommended security headers
-    context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
+    // Referrer-Policy: strict-origin-when-cross-origin
+    // What: Controls how much referrer information is sent to other websites
+    // Why: Protects user privacy by limiting what information is leaked when users navigate away
     context.Response.Headers.Append("Referrer-Policy", "strict-origin-when-cross-origin");
     
     await next();
