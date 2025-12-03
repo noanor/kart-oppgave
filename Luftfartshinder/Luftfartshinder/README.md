@@ -153,13 +153,71 @@ Build succeeded with 14 warning(s)
 - **Brukervennlighetstesting (Usability Testing):** 2 tester - Tester brukervennlighet
 - **Controller Testing:** 8 tester - Tester AccountController og HomeController
 
-**Kjør tester:**
+**Run tests:**
 ```bash
 cd Luftfartshinder/Luftfartshinder.Tests
 dotnet test
 ```
 
-**Note:** Det er 14 warnings knyttet til null-sjekker i testkoden. Disse påvirker ikke funksjonaliteten, men bør fikses for optimal kodekvalitet.
+**Note:** There are 14 warnings related to null checks in the test code. These do not affect functionality, but should be fixed for optimal code quality.
+
+### JavaScript Testing
+
+The project also contains JavaScript tests for frontend functionality. These tests use **Jest** as the testing framework.
+
+#### Prerequisites
+
+To run JavaScript tests, you need:
+- **Node.js** installed (version 18 or newer recommended)
+- **npm** (comes with Node.js)
+
+#### Installing Node.js
+
+1. **Download Node.js:**
+   - Go to [https://nodejs.org/](https://nodejs.org/)
+   - Download the LTS version (Long Term Support)
+   - Install with default settings
+
+2. **Verify installation:**
+   ```bash
+   node --version
+   npm --version
+   ```
+
+#### Installing Dependencies
+
+Before running JavaScript tests for the first time, you must install dependencies:
+
+```bash
+# Navigate to project root (where package.json is located)
+cd <project-root>
+
+# Install dependencies
+npm install
+```
+
+This installs Jest and jest-environment-jsdom as defined in `package.json`.
+
+#### Running JavaScript Tests
+
+After dependencies are installed, you can run the tests with:
+
+```bash
+# From project root
+npm test
+```
+
+This runs all JavaScript tests in the `wwwroot/js/` folder:
+- `testHelperMap.test.js` - Tests map functionality
+- `testHelperUserAdmin.test.js` - Tests user administration functionality
+
+#### Test Structure
+
+JavaScript tests are organized in `wwwroot/js/`:
+- **Test files:** `*.test.js` - Contains the tests
+- **Helper files:** `testHelper*.js` - Contains functions being tested
+
+**Important:** JavaScript tests require Node.js and cannot be run without it. If you don't have Node.js installed, you must install it first (see instructions above).
 
 ## Roller
 

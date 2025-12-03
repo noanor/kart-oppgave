@@ -62,8 +62,12 @@ Applikasjonen er pakket som en Docker-løsning for enkel kjøring og skalerbarhe
 
 **For lokal utvikling:**
 - .NET 9.0 SDK
-- MySQL/MariaDB (eller bruk Docker for database)
-- Visual Studio 2022 eller VS Code (anbefalt)
+- MySQL/MariaDB (or use Docker for database)
+- Visual Studio 2022 or VS Code (recommended)
+
+**For JavaScript testing:**
+- Node.js (version 18 or newer recommended)
+- npm (comes with Node.js)
 
 ### Kjøre med Docker (Anbefalt)
 
@@ -127,70 +131,62 @@ Etter første migrasjon er følgende testbrukere opprettet:
 
 ## Testing
 
-### C# Testing (Backend)
+### C# Tests
 
-Kjør C#-testene med:
+Run C# tests with:
 ```bash
 cd Luftfartshinder/Luftfartshinder.Tests
 dotnet test
 ```
 
-### JavaScript Testing (Frontend)
+### JavaScript Tests
 
-Prosjektet inneholder også JavaScript-tester for frontend-funksjonalitet. Disse testene bruker **Jest** som testrammeverk.
+The project also contains JavaScript tests for frontend functionality using **Jest**.
 
-#### Forutsetninger
+#### Prerequisites
 
-For å kjøre JavaScript-testene må du ha:
-- **Node.js** installert (versjon 18 eller nyere anbefalt)
-- **npm** (kommer med Node.js)
+To run JavaScript tests, you need:
+- **Node.js** installed (version 18 or newer recommended)
+- **npm** (comes with Node.js)
 
-#### Installere Node.js
+#### Installing Node.js
 
-1. **Last ned Node.js:**
-   - Gå til [https://nodejs.org/](https://nodejs.org/)
-   - Last ned LTS-versjonen (Long Term Support)
-   - Installer med standard innstillinger
+1. **Download Node.js:**
+   - Go to [https://nodejs.org/](https://nodejs.org/)
+   - Download the LTS version (Long Term Support)
+   - Install with default settings
 
-2. **Verifiser installasjon:**
+2. **Verify installation:**
    ```bash
    node --version
    npm --version
    ```
 
-#### Installere avhengigheter
+#### Installing Dependencies
 
-Før første gang du kjører JavaScript-testene, må du installere avhengighetene:
+Before running JavaScript tests for the first time, install dependencies:
 
 ```bash
-# Naviger til prosjektets rotmappe (der package.json ligger)
+# Navigate to project root (where package.json is located)
 npm install
 ```
 
-Dette installerer Jest og jest-environment-jsdom som er definert i `package.json`.
+#### Running JavaScript Tests
 
-#### Kjøre JavaScript-testene
-
-Etter at avhengighetene er installert, kan du kjøre testene med:
+After dependencies are installed, run the tests with:
 
 ```bash
-# Fra prosjektets rotmappe
+# From project root
 npm test
 ```
 
-Dette kjører alle JavaScript-testene i `Luftfartshinder/Luftfartshinder/wwwroot/js/`-mappen:
-- `testHelperMap.test.js` - Tester kart-funksjonalitet
-- `testHelperUserAdmin.test.js` - Tester brukeradministrasjons-funksjonalitet
+This runs all JavaScript tests in `Luftfartshinder/Luftfartshinder/wwwroot/js/`:
+- `testHelperMap.test.js` - Tests map functionality
+- `testHelperUserAdmin.test.js` - Tests user administration functionality
 
-#### Teststruktur
+**Important:** JavaScript tests require Node.js and cannot be run without it. If you don't have Node.js installed, you must install it first.
 
-JavaScript-testene er organisert i `wwwroot/js/`:
-- **Testfiler:** `*.test.js` - Inneholder testene
-- **Helper-filer:** `testHelper*.js` - Inneholder funksjoner som testes
+## Documentation
 
-**Viktig:** JavaScript-testene krever Node.js og kan ikke kjøres uten det. Hvis du ikke har Node.js installert, må du installere det først (se instruksjoner over).
-
-## Dokumentasjon
-
-- **Detaljert dokumentasjon:** Se [README.md](Luftfartshinder/Luftfartshinder/README.md) i Luftfartshinder/Luftfartshinder-mappen for systemarkitektur, drift og testing
-- **Testing:** Se [Testing-seksjonen](Luftfartshinder/Luftfartshinder/README.md#testing) i README.md for testdokumentasjon og resultater
+- **Detailed documentation:** See [README.md](Luftfartshinder/Luftfartshinder/README.md) in the Luftfartshinder/Luftfartshinder folder for system architecture, operations, and testing
+- **Testing:** See the [Testing section](Luftfartshinder/Luftfartshinder/README.md#testing) in README.md for test documentation and results
