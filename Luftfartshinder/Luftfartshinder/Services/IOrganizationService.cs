@@ -13,4 +13,3 @@ namespace Luftfartshinder.Services
         Task<Organization?> GetOrCreateOrganizationForRoleAsync(string role, string? organizationName, string? otherOrganizationName);
     }
 }
-
