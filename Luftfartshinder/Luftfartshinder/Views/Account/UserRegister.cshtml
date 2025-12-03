@@ -65,7 +65,7 @@
                             </label>
                             <div class="input-group">
                                 <input type="password" id="password" class="form-control" asp-for="Password" placeholder="Enter password" required/>
-                                <span class="input-group-text" id="togglePassword" style="cursor:pointer;">
+                                <span class="input-group-text input-group-text-cursor" id="togglePassword">
                                     <i class="bi bi-eye"></i>
                                 </span>
                             </div>
@@ -91,7 +91,7 @@
 
                             <div class="input-group">
                                 <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Re-enter password" required />
-                                <span class="input-group-text" id="toggleConfirmPassword" style="cursor:pointer;">
+                                <span class="input-group-text input-group-text-cursor" id="toggleConfirmPassword">
                                     <i class="bi bi-eye"></i>
                                 </span>
                             </div>
@@ -109,7 +109,7 @@
                                 </select>
                                 <span class="text-danger" asp-validation-for="SelectedRole"></span>
                             </div>
-                            <div class="col-md-6" id="organizationDiv" style="display:none;">
+                            <div class="col-md-6 form-display-none" id="organizationDiv">
                                 <label asp-for="OrganizationName" class="form-label">Organization <span class="text-danger">*</span></label>
                                 <select id="organization" asp-for="OrganizationName" class="form-select">
                                     <option value="">-- Select organization --</option>
@@ -121,7 +121,7 @@
                                 </select>
                                 <span class="text-danger" asp-validation-for="OrganizationName"></span>
 
-                                <input type="text" id="customOrganization" asp-for="OtherOrganizationName" class="form-control mt-2" placeholder="Enter organization name" style="display:none;">
+                                <input type="text" id="customOrganization" asp-for="OtherOrganizationName" class="form-control mt-2 form-display-none" placeholder="Enter organization name">
                                 <span class="text-danger" asp-validation-for="OtherOrganizationName"></span>
                             </div>
                         </div>

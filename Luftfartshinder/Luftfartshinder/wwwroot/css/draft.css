@@ -12,7 +12,7 @@ select option {
 }
 
 /* ===== DRAFT ACTION BUTTONS ===== */
-/* Container for Submit og Clear Draft knapper - kompakt design */
+/* Container for Submit and Clear Draft buttons - compact design */
 .draft-actions-container {
     position: sticky;
     bottom: 0;
@@ -30,7 +30,7 @@ select option {
     padding: 0 1rem;
 }
 
-/* Kompakte, mindre påtrengende knapper */
+/* Compact, less intrusive buttons */
 .draft-action-btn {
     min-width: 160px;
     min-height: 44px;
@@ -52,7 +52,7 @@ select option {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
-/* iPad-vennlig styling - fortsatt kompakt men touch-vennlig */
+/* iPad-friendly styling - still compact but touch-friendly */
 body[data-layout-type="ipad"] .draft-action-btn {
     min-width: 180px;
     min-height: 48px;
@@ -82,12 +82,12 @@ body[data-layout-type="ipad"] .draft-actions-container {
 }
 
 /* ===== FLOATING BACK BUTTON (iPad only) ===== */
-/* Skjul back button som standard */
+/* Hide back button by default */
 .draft-back-button {
     display: none;
 }
 
-/* Vis back button kun på iPad layout - moderne, subtil design */
+/* Show back button only on iPad layout - modern, subtle design */
 body[data-layout-type="ipad"] .draft-back-button {
     display: flex;
     position: fixed;

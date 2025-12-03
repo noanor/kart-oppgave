@@ -9,7 +9,7 @@
 @* Success/Error Messages *@
 @if (TempData["Success"] != null)
 {
-	<div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 9999; min-width: 400px; max-width: 600px;">
+	<div class="position-fixed top-0 start-50 translate-middle-x p-3 alert-toast-container">
 		<div id="successAlert" class="alert alert-success alert-dismissible fade show shadow-lg border-0" role="alert">
 			<div class="d-flex align-items-center">
 				<div class="flex-shrink-0">
@@ -28,7 +28,7 @@
 }
 @if (TempData["Error"] != null)
 {
-	<div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 9999; min-width: 400px; max-width: 600px;">
+	<div class="position-fixed top-0 start-50 translate-middle-x p-3 alert-toast-container">
 		<div id="errorAlert" class="alert alert-danger alert-dismissible fade show shadow-lg border-0" role="alert">
 			<div class="d-flex align-items-center">
 				<div class="flex-shrink-0">
@@ -168,7 +168,7 @@
 						<td>
 							@if (!user.IsApproved)
 							{
-								<form method="post" style="display:inline;"
+								<form method="post" class="btn-inline"
 								      asp-controller="SuperAdmin"
 								      asp-action="Approve"
 								      asp-route-id="@user.Id"
@@ -180,7 +180,7 @@
 									<input type="hidden" name="organizationFilter" value="@ViewBag.OrganizationFilter" />
 									<button class="btn btn-success btn-sm" type="submit">Approve</button>
 								</form>
-								<form method="post" style="display:inline;"
+								<form method="post" class="btn-inline"
 								      asp-controller="SuperAdmin"
 								      asp-action="Decline"
 								      asp-route-id="@user.Id"
@@ -195,7 +195,7 @@
 							}
 							else
 							{
-								<form method="post" style="display:inline;"
+								<form method="post" class="btn-inline"
 								      asp-controller="SuperAdmin"
 								      asp-action="Delete"
 								      asp-route-id="@user.Id"

@@ -1,4 +1,4 @@
-﻿@using System.Security.Claims
+@using System.Security.Claims
 
 @{
 }
@@ -37,13 +37,13 @@
 
             @if (User.IsInRole("SuperAdmin"))
             {
-                <div class="row justify-content-center align-items-center mb-5" style="min-height: 20vh;">
+                <div class="row justify-content-center align-items-center mb-5 min-height-20vh">
                     <div class="col-12 col-md-5 mb-4 mb-md-0">
                         <a asp-controller="SuperAdmin" asp-action="List" class="text-decoration-none">
                             <div class="card shadow-lg border-0 admin-card">
                                 <div class="card-body text-center p-5">
                                     <div class="mb-4">
-                                        <i class="fas fa-users-cog fa-5x" style="color: #2c5f8d;"></i>
+                                        <i class="fas fa-users-cog fa-5x icon-color-primary"></i>
                                     </div>
                                     <h3 class="card-title fw-bold text-dark mb-3">Manage Users</h3>
                                     <p class="card-text text-muted fs-5">View and manage all users</p>
@@ -57,7 +57,7 @@
                             <div class="card shadow-lg border-0 admin-card h-100">
                                 <div class="card-body text-center p-5">
                                     <div class="mb-4">
-                                        <i class="fas fa-user-plus fa-5x" style="color: #4a9b5f;"></i>
+                                        <i class="fas fa-user-plus fa-5x icon-color-success"></i>
                                     </div>
                                     <h3 class="card-title fw-bold text-dark mb-3">Create Users</h3>
                                     <p class="card-text text-muted fs-5">Add a new user to the system</p>
@@ -73,13 +73,13 @@
 
             @if (User.IsInRole("Registrar"))
             {
-                <div class="row justify-content-center align-items-center" style="min-height: 20vh;">
+                <div class="row justify-content-center align-items-center min-height-20vh">
                     <div class="col-12 col-md-5 mb-4 mb-md-0">
                         <a asp-controller="Registrar" asp-action="Overview" class="text-decoration-none d-block">
                             <div class="card shadow-lg border-0 admin-card">
                                 <div class="card-body text-center p-5">
                                     <div class="mb-4">
-                                        <i class="fa-solid fa-clipboard-list" style="color: burlywood;"></i>
+                                        <i class="fa-solid fa-clipboard-list icon-color-warning"></i>
                                     </div>
                                     <h3 class="card-title fw-bold text-dark mb-3">Manage Reports</h3>
                                     <p class="card-text text-muted fs-5">View and manage all reports</p>
@@ -93,7 +93,7 @@
                             <div class="card shadow-lg border-0 admin-card h-100">
                                 <div class="card-body text-center p-5">
                                     <div class="mb-4">
-                                        <i class="fa-solid fa-road-barrier" style="color: coral;"></i>
+                                        <i class="fa-solid fa-road-barrier icon-color-danger"></i>
                                     </div>
                                     <h3 class="card-title fw-bold text-dark mb-3">Manage Obstacles</h3>
                                     <p class="card-text text-muted fs-5">View and manage all obstacles</p>
@@ -105,13 +105,13 @@
             }
             else
             {
-                <div class="row justify-content-center align-items-center" style="min-height: 20vh;">
+                <div class="row justify-content-center align-items-center min-height-20vh">
                     <div class="col-12 col-md-5 mb-4 mb-md-0">
                         <a asp-controller="Dashboard" asp-action="FlightCrewObstacles" class="text-decoration-none d-block">
                             <div class="card shadow-lg border-0 admin-card">
                                 <div class="card-body text-center p-5">
                                     <div class="mb-4">
-                                        <i class="fa-solid fa-clipboard-list" style="color: burlywood;"></i>
+                                        <i class="fa-solid fa-clipboard-list icon-color-warning"></i>
                                     </div>
                                     <h3 class="card-title fw-bold text-dark mb-3">Manage Reports</h3>
                                     <p class="card-text text-muted fs-5">View and manage all reports</p>
@@ -125,7 +125,7 @@
                             <div class="card shadow-lg border-0 admin-card h-100">
                                 <div class="card-body text-center p-5">
                                     <div class="mb-4">
-                                    <i class="fa-solid fa-map-location-dot" style="color: darkslategray;"></i>
+                                    <i class="fa-solid fa-map-location-dot icon-color-dark"></i>
                                     </div>
                                     <h3 class="card-title fw-bold text-dark mb-3">Report Obstacles</h3>
                                     <p class="card-text text-muted fs-5">Go back to the map</p>

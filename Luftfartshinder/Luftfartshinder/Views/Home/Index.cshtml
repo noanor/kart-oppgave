@@ -24,53 +24,53 @@
 <div class="modal fade" id="tutorialModal" tabindex="-1" aria-labelledby="tutorialModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
-            <div class="modal-header text-white" style="background-color: #34656D;">
-                <h5 class="modal-title" id="tutorialModalLabel" style="font-size: 1.3rem;">
+            <div class="modal-header text-white modal-header-primary">
+                <h5 class="modal-title modal-title-lg" id="tutorialModalLabel">
                     <i class="fas fa-info-circle me-2"></i>
                     How to Report an Obstacle
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="padding: 1.5rem; font-size: 1rem; max-height: 70vh; overflow-y: auto;">
+            <div class="modal-body modal-body-scrollable">
 				<div class="mb-3">
-					<h6 class="fw-bold mb-2" style="font-size: 1.1rem;">Step 1: Navigate to Your Current Location</h6>
-					<p class="mb-2" style="font-size: 1rem;">To navigate to your current location on the map, click on the location button:</p>
+					<h6 class="fw-bold mb-2 text-size-lg">Step 1: Navigate to Your Current Location</h6>
+					<p class="mb-2 text-size-base">To navigate to your current location on the map, click on the location button:</p>
 					<div class="text-center mb-2">
-						<img src="~/images/Lokasjon.png" alt="Location button" style="max-width: 80px;" />
+						<img src="~/images/Lokasjon.png" alt="Location button" class="img-max-width-80" />
 					</div>
-					<p class="mb-0 text-muted" style="font-size: 0.9rem;"><strong>This button</strong> will center the map on your current location when clicked.</p>
+					<p class="mb-0 text-muted text-size-sm"><strong>This button</strong> will center the map on your current location when clicked.</p>
 				</div>
 
 				<div class="mb-3">
-					<h6 class="fw-bold mb-2" style="font-size: 1.1rem;">Step 2: Click on the Map</h6>
-					<p class="mb-0" style="font-size: 1rem;">Click anywhere on the map where you want to report an obstacle.</p>
+					<h6 class="fw-bold mb-2 text-size-lg">Step 2: Click on the Map</h6>
+					<p class="mb-0 text-size-base">Click anywhere on the map where you want to report an obstacle.</p>
 				</div>
 
 				<div class="mb-3">
-					<h6 class="fw-bold mb-2" style="font-size: 1.1rem;">Step 3: Select Obstacle Type</h6>
-					<p class="mb-2" style="font-size: 1rem;">A selection wheel will appear in the center of your screen with 5 options:</p>
-					<ul class="list-unstyled ms-3" style="font-size: 1rem;">
-						<li class="mb-2"><i class="fas fa-bullseye me-2" style="color: #000000;"></i><strong>Point</strong> - For point obstacles</li>
-						<li class="mb-2"><i class="fas fa-circle me-2" style="color: #000000;"></i><strong>Mast</strong> - For mast or pole structures</li>
-						<li class="mb-2"><span class="material-symbols-outlined" style="color: #000000; margin-right: 0.5rem; vertical-align: middle;">show_chart</span><strong>Line</strong> - For linear obstacles</li>
-						<li class="mb-2"><span class="material-symbols-outlined" style="color: #000000; margin-right: 0.5rem; vertical-align: middle;">diagonal_line</span><strong>Power Line</strong> - For power lines or cables</li>
-						<li class="mb-2"><i class="fas fa-square me-2" style="color: #000000;"></i><strong>Area</strong> - For area obstacles</li>
+					<h6 class="fw-bold mb-2 text-size-lg">Step 3: Select Obstacle Type</h6>
+					<p class="mb-2 text-size-base">A selection wheel will appear in the center of your screen with 5 options:</p>
+					<ul class="list-unstyled ms-3 text-size-base">
+						<li class="mb-2"><i class="fas fa-bullseye me-2 icon-black"></i><strong>Point</strong> - For point obstacles</li>
+						<li class="mb-2"><i class="fas fa-circle me-2 icon-black"></i><strong>Mast</strong> - For mast or pole structures</li>
+						<li class="mb-2"><span class="material-symbols-outlined icon-black material-icon-spaced">show_chart</span><strong>Line</strong> - For linear obstacles</li>
+						<li class="mb-2"><span class="material-symbols-outlined icon-black material-icon-spaced">diagonal_line</span><strong>Power Line</strong> - For power lines or cables</li>
+						<li class="mb-2"><i class="fas fa-square me-2 icon-black"></i><strong>Area</strong> - For area obstacles</li>
 					</ul>
 				</div>
 
 				<div class="mb-2">
-					<h6 class="fw-bold mb-2" style="font-size: 1.1rem;">Step 4: Complete the Form</h6>
-					<p class="mb-0" style="font-size: 1rem;">After selecting a type, fill in the obstacle details and submit your report.</p>
+					<h6 class="fw-bold mb-2 text-size-lg">Step 4: Complete the Form</h6>
+					<p class="mb-0 text-size-base">After selecting a type, fill in the obstacle details and submit your report.</p>
 				</div>
 			</div>
-			<div class="modal-footer" style="padding: 1rem 1.5rem;">
-				<button type="button" class="btn text-white" data-bs-dismiss="modal" style="background-color: #0d6efd; font-size: 1rem; padding: 0.6rem 1.5rem; min-height: 44px;">Skip</button>
+			<div class="modal-footer modal-footer-padded">
+				<button type="button" class="btn text-white btn-primary-skip" data-bs-dismiss="modal">Skip</button>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="toast-container position-fixed end-0 p-3" style="z-index: 3000; top: 5vh;">
+<div class="toast-container position-fixed end-0 p-3 toast-container-top">
 	<div id="toastObstacleAdded" class="toast text-white bg-success border-0" role="alert">
 		<div class="toast-body">
 			Obstacle added to draft!
@@ -78,7 +78,7 @@
 	</div>
 </div>
 
-<div class="toast-container position-fixed end-0 p-3" style="z-index: 3000; top: 5vh;">
+<div class="toast-container position-fixed end-0 p-3 toast-container-top">
 	<div id="toastDraftSubmitted" class="toast text-white bg-success border-0" role="alert">
 		<div class="toast-body">
 			Draft submitted!

@@ -3,7 +3,7 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> signInManager
 @{
-    // Henter layout-type fra ViewData, standard er 'auto' (automatisk basert på skjermstørrelse)
+    // Get layout-type from ViewData, default is 'auto' (automatically based on screen size)
     var layoutType = ViewData["LayoutType"]?.ToString()?.ToLower() ?? "auto";
 }
 <!DOCTYPE html>
@@ -25,11 +25,11 @@
         @if (signInManager.IsSignedIn(User))
         {
             <header>
-                <!-- PC-navbar: optimalisert for desktop -->
+                <!-- PC-navbar: optimized for desktop -->
                 <nav id="navbarPC" class="navbar navbar-expand-sm navbar-light bg-detail box-shadow fixed-top">
                     <div class="container-fluid">
                         <a class="navbar-brand text-white d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
-                            <img src="~/images/LogoKartverket.png" alt="Kartverket" style="height: 45px; margin-right: 12px;" />
+                            <img src="~/images/LogoKartverket.png" alt="Kartverket" class="navbar-logo" />
                             Kartverket
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -113,7 +113,7 @@
                 </div>
             </nav>
 
-                <!-- iPad-navbar: optimalisert for touch-enheter -->
+                <!-- iPad-navbar: optimized for touch devices -->
                 <nav id="navbarIPAD" class="navbar fixed-top">
                     <div class="container-fluid d-flex justify-content-between align-items-center">
                         <button class="navbar-toggler bg-body me-2 ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -175,7 +175,7 @@
             </header>
         }
 
-        <!-- Global tilbake-knapp for iPad-sider (skjules på Draft-siden som har egen knapp) -->
+        <!-- Global back button for iPad pages (hidden on Draft page which has its own button) -->
         <button class="ipad-back-button" 
                 onclick="window.history.back(); return false;"
                 aria-label="Tilbake">
@@ -199,15 +199,15 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="logoutModalLabel">Bekreft utlogging</h5>
+                        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Er du sikker på at du vil logge ut?
+                        Are you sure you want to log out?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Avbryt</button>
-                        <button id="confirmLogout" class="btn btn-danger">Logg ut</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button id="confirmLogout" class="btn btn-danger">Log out</button>
                     </div>
                 </div>
             </div>
