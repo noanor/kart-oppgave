@@ -79,18 +79,7 @@
                             @if (User.IsInRole("FlightCrew"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-white"
-                                       href="#"
-                                       id="tutorialNavButton"
-                                       style="cursor: pointer;">Tutorial</a>
-                                </li>
-                            }
-                            
-                            @if (User.IsInRole("SuperAdmin"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-white"
-                                       href="/Dashboard/Dashboard#">Tutorial</a>
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Tutorial">Tutorial</a>
                                 </li>
                             }
 
