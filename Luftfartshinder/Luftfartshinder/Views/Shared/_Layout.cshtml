@@ -76,10 +76,23 @@
                             </ul>
 
                         <ul class="navbar-nav flex-grow-1 justify-content-end align-items-center">
-                            <li class="nav-item">
-                                <a class="nav-link text-white"
-                                   asp-area="" asp-controller="Home" asp-action="Tutorial">Tutorial</a>
-                            </li>
+                            @if (User.IsInRole("FlightCrew"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white"
+                                       href="#"
+                                       id="tutorialNavButton"
+                                       style="cursor: pointer;">Tutorial</a>
+                                </li>
+                            }
+                            
+                            @if (User.IsInRole("SuperAdmin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white"
+                                       href="/Dashboard/Dashboard#">Tutorial</a>
+                                </li>
+                            }
 
                             <li class="nav-item">
                                 <div class="dropdown me-4">
@@ -135,9 +148,12 @@
                                         asp-area="" asp-controller="Obstacles" asp-action="Draft">Draft</a>
                                     </li>
 
-                                    <li class="nav-item mb-3">
-                                        <a class="nav-link btn btn-dark active text-light" asp-area="" asp-controller="Home" asp-action="Tutorial" role="button">Tutorial</a>
-                                    </li>
+                                    @if (User.IsInRole("FlightCrew"))
+                                    {
+                                        <li class="nav-item mb-3">
+                                            <a class="nav-link btn btn-dark active text-light" asp-area="" asp-controller="Home" asp-action="Tutorial" role="button">Tutorial</a>
+                                        </li>
+                                    }
 
                                     <li class="nav-item mb-3">
                                         <a class="nav-link btn btn-dark active text-light" aria-current="page" role="button"
