@@ -133,9 +133,26 @@ app.Use(async (context, next) =>
     // X-XSS-Protection header (legacy, but required for assignment)
     context.Response.Headers.Append("X-XSS-Protection", "1; mode=block");
     
+    // X-Frame-Options: Prevents clickjacking attacks by blocking the page from being embedded in frames
+    // DENY = Never allow framing, SAMEORIGIN = Allow framing from same origin only
+    // Using DENY for maximum security (change to SAMEORIGIN if you need to embed pages)
+    context.Response.Headers.Append("X-Frame-Options", "DENY");
+    
+    // Content-Security-Policy: Modern defense against XSS, data injection, and other attacks
+    // This policy restricts which resources (scripts, styles, fonts, etc.) can be loaded
+    var csp = "default-src 'self'; " +
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://kit.fontawesome.com https://unpkg.com; " +
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; " +
+              "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:; " +
+              "img-src 'self' data: https: blob:; " +
+              "connect-src 'self' https:; " +
+              "frame-ancestors 'none'; " +
+              "base-uri 'self'; " +
+              "form-action 'self';";
+    context.Response.Headers.Append("Content-Security-Policy", csp);
+    
     // Additional recommended security headers
     context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
-    context.Response.Headers.Append("X-Frame-Options", "DENY");
     context.Response.Headers.Append("Referrer-Policy", "strict-origin-when-cross-origin");
     
     await next();
