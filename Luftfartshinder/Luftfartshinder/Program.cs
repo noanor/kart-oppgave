@@ -127,6 +127,20 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// Add Security Headers Middleware
+app.Use(async (context, next) =>
+{
+    // X-XSS-Protection header (legacy, but required for assignment)
+    context.Response.Headers.Append("X-XSS-Protection", "1; mode=block");
+    
+    // Additional recommended security headers
+    context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
+    context.Response.Headers.Append("X-Frame-Options", "DENY");
+    context.Response.Headers.Append("Referrer-Policy", "strict-origin-when-cross-origin");
+    
+    await next();
+});
+
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseSession();
