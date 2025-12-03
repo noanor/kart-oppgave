@@ -53,60 +53,96 @@ Applikasjonen er pakket som en Docker-løsning for enkel kjøring og skalerbarhe
 
 ## Kjøringsinstruksjoner
 
-### Forutsetninger
+### Forutsetninger for Docker-kjøring
 
-**For Docker-kjøring:**
-- Docker Desktop installert og kjørende
-- Git (for å klone repository)
-- Ingen annen programvare nødvendig
+Før du kan kjøre applikasjonen, må du ha installert:
 
-**For lokal utvikling:**
-- .NET 9.0 SDK
-- MySQL/MariaDB (or use Docker for database)
-- Visual Studio 2022 or VS Code (recommended)
+1. **Docker Desktop**
+   - Last ned fra: https://www.docker.com/products/docker-desktop/
+   - Installer og start Docker Desktop
+   - Verifiser at Docker kjører (ikonet skal være synlig i system tray)
+   - Test installasjon: Åpne terminal og kjør `docker --version`
 
-**For JavaScript testing:**
-- Node.js (version 18 or newer recommended)
-- npm (comes with Node.js)
+2. **Git**
+   - Windows: Last ned fra https://git-scm.com/download/win
+   - Mac: Installer via Homebrew: `brew install git`
+   - Linux: `sudo apt-get install git` (Ubuntu/Debian) eller `sudo yum install git` (RedHat/CentOS)
+   - Verifiser installasjon: Åpne terminal og kjør `git --version`
+
+**Ingen annen programvare er nødvendig** - Docker håndterer alt!
+
+**Feilsøking:**
+- Hvis `docker-compose` ikke fungerer, prøv `docker compose` (uten bindestrek) - nyere versjoner av Docker bruker dette
+- Hvis Docker Desktop ikke starter, sjekk at virtualisering er aktivert i BIOS
 
 ### Kjøre med Docker (Anbefalt)
+
+Følg disse stegene i terminalen (Command Prompt på Windows, Terminal på Mac/Linux):
 
 1. **Klon prosjektet fra GitHub:**
    ```bash
    git clone https://github.com/noanor/kart-oppgave.git
-   cd kart-oppgave
    ```
 
-2. **Naviger til prosjektmappen:**
+2. **Naviger inn i prosjektmappen:**
    ```bash
-   cd Luftfartshinder
+   cd kart-oppgave/Luftfartshinder
    ```
 
-3. **Start applikasjonen:**
+3. **Start applikasjonen med Docker:**
    ```bash
    docker-compose up
    ```
+   
+   **Første gang kan ta 2-5 minutter** mens Docker:
+   - Laster ned nødvendige images
+   - Bygger applikasjonen
+   - Setter opp databasen
+   - Kjører migrasjoner
 
-4. **Vent til applikasjonen starter** (kan ta 1-2 minutter første gang mens Docker bygger image og setter opp databasen)
+4. **Vent til du ser meldinger som:**
+   ```
+   luftfartshinder  | Now listening on: http://[::]:8080
+   ```
+   
+   Dette betyr at applikasjonen er klar!
 
-5. **Åpne nettleser:**
-   - Gå til `http://localhost:8080`
+5. **Åpne nettleser og gå til:**
+   - `http://localhost:8080`
 
 **Stoppe applikasjonen:**
-```bash
-docker-compose down
-```
+- Trykk `Ctrl+C` i terminalen, eller
+- I en ny terminal, naviger til `kart-oppgave/Luftfartshinder` og kjør:
+  ```bash
+  docker-compose down
+  ```
 
-### Kjøre lokalt (dotnet run)
+**Tips:**
+- **Første gang tar lengre tid** - Docker må laste ned images og bygge applikasjonen
+- Hvis port 8080 allerede er i bruk, kan du endre porten i `docker-compose.yml`
+- For å se logger: `docker-compose up` viser logger i terminalen
+- For å kjøre i bakgrunnen: `docker-compose up -d`
+- For å stoppe og fjerne alt (inkludert data): `docker-compose down -v`
+- Hvis noe går galt, prøv: `docker-compose down` og deretter `docker-compose up --build`
+
+### Kjøre lokalt (for utviklere)
+
+**Kun for utviklere som vil kjøre applikasjonen uten Docker.**
+
+**Forutsetninger:**
+- .NET 9.0 SDK installert
+- MySQL/MariaDB installert lokalt, eller Docker for database
+
+**Instruksjoner:**
 
 1. **Naviger til prosjektmappen:**
    ```bash
-   cd Luftfartshinder/Luftfartshinder
+   cd kart-oppgave/Luftfartshinder/Luftfartshinder
    ```
 
 2. **Sørg for at database kjører:**
    - Enten start MySQL/MariaDB lokalt
-   - Eller kjør kun databasen med Docker: `docker-compose up db` (fra Luftfartshinder-mappen)
+   - Eller kjør kun databasen med Docker: `docker-compose up db` (fra `kart-oppgave/Luftfartshinder` mappen)
 
 3. **Kjør applikasjonen:**
    ```bash
