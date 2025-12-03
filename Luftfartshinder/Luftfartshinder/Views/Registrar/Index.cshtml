@@ -42,11 +42,10 @@
                         <td>@Model[i].ReportDate</td>
                         <td>@Model[i].Obstacles.Count</td>
                         <td>
-                            <a class="btn btn-primary" role="button"
+                            <a class="btn btn-primary btn-link-style" role="button"
                                asp-action="Details"
                                asp-controller="Registrar"
-                               asp-route-id="@Model[i].Id"
-                               style="vertical-align: middle; text-decoration: none;">
+                               asp-route-id="@Model[i].Id">
                                 View
                             </a>
                         </td>

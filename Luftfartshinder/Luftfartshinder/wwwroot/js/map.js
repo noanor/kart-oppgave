@@ -1,11 +1,11 @@
-﻿// ===== KART INITIALISERING =====
+﻿// ===== MAP INITIALIZATION =====
 const map = L.map('map').setView([58.1630, 8.003], 13);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
-// Geolokasjonskontroll for å sentrere kartet på brukerens posisjon
+// Geolocation control to center map on user's position
 const geoletControl = L.geolet({
     position: 'bottomleft',
     className: 'geolet-btn',
@@ -25,12 +25,12 @@ const geoletControl = L.geolet({
 
 L.DomUtil.addClass(geoletControl.getContainer(), 'geolet-container');
 
-// ===== DATA LAGRING =====
-// Map for å lagre alle obstacle-markører, nøkkel er draft-index
+// ===== DATA STORAGE =====
+// Map to store all obstacle markers, key is draft-index
 const obstacleMarkers = new Map();
 
-// ===== LASTE EKSISTERENDE DRAFT OBSTACLES =====
-// Henter alle draft obstacles fra serveren og viser dem på kartet ved oppstart
+// ===== LOAD EXISTING DRAFT OBSTACLES =====
+// Fetch all draft obstacles from server and display them on map at startup
 async function loadDraftObstacles() {
     try {
         const res = await fetch('/obstacles/draft-json');
@@ -89,7 +89,7 @@ let isOpen = false;
 let justOpened = false;
 let selectionMade = false;
 
-// Åpner radial menyen på gitt posisjon
+// Opens radial menu at given position
 function openWheel(x, y) {
     wheel.style.setProperty('--x', `${x}px`);
     wheel.style.setProperty('--y', `${y}px`);
@@ -101,7 +101,7 @@ function openWheel(x, y) {
     setTimeout(() => { justOpened = false; }, 0);
 }
 
-// Lukker radial menyen og fjerner midlertidig markør hvis ingen valg ble gjort
+// Closes radial menu and removes temporary marker if no selection was made
 function closeWheel() {
     wheel.classList.remove('on');
     setTimeout(() => wheel.classList.add('hidden'), 300);
@@ -120,14 +120,14 @@ function closeWheel() {
     isOpen = false;
 }
 
-// Hover-effekt på segmenter i radial menyen
+// Hover effect on segments in radial menu
 arcs.forEach((arc, i) => {
     arc.addEventListener('mouseenter', () => { if (isOpen) wheel.setAttribute('data-chosen', i + 1); });
     arc.addEventListener('mouseleave', () => { if (isOpen) wheel.setAttribute('data-chosen', 0); });
 });
 
-// ===== KART KLIKK-HÅNDTERING =====
-// Sporer panning for å unngå uønskede klikk etter at kartet er flyttet
+// ===== MAP CLICK HANDLING =====
+// Track panning to avoid unwanted clicks after map has been moved
 let isPanning = false;
 let justEndedPan = false;
 
@@ -142,7 +142,7 @@ map.on('moveend', () => {
 let lastClick = { lat: 0, lng: 0 };
 let tempMarker = null;
 
-// Setter koordinater og oppretter draggable markør
+// Sets coordinates and creates draggable marker
 function setLL(lat, lng) {
     const latInput = document.getElementById('latitude');
     const lngInput = document.getElementById('longitude');
@@ -165,7 +165,7 @@ function setLL(lat, lng) {
     lastClick = { lat, lng };
 }
 
-// Ved klikk på kartet: sett koordinater og åpne radial meny
+// On map click: set coordinates and open radial menu
 map.on('click', async (e) => {
     if (isPanning || justEndedPan || isOpen) return;
 
@@ -187,10 +187,10 @@ function obstacleTypeFromChoice(choice) {
     }
 }
 
-// ===== OBSTACLE HÅNDTERING =====
+// ===== OBSTACLE HANDLING =====
 const token = document.querySelector('#antiForgeryForm input[name="__RequestVerificationToken"]').value;
 
-// Sender obstacle til serveren og lagrer i draft
+// Sends obstacle to server and saves in draft
 async function addObstacle(type, lat, lng) {
     const payload = {
         type: type,
@@ -223,8 +223,8 @@ async function addObstacle(type, lat, lng) {
 const toastEl = document.getElementById('toastObstacleAdded');
 const toast = new bootstrap.Toast(toastEl);
 
-// ===== RADIAL MENY KLIKK-HÅNDTERING =====
-// Ved klikk i radial meny: velg type og legg til obstacle
+// ===== RADIAL MENU CLICK HANDLING =====
+// On click in radial menu: select type and add obstacle
 wheel.addEventListener('click', async (e) => {
     const arc = e.target.closest('.arc');
     if (!arc) return;

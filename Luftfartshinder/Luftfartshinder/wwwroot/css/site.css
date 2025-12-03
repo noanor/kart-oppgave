@@ -9,7 +9,7 @@ html {
 }
 
 /* ===== NAVBAR STYLING ===== */
-/* PC-navbar: vises på skjermer større enn 1024px (med mindre layout-type overstyrer) */
+/* PC-navbar: displayed on screens larger than 1024px (unless layout-type overrides) */
 @media (min-width: 1025px) {
     #navbarIPAD {
         display: none;
@@ -20,7 +20,7 @@ html {
     }
 }
 
-/* iPad-navbar: vises på skjermer mindre enn eller lik 1024px (med mindre layout-type overstyrer) */
+/* iPad-navbar: displayed on screens smaller than or equal to 1024px (unless layout-type overrides) */
 @media (max-width: 1024px) {
     #navbarIPAD {
         display: block;
@@ -37,13 +37,13 @@ html {
 }
 
 /* ===== LAYOUT TYPE STYLING ===== */
-/* PC-vennlig layout: optimalisert for desktop */
+/* PC-friendly layout: optimized for desktop */
 body[data-layout-type="pc"] {
     --touch-target-size: auto;
     --font-size-base: 1rem;
 }
 
-/* iPad-vennlig layout: optimalisert for touch */
+/* iPad-friendly layout: optimized for touch */
 body[data-layout-type="ipad"] {
     --touch-target-size: 44px; /* Minimum touch target size for iOS/Android */
     --font-size-base: 1.2rem;
@@ -54,7 +54,7 @@ body[data-layout-type="ipad"] .btn {
     min-height: var(--touch-target-size);
     padding: 0.75rem 1.5rem;
     font-size: var(--font-size-base);
-    touch-action: manipulation; /* Forbedrer touch-respons */
+    touch-action: manipulation; /* Improves touch response */
 }
 
 /* Touch-vennlige navigasjonslenker for iPad-layout */
@@ -80,7 +80,7 @@ body[data-layout-type="ipad"] .dropdown-item {
     font-size: var(--font-size-base);
 }
 
-/* Forbedret spacing for iPad-layout */
+/* Improved spacing for iPad-layout */
 body[data-layout-type="ipad"] .card {
     margin-bottom: 1.5rem;
 }
@@ -124,12 +124,12 @@ html {
 }
 
 /* ===== GLOBAL IPAD BACK BUTTON ===== */
-/* Skjul tilbake-knapp som standard */
+/* Hide back button by default */
 .ipad-back-button {
     display: none;
 }
 
-/* Vis tilbake-knapp kun på iPad layout, men ikke på Draft-siden */
+/* Show back button only on iPad layout, but not on Draft page */
 body[data-layout-type="ipad"] .ipad-back-button {
     display: flex;
     position: fixed;
@@ -165,8 +165,189 @@ body[data-layout-type="ipad"] .ipad-back-button:active {
     background-color: rgba(248, 249, 250, 0.95);
 }
 
-/* Skjul global tilbake-knapp på Draft-siden (som har egen knapp) og Home-siden */
+/* Hide global back button on Draft page (which has its own button) and Home page */
 body.page-draft[data-layout-type="ipad"] .ipad-back-button,
 body.page-home[data-layout-type="ipad"] .ipad-back-button {
     display: none !important;
+}
+
+/* ===== STANDARDISERTE CSS-KLASSER ===== */
+/* Navbar logo styling */
+.navbar-logo {
+    height: 45px;
+    margin-right: 12px;
+}
+
+/* Toast container positioning */
+.toast-container-top {
+    z-index: 3000;
+    top: 5vh;
+}
+
+/* Modal header styling */
+.modal-header-primary {
+    background-color: #34656D;
+}
+
+.modal-title-lg {
+    font-size: 1.3rem;
+}
+
+.modal-body-scrollable {
+    padding: 1.5rem;
+    font-size: 1rem;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* Text sizing utilities */
+.text-size-base {
+    font-size: 1rem;
+}
+
+.text-size-lg {
+    font-size: 1.1rem;
+}
+
+.text-size-sm {
+    font-size: 0.9rem;
+}
+
+/* Image sizing */
+.img-max-width-80 {
+    max-width: 80px;
+}
+
+.img-max-width-100 {
+    max-width: 100px;
+}
+
+/* Icon colors */
+.icon-black {
+    color: #000000;
+}
+
+.icon-color-primary {
+    color: #2c5f8d;
+}
+
+.icon-color-success {
+    color: #4a9b5f;
+}
+
+.icon-color-warning {
+    color: burlywood;
+}
+
+.icon-color-danger {
+    color: coral;
+}
+
+.icon-color-dark {
+    color: darkslategray;
+}
+
+.icon-color-info {
+    color: #0d6efd;
+}
+
+/* Material icon spacing */
+.material-icon-spaced {
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+/* Button utilities */
+.btn-inline {
+    display: inline;
+}
+
+.btn-link-style {
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+/* Form utilities */
+.form-display-none {
+    display: none;
+}
+
+.input-group-text-cursor {
+    cursor: pointer;
+}
+
+/* Layout utilities */
+.min-height-20vh {
+    min-height: 20vh;
+}
+
+.min-height-30vh {
+    min-height: 30vh;
+}
+
+.height-30vh {
+    height: 30vh;
+}
+
+.height-45vh {
+    height: 45vh;
+}
+
+.height-70vh {
+    height: 70vh;
+}
+
+.width-60 {
+    width: 60%;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+/* Overflow utilities */
+.overflow-auto {
+    overflow: auto;
+}
+
+/* Z-index utilities */
+.z-index-9999 {
+    z-index: 9999;
+}
+
+.z-index-3000 {
+    z-index: 3000;
+}
+
+/* Position utilities for alerts/toasts */
+.alert-toast-container {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    min-width: 400px;
+    max-width: 600px;
+}
+
+/* Modal footer padding */
+.modal-footer-padded {
+    padding: 1rem 1.5rem;
+}
+
+/* Button with specific styling */
+.btn-primary-skip {
+    background-color: #0d6efd;
+    font-size: 1rem;
+    padding: 0.6rem 1.5rem;
+    min-height: 44px;
+}
+
+/* Icon sizing */
+.icon-size-4rem {
+    font-size: 4rem;
+}
+
+.icon-size-1-5rem {
+    font-size: 1.5rem;
 }

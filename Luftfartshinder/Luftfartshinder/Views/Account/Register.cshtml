@@ -72,7 +72,7 @@
                 <label asp-for="Password" class="form-label">Password <span class="text-danger">*</span></label>
                 <div class="input-group">
                     <input type="password" id="password" class="form-control" asp-for="Password"/>
-                    <span class="input-group-text" id="togglePassword" style="cursor:pointer;">
+                    <span class="input-group-text input-group-text-cursor" id="togglePassword">
                         <i class="bi bi-eye"></i>
                     </span>
                 </div>
@@ -103,7 +103,7 @@
                     <span class="text-danger" asp-validation-for="SelectedRole"></span>
                 </div>
 
-                <div class="col-md-6" id="organizationDiv" style="display:none;">
+                <div class="col-md-6 form-display-none" id="organizationDiv">
                     <label asp-for="OrganizationName" class="form-label">
                         Organization <span class="text-danger">*</span>
                     </label>
@@ -121,9 +121,8 @@
                     <input asp-for="OtherOrganizationName"
                            type="text"
                            id="customOrganization"
-                           class="form-control mt-2"
-                           placeholder="Enter organization name"
-                           style="display:none;" />
+                           class="form-control mt-2 form-display-none"
+                           placeholder="Enter organization name" />
                     <span class="text-danger" asp-validation-for="OtherOrganizationName"></span>
                     
                 </div>
