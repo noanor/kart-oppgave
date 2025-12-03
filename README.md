@@ -51,7 +51,81 @@ Applikasjonen er pakket som en Docker-løsning for enkel kjøring og skalerbarhe
 - Databasen kjører i en MariaDB container
 - Komponentene kommuniserer via connection strings konfigurert i `appsettings.json`
 
+## Kjøringsinstruksjoner
+
+### Forutsetninger
+
+**For Docker-kjøring:**
+- Docker Desktop installert og kjørende
+- Git (for å klone repository)
+- Ingen annen programvare nødvendig
+
+**For lokal utvikling:**
+- .NET 9.0 SDK
+- MySQL/MariaDB (eller bruk Docker for database)
+- Visual Studio 2022 eller VS Code (anbefalt)
+
+### Kjøre med Docker (Anbefalt)
+
+1. **Naviger til prosjektmappen:**
+   ```bash
+   cd Luftfartshinder
+   ```
+
+2. **Start applikasjonen:**
+   ```bash
+   docker-compose up
+   ```
+
+3. **Vent til applikasjonen starter** (kan ta 1-2 minutter første gang mens Docker bygger image og setter opp databasen)
+
+4. **Åpne nettleser:**
+   - Gå til `http://localhost:8080`
+
+**Stoppe applikasjonen:**
+```bash
+docker-compose down
+```
+
+### Kjøre lokalt (dotnet run)
+
+1. **Naviger til prosjektmappen:**
+   ```bash
+   cd Luftfartshinder/Luftfartshinder
+   ```
+
+2. **Sørg for at database kjører:**
+   - Enten start MySQL/MariaDB lokalt
+   - Eller kjør kun databasen med Docker: `docker-compose up db` (fra Luftfartshinder-mappen)
+
+3. **Kjør applikasjonen:**
+   ```bash
+   dotnet run
+   ```
+
+4. **Åpne nettleser:**
+   - Gå til `https://localhost:7258` eller `http://localhost:5062` (avhengig av konfigurasjon)
+
+### Testbrukere
+
+Etter første migrasjon er følgende testbrukere opprettet:
+
+**SuperAdmin:**
+- **Brukernavn:** `superadmin@kartverket.no`
+- **Passord:** `Superadmin123!`
+- **Rolle:** SuperAdmin (har tilgang til alle funksjoner)
+
+**Registrar:**
+- **Brukernavn:** `registrar`
+- **Passord:** `Passord123!`
+- **Rolle:** Registrar (kan godkjenne/avvise rapporterte hindre)
+
+**Pilot (FlightCrew):**
+- **Brukernavn:** `pilot`
+- **Passord:** `Passord123!`
+- **Rolle:** FlightCrew (kan rapportere nye luftfartshinder)
+
 ## Dokumentasjon
 
-- **Kjøreinstruksjoner:** Se [README.md](Luftfartshinder/README.md) i Luftfartshinder-mappen
-- **Testing:** Se [TESTING.md](Luftfartshinder/TESTING.md) for testdokumentasjon og resultater
+- **Detaljert dokumentasjon:** Se [README.md](Luftfartshinder/Luftfartshinder/README.md) i Luftfartshinder/Luftfartshinder-mappen for systemarkitektur, drift og testing
+- **Testing:** Se [Testing-seksjonen](Luftfartshinder/Luftfartshinder/README.md#testing) i README.md for testdokumentasjon og resultater
