@@ -71,19 +71,25 @@ Applikasjonen er pakket som en Docker-løsning for enkel kjøring og skalerbarhe
 
 ### Kjøre med Docker (Anbefalt)
 
-1. **Naviger til prosjektmappen:**
+1. **Klon prosjektet fra GitHub:**
+   ```bash
+   git clone https://github.com/noanor/kart-oppgave.git
+   cd kart-oppgave
+   ```
+
+2. **Naviger til prosjektmappen:**
    ```bash
    cd Luftfartshinder
    ```
 
-2. **Start applikasjonen:**
+3. **Start applikasjonen:**
    ```bash
    docker-compose up
    ```
 
-3. **Vent til applikasjonen starter** (kan ta 1-2 minutter første gang mens Docker bygger image og setter opp databasen)
+4. **Vent til applikasjonen starter** (kan ta 1-2 minutter første gang mens Docker bygger image og setter opp databasen)
 
-4. **Åpne nettleser:**
+5. **Åpne nettleser:**
    - Gå til `http://localhost:8080`
 
 **Stoppe applikasjonen:**
