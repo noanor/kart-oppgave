@@ -102,9 +102,7 @@ C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\dashb
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\draft.js
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\dualNavbar.js
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\geolet.js
-C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\list.js
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\login.js
-C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\map.js
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\register.js
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\site.js
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
@@ -166,3 +164,5 @@ C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jque
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\dist\jquery.slim.min.js
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\dist\jquery.slim.min.map
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\lib\jquery\LICENSE.txt
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\list.js
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\wwwroot\js\map.js
