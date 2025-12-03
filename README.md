@@ -53,165 +53,103 @@ Applikasjonen er pakket som en Docker-løsning for enkel kjøring og skalerbarhe
 
 ## Kjøringsinstruksjoner
 
-### Forutsetninger for Docker-kjøring
+### Forutsetninger
 
-Før du kan kjøre applikasjonen, må du ha installert:
+Du trenger bare:
+- **Docker Desktop** installert og kjørende
+- **Git** installert
+- **Terminal** (Command Prompt på Windows, Terminal på Mac/Linux)
 
-1. **Docker Desktop**
-   - Last ned fra: https://www.docker.com/products/docker-desktop/
-   - Installer og start Docker Desktop
-   - Verifiser at Docker kjører (ikonet skal være synlig i system tray)
-   - Test installasjon: Åpne terminal og kjør `docker --version`
+**Installer Docker Desktop:**
+- Last ned fra: https://www.docker.com/products/docker-desktop/
+- Installer og start Docker Desktop
+- Test: Åpne terminal og kjør `docker --version`
 
-2. **Git**
-   - Windows: Last ned fra https://git-scm.com/download/win
-   - Mac: Installer via Homebrew: `brew install git`
-   - Linux: `sudo apt-get install git` (Ubuntu/Debian) eller `sudo yum install git` (RedHat/CentOS)
-   - Verifiser installasjon: Åpne terminal og kjør `git --version`
+**Installer Git:**
+- Windows: https://git-scm.com/download/win
+- Mac/Linux: Følg instruksjoner for ditt operativsystem
+- Test: Åpne terminal og kjør `git --version`
 
-**Ingen annen programvare er nødvendig** - Docker håndterer alt!
+---
 
-**Feilsøking:**
-- Hvis `docker-compose` ikke fungerer, prøv `docker compose` (uten bindestrek) - nyere versjoner av Docker bruker dette
-- Hvis Docker Desktop ikke starter, sjekk at virtualisering er aktivert i BIOS
+### Kjøre applikasjonen (3 enkle steg)
 
-### Kjøre med Docker (Anbefalt)
+**Steg 1: Klon prosjektet**
+```bash
+git clone https://github.com/noanor/kart-oppgave.git
+```
 
-Følg disse stegene i terminalen (Command Prompt på Windows, Terminal på Mac/Linux):
+**Steg 2: Gå inn i prosjektmappen**
+```bash
+cd kart-oppgave/Luftfartshinder
+```
 
-**Hvis du ikke har prosjektet ennå:**
+**Steg 3: Start applikasjonen**
+```bash
+docker-compose up
+```
 
-1. **Klon prosjektet fra GitHub:**
-   ```bash
-   git clone https://github.com/noanor/kart-oppgave.git
-   ```
-   
-   Dette lager en mappe kalt `kart-oppgave` i den mappen du er i nå.
+**Vent 2-5 minutter** (første gang) mens Docker setter opp alt.
 
-**Hvis du allerede har prosjektet klonet:**
+**Når du ser:**
+```
+luftfartshinder  | Now listening on: http://[::]:8080
+```
 
-1. **Finn hvor prosjektet er:**
-   - Søk etter `kart-oppgave` mappen på datamaskinen din
-   - Eller naviger til mappen der du klonet prosjektet tidligere
+**Åpne nettleser:** `http://localhost:8080`
 
-2. **Naviger til prosjektmappen:**
-   
-   Først, sjekk hvor du er:
-   ```bash
-   pwd
-   ```
-   (På Windows PowerShell: `Get-Location` eller bare se på prompten)
-   
-   Deretter naviger til prosjektmappen. Du må være i samme mappe som `kart-oppgave` mappen:
-   ```bash
-   cd kart-oppgave
-   cd Luftfartshinder
-   ```
-   
-   **Eller i ett steg:**
-   ```bash
-   cd kart-oppgave/Luftfartshinder
-   ```
-   
-   **Eksempel:** Hvis du klonet i `C:\Users\Madalitso\Documents`:
-   ```bash
-   cd Documents
-   cd kart-oppgave
-   cd Luftfartshinder
-   ```
-   
-   **Verifiser at du er i riktig mappe:** Du skal se `docker-compose.yml` filen hvis du kjører `ls` (eller `dir` på Windows).
+---
 
-3. **Start applikasjonen med Docker:**
-   ```bash
-   docker-compose up
-   ```
-   
-   **Første gang kan ta 2-5 minutter** mens Docker:
-   - Laster ned nødvendige images
-   - Bygger applikasjonen
-   - Setter opp databasen
-   - Kjører migrasjoner
+### Stoppe applikasjonen
 
-4. **Vent til du ser meldinger som:**
-   ```
-   luftfartshinder  | Now listening on: http://[::]:8080
-   ```
-   
-   Dette betyr at applikasjonen er klar!
+Trykk `Ctrl+C` i terminalen, eller kjør:
+```bash
+docker-compose down
+```
 
-5. **Åpne nettleser og gå til:**
-   - `http://localhost:8080`
+---
 
-**Stoppe applikasjonen:**
-- Trykk `Ctrl+C` i terminalen, eller
-- I en ny terminal, naviger til `kart-oppgave/Luftfartshinder` og kjør:
+### Feilsøking
+
+**"Cannot find path" feil:**
+- Sjekk at du er i riktig mappe: Kjør `dir` (Windows) eller `ls` (Mac/Linux)
+- Du skal se `docker-compose.yml` filen
+- Hvis ikke, naviger til: `cd kart-oppgave/Luftfartshinder`
+
+**"docker-compose: command not found":**
+- Prøv: `docker compose` (uten bindestrek)
+
+**Port 8080 allerede i bruk:**
+- Stopp andre applikasjoner som bruker port 8080
+- Eller endre port i `docker-compose.yml`
+
+**Ser ikke de nyeste endringene:**
+- Docker cacher ofte gamle versjoner. For å få de nyeste endringene:
+  1. Stopp applikasjonen: `docker-compose down`
+  2. Bygg på nytt uten cache: `docker-compose build --no-cache`
+  3. Start på nytt: `docker-compose up`
+  
+  **Eller i ett steg:**
   ```bash
   docker-compose down
+  docker-compose up --build --force-recreate
   ```
-
-**Tips:**
-- **Første gang tar lengre tid** - Docker må laste ned images og bygge applikasjonen
-- Hvis port 8080 allerede er i bruk, kan du endre porten i `docker-compose.yml`
-- For å se logger: `docker-compose up` viser logger i terminalen
-- For å kjøre i bakgrunnen: `docker-compose up -d`
-- For å stoppe og fjerne alt (inkludert data): `docker-compose down -v`
-- Hvis noe går galt, prøv: `docker-compose down` og deretter `docker-compose up --build`
-
-**Feilsøking:**
-- **"Cannot find path" feil:** 
-  - Sjekk at du er i riktig mappe. Kjør `pwd` (eller `Get-Location` på Windows) for å se hvor du er
-  - Sjekk at `kart-oppgave` mappen eksisterer: Kjør `ls` (eller `dir` på Windows) for å se hvilke mapper som finnes
-  - Hvis `kart-oppgave` ikke finnes, må du først klone prosjektet med `git clone`
-  - Hvis du allerede har klonet prosjektet et annet sted, naviger dit først
-- **"docker-compose: command not found":** Prøv `docker compose` (uten bindestrek) - nyere versjoner av Docker bruker dette
-- **Port allerede i bruk:** Endre port 8080 til noe annet i `docker-compose.yml`, eller stopp den andre applikasjonen som bruker porten
-
-### Kjøre lokalt (for utviklere)
-
-**Kun for utviklere som vil kjøre applikasjonen uten Docker.**
-
-**Forutsetninger:**
-- .NET 9.0 SDK installert
-- MySQL/MariaDB installert lokalt, eller Docker for database
-
-**Instruksjoner:**
-
-1. **Naviger til prosjektmappen:**
-   ```bash
-   cd kart-oppgave/Luftfartshinder/Luftfartshinder
-   ```
-
-2. **Sørg for at database kjører:**
-   - Enten start MySQL/MariaDB lokalt
-   - Eller kjør kun databasen med Docker: `docker-compose up db` (fra `kart-oppgave/Luftfartshinder` mappen)
-
-3. **Kjør applikasjonen:**
-   ```bash
-   dotnet run
-   ```
-
-4. **Åpne nettleser:**
-   - Gå til `https://localhost:7258` eller `http://localhost:5062` (avhengig av konfigurasjon)
 
 ### Testbrukere
 
-Etter første migrasjon er følgende testbrukere opprettet:
+Etter første oppstart kan du logge inn med:
 
 **SuperAdmin:**
-- **Brukernavn:** `superadmin@kartverket.no`
-- **Passord:** `Superadmin123!`
-- **Rolle:** SuperAdmin (har tilgang til alle funksjoner)
+- Brukernavn: `superadmin@kartverket.no`
+- Passord: `Superadmin123!`
 
 **Registrar:**
-- **Brukernavn:** `registrar`
-- **Passord:** `Passord123!`
-- **Rolle:** Registrar (kan godkjenne/avvise rapporterte hindre)
+- Brukernavn: `registrar`
+- Passord: `Passord123!`
 
-**Pilot (FlightCrew):**
-- **Brukernavn:** `pilot`
-- **Passord:** `Passord123!`
-- **Rolle:** FlightCrew (kan rapportere nye luftfartshinder)
+**Pilot:**
+- Brukernavn: `pilot`
+- Passord: `Passord123!`
 
 ## Testing
 
