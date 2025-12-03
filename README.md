@@ -1,155 +1,155 @@
-# Luftfartshinder - Nasjonalt Register over Luftfartshindre
+# Luftfartshinder - National Register of Airspace Obstacles
 
-## Prosjektbeskrivelse
+## Project Description
 
-System for innmelding og kontroll av luftfartshindre til Nasjonalt register over luftfartshindre (NRL).
+System for reporting and control of airspace obstacles to the National Register of Airspace Obstacles (NRL).
 
-Denne applikasjonen er utviklet for å gi piloter og flybesetning fra NLA, Luftforsvaret og Politiets helikoptertjeneste mulighet til å registrere hindringer i luftrommet. Innmeldte data kan deretter gjennomgås og enten godkjennes eller avvises av registerfører i NRL. Målet er å styrke flysikkerheten gjennom et kontinuerlig oppdatert register over luftfartshindre.
+This application is developed to give pilots and flight crews from NLA, the Air Force, and the Police Helicopter Service the ability to register obstacles in airspace. Reported data can then be reviewed and either approved or rejected by the registrar in NRL. The goal is to strengthen flight safety through a continuously updated register of airspace obstacles.
 
-## Teknologier
+## Technologies
 
 - ASP.NET Core 9.0 MVC
 - Entity Framework Core
 - ASP.NET Core Identity
 - MySQL/MariaDB
-- Leaflet (kartklient)
-- Docker (containerisering)
+- Leaflet (map client)
+- Docker (containerization)
 
-## Arkitektur
+## Architecture
 
-Løsningen er bygd etter Model-View-Controller (MVC)-mønsteret:
+The solution is built following the Model-View-Controller (MVC) pattern:
 
-- **Model** – Domeneklasser og valideringslogikk
-- **View** – Razor Views benyttes for visning av skjemaer, oversiktssider, kart og tilbakemeldinger
-- **Controller** – Ansvarlig for ruting og forretningslogikk
-- **Database** – Data lagres i MySQL/MariaDB og håndteres via Entity Framework Core med migrasjoner gjennom ApplicationDbContext og AuthDbContext
+- **Model** – Domain classes and validation logic
+- **View** – Razor Views are used for displaying forms, overview pages, maps, and feedback
+- **Controller** – Responsible for routing and business logic
+- **Database** – Data is stored in MySQL/MariaDB and handled via Entity Framework Core with migrations through ApplicationDbContext and AuthDbContext
 
-## Dataflyt
+## Data Flow
 
-1. Brukeren logger inn på systemet
-2. Piloter kan registrere nye hindringer gjennom interaktivt kart (Home → Index)
-3. Input blir validert med modellattributter
-4. Hindre lagres i draft-session før innsending
-5. Gyldige innsendelser publiseres til database
-6. Registerfører kan behandle og validere innkomne rapporter direkte i systemet
-7. Brukere får beskjed om godkjenning/avvisning
+1. User logs into the system
+2. Pilots can register new obstacles through an interactive map (Home → Index)
+3. Input is validated with model attributes
+4. Obstacles are saved in a draft session before submission
+5. Valid submissions are published to the database
+6. Registrar can process and validate incoming reports directly in the system
+7. Users receive notification of approval/rejection
 
-## Funksjonalitet
+## Functionality
 
-- Brukerregistrering med godkjenning av SuperAdmin
-- Rollbasert tilgangskontroll (SuperAdmin, Registrar, FlightCrew)
-- Rapportering av luftfartshindre via interaktivt kart (Leaflet)
-- Draft-system for midlertidig lagring før innsending
-- Godkjenning/avvisning av rapporterte hindre
-- Brukeradministrasjon med filtrering og søk
+- User registration with SuperAdmin approval
+- Role-based access control (SuperAdmin, Registrar, FlightCrew)
+- Reporting of airspace obstacles via interactive map (Leaflet)
+- Draft system for temporary storage before submission
+- Approval/rejection of reported obstacles
+- User administration with filtering and search
 
-## Drift og distribusjon
+## Operations and Deployment
 
-Applikasjonen er pakket som en Docker-løsning for enkel kjøring og skalerbarhet:
+The application is packaged as a Docker solution for easy running and scalability:
 
-- Webdelen kjøres på `mcr.microsoft.com/dotnet/aspnet:9.0`
-- Databasen kjører i en MariaDB container
-- Komponentene kommuniserer via connection strings konfigurert i `appsettings.json`
+- The web part runs on `mcr.microsoft.com/dotnet/aspnet:9.0`
+- The database runs in a MariaDB container
+- Components communicate via connection strings configured in `appsettings.json`
 
-## Kjøringsinstruksjoner
+## Running Instructions
 
-### Forutsetninger
+### Prerequisites
 
-Du trenger bare:
-- **Docker Desktop** installert og kjørende
-- **Git** installert
-- **Terminal** (Command Prompt på Windows, Terminal på Mac/Linux)
+You only need:
+- **Docker Desktop** installed and running
+- **Git** installed
+- **Terminal** (Command Prompt on Windows, Terminal on Mac/Linux)
 
-**Installer Docker Desktop:**
-- Last ned fra: https://www.docker.com/products/docker-desktop/
-- Installer og start Docker Desktop
-- Test: Åpne terminal og kjør `docker --version`
+**Install Docker Desktop:**
+- Download from: https://www.docker.com/products/docker-desktop/
+- Install and start Docker Desktop
+- Test: Open terminal and run `docker --version`
 
-**Installer Git:**
+**Install Git:**
 - Windows: https://git-scm.com/download/win
-- Mac/Linux: Følg instruksjoner for ditt operativsystem
-- Test: Åpne terminal og kjør `git --version`
+- Mac/Linux: Follow instructions for your operating system
+- Test: Open terminal and run `git --version`
 
 ---
 
-### Kjøre applikasjonen (3 enkle steg)
+### Running the Application (3 Simple Steps)
 
-**Steg 1: Klon prosjektet**
+**Step 1: Clone the project**
 ```bash
 git clone https://github.com/noanor/kart-oppgave.git
 ```
 
-**Steg 2: Gå inn i prosjektmappen**
+**Step 2: Navigate to the project folder**
 ```bash
 cd kart-oppgave/Luftfartshinder
 ```
 
-**Steg 3: Start applikasjonen**
+**Step 3: Start the application**
 ```bash
 docker-compose up --build
 ```
 
-**Vent 2-5 minutter** (første gang) mens Docker setter opp alt.
+**Wait 2-5 minutes** (first time) while Docker sets up everything.
 
-**Hvorfor `--build`?**
-Docker cacher (lagrer) images for å spare tid. Uten `--build` kan Docker bruke en gammel cached versjon hvis filene ikke har endret seg mye. Med `--build` sikrer vi at Docker alltid bygger på nytt med de nyeste endringene fra GitHub.
+**Why `--build`?**
+Docker caches (stores) images to save time. Without `--build`, Docker may use an old cached version if the files haven't changed much. With `--build`, we ensure that Docker always rebuilds with the latest changes from GitHub.
 
-**Når du ser:**
+**When you see:**
 ```
 luftfartshinder  | Now listening on: http://[::]:8080
 ```
 
-**Åpne nettleser:** `http://localhost:8080`
+**Open browser:** `http://localhost:8080`
 
 ---
 
-### Stoppe applikasjonen
+### Stopping the Application
 
-Trykk `Ctrl+C` i terminalen, eller kjør:
+Press `Ctrl+C` in the terminal, or run:
 ```bash
 docker-compose down
 ```
 
 ---
 
-### Feilsøking
+### Troubleshooting
 
-**"Cannot find path" feil:**
-- Sjekk at du er i riktig mappe: Kjør `dir` (Windows) eller `ls` (Mac/Linux)
-- Du skal se `docker-compose.yml` filen
-- Hvis ikke, naviger til: `cd kart-oppgave/Luftfartshinder`
+**"Cannot find path" error:**
+- Check that you are in the correct folder: Run `dir` (Windows) or `ls` (Mac/Linux)
+- You should see the `docker-compose.yml` file
+- If not, navigate to: `cd kart-oppgave/Luftfartshinder`
 
 **"docker-compose: command not found":**
-- Prøv: `docker compose` (uten bindestrek)
+- Try: `docker compose` (without hyphen)
 
-**Port 8080 allerede i bruk:**
-- Stopp andre applikasjoner som bruker port 8080
-- Eller endre port i `docker-compose.yml`
+**Port 8080 already in use:**
+- Stop other applications using port 8080
+- Or change the port in `docker-compose.yml`
 
-**Hvis du fortsatt ser gamle endringer:**
-- Sjekk at du bruker `docker-compose up --build` (ikke bare `docker-compose up`)
-- Hvis problemet vedvarer, tving fullstendig ny bygging:
+**If you still see old changes:**
+- Check that you are using `docker-compose up --build` (not just `docker-compose up`)
+- If the problem persists, force a complete rebuild:
   ```bash
   docker-compose down
   docker-compose build --no-cache
   docker-compose up --build
   ```
 
-### Testbrukere
+### Test Users
 
-Etter første oppstart kan du logge inn med:
+After the first startup, you can log in with:
 
 **SuperAdmin:**
-- Brukernavn: `superadmin@kartverket.no`
-- Passord: `Superadmin123!`
+- Username: `superadmin@kartverket.no`
+- Password: `Superadmin123!`
 
 **Registrar:**
-- Brukernavn: `registrar`
-- Passord: `Passord123!`
+- Username: `registrar`
+- Password: `Passord123!`
 
 **Pilot:**
-- Brukernavn: `pilot`
-- Passord: `Passord123!`
+- Username: `pilot`
+- Password: `Passord123!`
 
 ## Testing
 
