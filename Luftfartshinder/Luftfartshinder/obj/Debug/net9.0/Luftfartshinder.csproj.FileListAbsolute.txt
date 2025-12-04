@@ -132,7 +132,7 @@ C:\Users\Bruker\Desktop\Eksamen2\Luftfartshinder\Luftfartshinder\obj\Debug\net9.
 C:\Users\Bruker\Desktop\Eksamen2\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\wklkukslkx-{0}-xao8xrp0k2-xao8xrp0k2.gz
 C:\Users\Bruker\Desktop\Eksamen2\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\kd86xbko0j-{0}-nvc742ewl8-nvc742ewl8.gz
 C:\Users\Bruker\Desktop\Eksamen2\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\bvs801oyvp-{0}-k938po996s-k938po996s.gz
-C:\Users\Bruker\Desktop\Eksamen2\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\vy2yg21eio-{0}-1ds3arpknu-1ds3arpknu.gz
+C:\Users\Bruker\Desktop\Eksamen2\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\vy2yg21eio-{0}-up7o6dsklk-up7o6dsklk.gz
 C:\Users\Bruker\Desktop\Eksamen2\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\8gtvdlyvcr-{0}-vt9t34si6l-vt9t34si6l.gz
 C:\Users\Bruker\Desktop\Eksamen2\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\chpn59opp2-{0}-9nsuyz331s-9nsuyz331s.gz
 C:\Users\Bruker\Desktop\Eksamen2\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\7c7ujydjjw-{0}-lv552ilvta-lv552ilvta.gz
