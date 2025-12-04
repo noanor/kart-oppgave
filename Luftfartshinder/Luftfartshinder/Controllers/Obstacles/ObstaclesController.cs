@@ -226,6 +226,23 @@ namespace Luftfartshinder.Controllers.Obstacles
             return Ok(list);
         }
 
+        // Delete draft obstacle
+        [HttpPost]
+        public IActionResult DeleteDraftObstacle(int index)
+        {
+            var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey);
+            if (draft is null || index < 0 || index >= draft.Obstacles.Count)
+            {
+                return BadRequest("Invalid draft or index.");
+            }
+
+            draft.Obstacles.RemoveAt(index);
+            HttpContext.Session.Set(DraftKey, draft);
+
+            TempData["ObstacleDeleted"] = true;
+            return RedirectToAction("Draft");
+        }
+
         // DTO for JSON requests
         public class AddObstacleRequest
         {
