@@ -166,7 +166,7 @@ dotnet test
 - Uses `TestSession` class for testing session functionality (replaces Moq ISession mocking to avoid extension method issues)
 - Tests cover controllers: ObstaclesController, ReportController, AccountController, DashboardController, HomeController, RegistrarController, and SuperAdminController
 - Repository tests: ObstacleRepositoryTests (9 tests) and ReportRepositoryTests (10 tests) using InMemory database
-- All tests include documentation with MÅL (goal), LOGIKK (logic), and RESULTAT (result)
+- All tests include documentation with GOAL, LOGIC, and RESULT
 
 ### JavaScript Tests
 
