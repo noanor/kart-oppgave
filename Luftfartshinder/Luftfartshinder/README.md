@@ -153,17 +153,24 @@ Build succeeded with 40 warning(s)
 - **Brukervennlighetstesting (Usability Testing):** 2 tester - Tester brukervennlighet
 - **Controller Testing:** 50 tester - Tester alle controllers (AccountController, HomeController, ObstaclesController, ReportController, RegistrarController, SuperAdminController, DashboardController)
 
+<<<<<<< HEAD
 **Test Implementering:**
 - Bruker `TestSession` klasse for testing av session-funksjonalitet (erstatter Moq ISession mocking for å unngå problemer med extension methods)
 - Alle 59 tester passerer
 
+=======
+>>>>>>> 9abab9b (Refaktorisering av registrar sider og superadmin list)
 **Run tests:**
 ```bash
 cd Luftfartshinder/Luftfartshinder.Tests
 dotnet test
 ```
 
+<<<<<<< HEAD
 **Note:** Det er 40 advarsler relatert til null checks i testkoden. Disse påvirker ikke funksjonalitet, men bør fikses for optimal kodekvalitet.
+=======
+**Note:** There are 14 warnings related to null checks in the test code. These do not affect functionality, but should be fixed for optimal code quality.
+>>>>>>> 9abab9b (Refaktorisering av registrar sider og superadmin list)
 
 ### JavaScript Testing
 

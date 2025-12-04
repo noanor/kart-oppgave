@@ -161,11 +161,14 @@ cd Luftfartshinder/Luftfartshinder.Tests
 dotnet test
 ```
 
+<<<<<<< HEAD
 **Test Implementation:**
 - All 59 tests pass successfully
 - Uses `TestSession` class for testing session functionality (replaces Moq ISession mocking to avoid extension method issues)
 - Tests cover controllers: ObstaclesController, ReportController, AccountController, DashboardController, HomeController, RegistrarController, and SuperAdminController
 
+=======
+>>>>>>> 9abab9b (Refaktorisering av registrar sider og superadmin list)
 ### JavaScript Tests
 
 The project also contains JavaScript tests for frontend functionality using **Jest**.
