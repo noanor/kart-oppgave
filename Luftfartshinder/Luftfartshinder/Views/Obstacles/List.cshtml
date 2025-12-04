@@ -1,28 +1,29 @@
 ﻿@model List<Luftfartshinder.Models.Domain.Obstacle>
 
-@{
-}
+@* 
+    Registrar - Obstacle List View
+    --------------------------------------------------
+    This page shows all obstacles that have been reported.
+    The registrar can search, sort, and open an obstacle to edit it.
+*@
 
 @section Styles {
+    @* Page specific styling for the obstacle list *@
     <link href="~/css/registrar.css" rel="stylesheet" />
 }
 
 <div class="container mt-5 py-5">
-    <div class="mb-3">
-        <a class="btn btn-outline-secondary" asp-controller="Dashboard" asp-action="Dashboard">
-            <span class="material-symbols-outlined inline-icon">arrow_back</span>
-            Back
-        </a>
-    </div>
-    
+    @* Page title *@
     <div class="h1 text-center">
         List of Obstacles
     </div>
 
+    @* Simple client-side search field (filters table rows below) *@
     <div class="mb-3">
         <input id="obstacleSearch" class="form-control" placeholder="Search obstacles..." />
     </div>
 
+    @* Main obstacle table with sortable columns *@
     <table id="obstacleTable" class="table table-hover mb-5">
         <thead>
             <tr>
@@ -41,6 +42,7 @@
         <tbody class="table-group-divider">
             @if (Model != null && Model.Count > 0)
             {
+                @* Render one table row per obstacle in the model *@
                 @foreach (var o in Model)
                 {
                     <tr>
@@ -50,6 +52,7 @@
                         <td>@o.Name</td>
                         <td>@o.Height</td>
 
+                        @* Format coordinates to 6 decimal places for a consistent look *@
                         @{
                             string formattedLatitude = String.Format("{0:0.000000}", o.Latitude);
                             string formattedLongitude = String.Format("{0:0.000000}", o.Longitude);
@@ -60,6 +63,7 @@
                         <td>@o.RegistrarNote</td>
 
                         <td>
+                            @* Status pill with color depending on the obstacle status *@
                             @switch (o.Status)
                             {
                                 case Luftfartshinder.Models.Domain.Obstacle.Statuses.Approved:
@@ -77,7 +81,8 @@
                         </td>
 
                         <td>
-                            <a class="btn btn-outline-primary shadow btn-link-style" role="button"
+                            @* Link to open the obstacle in the Edit view *@
+                            <a class="btn btn-outline-primary shadow" role="button"
                                asp-action="Edit"
                                asp-controller="Obstacles"
                                asp-route-id="@o.Id">
@@ -92,6 +97,7 @@
             }
             else
             {
+                @* Fallback row when there are no obstacles in the model *@
                 <tr>
                     <td colspan="10" class="text-center text-muted py-4">
                         No obstacles found. Obstacles will appear here after they have been submitted from the draft.
@@ -104,6 +110,7 @@
 
 @section Scripts {
     <script>
+        // Simple client-side search that hides rows that do not match the search term
         const searchInput = document.getElementById('obstacleSearch');
         const table = document.getElementById('obstacleTable');
         const rows = table.querySelectorAll('tbody tr');
@@ -117,6 +124,7 @@
             });
         });
 
+        // Self-invoking function that adds click-to-sort behavior to table headers
         (function () {
             const table = document.getElementById('obstacleTable');
             if (!table) return;
@@ -143,12 +151,12 @@
                         h.innerHTML = h.dataset.label;
                     });
 
-                    // Set active header state
+                    // Set active header state and show arrow in the header cell
                     th.dataset.sort = newDir;
                     const arrow = newDir === 'asc' ? ' ▲' : ' ▼';
                     th.innerHTML = th.dataset.label + arrow;
 
-                    // Sort rows
+                    // Sort rows based on clicked column (numeric or text comparison)
                     rows.sort((a, b) => {
                         let aText = a.children[index].textContent.trim();
                         let bText = b.children[index].textContent.trim();
@@ -162,7 +170,7 @@
                         }
                     });
 
-                    // Re-attach sorted rows
+                    // Re-attach sorted rows back to the table body
                     rows.forEach(row => tbody.appendChild(row));
                 });
             });

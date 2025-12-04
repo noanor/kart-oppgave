@@ -13,7 +13,7 @@
 }
 
 <div class="container">
-    <!-- Back button -->
+    @* Small back button that sends the user back to the main dashboard *@
     <div class="row mb-4">
         <div class="col-12">
             <a href="@Url.Action("Dashboard", "Dashboard")" class="back-icon">
@@ -24,11 +24,14 @@
 </div>
 
 <header class="mb-5">
+    @* Page heading for the registrar overview *@
     <div class="h1 text-center">
         List of Reports
     </div>
 </header>
+
 <div class="container">
+    @* Table that lists all reports available to the registrar *@
     <table class="table">
         <thead>
             <tr>
@@ -43,16 +46,20 @@
         </thead>
 
         <tbody>
-            @for (int i = 0; i < Model.Count; i++)
+            @* Loop through each report in the model and render one row per report *@
+            @foreach (var report in Model)
             {
-                var pendingCount = Model[i].Obstacles.Count(o => o.Status == Luftfartshinder.Models.Domain.Obstacle.Statuses.Pending);
+                @* Count how many obstacles in this report still have status "Pending" *@
+                var pendingCount = report.Obstacles.Count(o => o.Status == Luftfartshinder.Models.Domain.Obstacle.Statuses.Pending);
+
                 <tr>
-                    <td>@Model[i].Id</td>
-                    <td>@Model[i].Title</td>
-                    <td>@Model[i].Author</td>
-                    <td>@Model[i].ReportDate</td>
-                    <td>@Model[i].Obstacles.Count</td>
+                    <td>@report.Id</td>
+                    <td>@report.Title</td>
+                    <td>@report.Author</td>
+                    <td>@report.ReportDate</td>
+                    <td>@report.Obstacles.Count</td>
                     <td>
+                        @* Show a yellow badge when there are pending obstacles, otherwise show 0 in grey text *@
                         @if (pendingCount > 0)
                         {
                             <span class="badge bg-warning text-dark">@pendingCount</span>
@@ -63,10 +70,11 @@
                         }
                     </td>
                     <td>
+                        @* Button that navigates to the detailed view of this specific report *@
                         <a class="btn btn-primary" role="button"
                            asp-action="Details"
                            asp-controller="Registrar"
-                           asp-route-id="@Model[i].Id"
+                           asp-route-id="@report.Id"
                            style="vertical-align: middle; text-decoration: none;">
                             View
                         </a>
@@ -76,5 +84,4 @@
         </tbody>
     </table>
 </div>
-
 

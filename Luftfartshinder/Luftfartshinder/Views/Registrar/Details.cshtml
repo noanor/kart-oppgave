@@ -4,234 +4,234 @@
     ViewData["Title"] = "Registrar – Details";
 }
 
+@* Styles for registrar details page (page-specific CSS + Leaflet) *@
 @section Styles {
     <link href="~/css/registrar.css" rel="stylesheet" />
     <link href="~/css/draft.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 }
-          
 
 <div class="container">
-    <!-- PERFECTLY CENTERED HEADER -->
+    @* Page header: back button, report title and delete button *@
     <div class="row align-items-center mb-4">
-        <!-- Left: Back to list -->
         <div class="col-4 text-start">
+            @* Go back to registrar overview list *@
             <a href="@Url.Action("Overview", "Registrar")" class="back-icon">
                 <i class="bi bi-arrow-left-circle"></i>
             </a>
         </div>
 
-        <!-- Center: Obstacle title -->
         <div class="col-4 text-center">
+            @* Main report info shown in the center *@
             <h1 class="page-title mb-0">Report #@Model.Id</h1>
             <h2 class="figure-caption">Reported by: @Model.Author</h2>
         </div>
 
-        <!-- Right: Delete button -->
         <div class="col-4 text-end">
+            @* Open modal to confirm deletion of the whole report *@
             <button type="button"
                     class="btn btn-danger btn-sm d-inline-flex align-items-center gap-2"
                     data-bs-toggle="modal" data-bs-target="#deleteModal">
                 <i class="bi bi-trash"></i>
             </button>
         </div>
-
     </div>
 </div>
 
 <div class="container h-auto">
-    @for (int i = 0; i < Model.Obstacles.Count; i++)
+    @* Loop through all obstacles that belong to this report *@
+    @foreach (var obstacle in Model.Obstacles)
     {
-            
-    var o = Model.Obstacles.ToList()[i];
-            
-    <!-- META BOX (ID / Type / Status) -->
-    <div class="card meta-box mb-2 mt-5 h-10">
-        <div class="card-body">
-            <div class="meta-grid">
+        @* META BOX (ID / Type / Status + actions) *@
+        <div class="card meta-box mb-2 mt-5 h-10">
+            <div class="card-body">
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <div class="meta-label">ID</div>
+                        <div class="meta-value">#@obstacle.Id</div>
+                    </div>
 
-                <!-- ID -->
-                <div class="meta-item">
-                    <div class="meta-label">ID</div>
-                    <div class="meta-value">#@o.Id</div>
+                    <div class="meta-item">
+                        <div class="meta-label">Type</div>
+                        <div class="meta-value">@obstacle.Type</div>
+                    </div>
+
+                    <div class="meta-item">
+                        <div class="meta-label">Status</div>
+                        <div class="meta-actions">
+                            @* Show status pill based on current obstacle status *@
+                            @switch (obstacle.Status)
+                            {
+                                case Luftfartshinder.Models.Domain.Obstacle.Statuses.Approved:
+                                    <span class="pill pill-approved">Approved</span>
+                                    break;
+
+                                case Luftfartshinder.Models.Domain.Obstacle.Statuses.Rejected:
+                                    <span class="pill pill-rejected">Rejected</span>
+                                    break;
+
+                                case Luftfartshinder.Models.Domain.Obstacle.Statuses.Pending:
+                                    <span class="pill pill-pending">Pending</span>
+                                    break;
+                            }
+
+                            @* Approve obstacle action *@
+                            <form asp-controller="Registrar" asp-action="Approve" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@obstacle.Id" />
+                                <button type="submit" class="btn btn-success btn-pill">Approve</button>
+                            </form>
+
+                            @* Reject obstacle action *@
+                            <form asp-controller="Registrar" asp-action="Reject" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@obstacle.Id" />
+                                <button type="submit" class="btn btn-danger btn-pill">Reject</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- Type -->
-                <div class="meta-item">
-                    <div class="meta-label">Type</div>
-                    <div class="meta-value">@o.Type</div>
-                </div>
-
-                <!-- Status -->
-                <div class="meta-item">
-                    <div class="meta-label">Status</div>
-
-                    <div class="meta-actions">
-
-                        @switch (o.Status)
-                        {
-                            case Luftfartshinder.Models.Domain.Obstacle.Statuses.Approved:
-                                <span class="pill pill-approved">Approved</span>
-                                break;
-
-                            case Luftfartshinder.Models.Domain.Obstacle.Statuses.Rejected:
-                                <span class="pill pill-rejected">Rejected</span>
-                                break;
-
-                            case Luftfartshinder.Models.Domain.Obstacle.Statuses.Pending:
-                                <span class="pill pill-pending">Pending</span>
-                                break;
-                        }
-
-                        <!-- Approve -->
-                        <form asp-controller="Registrar" asp-action="Approve" method="post" class="d-inline">
-                            @Html.AntiForgeryToken()
-                            <input type="hidden" name="id" value="@o.Id" />
-                            <button type="submit" class="btn btn-success btn-pill">Approve</button>
-                        </form>
-
-                        <!-- Reject -->
-                        <form asp-controller="Registrar" asp-action="Reject" method="post" class="d-inline">
-                            @Html.AntiForgeryToken()
-                            <input type="hidden" name="id" value="@o.Id" />
-                            <button type="submit" class="btn btn-danger btn-pill">Reject</button>
-                        </form>
-
-                    </div> 
-                </div>
-
             </div>
         </div>
-    </div>
 
+        @* Main content row for obstacle details and map *@
+        <div class="row mb-5 position-relative" style="height: 70vh;">
+            @* LEFT COLUMN – obstacle details and registrar note *@
+            <div class="col-xl-6 h-100 position-absolute obstacle-column">
+                @* Obstacle general information *@
+                <div class="card card-large shadow-sm mb-auto w-100 position-absolute h-60 left-col-card">
+                    <div class="card-header fw-semibold">General Information</div>
+                    <div class="card-body">
+                        <dl class="info-grid mb-0">
+                            <dt>Latitude</dt>
+                            <dd>@obstacle.Latitude.ToString("0.######")</dd>
 
-    <div class="row mb-5 position-relative height-70vh">
+                            <dt>Longitude</dt>
+                            <dd>@obstacle.Longitude.ToString("0.######")</dd>
 
-        <!-- LEFT COLUMN -->
-        <div class="col-xl-6 h-100 position-absolute obstacle-column">
-            <!-- Obstacle details -->
-            <div class="card card-large shadow-sm mb-auto w-100 position-absolute h-60 left-col-card">
-                <div class="card-header fw-semibold">General Information</div>
-                <div class="card-body">
-                    <dl class="info-grid mb-0">
-                        <dt>Latitude</dt>
-                        <dd>@o.Latitude.ToString("0.######")</dd>
+                            <dt>Height</dt>
+                            <dd>@((obstacle.Height?.ToString()) ?? "-")</dd>
 
-                        <dt>Longitude</dt>
-                        <dd>@o.Longitude.ToString("0.######")</dd>
-
-                        <dt>Height</dt>
-                        <dd>@((o.Height?.ToString()) ?? "-")</dd>
-
-                        <dt>Description</dt>
-                        <dd>@(!string.IsNullOrWhiteSpace(o.Description) ? o.Description : "-")</dd>
-                    </dl>
+                            <dt>Description</dt>
+                            <dd>@(!string.IsNullOrWhiteSpace(obstacle.Description) ? obstacle.Description : "-")</dd>
+                        </dl>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Registrar Note -->
-            <div class="card card-large shadow-sm bottom-0 position-absolute w-100 h-40 left-col-card">
-                <div class="card-header fw-semibold">Registrar Note</div>
-                <div class="card-body">
-                    <form id="registrarNoteForm" asp-controller="Registrar" asp-action="SaveNote" method="post" class="row g-3">
-                        <input type="hidden" name="Id" value="@o.Id" />
-                        @Html.AntiForgeryToken()
+                @* Registrar note for this specific obstacle *@
+                <div class="card card-large shadow-sm bottom-0 position-absolute w-100 h-40 left-col-card">
+                    <div class="card-header fw-semibold">Registrar Note</div>
+                    <div class="card-body">
+                        @* Form for saving registrar note for a single obstacle *@
+                        <form id="registrarNoteForm-@obstacle.Id"
+                              asp-controller="Registrar"
+                              asp-action="SaveNote"
+                              method="post"
+                              class="row g-3">
+                            <input type="hidden" name="Id" value="@obstacle.Id" />
+                            @Html.AntiForgeryToken()
 
-                        <div class="col-12">
-                            <textarea name="RegistrarNote" class="form-control" rows="4"
-                                        placeholder="Ask for more info, add internal remarks, etc."
-                                          
-                            >@o.RegistrarNote</textarea>
+                            <div class="col-12">
+                                <textarea name="RegistrarNote"
+                                          class="form-control"
+                                          rows="4"
+                                          placeholder="Ask for more info, add internal remarks, etc.">@obstacle.RegistrarNote</textarea>
+                            </div>
+                        </form>
 
-                        </div>
-
-                    </form>
+                        @* Button to open confirmation modal before submitting note *@
                         <div class="col-12 d-flex align-items-center gap-3 position-absolute btn-save-note">
-                            <button class="btn btn-primary btn-sm px-4 py-2" data-bs-toggle="modal" data-bs-target="#modalSaveNote">
+                            <button class="btn btn-primary btn-sm px-4 py-2"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalSaveNote-@obstacle.Id">
                                 Save note
                             </button>
                         </div>
-                </div>
-            </div> 
-        </div>
-
-        <!-- RIGHT COLUMN -->
-        <div class="col-xl-6 h-100 position-absolute end-0 obstacle-column">
-            <div class="card card-large shadow-sm h-100 mb-0">
-                <div class="card-header fw-semibold">Map Preview</div>
-                <div class="card-body h-100">
-                    <div class="obstacle-map h-100"
-                            data-lat="@o.Latitude.ToString(CultureInfo.InvariantCulture)"
-                            data-lng="@o.Longitude.ToString(CultureInfo.InvariantCulture)"
-                            id="map-@i">
                     </div>
+                </div>
+            </div>
 
+            @* RIGHT COLUMN – map preview for obstacle coordinates *@
+            <div class="col-xl-6 h-100 position-absolute end-0 obstacle-column">
+                <div class="card card-large shadow-sm h-100 mb-0">
+                    <div class="card-header fw-semibold">Map Preview</div>
+                    <div class="card-body h-100">
+                        <div class="obstacle-map h-100"
+                             data-lat="@obstacle.Latitude.ToString(CultureInfo.InvariantCulture)"
+                             data-lng="@obstacle.Longitude.ToString(CultureInfo.InvariantCulture)"
+                             id="map-@obstacle.Id">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Delete confirmation modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Delete obstacle?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to delete <strong>@Model.Title</strong>? This action cannot be undone!
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <form asp-controller="Registrar" asp-action="Delete" method="post" class="d-inline">
-                        <input type="hidden" name="id" value="@Model.Id" />
-                        @Html.AntiForgeryToken()
-                        <button type="submit" class="btn btn-danger">
-                            <i class="bi bi-trash"></i>
+        @* Save note confirmation modal for this obstacle *@
+        <div class="modal fade"
+             id="modalSaveNote-@obstacle.Id"
+             data-bs-backdrop="static"
+             data-bs-keyboard="false"
+             tabindex="-1"
+             aria-labelledby="modalSaveNoteLabel-@obstacle.Id"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalSaveNoteLabel-@obstacle.Id">Submit note</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to submit the note for <strong>Report #@Model.Id</strong>?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary"
+                                type="submit"
+                                form="registrarNoteForm-@obstacle.Id">
+                            Submit
                         </button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Save note confirmation modal-->
-    <div class="modal fade" id="modalSaveNote" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalSaveNote" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Submit Draft</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to submit note for obstacle #@o.Id?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-                    <button id="btnSubminDraft"
-                            class="btn btn-primary"
-                            type="submit"
-                            form="registrarNoteForm">
-                        Submit
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     }
-<div class="toast-container position-fixed end-0 p-3 toast-container-top">
-    <div id="toastNoteSaved" class="toast text-white bg-success border-0 opacity-75" role="alert">
-        <div class="toast-body">
-            Note saved!
+
+    @* Toast that shows feedback when a note has been saved *@
+    <div class="toast-container position-fixed end-0 p-3" style="z-index: 3000; top: 5vh;">
+        <div id="toastNoteSaved" class="toast text-white bg-success border-0 opacity-75" role="alert">
+            <div class="toast-body">
+                Note saved!
+            </div>
         </div>
     </div>
 </div>
 
-
+@* Delete confirmation modal for the entire report (only one per page) *@
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete report?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <strong>Report #@Model.Id</strong>? This action cannot be undone!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form asp-controller="Registrar" asp-action="Delete" method="post" class="d-inline">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+@* Scripts needed only on this page (draft behavior + Leaflet) *@
 @section Scripts {
     <script src="~/js/draft.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
