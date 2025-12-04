@@ -30,12 +30,11 @@
                         <div class="mb-3">
                             <label asp-for="Type" class="form-label">Type <span class="text-danger">*</span></label>
                             <select class="form-select" asp-for="Type" required>
-                                <option value="Punkt">Punkt</option>
+                                <option value="Point">Point</option>
                                 <option value="Mast">Mast</option>
-                                <option value="Linje">Linje</option>
-                                <option value="Luftspenn">Luftspenn</option>
-                                <option value="Flate">Flate</option>
-                                <option value="Powerline">Powerline</option>
+                                <option value="Line">Line</option>
+                                <option value="Power line">Power line</option>
+                                <option value="Area">Area</option>
                             </select>
                             <span asp-validation-for="Type" class="text-danger"></span>
                         </div>
