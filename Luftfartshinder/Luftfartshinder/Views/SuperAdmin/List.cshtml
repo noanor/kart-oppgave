@@ -1,12 +1,10 @@
 ﻿@model UserViewModel
-@{
-}
 
 @section Styles {
 	<link rel="stylesheet" href="~/css/userlist.css" />
 }
 
-@* Success/Error Messages *@
+@* Success / Error toast messages shown at the top of the page *@
 @if (TempData["Success"] != null)
 {
 	<div class="position-fixed top-0 start-50 translate-middle-x p-3 alert-toast-container">
@@ -47,7 +45,7 @@
 }
 
 <div class="pt-5 mt-5 mb-5">
-	<div class=" container">
+	<div class="container">
 		<h1>List of Users</h1>
 	</div>
 </div>
@@ -55,15 +53,16 @@
 <div>
 	<div class="container">
 		
+		@* Navigation back to the main dashboard *@
 		<div class="mb-3">
 			<a asp-controller="Dashboard" asp-action="Dashboard" class="btn btn-secondary">
 				&larr; Back to Dashboard
 			</a>
 		</div>
 
-		<!-- Role Filter Buttons -->
+		@* Quick filter buttons for role and search / advanced filters *@
 		<div class="d-flex justify-content-between align-items-center mb-4">
-			<!-- Quick role buttons -->
+			@* Quick role buttons that reload the page with a new roleFilter *@
 			<div class="btn-group" role="group" aria-label="Filter by role">
 				<a href="@Url.Action("List", new { roleFilter = "All" })"
 				class="btn @(ViewBag.CurrentFilter == "All" ? "btn-dark" : "btn-outline-dark")">
@@ -79,18 +78,18 @@
 				</a>
 			</div>
 
-			<!-- Search input -->
+			@* Simple client-side search box and toggle for advanced filters *@
 			<div class="d-flex align-items-center">
 				<input type="text" id="userSearch" class="form-control form-control-sm me-2" placeholder="Search users...">
         
-				<!-- Advanced filters toggle -->
+				@*Advanced filters toggle*@
 				<button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#advancedFilters" aria-expanded="false" aria-controls="advancedFilters">
 					Advanced Filters
 				</button>
 			</div>
 		</div>
 
-		<!-- Advanced filters section -->
+		@* Advanced filter panel (Role, Status, Organization) *@
 		<div class="collapse mb-4" id="advancedFilters">
 			<div class="card card-body bg-light">
 				<div class="row g-3">
@@ -129,8 +128,10 @@
 			</div>
 		</div>
 
+		@* Main user table - only shown when there are users in the model *@
 		@if (Model.Users != null && Model.Users.Any())
 		{
+			@* Container where active filter "chips" are rendered by JavaScript *@
 			<div id="activeFilters" class="d-flex flex-wrap gap-2 mb-3"></div>
 			
 			<span id="userCount" data-total="@ViewBag.TotalUsers">Showing @Model.Users.Count() of @ViewBag.TotalUsers users</span>
@@ -156,6 +157,7 @@
 						<td>@(user.Organization?.Name ?? String.Empty)</td>
 						<td>@user.Role</td>
 						<td>
+							@* Visual status indicator for each user *@
 							@if (user.IsApproved)
 							{
 								<span class="badge bg-success">Approved</span>
@@ -166,6 +168,7 @@
 							}
 						</td>
 						<td>
+							@* Action buttons for approve / decline / delete users *@
 							@if (!user.IsApproved)
 							{
 								<form method="post" class="btn-inline"
@@ -216,6 +219,7 @@
 		}
 		else
 		{
+			@* Fallback message when there are no users to show *@
 			<div class="alert alert-info" role="alert">
 				<i class="bi bi-info-circle"></i>
 				@if (!string.IsNullOrEmpty(ViewBag.NoUsersMessage))
@@ -234,7 +238,7 @@
 	</div>
 </div>
 
-<!-- Confirmation Modal -->
+@* Reusable confirmation modal. *@
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
