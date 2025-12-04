@@ -178,11 +178,11 @@ map.on('click', async (e) => {
 // Konverterer segment-nummer (1-5) til obstacle-type
 function obstacleTypeFromChoice(choice) {
     switch (choice) {
-        case 1: return 'mast';
-        case 2: return 'point';
-        case 3: return 'line';
-        case 4: return 'powerline';
-        case 5: return 'area';
+        case 1: return 'Mast';
+        case 2: return 'Point';
+        case 3: return 'Line';
+        case 4: return 'Powerline';
+        case 5: return 'Area';
         default: return null;
     }
 }
