@@ -142,8 +142,8 @@ Alle tester kjører med `dotnet test` fra `Luftfartshinder.Tests`-mappen.
 
 **Siste testkjøring:**
 ```
-Test summary: total: 17; failed: 0; succeeded: 17; skipped: 0; duration: 2,3s
-Build succeeded with 14 warning(s)
+Test summary: total: 59; failed: 0; succeeded: 59; skipped: 0; duration: 5,0s
+Build succeeded with 40 warning(s)
 ```
 
 **Testkategorier:**
@@ -151,7 +151,11 @@ Build succeeded with 14 warning(s)
 - **Systemstesting (System Testing):** 2 tester - Tester at hele systemet fungerer sammen  
 - **Sikkerhetstesting (Security Testing):** 2 tester - Tester sikkerhetsaspekter
 - **Brukervennlighetstesting (Usability Testing):** 2 tester - Tester brukervennlighet
-- **Controller Testing:** 8 tester - Tester AccountController og HomeController
+- **Controller Testing:** 50 tester - Tester alle controllers (AccountController, HomeController, ObstaclesController, ReportController, RegistrarController, SuperAdminController, DashboardController)
+
+**Test Implementering:**
+- Bruker `TestSession` klasse for testing av session-funksjonalitet (erstatter Moq ISession mocking for å unngå problemer med extension methods)
+- Alle 59 tester passerer
 
 **Run tests:**
 ```bash
@@ -159,7 +163,7 @@ cd Luftfartshinder/Luftfartshinder.Tests
 dotnet test
 ```
 
-**Note:** There are 14 warnings related to null checks in the test code. These do not affect functionality, but should be fixed for optimal code quality.
+**Note:** Det er 40 advarsler relatert til null checks i testkoden. Disse påvirker ikke funksjonalitet, men bør fikses for optimal kodekvalitet.
 
 ### JavaScript Testing
 
