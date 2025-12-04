@@ -203,9 +203,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if (hasUserInput()) { 
                 var cancelModal = new bootstrap.Modal(document.getElementById('cancelModal'));
                 cancelModal.show();
-                document.getElementById("confirmCancelBtn").dataset.redirect = "/Account/Dashboard";
+                document.getElementById("confirmCancelBtn").dataset.redirect = "/Dashboard/Dashboard";
             } else {
-                window.location.href = "/Account/Dashboard"; 
+                window.location.href = "/Dashboard/Dashboard"; 
             }
         });
     }
