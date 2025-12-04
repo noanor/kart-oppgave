@@ -161,6 +161,7 @@ cd Luftfartshinder/Luftfartshinder.Tests
 dotnet test
 ```
 
+<<<<<<< HEAD
 **Test Implementation:**
 - All 78 tests pass successfully
 - Uses `TestSession` class for testing session functionality (replaces Moq ISession mocking to avoid extension method issues)
@@ -168,6 +169,8 @@ dotnet test
 - Repository tests: ObstacleRepositoryTests (9 tests) and ReportRepositoryTests (10 tests) using InMemory database
 - All tests include documentation with GOAL, LOGIC, and RESULT
 
+=======
+>>>>>>> 9abab9b (Refaktorisering av registrar sider og superadmin list)
 ### JavaScript Tests
 
 The project also contains JavaScript tests for frontend functionality using **Jest**.

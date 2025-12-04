@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\Bruker\\Desktop\\Eksamen2\\Luftfartshinder\\Luftfartshinder\\Luftfartshinder.csproj": {}
   },
   "projects": {
@@ -12,12 +13,29 @@
         "projectPath": "C:\\Users\\Bruker\\Desktop\\Eksamen2\\Luftfartshinder\\Luftfartshinder\\Luftfartshinder.csproj",
         "packagesPath": "C:\\Users\\Bruker\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Bruker\\Desktop\\Eksamen2\\Luftfartshinder\\Luftfartshinder\\obj\\",
+=======
+    "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Luftfartshinder.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Luftfartshinder.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Luftfartshinder.csproj",
+        "projectName": "Luftfartshinder",
+        "projectPath": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Luftfartshinder.csproj",
+        "packagesPath": "C:\\Users\\noano\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\obj\\",
+>>>>>>> 39d3880290330f7945a020fdf0c6e26bbd83510b
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
+<<<<<<< HEAD
           "C:\\Users\\Bruker\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+          "C:\\Users\\noano\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 39d3880290330f7945a020fdf0c6e26bbd83510b
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +44,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
