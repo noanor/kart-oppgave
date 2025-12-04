@@ -9,9 +9,9 @@ namespace Luftfartshinder.Tests
     public class UsabilityTestingTests
     {
         /// <summary>
-        /// MÅL: Teste at Privacy-siden er tilgjengelig og returnerer en view
-        /// LOGIKK: Kaller Privacy() og verifiserer at en view returneres
-        /// RESULTAT: ViewResult skal returneres, noe som indikerer at siden er tilgjengelig for brukere
+        /// GOAL: Test that Privacy page is accessible and returns a view
+        /// LOGIC: Calls Privacy() and verifies that a view is returned
+        /// RESULT: ViewResult should be returned, indicating that the page is accessible to users
         /// </summary>
         [Fact]
         public void Usability_PrivacyPage_ReturnsView()

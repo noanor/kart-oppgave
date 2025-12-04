@@ -13,7 +13,7 @@
 //            _IdataRepocs = iDatarepoc;
 //        }
 
-//        [HttpGet] //Get er for å vise frontenden
+//        [HttpGet] // GET is for displaying the frontend
 //        public async Task <ActionResult> Report()
 //        {
 //            return View();

@@ -17,9 +17,9 @@ namespace Luftfartshinder.Tests
         }
 
         /// <summary>
-        /// MÅL: Teste at AddAsync kan legge til en gyldig report i databasen
-        /// LOGIKK: Oppretter en report med gyldig data og kaller AddAsync
-        /// RESULTAT: Report skal returneres med en generert ID > 0 og korrekt data
+        /// GOAL: Test that AddAsync can add a valid report to the database
+        /// LOGIC: Creates a report with valid data and calls AddAsync
+        /// RESULT: Report should be returned with a generated ID > 0 and correct data
         /// </summary>
         [Fact]
         public async Task AddAsync_ValidReport_ReturnsReportWithId()
@@ -256,9 +256,9 @@ namespace Luftfartshinder.Tests
         }
 
         /// <summary>
-        /// MÅL: Teste at DeleteAsync sletter både report og tilhørende obstacles
-        /// LOGIKK: Oppretter en report med obstacles, sletter reporten og verifiserer at både report og obstacles er fjernet
-        /// RESULTAT: Både report og alle tilhørende obstacles skal være slettet fra databasen
+        /// GOAL: Test that DeleteAsync removes both report and associated obstacles
+        /// LOGIC: Creates a report with obstacles, deletes the report and verifies that both report and obstacles are removed
+        /// RESULT: Both report and all associated obstacles should be deleted from the database
         /// </summary>
         [Fact]
         public async Task DeleteAsync_ReportWithObstacles_RemovesReportAndObstacles()

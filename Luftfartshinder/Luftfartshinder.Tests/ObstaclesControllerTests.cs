@@ -53,9 +53,9 @@ namespace Luftfartshinder.Tests
         }
 
         /// <summary>
-        /// MÅL: Teste at Draft-action returnerer en tom draft når ingen draft finnes i session
-        /// LOGIKK: Kaller Draft() med tom session og sjekker at en tom ObstacleDraftViewModel returneres
-        /// RESULTAT: ViewResult med tom ObstacleDraftViewModel skal returneres
+        /// GOAL: Test that Draft action returns an empty draft when no draft exists in session
+        /// LOGIC: Calls Draft() with empty session and checks that an empty ObstacleDraftViewModel is returned
+        /// RESULT: ViewResult with empty ObstacleDraftViewModel should be returned
         /// </summary>
         [Fact]
         public void Draft_NoDraftInSession_ReturnsViewWithEmptyDraft()
@@ -105,9 +105,9 @@ namespace Luftfartshinder.Tests
         }
 
         /// <summary>
-        /// MÅL: Teste at AddOne kan legge til en obstacle til draft i session
-        /// LOGIKK: Sender en gyldig AddObstacleRequest og verifiserer at obstacle lagres i session
-        /// RESULTAT: OkObjectResult skal returneres med response.Ok = true og count = 1
+        /// GOAL: Test that AddOne can add an obstacle to draft in session
+        /// LOGIC: Sends a valid AddObstacleRequest and verifies that obstacle is saved in session
+        /// RESULT: OkObjectResult should be returned with response.Ok = true and count = 1
         /// </summary>
         [Fact]
         public void AddOne_ValidData_AddsObstacleToDraft()

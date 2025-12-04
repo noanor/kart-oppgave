@@ -5,17 +5,17 @@
 ### Prerequisites
 - **Docker Desktop** installed and running
 - **Git** (for cloning the repository)
-- No other software required (no Visual Studio, .NET SDK, or MySQL needed)
+- No other software required (no Visual Studio, .NET SDK, or MySQL)
 
 ### Getting the Application from GitHub
 
-1. **Clone the repository:**
+1. **Clone repository:**
    ```bash
    git clone <github-repo-url>
    cd Luftfartshinder
    ```
 
-   **Explanation:** This fetches the entire project from GitHub, including all code, configurations, and Docker files.
+   **Explanation:** This retrieves the entire project from GitHub, including all code, configurations, and Docker files.
 
 ### Simple Running
 
@@ -84,8 +84,8 @@ After the first migration, the following users are created:
 - `AccountRepository` - User reports
 
 **Databases:**
-- `KartverketDb` - Main database (DataContext: ApplicationContext) for obstacles and reports
-- `AuthKartverketDb` - Authentication database (DataContext: AuthDbContext) for users and roles
+- `KartverketDb` - Main database (Data context: ApplicationContext) for obstacles and reports
+- `AuthKartverketDb` - Authentication database (Data context: AuthDbContext) for users and roles
 
 **Authentication:**
 - ASP.NET Core Identity with roles: SuperAdmin, Registrar, FlightCrew
@@ -132,7 +132,7 @@ Connection strings are configured in `appsettings.json`:
 1.  List shows all users
 2.  Filtering by role works
 3.  Approve updates user status
-4.  Approve handles non-existent users
+4.  Approve handles non-existing users
 5.  Delete removes users
 6.  Decline removes pending users
 
@@ -156,7 +156,7 @@ Build succeeded with 40 warning(s)
 
 **Test Implementation:**
 - Uses `TestSession` class for testing session functionality (replaces Moq ISession mocking to avoid extension method issues)
-- All tests include documentation with GOAL, LOGIC, and RESULT
+- All tests have documentation with GOAL, LOGIC, and RESULT
 - Repository tests use InMemory database for isolation and fast execution
 - All 78 tests pass
 

@@ -26,7 +26,7 @@ namespace Luftfartshinder.DataContext
             builder.Entity<Organization>().Ignore(o => o.Reports);
 
 
-            // seed organisasjoner
+            // seed organizations
             var orgs = new List<Organization>
             {
                 new Organization
@@ -176,7 +176,7 @@ namespace Luftfartshinder.DataContext
                 }
             };
 
-            // Gi pilot rolle til pilotbruker
+            // Assign pilot role to pilot user
             var pilotRoles = new List<IdentityUserRole<string>>
             {
                 new IdentityUserRole<string>

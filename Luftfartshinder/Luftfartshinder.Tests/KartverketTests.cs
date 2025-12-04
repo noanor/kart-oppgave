@@ -19,9 +19,9 @@ namespace Luftfartshinder.Tests
       
 
         /// <summary>
-        /// MÅL: Teste at Obstacle aksepterer gyldig høyde (under 200m)
-        /// LOGIKK: Setter Height til 150.0 og verifiserer at verdien aksepteres
-        /// RESULTAT: Height skal være satt til 150.0 uten exceptions
+        /// GOAL: Test that Obstacle accepts valid height (under 200m)
+        /// LOGIC: Sets Height to 150.0 and verifies that the value is accepted
+        /// RESULT: Height should be set to 150.0 without exceptions
         /// </summary>
         [Fact]
         public void UnitTest_ObstacleHeightValidation_AcceptsValidHeight()
@@ -37,9 +37,9 @@ namespace Luftfartshinder.Tests
         }
 
         /// <summary>
-        /// MÅL: Teste at Obstacle avviser høyde over 200m
-        /// LOGIKK: Prøver å sette Height til 250.0 og forventer exception
-        /// RESULTAT: ArgumentOutOfRangeException skal kastes når høyde overstiger 200m
+        /// GOAL: Test that Obstacle rejects height over 200m
+        /// LOGIC: Attempts to set Height to 250.0 and expects exception
+        /// RESULT: ArgumentOutOfRangeException should be thrown when height exceeds 200m
         /// </summary>
         [Fact]
         public void UnitTest_ObstacleHeightValidation_RejectsHeightOver200()
@@ -56,9 +56,9 @@ namespace Luftfartshinder.Tests
        
 
         /// <summary>
-        /// MÅL: Teste at LoginViewModel validerer påkrevde felt
-        /// LOGIKK: Oppretter LoginViewModel med tomme felt og kjører validering
-        /// RESULTAT: Validering skal feile og returnere feilmeldinger for Username og Password
+        /// GOAL: Test that LoginViewModel validates required fields
+        /// LOGIC: Creates LoginViewModel with empty fields and runs validation
+        /// RESULT: Validation should fail and return error messages for Username and Password
         /// </summary>
         [Fact]
         public void SystemTest_LoginViewModel_ValidatesRequiredFields()
@@ -82,9 +82,9 @@ namespace Luftfartshinder.Tests
         }
 
         /// <summary>
-        /// MÅL: Teste at LoginViewModel aksepterer gyldig input
-        /// LOGIKK: Oppretter LoginViewModel med gyldige verdier og kjører validering
-        /// RESULTAT: Validering skal lykkes (isValid = true)
+        /// GOAL: Test that LoginViewModel accepts valid input
+        /// LOGIC: Creates LoginViewModel with valid values and runs validation
+        /// RESULT: Validation should succeed (isValid = true)
         /// </summary>
         [Fact]
         public void SystemTest_LoginViewModel_AcceptsValidInput()
@@ -110,9 +110,9 @@ namespace Luftfartshinder.Tests
       
 
         /// <summary>
-        /// MÅL: Teste at Obstacle.Name er påkrevd for sikkerhet
-        /// LOGIKK: Oppretter Obstacle uten Name og kjører validering
-        /// RESULTAT: Validering skal feile med feilmelding for Name-feltet
+        /// GOAL: Test that Obstacle.Name is required for security
+        /// LOGIC: Creates Obstacle without Name and runs validation
+        /// RESULT: Validation should fail with error message for Name field
         /// </summary>
         [Fact]
         public void SecurityTest_ObstacleName_IsRequired()
@@ -130,9 +130,9 @@ namespace Luftfartshinder.Tests
         }
 
         /// <summary>
-        /// MÅL: Teste at Obstacle koordinater er påkrevd for sikkerhet
-        /// LOGIKK: Oppretter Obstacle med koordinater satt til 0.0 og verifiserer validering
-        /// RESULTAT: Validering skal passere (koordinater er satt, selv om de er 0.0)
+        /// GOAL: Test that Obstacle coordinates are required for security
+        /// LOGIC: Creates Obstacle with coordinates set to 0.0 and verifies validation
+        /// RESULT: Validation should pass (coordinates are set, even if they are 0.0)
         /// </summary>
         [Fact]
         public void SecurityTest_ObstacleCoordinates_AreRequired()
@@ -158,9 +158,9 @@ namespace Luftfartshinder.Tests
         // ============================================
 
         /// <summary>
-        /// MÅL: Teste at Obstacle kan opprettes med minimal data for brukervennlighet
-        /// LOGIKK: Oppretter Obstacle med kun påkrevde felt (Name, Latitude, Longitude, Height)
-        /// RESULTAT: Obstacle skal opprettes uten feil med korrekt data
+        /// GOAL: Test that Obstacle can be created with minimal data for usability
+        /// LOGIC: Creates Obstacle with only required fields (Name, Latitude, Longitude, Height)
+        /// RESULT: Obstacle should be created without errors with correct data
         /// </summary>
         [Fact]
         public void UsabilityTest_Obstacle_CanBeCreatedWithMinimalData()
@@ -183,9 +183,9 @@ namespace Luftfartshinder.Tests
         }
 
         /// <summary>
-        /// MÅL: Teste at Obstacle gir hjelpsomme feilmeldinger for brukervennlighet
-        /// LOGIKK: Oppretter Obstacle uten påkrevde felt og sjekker feilmeldinger
-        /// RESULTAT: Feilmeldinger skal inneholde "required" for å hjelpe brukeren
+        /// GOAL: Test that Obstacle provides helpful error messages for usability
+        /// LOGIC: Creates Obstacle without required fields and checks error messages
+        /// RESULT: Error messages should contain "required" to help the user
         /// </summary>
         [Fact]
         public void UsabilityTest_Obstacle_ProvidesHelpfulErrorMessages()

@@ -17,9 +17,9 @@ namespace Luftfartshinder.Tests
         }
 
         /// <summary>
-        /// MÅL: Teste at AddObstacle kan legge til en gyldig obstacle i databasen
-        /// LOGIKK: Oppretter en obstacle med gyldig data og kaller AddObstacle
-        /// RESULTAT: Obstacle skal returneres med en generert ID > 0 og korrekt data
+        /// GOAL: Test that AddObstacle can add a valid obstacle to the database
+        /// LOGIC: Creates an obstacle with valid data and calls AddObstacle
+        /// RESULT: Obstacle should be returned with a generated ID > 0 and correct data
         /// </summary>
         [Fact]
         public async Task AddObstacle_ValidObstacle_ReturnsObstacleWithId()
@@ -62,9 +62,9 @@ namespace Luftfartshinder.Tests
         }
 
         /// <summary>
-        /// MÅL: Teste at GetObstacleById kan hente en obstacle med en eksisterende ID
-        /// LOGIKK: Legger til en obstacle, henter den med ID og verifiserer at riktig obstacle returneres
-        /// RESULTAT: Obstacle med matchende ID skal returneres med korrekt data
+        /// GOAL: Test that GetObstacleById can retrieve an obstacle with an existing ID
+        /// LOGIC: Adds an obstacle, retrieves it by ID and verifies that the correct obstacle is returned
+        /// RESULT: Obstacle with matching ID should be returned with correct data
         /// </summary>
         [Fact]
         public async Task GetObstacleById_ExistingId_ReturnsObstacle()
@@ -108,9 +108,9 @@ namespace Luftfartshinder.Tests
         }
 
         /// <summary>
-        /// MÅL: Teste at GetObstacleById håndterer ikke-eksisterende ID korrekt
-        /// LOGIKK: Prøver å hente en obstacle med en ID som ikke finnes i databasen
-        /// RESULTAT: Metoden skal returnere null når ID ikke finnes
+        /// GOAL: Test that GetObstacleById handles non-existing ID correctly
+        /// LOGIC: Attempts to retrieve an obstacle with an ID that does not exist in the database
+        /// RESULT: Method should return null when ID does not exist
         /// </summary>
         [Fact]
         public async Task GetObstacleById_NonExistingId_ReturnsNull()
