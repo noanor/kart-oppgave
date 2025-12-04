@@ -1,133 +1,155 @@
-# Luftfartshinder - Nasjonalt Register over Luftfartshindre
+# Luftfartshinder - National Register of Airspace Obstacles
 
-## Prosjektbeskrivelse
+## Project Description
 
-System for innmelding og kontroll av luftfartshindre til Nasjonalt register over luftfartshindre (NRL).
+System for reporting and control of airspace obstacles to the National Register of Airspace Obstacles (NRL).
 
-Denne applikasjonen er utviklet for å gi piloter og flybesetning fra NLA, Luftforsvaret og Politiets helikoptertjeneste mulighet til å registrere hindringer i luftrommet. Innmeldte data kan deretter gjennomgås og enten godkjennes eller avvises av registerfører i NRL. Målet er å styrke flysikkerheten gjennom et kontinuerlig oppdatert register over luftfartshindre.
+This application is developed to give pilots and flight crews from NLA, the Air Force, and the Police Helicopter Service the ability to register obstacles in airspace. Reported data can then be reviewed and either approved or rejected by the registrar in NRL. The goal is to strengthen flight safety through a continuously updated register of airspace obstacles.
 
-## Teknologier
+## Technologies
 
 - ASP.NET Core 9.0 MVC
 - Entity Framework Core
 - ASP.NET Core Identity
 - MySQL/MariaDB
-- Leaflet (kartklient)
-- Docker (containerisering)
+- Leaflet (map client)
+- Docker (containerization)
 
-## Arkitektur
+## Architecture
 
-Løsningen er bygd etter Model-View-Controller (MVC)-mønsteret:
+The solution is built following the Model-View-Controller (MVC) pattern:
 
-- **Model** – Domeneklasser og valideringslogikk
-- **View** – Razor Views benyttes for visning av skjemaer, oversiktssider, kart og tilbakemeldinger
-- **Controller** – Ansvarlig for ruting og forretningslogikk
-- **Database** – Data lagres i MySQL/MariaDB og håndteres via Entity Framework Core med migrasjoner gjennom ApplicationDbContext og AuthDbContext
+- **Model** – Domain classes and validation logic
+- **View** – Razor Views are used for displaying forms, overview pages, maps, and feedback
+- **Controller** – Responsible for routing and business logic
+- **Database** – Data is stored in MySQL/MariaDB and handled via Entity Framework Core with migrations through ApplicationDbContext and AuthDbContext
 
-## Dataflyt
+## Data Flow
 
-1. Brukeren logger inn på systemet
-2. Piloter kan registrere nye hindringer gjennom interaktivt kart (Home → Index)
-3. Input blir validert med modellattributter
-4. Hindre lagres i draft-session før innsending
-5. Gyldige innsendelser publiseres til database
-6. Registerfører kan behandle og validere innkomne rapporter direkte i systemet
-7. Brukere får beskjed om godkjenning/avvisning
+1. User logs into the system
+2. Pilots can register new obstacles through an interactive map (Home → Index)
+3. Input is validated with model attributes
+4. Obstacles are saved in a draft session before submission
+5. Valid submissions are published to the database
+6. Registrar can process and validate incoming reports directly in the system
+7. Users receive notification of approval/rejection
 
-## Funksjonalitet
+## Functionality
 
-- Brukerregistrering med godkjenning av SuperAdmin
-- Rollbasert tilgangskontroll (SuperAdmin, Registrar, FlightCrew)
-- Rapportering av luftfartshindre via interaktivt kart (Leaflet)
-- Draft-system for midlertidig lagring før innsending
-- Godkjenning/avvisning av rapporterte hindre
-- Brukeradministrasjon med filtrering og søk
+- User registration with SuperAdmin approval
+- Role-based access control (SuperAdmin, Registrar, FlightCrew)
+- Reporting of airspace obstacles via interactive map (Leaflet)
+- Draft system for temporary storage before submission
+- Approval/rejection of reported obstacles
+- User administration with filtering and search
 
-## Drift og distribusjon
+## Operations and Deployment
 
-Applikasjonen er pakket som en Docker-løsning for enkel kjøring og skalerbarhet:
+The application is packaged as a Docker solution for easy running and scalability:
 
-- Webdelen kjøres på `mcr.microsoft.com/dotnet/aspnet:9.0`
-- Databasen kjører i en MariaDB container
-- Komponentene kommuniserer via connection strings konfigurert i `appsettings.json`
+- The web part runs on `mcr.microsoft.com/dotnet/aspnet:9.0`
+- The database runs in a MariaDB container
+- Components communicate via connection strings configured in `appsettings.json`
 
-## Kjøringsinstruksjoner
+## Running Instructions
 
-### Forutsetninger
+### Prerequisites
 
-**For Docker-kjøring:**
-- Docker Desktop installert og kjørende
-- Git (for å klone repository)
-- Ingen annen programvare nødvendig
+You only need:
+- **Docker Desktop** installed and running
+- **Git** installed
+- **Terminal** (Command Prompt on Windows, Terminal on Mac/Linux)
 
-**For lokal utvikling:**
-- .NET 9.0 SDK
-- MySQL/MariaDB (or use Docker for database)
-- Visual Studio 2022 or VS Code (recommended)
+**Install Docker Desktop:**
+- Download from: https://www.docker.com/products/docker-desktop/
+- Install and start Docker Desktop
+- Test: Open terminal and run `docker --version`
 
-**For JavaScript testing:**
-- Node.js (version 18 or newer recommended)
-- npm (comes with Node.js)
+**Install Git:**
+- Windows: https://git-scm.com/download/win
+- Mac/Linux: Follow instructions for your operating system
+- Test: Open terminal and run `git --version`
 
-### Kjøre med Docker (Anbefalt)
+---
 
-1. **Naviger til prosjektmappen:**
-   ```bash
-   cd Luftfartshinder
-   ```
+### Running the Application (3 Simple Steps)
 
-2. **Start applikasjonen:**
-   ```bash
-   docker-compose up
-   ```
+**Step 1: Clone the project**
+```bash
+git clone https://github.com/noanor/kart-oppgave.git
+```
 
-3. **Vent til applikasjonen starter** (kan ta 1-2 minutter første gang mens Docker bygger image og setter opp databasen)
+**Step 2: Navigate to the project folder**
+```bash
+cd kart-oppgave/Luftfartshinder
+```
 
-4. **Åpne nettleser:**
-   - Gå til `http://localhost:8080`
+**Step 3: Start the application**
+```bash
+docker-compose up --build
+```
 
-**Stoppe applikasjonen:**
+**Wait 2-5 minutes** (first time) while Docker sets up everything.
+
+**Why `--build`?**
+Docker caches (stores) images to save time. Without `--build`, Docker may use an old cached version if the files haven't changed much. With `--build`, we ensure that Docker always rebuilds with the latest changes from GitHub.
+
+**When you see:**
+```
+luftfartshinder  | Now listening on: http://[::]:8080
+```
+
+**Open browser:** `http://localhost:8080`
+
+---
+
+### Stopping the Application
+
+Press `Ctrl+C` in the terminal, or run:
 ```bash
 docker-compose down
 ```
 
-### Kjøre lokalt (dotnet run)
+---
 
-1. **Naviger til prosjektmappen:**
-   ```bash
-   cd Luftfartshinder/Luftfartshinder
-   ```
+### Troubleshooting
 
-2. **Sørg for at database kjører:**
-   - Enten start MySQL/MariaDB lokalt
-   - Eller kjør kun databasen med Docker: `docker-compose up db` (fra Luftfartshinder-mappen)
+**"Cannot find path" error:**
+- Check that you are in the correct folder: Run `dir` (Windows) or `ls` (Mac/Linux)
+- You should see the `docker-compose.yml` file
+- If not, navigate to: `cd kart-oppgave/Luftfartshinder`
 
-3. **Kjør applikasjonen:**
-   ```bash
-   dotnet run
-   ```
+**"docker-compose: command not found":**
+- Try: `docker compose` (without hyphen)
 
-4. **Åpne nettleser:**
-   - Gå til `https://localhost:7258` eller `http://localhost:5062` (avhengig av konfigurasjon)
+**Port 8080 already in use:**
+- Stop other applications using port 8080
+- Or change the port in `docker-compose.yml`
 
-### Testbrukere
+**If you still see old changes:**
+- Check that you are using `docker-compose up --build` (not just `docker-compose up`)
+- If the problem persists, force a complete rebuild:
+  ```bash
+  docker-compose down
+  docker-compose build --no-cache
+  docker-compose up --build
+  ```
 
-Etter første migrasjon er følgende testbrukere opprettet:
+### Test Users
+
+After the first startup, you can log in with:
 
 **SuperAdmin:**
-- **Brukernavn:** `superadmin@kartverket.no`
-- **Passord:** `Superadmin123!`
-- **Rolle:** SuperAdmin (har tilgang til alle funksjoner)
+- Username: `superadmin@kartverket.no`
+- Password: `Superadmin123!`
 
 **Registrar:**
-- **Brukernavn:** `registrar`
-- **Passord:** `Passord123!`
-- **Rolle:** Registrar (kan godkjenne/avvise rapporterte hindre)
+- Username: `registrar`
+- Password: `Passord123!`
 
-**Pilot (FlightCrew):**
-- **Brukernavn:** `pilot`
-- **Passord:** `Passord123!`
-- **Rolle:** FlightCrew (kan rapportere nye luftfartshinder)
+**Pilot:**
+- Username: `pilot`
+- Password: `Passord123!`
 
 ## Testing
 
