@@ -2130,23 +2130,39 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\Bruker\\.nuget\\packages\\": {},
+=======
+    "C:\\Users\\noano\\.nuget\\packages\\": {},
+>>>>>>> ac8355f (obj)
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Bruker\\Desktop\\Eksamen2\\Luftfartshinder\\Luftfartshinder\\Luftfartshinder.csproj",
       "projectName": "Luftfartshinder",
       "projectPath": "C:\\Users\\Bruker\\Desktop\\Eksamen2\\Luftfartshinder\\Luftfartshinder\\Luftfartshinder.csproj",
       "packagesPath": "C:\\Users\\Bruker\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Bruker\\Desktop\\Eksamen2\\Luftfartshinder\\Luftfartshinder\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Luftfartshinder.csproj",
+      "projectName": "Luftfartshinder",
+      "projectPath": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\Luftfartshinder.csproj",
+      "packagesPath": "C:\\Users\\noano\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\noano\\code\\repos\\kart-oppgave\\Luftfartshinder\\Luftfartshinder\\obj\\",
+>>>>>>> ac8355f (obj)
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\Bruker\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+        "C:\\Users\\noano\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> ac8355f (obj)
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2155,7 +2171,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
