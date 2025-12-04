@@ -54,6 +54,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxVc2VyUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/noano/code/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/FlightCrew/EditObstacle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0Q3Jld1xFZGl0T2JzdGFjbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/noano/code/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/FlightCrew/EditReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0Q3Jld1xFZGl0UmVwb3J0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/noano/code/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/FlightCrew/ObstacleDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0Q3Jld1xPYnN0YWNsZURldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/noano/code/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/FlightCrew/ReportDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0Q3Jld1xSZXBvcnREZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/noano/code/repos/kart-oppgave/Luftfartshinder/Luftfartshinder/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

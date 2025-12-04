@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"documents":{"C:\\Users\\Bruker\\Desktop\\Eksamen2\\*":"https://raw.githubusercontent.com/noanor/kart-oppgave/dbe159b35ec1059770cd9b710e5f6cf0c9734082/*"}}
+=======
+{"documents":{"C:\\Users\\Noa\\repos\\kart-oppgave\\*":"https://raw.githubusercontent.com/noanor/kart-oppgave/c6a422e914910acdc06e7c70212812c033275889/*"}}
+>>>>>>> b5bca37 (View og edit obstacle og report i FlightCrewObstacles. Title og summary for report. Pill styling for status obstacle status. Consistent styling for knapper. Gjemt tilbakeknapp fra login og la til form-control klasse på username input)

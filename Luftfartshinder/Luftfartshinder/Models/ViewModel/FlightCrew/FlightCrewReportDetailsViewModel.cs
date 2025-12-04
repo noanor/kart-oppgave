@@ -1,14 +1,20 @@
-﻿using Luftfartshinder.Models.Domain;
+using Luftfartshinder.Models.Domain;
 
-namespace Luftfartshinder.Models.ViewModel.User
+namespace Luftfartshinder.Models.ViewModel.FlightCrew
 {
     /// <summary>
-    /// ViewModel for editing and displaying report details in the registrar interface.
+    /// ViewModel for displaying report details in the FlightCrew interface.
     /// </summary>
-    public class EditReportRequest
+    public class FlightCrewReportDetailsViewModel
     {
         /// <summary>Unique identifier for the report.</summary>
         public int Id { get; set; }
+        
+        /// <summary>Title of the report.</summary>
+        public required string Title { get; set; }
+        
+        /// <summary>Summary of the report.</summary>
+        public string? Summary { get; set; }
         
         /// <summary>Name of the author who created the report.</summary>
         public required string Author { get; set; }
@@ -19,13 +25,8 @@ namespace Luftfartshinder.Models.ViewModel.User
         /// <summary>Date when the report was created.</summary>
         public DateTime ReportDate { get; set; }
         
-        /// <summary>Title of the report.</summary>
-        public required string Title { get; set; }
-        
-        /// <summary>Summary of the report.</summary>
-        public string? Summary { get; set; }
-
         /// <summary>Collection of obstacles associated with this report.</summary>
         public ICollection<Obstacle> Obstacles { get; set; } = [];
     }
 }
+

@@ -1,0 +1,74 @@
+@model Luftfartshinder.Models.ViewModel.FlightCrew.FlightCrewEditReportViewModel
+@{
+    ViewData["Title"] = "Edit Report";
+    ViewData["LayoutType"] = "ipad";
+}
+
+@section Styles {
+    <link href="~/css/draft.css" rel="stylesheet" />
+}
+
+<div class="container mt-4 pt-4">
+    <div class="text-center mb-4">
+        <h1 class="mb-2">Edit Report #@Model.Id</h1>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h4 class="mb-0">Report Information</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-action="EditReport" asp-controller="FlightCrew" asp-route-id="@Model.Id">
+                        @Html.AntiForgeryToken()
+                        
+                        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Title" class="form-label">Title <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Title" class="form-control" required maxlength="100" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Summary" class="form-label">Summary</label>
+                            <textarea asp-for="Summary" class="form-control" rows="4" maxlength="500"></textarea>
+                            <div class="form-text">
+                                <span id="summaryCharCount">@(Model.Summary?.Length ?? 0)</span>/500 characters
+                            </div>
+                            <span asp-validation-for="Summary" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle me-2"></i>Save Changes
+                            </button>
+                            <a asp-action="ReportDetails" asp-controller="FlightCrew" asp-route-id="@Model.Id" 
+                               class="btn btn-secondary">
+                                <i class="bi bi-x-circle me-2"></i>Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const summaryTextarea = document.querySelector('textarea[asp-for="Summary"]');
+            const charCount = document.getElementById('summaryCharCount');
+            
+            if (summaryTextarea && charCount) {
+                summaryTextarea.addEventListener('input', function() {
+                    charCount.textContent = this.value.length;
+                });
+            }
+        });
+    </script>
+}
+
+

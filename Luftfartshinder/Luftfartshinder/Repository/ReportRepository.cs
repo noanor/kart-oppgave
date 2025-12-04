@@ -44,6 +44,7 @@ namespace Luftfartshinder.Repository
             if (existingReport != null)
             {
                 existingReport.Title = report.Title;
+                existingReport.Summary = report.Summary;
 
                 await context.SaveChangesAsync();
 

@@ -9,6 +9,10 @@
     var userId = userManager.GetUserId(User);
 }
 
+@section Styles {
+    <link href="~/css/registrar.css" rel="stylesheet" />
+}
+
 <div class="container mt-5 py-5">
     <header class="h1 text-center">
         Your Obstacles & Reports
@@ -28,6 +32,7 @@
                 <th scope="col">Lon</th>
                 <th scope="col">Registrar Note</th>
                 <th scope="col">Status</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -51,7 +56,26 @@
                             <td>@formattedLatitude</td>
                             <td>@formattedLongitude</td>
                             <td>@o.RegistrarNote</td>
-                            <td>@o.Status</td>
+                            <td>
+                                @switch (o.Status)
+                                {
+                                    case Luftfartshinder.Models.Domain.Obstacle.Statuses.Approved:
+                                        <span class="pill pill-approved">Approved</span>
+                                        break;
+                                    case Luftfartshinder.Models.Domain.Obstacle.Statuses.Rejected:
+                                        <span class="pill pill-rejected">Rejected</span>
+                                        break;
+                                    case Luftfartshinder.Models.Domain.Obstacle.Statuses.Pending:
+                                        <span class="pill pill-pending">Pending</span>
+                                        break;
+                                }
+                            </td>
+                            <td>
+                                <a asp-action="ObstacleDetails" asp-controller="FlightCrew" asp-route-id="@o.Id" 
+                                   class="btn btn-primary">
+                                    View
+                                </a>
+                            </td>
                         </tr>
                         
                     }
@@ -71,7 +95,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Date</th>
                 <th scope="col">No. of Obstacles</th>
-                <th scope="col">Registrar Note</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -84,7 +108,12 @@
                         <td>@r.Title</td>
                         <td>@r.ReportDate</td>
                         <td>@r.Obstacles.Count</td>
-                        <td>@r.RegistrarNote</td>
+                        <td>
+                            <a asp-action="ReportDetails" asp-controller="FlightCrew" asp-route-id="@r.Id" 
+                               class="btn btn-primary">
+                                View
+                            </a>
+                        </td>
                     </tr>
                     
                 }
@@ -106,6 +135,7 @@
                 <th scope="col">Lon</th>
                 <th scope="col">Registrar Note</th>
                 <th scope="col">Status</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -125,7 +155,26 @@
                     <td>@formattedLatitude</td>
                     <td>@formattedLongitude</td>
                     <td>@o.RegistrarNote</td>
-                    <td>@o.Status</td>
+                    <td>
+                        @switch (o.Status)
+                        {
+                            case Luftfartshinder.Models.Domain.Obstacle.Statuses.Approved:
+                                <span class="pill pill-approved">Approved</span>
+                                break;
+                            case Luftfartshinder.Models.Domain.Obstacle.Statuses.Rejected:
+                                <span class="pill pill-rejected">Rejected</span>
+                                break;
+                            case Luftfartshinder.Models.Domain.Obstacle.Statuses.Pending:
+                                <span class="pill pill-pending">Pending</span>
+                                break;
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="ObstacleDetails" asp-controller="FlightCrew" asp-route-id="@o.Id" 
+                           class="btn btn-primary">
+                            View
+                        </a>
+                    </td>
                 </tr>
             }
         </tbody>
