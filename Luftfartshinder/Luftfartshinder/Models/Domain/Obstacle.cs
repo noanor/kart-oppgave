@@ -12,28 +12,19 @@ namespace Luftfartshinder.Models.Domain
         /// <summary>
         /// Type of obstacle (e.g., "Powerline", "Mast", "Line", "Point", "Luftspenn").
         /// </summary>
-        public string Type { get; set; } = "";
+        [Required]
+        public string Type { get; set; }
 
         [Required(ErrorMessage = "Obstacle name is required.")]
+        [MaxLength(100, ErrorMessage = "Obstacle name cannot exceed 40 characters.")]
         public string Name { get; set; }
 
-        private double? _height;
 
         /// <summary>
         /// Height of the obstacle in meters. Maximum value is 200 meters.
         /// </summary>
-        public double? Height
-        {
-            get => _height;
-            set
-            {
-                if (value > 200)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(Height), "Obstacle height cannot exceed 200.");
-                }
-                _height = value;
-            }
-        }
+        [Range(0, 200, ErrorMessage = "Height must be between 0 and 200 meters.")]        
+        public double? Height { get; set;  }
 
         [Required(ErrorMessage = "Obstacle latitude is required.")]
         public double Latitude { get; set; }
@@ -41,6 +32,7 @@ namespace Luftfartshinder.Models.Domain
         [Required(ErrorMessage = "Obstacle longitude is required.")]
         public double Longitude { get; set; }
 
+        [MaxLength(500, ErrorMessage = "Description cannot exceed 500 characters.")]
         public string? Description { get; set; }
 
         /// <summary>
