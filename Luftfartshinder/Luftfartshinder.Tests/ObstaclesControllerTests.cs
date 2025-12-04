@@ -52,6 +52,11 @@ namespace Luftfartshinder.Tests
             };
         }
 
+        /// <summary>
+        /// GOAL: Test that Draft action returns an empty draft when no draft exists in session
+        /// LOGIC: Calls Draft() with empty session and checks that an empty ObstacleDraftViewModel is returned
+        /// RESULT: ViewResult with empty ObstacleDraftViewModel should be returned
+        /// </summary>
         [Fact]
         public void Draft_NoDraftInSession_ReturnsViewWithEmptyDraft()
         {
@@ -99,6 +104,11 @@ namespace Luftfartshinder.Tests
             Assert.Single(model.Obstacles);
         }
 
+        /// <summary>
+        /// GOAL: Test that AddOne can add an obstacle to draft in session
+        /// LOGIC: Sends a valid AddObstacleRequest and verifies that obstacle is saved in session
+        /// RESULT: OkObjectResult should be returned with response.Ok = true and count = 1
+        /// </summary>
         [Fact]
         public void AddOne_ValidData_AddsObstacleToDraft()
         {

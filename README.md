@@ -162,9 +162,11 @@ dotnet test
 ```
 
 **Test Implementation:**
-- All 59 tests pass successfully
+- All 78 tests pass successfully
 - Uses `TestSession` class for testing session functionality (replaces Moq ISession mocking to avoid extension method issues)
 - Tests cover controllers: ObstaclesController, ReportController, AccountController, DashboardController, HomeController, RegistrarController, and SuperAdminController
+- Repository tests: ObstacleRepositoryTests (9 tests) and ReportRepositoryTests (10 tests) using InMemory database
+- All tests include documentation with GOAL, LOGIC, and RESULT
 
 ### JavaScript Tests
 

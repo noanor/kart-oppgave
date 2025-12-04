@@ -1,102 +1,102 @@
 # Luftfartshinder - Kartverket
 
-## Kjøre Applikasjonen med Docker
+## Running the Application with Docker
 
-### Forutsetninger
-- **Docker Desktop** installert og kjørende
-- **Git** (for å klone repository)
-- Ingen annen programvare nødvendig (ikke Visual Studio, .NET SDK, eller MySQL)
+### Prerequisites
+- **Docker Desktop** installed and running
+- **Git** (for cloning the repository)
+- No other software required (no Visual Studio, .NET SDK, or MySQL)
 
-### Hente Applikasjonen fra GitHub
+### Getting the Application from GitHub
 
-1. **Klone repository:**
+1. **Clone repository:**
    ```bash
    git clone <github-repo-url>
    cd Luftfartshinder
    ```
 
-   **Forklaring:** Dette henter hele prosjektet fra GitHub, inkludert all kode, konfigurasjoner og Docker-filer.
+   **Explanation:** This retrieves the entire project from GitHub, including all code, configurations, and Docker files.
 
-### Enkel Kjøring
+### Simple Running
 
-1. **Naviger til prosjektmappen** (der `docker-compose.yml` ligger)
+1. **Navigate to the project folder** (where `docker-compose.yml` is located)
 
-2. **Start applikasjonen:**
+2. **Start the application:**
    ```bash
    docker-compose up
    ```
 
-3. **Vent til applikasjonen starter** (kan ta 1-2 minutter første gang mens Docker bygger image og setter opp databasen)
+3. **Wait for the application to start** (may take 1-2 minutes the first time while Docker builds the image and sets up the database)
 
-4. **Åpne nettleser:**
-   - Gå til `http://localhost:8080`
+4. **Open browser:**
+   - Go to `http://localhost:8080`
 
-**Forklaring:** `docker-compose up` bygger automatisk Docker image, starter MariaDB database, kjører migrasjoner, og starter applikasjonen. Alt er konfigurert og klar til bruk uten manuell oppsett.
+**Explanation:** `docker-compose up` automatically builds the Docker image, starts the MariaDB database, runs migrations, and starts the application. Everything is configured and ready to use without manual setup.
 
-### Stoppe Applikasjonen
+### Stopping the Application
 
-Trykk `Ctrl+C` i terminalen, eller kjør:
+Press `Ctrl+C` in the terminal, or run:
 ```bash
 docker-compose down
 ```
 
-### Standard Brukere
+### Default Users
 
-Etter første migrasjon er følgende brukere opprettet:
+After the first migration, the following users are created:
 
 **SuperAdmin:**
-- **Brukernavn:** `superadmin@kartverket.no`
-- **Passord:** `Superadmin123!`
-- **Rolle:** SuperAdmin (har tilgang til alle funksjoner)
+- **Username:** `superadmin@kartverket.no`
+- **Password:** `Superadmin123!`
+- **Role:** SuperAdmin (has access to all functions)
 
 **Registrar:**
-- **Brukernavn:** `registrar`
-- **Passord:** `Passord123!`
-- **Rolle:** Registrar (kan godkjenne/avvise rapporterte hindre)
+- **Username:** `registrar`
+- **Password:** `Passord123!`
+- **Role:** Registrar (can approve/reject reported obstacles)
 
 **Pilot (FlightCrew):**
-- **Brukernavn:** `pilot`
-- **Passord:** `Passord123!`
-- **Rolle:** FlightCrew (kan rapportere nye luftfartshinder)
+- **Username:** `pilot`
+- **Password:** `Passord123!`
+- **Role:** FlightCrew (can report new airspace obstacles)
 
 
 
-## Systemarkitektur
+## System Architecture
 
-### Arkitekturmønstre
-- **MVC (Model-View-Controller):** Separasjon mellom data, visning og logikk
-- **Repository Pattern:** Abstraherer dataaksesslaget
-- **Dependency Injection:** Løs kobling mellom komponenter
+### Architecture Patterns
+- **MVC (Model-View-Controller):** Separation between data, view, and logic
+- **Repository Pattern:** Abstracts the data access layer
+- **Dependency Injection:** Loose coupling between components
 
-### Komponenter
+### Components
 
 **Controllers:**
-- `HomeController` - Hjemmeside og rollbasert routing
-- `AccountController` - Autentisering og registrering
-- `SuperAdminController` - Brukeradministrasjon
-- `ObstaclesController` - Håndtering av luftfartshinder
-- `RegistrarController` - Godkjenning av rapporter
+- `HomeController` - Homepage and role-based routing
+- `AccountController` - Authentication and registration
+- `SuperAdminController` - User administration
+- `ObstaclesController` - Handling of airspace obstacles
+- `RegistrarController` - Approval of reports
 
 **Repositories:**
-- `ObstacleRepository` - CRUD-operasjoner for hindre
-- `ReportRepository` - Håndtering av rapporter
-- `UserRepository` - Brukerdata
-- `AccountRepository` - Brukerrapporter
+- `ObstacleRepository` - CRUD operations for obstacles
+- `ReportRepository` - Handling of reports
+- `UserRepository` - User data
+- `AccountRepository` - User reports
 
-**Databaser:**
-- `KartverketDb` - Hoveddatabase (Datacontext: ApplicationContext) for hindre og rapporter
-- `AuthKartverketDb` - Autentiseringsdatabase (Datacontext: AuthDbContext) for brukere og roller
+**Databases:**
+- `KartverketDb` - Main database (Data context: ApplicationContext) for obstacles and reports
+- `AuthKartverketDb` - Authentication database (Data context: AuthDbContext) for users and roles
 
-**Autentisering:**
-- ASP.NET Core Identity med roller: SuperAdmin, Registrar, FlightCrew
-- Rollbasert autorisering med `[Authorize(Roles = "...")]`
+**Authentication:**
+- ASP.NET Core Identity with roles: SuperAdmin, Registrar, FlightCrew
+- Role-based authorization with `[Authorize(Roles = "...")]`
 
 ---
 
-## Drift
+## Operations
 
-### Database Migrasjoner
-Migrasjoner kjøres automatisk ved oppstart via `Program.cs`. Hvis manuell migrasjon trengs:
+### Database Migrations
+Migrations run automatically on startup via `Program.cs`. If manual migration is needed:
 
 ```bash
 dotnet ef database update --context ApplicationContext
@@ -104,10 +104,10 @@ dotnet ef database update --context AuthDbContext
 ```
 
 ### Logging
-Applikasjonen logger database-tilkoblinger og feil til konsollen.
+The application logs database connections and errors to the console.
 
-### Miljøvariabler
-Connection strings konfigureres i `appsettings.json`:
+### Environment Variables
+Connection strings are configured in `appsettings.json`:
 ```json
 "ConnectionStrings": {
   "DbConnection": "Server=127.0.0.1;Port=3307;Database=Kartverketdb;User=root;Password=root123",
@@ -119,43 +119,46 @@ Connection strings konfigureres i `appsettings.json`:
 
 ## Testing
 
-### Testscenarier
+### Test Scenarios
 
 **Login Testing:**
-1.  Login GET returnerer view
-2.  Ugyldige credentials avvises
-3.  Ikke-godkjente brukere kan ikke logge inn
-4.  Gyldige credentials redirecter korrekt
-5.  SuperAdmin redirecter til SuperAdminHome
+1.  Login GET returns view
+2.  Invalid credentials are rejected
+3.  Non-approved users cannot log in
+4.  Valid credentials redirect correctly
+5.  SuperAdmin redirects to SuperAdminHome
 
 **SuperAdmin Testing:**
-1.  Liste viser alle brukere
-2.  Filtrering etter rolle fungerer
-3.  Approve oppdaterer brukerstatus
-4.  Approve håndterer ikke-eksisterende brukere
-5.  Delete sletter brukere
-6.  Decline sletter ventende brukere
+1.  List shows all users
+2.  Filtering by role works
+3.  Approve updates user status
+4.  Approve handles non-existing users
+5.  Delete removes users
+6.  Decline removes pending users
 
-### Testresultater
+### Test Results
 
-Alle tester kjører med `dotnet test` fra `Luftfartshinder.Tests`-mappen.
+All tests run with `dotnet test` from the `Luftfartshinder.Tests` folder.
 
-**Siste testkjøring:**
+**Latest test run:**
 ```
-Test summary: total: 59; failed: 0; succeeded: 59; skipped: 0; duration: 5,0s
+Test summary: total: 78; failed: 0; succeeded: 78; skipped: 0; duration: 2,1s
 Build succeeded with 40 warning(s)
 ```
 
-**Testkategorier:**
-- **Enhetstesting (Unit Testing):** 3 tester - Tester enkeltkomponenter isolert
-- **Systemstesting (System Testing):** 2 tester - Tester at hele systemet fungerer sammen  
-- **Sikkerhetstesting (Security Testing):** 2 tester - Tester sikkerhetsaspekter
-- **Brukervennlighetstesting (Usability Testing):** 2 tester - Tester brukervennlighet
-- **Controller Testing:** 50 tester - Tester alle controllers (AccountController, HomeController, ObstaclesController, ReportController, RegistrarController, SuperAdminController, DashboardController)
+**Test Categories:**
+- **Unit Testing:** 3 tests - Tests individual components in isolation
+- **System Testing:** 2 tests - Tests that the entire system works together  
+- **Security Testing:** 2 tests - Tests security aspects
+- **Usability Testing:** 2 tests - Tests usability
+- **Controller Testing:** 50 tests - Tests all controllers (AccountController, HomeController, ObstaclesController, ReportController, RegistrarController, SuperAdminController, DashboardController)
+- **Repository Testing:** 19 tests - ObstacleRepositoryTests (9 tests) and ReportRepositoryTests (10 tests) with InMemory database
 
-**Test Implementering:**
-- Bruker `TestSession` klasse for testing av session-funksjonalitet (erstatter Moq ISession mocking for å unngå problemer med extension methods)
-- Alle 59 tester passerer
+**Test Implementation:**
+- Uses `TestSession` class for testing session functionality (replaces Moq ISession mocking to avoid extension method issues)
+- All tests have documentation with GOAL, LOGIC, and RESULT
+- Repository tests use InMemory database for isolation and fast execution
+- All 78 tests pass
 
 **Run tests:**
 ```bash
@@ -163,7 +166,7 @@ cd Luftfartshinder/Luftfartshinder.Tests
 dotnet test
 ```
 
-**Note:** Det er 40 advarsler relatert til null checks i testkoden. Disse påvirker ikke funksjonalitet, men bør fikses for optimal kodekvalitet.
+**Note:** There are 40 warnings related to null checks in the test code. These do not affect functionality, but should be fixed for optimal code quality.
 
 ### JavaScript Testing
 
@@ -223,8 +226,8 @@ JavaScript tests are organized in `wwwroot/js/`:
 
 **Important:** JavaScript tests require Node.js and cannot be run without it. If you don't have Node.js installed, you must install it first (see instructions above).
 
-## Roller
+## Roles
 
-- **SuperAdmin:** Full tilgang, brukeradministrasjon
-- **Registrar:** Godkjenner/avviser rapporterte hindre
-- **FlightCrew:** Rapporterer nye luftfartshinder
+- **SuperAdmin:** Full access, user administration
+- **Registrar:** Approves/rejects reported obstacles
+- **FlightCrew:** Reports new airspace obstacles

@@ -80,17 +80,17 @@ namespace Luftfartshinder.Controllers.Obstacles
         {
             var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey);
 
-            // 1. Finn innlogget bruker
+            // 1. Find logged in user
             var user = await userManager.GetUserAsync(User);
 
             if (user == null)
             {
-                return Challenge(); // eller throw
+                return Challenge(); // or throw
             }
 
             if (user.OrganizationId == 0)
             {
-                return BadRequest("Brukeren er ikke knyttet til en organisasjon.");
+                return BadRequest("User is not associated with an organization.");
             }
 
             // Create new report

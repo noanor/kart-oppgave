@@ -18,6 +18,11 @@ namespace Luftfartshinder.Tests
         // Tester enkeltkomponenter isolert
       
 
+        /// <summary>
+        /// GOAL: Test that Obstacle accepts valid height (under 200m)
+        /// LOGIC: Sets Height to 150.0 and verifies that the value is accepted
+        /// RESULT: Height should be set to 150.0 without exceptions
+        /// </summary>
         [Fact]
         public void UnitTest_ObstacleHeightValidation_AcceptsValidHeight()
         {
@@ -31,6 +36,11 @@ namespace Luftfartshinder.Tests
             Assert.Equal(150.0, obstacle.Height);
         }
 
+        /// <summary>
+        /// GOAL: Test that Obstacle rejects height over 200m
+        /// LOGIC: Attempts to set Height to 250.0 and expects exception
+        /// RESULT: ArgumentOutOfRangeException should be thrown when height exceeds 200m
+        /// </summary>
         [Fact]
         public void UnitTest_ObstacleHeightValidation_RejectsHeightOver200()
         {
@@ -45,6 +55,11 @@ namespace Luftfartshinder.Tests
         // Tester at hele systemet fungerer sammen
        
 
+        /// <summary>
+        /// GOAL: Test that LoginViewModel validates required fields
+        /// LOGIC: Creates LoginViewModel with empty fields and runs validation
+        /// RESULT: Validation should fail and return error messages for Username and Password
+        /// </summary>
         [Fact]
         public void SystemTest_LoginViewModel_ValidatesRequiredFields()
         {
@@ -66,6 +81,11 @@ namespace Luftfartshinder.Tests
             Assert.Contains(validationResults, v => v.MemberNames.Contains("Password"));
         }
 
+        /// <summary>
+        /// GOAL: Test that LoginViewModel accepts valid input
+        /// LOGIC: Creates LoginViewModel with valid values and runs validation
+        /// RESULT: Validation should succeed (isValid = true)
+        /// </summary>
         [Fact]
         public void SystemTest_LoginViewModel_AcceptsValidInput()
         {
@@ -89,6 +109,11 @@ namespace Luftfartshinder.Tests
         // Tester sikkerhetsaspekter
       
 
+        /// <summary>
+        /// GOAL: Test that Obstacle.Name is required for security
+        /// LOGIC: Creates Obstacle without Name and runs validation
+        /// RESULT: Validation should fail with error message for Name field
+        /// </summary>
         [Fact]
         public void SecurityTest_ObstacleName_IsRequired()
         {
@@ -104,6 +129,11 @@ namespace Luftfartshinder.Tests
             Assert.Contains(validationResults, v => v.MemberNames.Contains("Name"));
         }
 
+        /// <summary>
+        /// GOAL: Test that Obstacle coordinates are required for security
+        /// LOGIC: Creates Obstacle with coordinates set to 0.0 and verifies validation
+        /// RESULT: Validation should pass (coordinates are set, even if they are 0.0)
+        /// </summary>
         [Fact]
         public void SecurityTest_ObstacleCoordinates_AreRequired()
         {
@@ -127,6 +157,11 @@ namespace Luftfartshinder.Tests
         // Tester at systemet er brukervennlig
         // ============================================
 
+        /// <summary>
+        /// GOAL: Test that Obstacle can be created with minimal data for usability
+        /// LOGIC: Creates Obstacle with only required fields (Name, Latitude, Longitude, Height)
+        /// RESULT: Obstacle should be created without errors with correct data
+        /// </summary>
         [Fact]
         public void UsabilityTest_Obstacle_CanBeCreatedWithMinimalData()
         {
@@ -147,6 +182,11 @@ namespace Luftfartshinder.Tests
             Assert.Equal(50.0, obstacle.Height);
         }
 
+        /// <summary>
+        /// GOAL: Test that Obstacle provides helpful error messages for usability
+        /// LOGIC: Creates Obstacle without required fields and checks error messages
+        /// RESULT: Error messages should contain "required" to help the user
+        /// </summary>
         [Fact]
         public void UsabilityTest_Obstacle_ProvidesHelpfulErrorMessages()
         {
