@@ -76,9 +76,20 @@ namespace Luftfartshinder.Controllers.Obstacles
         // === POST: /obstacles/submit-draft ===
         [Authorize]
         [HttpPost("/obstacles/submit-draft")]
-        public async Task<IActionResult> SubmitDraft()
+        public async Task<IActionResult> SubmitDraft(SubmitDraftViewModel model)
         {
-            var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey);
+            ViewData["LayoutType"] = "ipad";
+
+            // Get draft from session
+            var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey)
+                       ?? new ObstacleDraftViewModel();
+
+            // Validate model
+            if (!ModelState.IsValid)
+            {
+                // Return to draft view with validation errors
+                return View("Draft", draft);
+            }
 
             // 1. Find logged in user
             var user = await userManager.GetUserAsync(User);
@@ -93,34 +104,33 @@ namespace Luftfartshinder.Controllers.Obstacles
                 return BadRequest("User is not associated with an organization.");
             }
 
+            if (draft is null || draft.Obstacles.Count == 0)
+            {
+                return BadRequest("No draft to submit.");
+            }
+
             // Create new report
             var newReport = new Report
             {
                 ReportDate = DateTime.Now,
                 Author = User.Identity.Name,
                 AuthorId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-                Title = "",
+                Title = model.Title,
+                Summary = model.Summary,
                 OrganizationId = user.OrganizationId
             };
-
-            if (draft is null || draft.Obstacles.Count == 0)
-            {
-                return BadRequest("No draft to submit.");
-            }
 
             // Assign obstacles to the report
             foreach (var obstacle in draft.Obstacles)
             {
                 obstacle.OrganizationId = user.OrganizationId;
                 newReport.Obstacles.Add(obstacle);
-
             }
 
             try
             {
                 // Send report to DB
                 await reportRepository.AddAsync(newReport);
-
             }
             catch (Exception ex)
             {
@@ -130,7 +140,7 @@ namespace Luftfartshinder.Controllers.Obstacles
                 Console.WriteLine("Inner: " + ex.InnerException?.Message);
                 throw; // or return BadRequest with the inner message
             }
-            //applicationContext.SaveChanges();
+            
             HttpContext.Session.Remove(DraftKey);
             TempData["DraftSubmitted"] = true;
             return RedirectToAction("Index", "Home");
@@ -214,24 +224,6 @@ namespace Luftfartshinder.Controllers.Obstacles
                 }).ToList();
 
             return Ok(list);
-        }
-
-        // Delete draft obstacle
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteDraftObstacle(int index)
-        {
-            var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey);
-            if (draft is null || index < 0 || index >= draft.Obstacles.Count)
-            {
-                return BadRequest("Invalid draft or index.");
-            }
-
-            draft.Obstacles.RemoveAt(index);
-            HttpContext.Session.Set(DraftKey, draft);
-
-            TempData["ObstacleDeleted"] = true;
-            return RedirectToAction("Draft");
         }
 
         // DTO for JSON requests

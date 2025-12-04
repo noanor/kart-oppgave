@@ -22,8 +22,8 @@ namespace Luftfartshinder.Models.ViewModel.User
         /// <summary>Title of the report.</summary>
         public required string Title { get; set; }
         
-        /// <summary>Optional note added by the registrar during review.</summary>
-        public string? RegistrarNote { get; set; }
+        /// <summary>Summary of the report.</summary>
+        public string? Summary { get; set; }
 
         /// <summary>Collection of obstacles associated with this report.</summary>
         public ICollection<Obstacle> Obstacles { get; set; } = [];

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
 using System.Linq;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text.Json;
 using Xunit;
@@ -168,6 +169,7 @@ namespace Luftfartshinder.Tests
             var httpContextMock = new Mock<HttpContext>();
             var identity = new ClaimsIdentity();
             var principal = new ClaimsPrincipal(identity);
+            var model = new SubmitDraftViewModel() { Title = "Example title"};
             httpContextMock.Setup(h => h.User).Returns(principal);
             httpContextMock.Setup(h => h.Session).Returns(session);
             controller.ControllerContext = new ControllerContext
@@ -186,7 +188,7 @@ namespace Luftfartshinder.Tests
             session.SetString("ObstacleDraft", json);
 
             // Act
-            var result = await controller.SubmitDraft();
+            var result = await controller.SubmitDraft(model);
 
             // Assert
             Assert.IsType<ChallengeResult>(result);

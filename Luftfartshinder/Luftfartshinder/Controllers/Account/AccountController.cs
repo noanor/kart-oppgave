@@ -210,6 +210,7 @@ namespace Luftfartshinder.Controllers.Account
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             ViewData["LayoutType"] = "ipad";
+            ViewData["BodyClass"] = "page-login";
 
             if (!ModelState.IsValid)
             {

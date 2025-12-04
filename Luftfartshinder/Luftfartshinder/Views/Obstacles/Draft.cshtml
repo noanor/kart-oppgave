@@ -149,30 +149,55 @@
 <div class="modal fade" id="modalSubmitDraft" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="labelSubmitDraft" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="labelSubmitDraft">Submit Draft</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Have you filled out all information? If not, go back and do so.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <form method="post" 
-                      asp-action="SubmitDraft"
-                      asp-controller="Obstacles">
-                    @Html.AntiForgeryToken()
-                    <button 
-                            id="btnSubminDraft"
-                            class="btn btn-primary"
-                            type="submit"
-                            data-bs-toggle="modal"
-                            data-bs-target="#modalSubmitDraft">
+            <form method="post" 
+                  asp-action="SubmitDraft"
+                  asp-controller="Obstacles"
+                  id="submitDraftForm"
+                  novalidate>
+                @Html.AntiForgeryToken()
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="labelSubmitDraft">Submit Draft</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-3">Have you filled out all information? If not, go back and do so.</p>
+                    
+                    <div class="mb-3">
+                        <label for="Title" class="form-label">Title <span class="text-danger">*</span></label>
+                        <input type="text" 
+                               name="Title"
+                               class="form-control" 
+                               id="draftTitle"
+                               required 
+                               maxlength="100"
+                               placeholder="Enter report title"/>
+                        <div class="invalid-feedback">
+                            Please provide a title for the report.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Summary" class="form-label">Summary</label>
+                        <textarea name="Summary"
+                                  class="form-control" 
+                                  id="draftSummary"
+                                  rows="4"
+                                  maxlength="500"
+                                  placeholder="Enter report summary (optional)"></textarea>
+                        <div class="form-text">
+                            <span id="summaryCharCount">0</span>/500 characters
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" 
+                            id="btnSubmitDraft"
+                            class="btn btn-primary">
                         Submit
                     </button>
-
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -230,6 +255,56 @@
                 const toastEl = document.getElementById('toastDraftCleared');
                 const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
                 toast.show();
+            }
+
+            // Character counter for Summary field
+            const summaryTextarea = document.getElementById('draftSummary');
+            const charCount = document.getElementById('summaryCharCount');
+            
+            if (summaryTextarea && charCount) {
+                summaryTextarea.addEventListener('input', function() {
+                    charCount.textContent = this.value.length;
+                });
+            }
+
+            // Form validation
+            const submitDraftForm = document.getElementById('submitDraftForm');
+            const draftTitle = document.getElementById('draftTitle');
+            
+            if (submitDraftForm) {
+                submitDraftForm.addEventListener('submit', function(event) {
+                    // Remove previous validation classes
+                    draftTitle.classList.remove('is-invalid', 'is-valid');
+                    
+                    // Validate Title
+                    if (!draftTitle.value || draftTitle.value.trim() === '') {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        draftTitle.classList.add('is-invalid');
+                        return false;
+                    }
+                    
+                    // Validate max length
+                    if (draftTitle.value.length > 100) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        draftTitle.classList.add('is-invalid');
+                        return false;
+                    }
+                    
+                    draftTitle.classList.add('is-valid');
+                    
+                    // Validate Summary max length
+                    if (summaryTextarea && summaryTextarea.value.length > 500) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        summaryTextarea.classList.add('is-invalid');
+                        return false;
+                    }
+                    
+                    // If all validations pass, form will submit
+                    return true;
+                }, false);
             }
         });
     </script>

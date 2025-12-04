@@ -88,11 +88,11 @@ namespace Luftfartshinder.Migrations.Application
                     b.Property<int>("OrganizationId")
                         .HasColumnType("int");
 
-                    b.Property<string>("RegistrarNote")
-                        .HasColumnType("longtext");
-
                     b.Property<DateTime>("ReportDate")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Summary")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Title")
                         .IsRequired()

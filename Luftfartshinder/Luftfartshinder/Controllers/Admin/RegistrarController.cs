@@ -148,7 +148,6 @@ namespace Luftfartshinder.Controllers.Admin
                 AuthorId = report.AuthorId,
                 Title = report.Title,
                 Obstacles = report.Obstacles,
-                RegistrarNote = report.RegistrarNote,
                 ReportDate = report.ReportDate
             };
         }
