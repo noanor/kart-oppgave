@@ -142,7 +142,7 @@ Alle tester kjører med `dotnet test` fra `Luftfartshinder.Tests`-mappen.
 
 **Siste testkjøring:**
 ```
-Test summary: total: 59; failed: 0; succeeded: 59; skipped: 0; duration: 5,0s
+Test summary: total: 78; failed: 0; succeeded: 78; skipped: 0; duration: 2,1s
 Build succeeded with 40 warning(s)
 ```
 
@@ -152,10 +152,13 @@ Build succeeded with 40 warning(s)
 - **Sikkerhetstesting (Security Testing):** 2 tester - Tester sikkerhetsaspekter
 - **Brukervennlighetstesting (Usability Testing):** 2 tester - Tester brukervennlighet
 - **Controller Testing:** 50 tester - Tester alle controllers (AccountController, HomeController, ObstaclesController, ReportController, RegistrarController, SuperAdminController, DashboardController)
+- **Repository Testing:** 19 tester - ObstacleRepositoryTests (9 tester) og ReportRepositoryTests (10 tester) med InMemory database
 
 **Test Implementering:**
 - Bruker `TestSession` klasse for testing av session-funksjonalitet (erstatter Moq ISession mocking for å unngå problemer med extension methods)
-- Alle 59 tester passerer
+- Alle tester har dokumentasjon med MÅL, LOGIKK og RESULTAT
+- Repository-tester bruker InMemory database for isolasjon og rask kjøring
+- Alle 78 tester passerer
 
 **Run tests:**
 ```bash
