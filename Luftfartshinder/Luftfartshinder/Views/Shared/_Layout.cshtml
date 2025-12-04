@@ -3,8 +3,12 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> signInManager
 @{
-    // Get layout-type from ViewData, default is 'auto' (automatically based on screen size)
     var layoutType = ViewData["LayoutType"]?.ToString()?.ToLower() ?? "auto";
+
+    var isSignedIn = signInManager.IsSignedIn(User);
+    var isSuperAdmin = User.IsInRole("SuperAdmin");
+    var isRegistrar = User.IsInRole("Registrar");
+    var isFlightCrew = User.IsInRole("FlightCrew");
 }
 <!DOCTYPE html>
 <html lang="no">
@@ -22,10 +26,11 @@
     </head>
 
     <body data-layout-type="@layoutType" class="@(ViewData["BodyClass"]?.ToString() ?? "")">
-        @if (signInManager.IsSignedIn(User))
+        @* Show navigation and header only for signed-in users *@
+        @if (isSignedIn)
         {
             <header>
-                <!-- PC-navbar: optimized for desktop -->
+                @* Desktop navbar (PC) *@
                 <nav id="navbarPC" class="navbar navbar-expand-sm navbar-light bg-detail box-shadow fixed-top">
                     <div class="container-fluid">
                         <a class="navbar-brand text-white d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
@@ -40,11 +45,13 @@
 
                         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between align-items-center">
                             <ul class="navbar-nav flex-grow-1">
+                                @* Home is available to all authenticated users *@
                                 <li class="nav-item">
                                     <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                 </li>
 
-                                @if (User.IsInRole("SuperAdmin"))
+                                @* Admin dropdown only for SuperAdmin *@
+                                @if (isSuperAdmin)
                                 {
                                     <li class="nav-item align-self-center">
                                         <div class="dropdown">
@@ -61,13 +68,15 @@
                                             </ul>
                                         </div>
                                     </li>
-                                }
-                                
+                                }                                
+
+                                @* Draft is available to all authenticated users *@
                                 <li class="nav-item">
                                     <a class="nav-link text-white" asp-area="" asp-controller="Obstacles" asp-action="Draft">Draft</a>
                                 </li>
 
-                                @if (User.IsInRole("Registrar") && !User.IsInRole("SuperAdmin"))
+                                @* Registrar link for Registrar role when not SuperAdmin *@
+                                @if (isRegistrar && !isSuperAdmin)
                                 {
                                     <li class="nav-item">
                                         <a class="nav-link text-white" asp-area="" asp-controller="Registrar" asp-action="Overview">Registrar</a>
@@ -76,7 +85,8 @@
                             </ul>
 
                         <ul class="navbar-nav flex-grow-1 justify-content-end align-items-center">
-                            @if (User.IsInRole("FlightCrew"))
+                            @* Tutorial link is visible for FlightCrew only *@
+                            @if (isFlightCrew)
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Tutorial">Tutorial</a>
@@ -86,9 +96,10 @@
                             <li class="nav-item">
                                 <div class="dropdown me-4">
                                     <button class="btn dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        @User?.Identity?.Name
+                                        @User?.Identity?.Name @* Display current user name *@
                                     </button>
 
+                                    @* Account menu (Dashboard + Sign out) *@
                                     <ul class="dropdown-menu dropdown-menu-end account-menu">
                                         <li>
                                             <a class="dropdown-item" asp-area="" asp-controller="Dashboard" asp-action="Dashboard">
@@ -110,10 +121,8 @@
                             </li>
                         </ul>
                     </div>
-                </div>
             </nav>
-
-                <!-- iPad-navbar: optimized for touch devices -->
+                @* iPad / tablet navbar using offcanvas menu *@
                 <nav id="navbarIPAD" class="navbar fixed-top">
                     <div class="container-fluid d-flex justify-content-between align-items-center">
                         <button class="navbar-toggler bg-body me-2 ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -122,7 +131,7 @@
 
                         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                             <div class="offcanvas-header">
-                                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Meny</h5>
+                                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
@@ -131,13 +140,15 @@
                                         <a class="nav-link btn btn-dark active text-light" aria-current="page" role="button"
                                         asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                     </li>
-
+                                    
+                                    @* Draft page for all authenticated users (iPad) *@
                                     <li class="nav-item mb-3">
                                         <a class="nav-link btn btn-dark active text-light" aria-current="page" role="button"
                                         asp-area="" asp-controller="Obstacles" asp-action="Draft">Draft</a>
                                     </li>
 
-                                    @if (User.IsInRole("FlightCrew"))
+                                    @* Tutorial page visible only for FlightCrew (iPad) *@
+                                    @if (isFlightCrew)
                                     {
                                         <li class="nav-item mb-3">
                                             <a class="nav-link btn btn-dark active text-light" asp-area="" asp-controller="Home" asp-action="Tutorial" role="button">Tutorial</a>
@@ -149,7 +160,8 @@
                                         asp-area="" asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>
                                     </li>
 
-                                    @if (User.IsInRole("SuperAdmin"))
+                                    @* Registrar overview only for SuperAdmin on iPad *@
+                                    @if (isSuperAdmin)
                                     {
                                         <li class="nav-item mb-3">
                                             <a class="nav-link btn btn-dark active text-light" aria-current="page" role="button"
@@ -164,7 +176,7 @@
                                            data-bs-target="#logoutModal"
                                            role="button">
                                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                            Sign out
+                                            Log out
                                         </a>
                                     </li>
                                 </ul>
@@ -175,7 +187,7 @@
             </header>
         }
 
-        <!-- Global back button for iPad pages (hidden on Draft page which has its own button) -->
+        @* Global back button for iPad pages (hidden on Draft where a specific back button exists) *@
         <button class="ipad-back-button" 
                 onclick="window.history.back(); return false;"
                 aria-label="Back">
@@ -187,19 +199,21 @@
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
-        @if (signInManager.IsSignedIn(User))
+
+        @if (isSignedIn)
         {
             <script src="~/js/dualNavbar.js"></script>
         }
+
         @await RenderSectionAsync("Scripts", required: false)
         @await RenderSectionAsync("Styles", required: false)
 
-        <!-- Logout modal -->
+        @* Logout confirmation modal shared across pages *@
         <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+                        <h5 class="modal-title" id="logoutModalLabel">Confirm Log out</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">

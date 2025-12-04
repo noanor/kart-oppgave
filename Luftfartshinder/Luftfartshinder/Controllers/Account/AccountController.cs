@@ -94,7 +94,7 @@ namespace Luftfartshinder.Controllers.Account
             if (success)
             {
                 TempData["RegistrationSuccess"] = "User registered successfully!";
-                return RedirectToAction("Dashboard", "Account");
+                return RedirectToAction("Dashboard", "Dashboard");
             }
 
             AddIdentityErrorsToModelState(result);

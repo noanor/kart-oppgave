@@ -8,13 +8,6 @@
 }
 
 <div class="container mt-5 py-5">
-    <div class="mb-3">
-        <a class="btn btn-outline-secondary" asp-controller="Dashboard" asp-action="Dashboard">
-            <span class="material-symbols-outlined inline-icon">arrow_back</span>
-            Back
-        </a>
-    </div>
-    
     <div class="h1 text-center">
         List of Obstacles
     </div>
@@ -77,7 +70,7 @@
                         </td>
 
                         <td>
-                            <a class="btn btn-outline-primary shadow btn-link-style" role="button"
+                            <a class="btn btn-outline-primary shadow" role="button"
                                asp-action="Edit"
                                asp-controller="Obstacles"
                                asp-route-id="@o.Id">
