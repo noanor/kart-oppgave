@@ -8,6 +8,11 @@ namespace Luftfartshinder.Tests
 {
     public class SystemTestingTests
     {
+        /// <summary>
+        /// MÅL: Teste at hjemmesiden kan lastes uten feil
+        /// LOGIKK: Kaller HomeController.Index() og verifiserer at en view returneres
+        /// RESULTAT: ViewResult skal returneres uten null-verdier
+        /// </summary>
         [Fact]
         public void System_HomePage_LoadsSuccessfully()
         {

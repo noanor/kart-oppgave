@@ -56,6 +56,11 @@ namespace Luftfartshinder.Tests
                 userServiceMock.Object);
         }
 
+        /// <summary>
+        /// MÅL: Teste at Login GET-action returnerer en view
+        /// LOGIKK: Kaller Login() uten parametere og sjekker returtypen
+        /// RESULTAT: Metoden skal returnere en ViewResult
+        /// </summary>
         [Fact]
         public void Login_GET_ReturnsView()
         {
@@ -79,6 +84,11 @@ namespace Luftfartshinder.Tests
             Assert.Null(viewResult.ViewName);
         }
 
+        /// <summary>
+        /// MÅL: Teste at Login POST håndterer ugyldige credentials korrekt
+        /// LOGIKK: Prøver å logge inn med feil passord og verifiserer at feilmelding returneres
+        /// RESULTAT: ViewResult skal returneres med ModelState.IsValid = false
+        /// </summary>
         [Fact]
         public async Task Login_POST_InvalidCredentials_ReturnsViewWithError()
         {

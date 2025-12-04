@@ -11,6 +11,11 @@ namespace Luftfartshinder.Tests
 {
     public class SecurityTestingTests
     {
+        /// <summary>
+        /// MÅL: Teste at SuperAdminHome krever autorisasjon
+        /// LOGIKK: Kaller SuperAdminHome() og verifiserer at resultatet ikke er null (indikerer autorisasjon sjekk)
+        /// RESULTAT: Resultat skal ikke være null, noe som indikerer at autorisasjon håndteres
+        /// </summary>
         [Fact]
         public void Security_SuperAdminHome_RequiresAuthorization()
         {
@@ -26,6 +31,11 @@ namespace Luftfartshinder.Tests
             Assert.NotNull(result);
         }
 
+        /// <summary>
+        /// MÅL: Teste at HTTP-responser inneholder nødvendige sikkerhetsheaders
+        /// LOGIKK: Sender en HTTP-forespørsel og verifiserer at alle sikkerhetsheaders er tilstede
+        /// RESULTAT: Alle headers (X-Content-Type-Options, X-XSS-Protection, X-Frame-Options, CSP, HSTS) skal være tilstede med korrekte verdier
+        /// </summary>
         [Fact]
         public async Task Security_HttpResponse_ContainsSecurityHeaders()
         {

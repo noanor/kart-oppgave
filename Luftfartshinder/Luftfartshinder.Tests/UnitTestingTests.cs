@@ -8,6 +8,11 @@ namespace Luftfartshinder.Tests
 {
     public class UnitTestingTests
     {
+        /// <summary>
+        /// MÅL: Teste at HomeController.Index() returnerer en view
+        /// LOGIKK: Kaller Index() metoden og sjekker returtypen
+        /// RESULTAT: ViewResult skal returneres
+        /// </summary>
         [Fact]
         public void HomeController_Index_ReturnsView()
         {
