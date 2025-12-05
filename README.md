@@ -6,6 +6,14 @@ System for reporting and control of airspace obstacles to the National Register 
 
 This application is developed to give pilots and flight crews from NLA, the Air Force, and the Police Helicopter Service the ability to register obstacles in airspace. Reported data can then be reviewed and either approved or rejected by the registrar in NRL. The goal is to strengthen flight safety through a continuously updated register of airspace obstacles.
 
+## AI Assistance Disclosure
+During the development of this MVC application, AI tools (specifically ChatGPT from OpenAI and Cursor IDE) were utilized to support the following tasks:
+• Researching architectural patterns and best practices
+• Generating initial drafts of explanations and documentation
+• Providing code suggestions and troubleshooting guidance
+
+All AI-generated material was critically evaluated, edited, and integrated by the project members. The final implementation and documentation reflect our own understanding and decisions.
+
 ## Technologies
 
 - ASP.NET Core 9.0 MVC
@@ -223,10 +231,3 @@ This runs all JavaScript tests in `Luftfartshinder/Luftfartshinder/wwwroot/js/`:
 - **Detailed documentation:** See [README.md](Luftfartshinder/Luftfartshinder/README.md) in the Luftfartshinder/Luftfartshinder folder for system architecture, operations, and testing
 - **Testing:** See the [Testing section](Luftfartshinder/Luftfartshinder/README.md#testing) in README.md for test documentation and results
 
-## AI Assistance Disclosure
-During the development of this MVC application, AI tools (specifically ChatGPT from OpenAI and Cursor IDE) were utilized to support the following tasks:
-• Researching architectural patterns and best practices
-• Generating initial drafts of explanations and documentation
-• Providing code suggestions and troubleshooting guidance
-
-All AI-generated material was critically evaluated, edited, and integrated by the project members. The final implementation and documentation reflect our own understanding and decisions.
