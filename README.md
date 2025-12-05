@@ -23,6 +23,8 @@ All AI-generated material was critically evaluated, edited, and integrated by th
 - Leaflet (map client)
 - Docker (containerization)
 
+- Wheel menu source (Created by: @wheatup): https://codepen.io/wheatup/pen/GbgyLY
+
 ## Architecture
 
 The solution is built following the Model-View-Controller (MVC) pattern:
