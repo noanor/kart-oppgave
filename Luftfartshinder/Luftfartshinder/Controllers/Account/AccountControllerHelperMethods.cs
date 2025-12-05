@@ -59,7 +59,7 @@ namespace Luftfartshinder.Controllers.Account
                 return RedirectToAction("Tutorial", "Home");
             }
 
-            var roles = await userManager.GetRolesAsync(user);
+            var roles = await _userManager.GetRolesAsync(user);
 
             if (roles.Contains("SuperAdmin") || roles.Contains("Registrar"))
             {

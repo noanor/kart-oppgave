@@ -4,6 +4,7 @@ using Luftfartshinder.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Luftfartshinder.Migrations.Application
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20251205092714_SeedObstaclesAndReports")]
+    partial class SeedObstaclesAndReports
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,71 +177,6 @@ namespace Luftfartshinder.Migrations.Application
                             ReportId = 3,
                             Status = 0,
                             Type = "area"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Description = "Communication tower near Tromsø airport",
-                            Height = 85.0,
-                            Latitude = 69.649199999999993,
-                            Longitude = 18.955300000000001,
-                            Name = "Communication Tower",
-                            OrganizationId = 4,
-                            ReportId = 4,
-                            Status = 0,
-                            Type = "mast"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Description = "Weather monitoring mast in Tromsø region",
-                            Height = 20.0,
-                            Latitude = 69.650000000000006,
-                            Longitude = 18.960000000000001,
-                            Name = "Weather Mast",
-                            OrganizationId = 4,
-                            ReportId = 4,
-                            Status = 0,
-                            Type = "point"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Description = "High voltage powerline crossing flight path",
-                            Height = 50.0,
-                            Latitude = 69.644999999999996,
-                            Longitude = 18.949999999999999,
-                            Name = "High Voltage Line",
-                            OrganizationId = 4,
-                            ReportId = 4,
-                            Status = 1,
-                            Type = "powerline"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Description = "Main powerline in Stavanger area",
-                            Height = 40.0,
-                            Latitude = 58.969999999999999,
-                            Longitude = 5.7331000000000003,
-                            Name = "Main Powerline",
-                            OrganizationId = 4,
-                            ReportId = 5,
-                            Status = 0,
-                            Type = "powerline"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Description = "Overhead cable line near Stavanger",
-                            Height = 28.5,
-                            Latitude = 58.975000000000001,
-                            Longitude = 5.7400000000000002,
-                            Name = "Cable Line",
-                            OrganizationId = 4,
-                            ReportId = 5,
-                            Status = 0,
-                            Type = "line"
                         });
                 });
 
@@ -282,7 +220,7 @@ namespace Luftfartshinder.Migrations.Application
                             Author = "pilot",
                             AuthorId = "1d3b44cf-5507-444f-b84c-842539f13e02",
                             OrganizationId = 4,
-                            ReportDate = new DateTime(2025, 11, 30, 9, 40, 1, 243, DateTimeKind.Utc).AddTicks(4435),
+                            ReportDate = new DateTime(2025, 11, 30, 9, 27, 14, 420, DateTimeKind.Utc).AddTicks(9261),
                             Summary = "Multiple powerline obstacles detected during flight survey",
                             Title = "Powerline Obstacle Report - Oslo Area"
                         },
@@ -292,7 +230,7 @@ namespace Luftfartshinder.Migrations.Application
                             Author = "pilot",
                             AuthorId = "1d3b44cf-5507-444f-b84c-842539f13e02",
                             OrganizationId = 4,
-                            ReportDate = new DateTime(2025, 12, 2, 9, 40, 1, 243, DateTimeKind.Utc).AddTicks(4659),
+                            ReportDate = new DateTime(2025, 12, 2, 9, 27, 14, 420, DateTimeKind.Utc).AddTicks(9538),
                             Summary = "Communication masts and towers identified in flight path",
                             Title = "Mast and Tower Report - Bergen Region"
                         },
@@ -302,29 +240,9 @@ namespace Luftfartshinder.Migrations.Application
                             Author = "registrar",
                             AuthorId = "322acd53-a201-47c6-a7e0-6695690ce677",
                             OrganizationId = 1,
-                            ReportDate = new DateTime(2025, 12, 4, 9, 40, 1, 243, DateTimeKind.Utc).AddTicks(4664),
+                            ReportDate = new DateTime(2025, 12, 4, 9, 27, 14, 420, DateTimeKind.Utc).AddTicks(9543),
                             Summary = "Various urban obstacles including buildings and structures",
                             Title = "Urban Obstacle Survey - Trondheim"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Author = "pilot2",
-                            AuthorId = "2e4c55df-6618-5550-c95d-953640f24e13",
-                            OrganizationId = 4,
-                            ReportDate = new DateTime(2025, 12, 3, 9, 40, 1, 243, DateTimeKind.Utc).AddTicks(4666),
-                            Summary = "Obstacles identified during emergency flight route to Tromsø",
-                            Title = "Northern Route Obstacle Survey - Tromsø"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Author = "pilot2",
-                            AuthorId = "2e4c55df-6618-5550-c95d-953640f24e13",
-                            OrganizationId = 4,
-                            ReportDate = new DateTime(2025, 12, 1, 9, 40, 1, 243, DateTimeKind.Utc).AddTicks(4668),
-                            Summary = "Powerline obstacles in Stavanger region affecting flight paths",
-                            Title = "Stavanger Area Powerline Report"
                         });
                 });
 

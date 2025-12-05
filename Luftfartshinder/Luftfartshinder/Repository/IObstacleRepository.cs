@@ -11,9 +11,9 @@ namespace Luftfartshinder.Repository
 
         Task<List<Obstacle>> GetAllAsync();
 
-        Task<Obstacle> DeleteById(int id);
+        Task<Obstacle?> DeleteById(int id);
 
-        Task<Obstacle> UpdateObstacle(Obstacle obstacleData);
+        Task<Obstacle?> UpdateObstacle(Obstacle obstacleData);
 
 
     }

@@ -1,16 +1,22 @@
 using Luftfartshinder.Controllers.Obstacles;
+using Luftfartshinder.Extensions;
 using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Models.ViewModel.Obstacles;
 using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Moq;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
-using System.Text.Json;
 using Xunit;
 
 namespace Luftfartshinder.Tests
@@ -27,7 +33,7 @@ namespace Luftfartshinder.Tests
         {
             var userStoreMock = new Mock<IUserStore<ApplicationUser>>();
             userManagerMock = new Mock<UserManager<ApplicationUser>>(
-                userStoreMock.Object, null, null, null, null, null, null, null, null);
+                userStoreMock.Object, null!, null!, null!, null!, null!, null!, null!, null!);
 
             reportRepositoryMock = new Mock<IReportRepository>();
             obstacleRepositoryMock = new Mock<IObstacleRepository>();
@@ -42,10 +48,45 @@ namespace Luftfartshinder.Tests
             var httpContextMock = new Mock<HttpContext>();
             httpContextMock.Setup(h => h.Session).Returns(session);
             
+            // Setup services for model validation
+            var services = new ServiceCollection();
+            services.AddSingleton<ILoggerFactory, LoggerFactory>();
+            services.AddMvc();
+            var serviceProvider = services.BuildServiceProvider();
+            var modelMetadataProvider = serviceProvider.GetRequiredService<IModelMetadataProvider>();
+            
             // Setup TempData
             var tempDataProvider = new Mock<ITempDataProvider>();
             var tempDataDictionary = new TempDataDictionary(httpContextMock.Object, tempDataProvider.Object);
             controller.TempData = tempDataDictionary;
+            
+            // Setup ModelState
+            controller.ModelState.Clear();
+            
+            // Create a mock ObjectValidator that validates using DataAnnotations
+            var objectValidatorMock = new Mock<IObjectModelValidator>();
+            objectValidatorMock.Setup(x => x.Validate(
+                It.IsAny<ActionContext>(),
+                It.IsAny<ValidationStateDictionary>(),
+        It.IsAny<string>(),
+                It.IsAny<object>()))
+                .Callback<ActionContext, ValidationStateDictionary, string, object>((actionContext, validationState, prefix, model) =>
+                {
+                    // Use DataAnnotations validation
+                    var validationResults = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+                    var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
+                    System.ComponentModel.DataAnnotations.Validator.TryValidateObject(model, validationContext, validationResults, true);
+                    
+                    foreach (var result in validationResults)
+                    {
+                        foreach (var memberName in result.MemberNames)
+                        {
+                            actionContext.ModelState.AddModelError(memberName, result.ErrorMessage ?? "");
+                        }
+                    }
+                });
+            
+            controller.ObjectValidator = objectValidatorMock.Object;
             
             controller.ControllerContext = new ControllerContext
             {
@@ -93,8 +134,7 @@ namespace Luftfartshinder.Tests
                     }
                 }
             };
-            var json = JsonSerializer.Serialize(draft, new JsonSerializerOptions(JsonSerializerDefaults.Web));
-            session.SetString("ObstacleDraft", json);
+            session.Set("ObstacleDraft", draft);
 
             // Act
             var result = controller.Draft();
@@ -133,7 +173,7 @@ namespace Luftfartshinder.Tests
             Assert.True(response.Ok);
             Assert.Equal(1, response.Count);
             // Verify that draft was saved to session
-            var savedDraft = session.GetString("ObstacleDraft");
+            var savedDraft = session.Get<ObstacleDraftViewModel>("ObstacleDraft");
             Assert.NotNull(savedDraft);
         }
 
@@ -141,7 +181,7 @@ namespace Luftfartshinder.Tests
         public void AddOne_NullData_ReturnsBadRequest()
         {
             // Act
-            var result = controller.AddOne(null);
+            var result = controller.AddOne(null!);
 
             // Assert
             Assert.IsType<BadRequestObjectResult>(result);
@@ -151,7 +191,8 @@ namespace Luftfartshinder.Tests
         public void ClearDraft_RemovesDraftFromSession()
         {
             // Arrange
-            session.SetString("ObstacleDraft", "test");
+            var draft = new ObstacleDraftViewModel { Obstacles = new List<Obstacle>() };
+            session.Set("ObstacleDraft", draft);
 
             // Act
             var result = controller.ClearDraft();
@@ -159,7 +200,7 @@ namespace Luftfartshinder.Tests
             // Assert
             var redirectResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Draft", redirectResult.ActionName);
-            Assert.Null(session.GetString("ObstacleDraft"));
+            Assert.Null(session.Get<ObstacleDraftViewModel>("ObstacleDraft"));
         }
 
         [Fact]
@@ -184,8 +225,7 @@ namespace Luftfartshinder.Tests
                     new Obstacle { Type = "Mast", Name = "Test" }
                 }
             };
-            var json = JsonSerializer.Serialize(draft, new JsonSerializerOptions(JsonSerializerDefaults.Web));
-            session.SetString("ObstacleDraft", json);
+            session.Set("ObstacleDraft", draft);
 
             // Act
             var result = await controller.SubmitDraft(model);
@@ -229,8 +269,7 @@ namespace Luftfartshinder.Tests
                     }
                 }
             };
-            var json = JsonSerializer.Serialize(draft, new JsonSerializerOptions(JsonSerializerDefaults.Web));
-            session.SetString("ObstacleDraft", json);
+            session.Set("ObstacleDraft", draft);
 
             // Act
             var result = controller.DraftJson();

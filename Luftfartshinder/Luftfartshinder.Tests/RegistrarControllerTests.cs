@@ -129,7 +129,7 @@ namespace Luftfartshinder.Tests
         }
 
         [Fact]
-        public async Task Details_ReportNotFound_ReturnsNotFound()
+        public async Task Details_ReportNotFound_ReturnsRedirect()
         {
             // Arrange
             reportRepositoryMock.Setup(r => r.GetByIdAsync(999)).ReturnsAsync((Report?)null);
@@ -138,7 +138,8 @@ namespace Luftfartshinder.Tests
             var result = await controller.Details(999);
 
             // Assert
-            Assert.IsType<NotFoundResult>(result);
+            var redirectResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Overview", redirectResult.ActionName);
         }
 
         [Fact]
@@ -218,7 +219,7 @@ namespace Luftfartshinder.Tests
         }
 
         [Fact]
-        public async Task Approve_ObstacleNotFound_ReturnsNotFound()
+        public async Task Approve_ObstacleNotFound_ReturnsRedirect()
         {
             // Arrange
             obstacleRepositoryMock.Setup(r => r.GetObstacleById(999)).ReturnsAsync((Obstacle?)null);
@@ -227,7 +228,8 @@ namespace Luftfartshinder.Tests
             var result = await controller.Approve(999);
 
             // Assert
-            Assert.IsType<NotFoundResult>(result);
+            var redirectResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Overview", redirectResult.ActionName);
         }
 
         [Fact]
@@ -254,7 +256,7 @@ namespace Luftfartshinder.Tests
         }
 
         [Fact]
-        public async Task Reject_ObstacleNotFound_ReturnsNotFound()
+        public async Task Reject_ObstacleNotFound_ReturnsRedirect()
         {
             // Arrange
             obstacleRepositoryMock.Setup(r => r.GetObstacleById(999)).ReturnsAsync((Obstacle?)null);
@@ -263,7 +265,8 @@ namespace Luftfartshinder.Tests
             var result = await controller.Reject(999);
 
             // Assert
-            Assert.IsType<NotFoundResult>(result);
+            var redirectResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Overview", redirectResult.ActionName);
         }
     }
 }

@@ -95,6 +95,7 @@ namespace Luftfartshinder.DataContext
             var superAdminId = "3c1b1dcf-6345-42b9-90fe-45227eb5be5b";
             var registrarId = "322acd53-a201-47c6-a7e0-6695690ce677";
             var pilotId = "1d3b44cf-5507-444f-b84c-842539f13e02";
+            var newPilotId = "2e4c55df-6618-5550-c95d-953640f24e13";
 
             var superAdminUser = new ApplicationUser
             {
@@ -135,13 +136,28 @@ namespace Luftfartshinder.DataContext
                 OrganizationId = 4
             };
 
+            var newPilotUser = new ApplicationUser
+            {
+                Id = newPilotId,
+                UserName = "pilot2",
+                NormalizedUserName = "PILOT2",
+                Email = "pilot2@airambulance.no",
+                NormalizedEmail = "PILOT2@AIRAMBULANCE.NO",
+                FirstName = "Anna",
+                LastName = "Hansen",
+                IsApproved = true,
+                OrganizationId = 4 // Norwegian Air Ambulance
+            };
+
             superAdminUser.PasswordHash = "AQAAAAIAAYagAAAAEH47+CKFibjiheWX+ESu0lWsKk2kMdbDeq0/1uuZRKqLw+a8CzqP/mDnVKJl7/Kq8A==";
             registrarUser.PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==";
             pilotUser.PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA==";
+            newPilotUser.PasswordHash = "AQAAAAIAAYagAAAAEKK/tjn9DmfSvd9EhZ1uGpB4grNXZ3L4D07PdU+vRm2QBPdbMk5G1OiekqX1C4B2PA=="; // Same password: Password123!
 
             builder.Entity<ApplicationUser>().HasData(superAdminUser);
             builder.Entity<ApplicationUser>().HasData(registrarUser);
             builder.Entity<ApplicationUser>().HasData(pilotUser);
+            builder.Entity<ApplicationUser>().HasData(newPilotUser);
 
 
 
@@ -186,9 +202,20 @@ namespace Luftfartshinder.DataContext
                 }
             };
 
+            // Assign pilot role to new pilot user
+            var newPilotRoles = new List<IdentityUserRole<string>>
+            {
+                new IdentityUserRole<string>
+                {
+                    RoleId = flightCrewRoleId,
+                    UserId = newPilotId
+                }
+            };
+
             builder.Entity<IdentityUserRole<string>>().HasData(superAdminRoles);
             builder.Entity<IdentityUserRole<string>>().HasData(registrarRoles);
             builder.Entity<IdentityUserRole<string>>().HasData(pilotRoles);
+            builder.Entity<IdentityUserRole<string>>().HasData(newPilotRoles);
         }
     }
 }

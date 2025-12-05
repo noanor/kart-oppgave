@@ -154,45 +154,22 @@ Build succeeded with 40 warning(s)
 - **Controller Testing:** 50 tests - Tests all controllers (AccountController, HomeController, ObstaclesController, ReportController, RegistrarController, SuperAdminController, DashboardController)
 - **Repository Testing:** 19 tests - ObstacleRepositoryTests (9 tests) and ReportRepositoryTests (10 tests) with InMemory database
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 **Test Implementation:**
 - Uses `TestSession` class for testing session functionality (replaces Moq ISession mocking to avoid extension method issues)
 - All tests have documentation with GOAL, LOGIC, and RESULT
 - Repository tests use InMemory database for isolation and fast execution
 - All 78 tests pass
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 84adc05079e25b1525ec9c38f13d071f3069f1d1
-**Test Implementering:**
-- Bruker `TestSession` klasse for testing av session-funksjonalitet (erstatter Moq ISession mocking for å unngå problemer med extension methods)
-- Alle 59 tester passerer
->>>>>>> a9dda52 (Rebase: Refaktorisering av registrar sider og superadmin list)
 
-=======
->>>>>>> 9abab9b (Refaktorisering av registrar sider og superadmin list)
 **Run tests:**
 ```bash
 cd Luftfartshinder/Luftfartshinder.Tests
 dotnet test
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 **Note:** There are 40 warnings related to null checks in the test code. These do not affect functionality, but should be fixed for optimal code quality.
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 84adc05079e25b1525ec9c38f13d071f3069f1d1
-**Note:** Det er 40 advarsler relatert til null checks i testkoden. Disse påvirker ikke funksjonalitet, men bør fikses for optimal kodekvalitet.
-=======
+
 **Note:** There are 14 warnings related to null checks in the test code. These do not affect functionality, but should be fixed for optimal code quality.
->>>>>>> 9abab9b (Refaktorisering av registrar sider og superadmin list)
-<<<<<<< HEAD
->>>>>>> a9dda52 (Rebase: Refaktorisering av registrar sider og superadmin list)
-=======
->>>>>>> 84adc05079e25b1525ec9c38f13d071f3069f1d1
+
 
 ### JavaScript Testing
 

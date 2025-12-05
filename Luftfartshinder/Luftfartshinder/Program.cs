@@ -22,7 +22,6 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
                new MariaDbServerVersion(new Version(11, 8, 3))));
 builder.Services.AddSession();
 
-//s(legg til pakkene, og arv)
 builder.Services.AddDbContext<AuthDbContext>(options =>
            options.UseMySql(builder.Configuration.GetConnectionString("AuthConnection"),
              new MySqlServerVersion(new Version(11, 8, 3))));
@@ -32,7 +31,6 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
-    // Dette er default settings for passord
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
     options.Password.RequireNonAlphanumeric = true;
@@ -119,11 +117,14 @@ using (var scope = app.Services.CreateScope())
 
 }
 
+// Always use exception handler to prevent exposing error details
+app.UseExceptionHandler("/Home/Error");
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
     app.UseHsts();
 }
 
@@ -138,28 +139,28 @@ app.Use(async (context, next) =>
     //      preload allows the domain to be included in browser HSTS preload lists
     if (!app.Environment.IsDevelopment())
     {
-        context.Response.Headers.Append("Strict-Transport-Security", 
+        context.Response.Headers.Append("Strict-Transport-Security",
             "max-age=31536000; includeSubDomains; preload");
     }
-    
+
     // X-Content-Type-Options: nosniff
     // What: Prevents browsers from guessing file types (MIME type sniffing)
     // Why: Stops attackers from serving malicious scripts as text files, which browsers might execute
     //      Forces browser to respect the Content-Type header sent by the server
     //      Without this, a file served as "text/plain" could be executed as JavaScript
     context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
-    
+
     // X-XSS-Protection header (legacy, but required for assignment)
     // What: Tells old browsers to enable their built-in XSS filter
     // Why: Provides basic protection against cross-site scripting attacks in older browsers
     context.Response.Headers.Append("X-XSS-Protection", "1; mode=block");
-    
+
     // X-Frame-Options: DENY
     // What: Prevents this website from being loaded inside an iframe on other websites
     // Why: Protects against clickjacking attacks where attackers embed your site in a hidden frame
     //      and trick users into clicking on things they can't see
     context.Response.Headers.Append("X-Frame-Options", "DENY");
-    
+
     // Content-Security-Policy
     // What: Controls which resources (scripts, styles, images, etc.) the browser is allowed to load
     // Why: Prevents XSS attacks by blocking unauthorized scripts and resources from loading
@@ -172,12 +173,12 @@ app.Use(async (context, next) =>
               "connect-src 'self' https:; " +
               "frame-ancestors 'none';";
     context.Response.Headers.Append("Content-Security-Policy", csp);
-    
+
     // Referrer-Policy: strict-origin-when-cross-origin
     // What: Controls how much referrer information is sent to other websites
     // Why: Protects user privacy by limiting what information is leaked when users navigate away
     context.Response.Headers.Append("Referrer-Policy", "strict-origin-when-cross-origin");
-    
+
     await next();
 });
 

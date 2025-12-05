@@ -40,8 +40,17 @@ namespace Luftfartshinder.Controllers.Admin
         public async Task<IActionResult> Index()
         {
             ViewData["LayoutType"] = "pc";
-            var reports = await _reportRepository.GetAllAsync();
-            return View("Index", reports);
+            
+            try
+            {
+                var reports = await _reportRepository.GetAllAsync();
+                return View("Index", reports);
+            }
+            catch (Exception)
+            {
+                TempData["Error"] = "An error occurred while loading reports. Please try again.";
+                return View("Index", new List<Report>());
+            }
         }
 
         /// <summary>
@@ -51,8 +60,17 @@ namespace Luftfartshinder.Controllers.Admin
         public async Task<IActionResult> Overview()
         {
             ViewData["LayoutType"] = "pc";
-            var reports = await _reportRepository.GetAllAsync();
-            return View("Overview", reports);
+            
+            try
+            {
+                var reports = await _reportRepository.GetAllAsync();
+                return View("Overview", reports);
+            }
+            catch (Exception)
+            {
+                TempData["Error"] = "An error occurred while loading reports. Please try again.";
+                return View("Overview", new List<Report>());
+            }
         }
 
         /// <summary>
@@ -63,14 +81,30 @@ namespace Luftfartshinder.Controllers.Admin
         public async Task<IActionResult> Details(int id)
         {
             ViewData["LayoutType"] = "pc";
-            var report = await _reportRepository.GetByIdAsync(id);
-
-            if (report == null)
+            
+            if (id <= 0)
             {
-                return NotFound();
+                TempData["Error"] = "Invalid report ID.";
+                return RedirectToAction("Overview");
             }
 
-            return View(MapToEditReport(report));
+            try
+            {
+                var report = await _reportRepository.GetByIdAsync(id);
+
+                if (report == null)
+                {
+                    TempData["Error"] = "Report not found.";
+                    return RedirectToAction("Overview");
+                }
+
+                return View(MapToEditReport(report));
+            }
+            catch (Exception)
+            {
+                TempData["Error"] = "An error occurred while loading the report. Please try again.";
+                return RedirectToAction("Overview");
+            }
         }
 
         /// <summary>
@@ -81,18 +115,44 @@ namespace Luftfartshinder.Controllers.Admin
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveNote(Obstacle obstacleData)
         {
-            var existingObstacle = await _obstacleRepository.GetObstacleById(obstacleData.Id);
-            if (existingObstacle != null)
+            if (obstacleData == null || obstacleData.Id <= 0)
             {
+                TempData["Error"] = "Invalid obstacle data.";
+                return RedirectToAction("Overview");
+            }
+
+            try
+            {
+                var existingObstacle = await _obstacleRepository.GetObstacleById(obstacleData.Id);
+                if (existingObstacle == null)
+                {
+                    TempData["Error"] = "Obstacle not found.";
+                    return RedirectToAction("Overview");
+                }
+
+                // Validate note length
+                if (!string.IsNullOrEmpty(obstacleData.RegistrarNote) && obstacleData.RegistrarNote.Length > 1000)
+                {
+                    TempData["Error"] = "Registrar note cannot exceed 1000 characters.";
+                    return RedirectToAction("Details", new { id = existingObstacle.ReportId });
+                }
+
                 existingObstacle.RegistrarNote = obstacleData.RegistrarNote;
                 await _obstacleRepository.UpdateObstacle(existingObstacle);
 
-                TempData["NoteSaved"] = true;
+                TempData["Success"] = "Note saved successfully.";
                 return RedirectToAction("Details", new { id = existingObstacle.ReportId });
             }
-
-            return RedirectToAction("Details", new { id = obstacleData.ReportId });
-
+            catch (InvalidOperationException)
+            {
+                TempData["Error"] = "Unable to save the note. Please try again.";
+                return RedirectToAction("Details", new { id = obstacleData.ReportId });
+            }
+            catch (Exception)
+            {
+                TempData["Error"] = "An unexpected error occurred. Please try again.";
+                return RedirectToAction("Overview");
+            }
         }
 
         /// <summary>
@@ -103,14 +163,35 @@ namespace Luftfartshinder.Controllers.Admin
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            var deletedReport = await _reportRepository.DeleteAsync(id);
-
-            if (deletedReport != null)
+            if (id <= 0)
             {
+                TempData["Error"] = "Invalid report ID.";
                 return RedirectToAction("Overview");
             }
 
-            return RedirectToAction("Details", new { id = id });
+            try
+            {
+                var deletedReport = await _reportRepository.DeleteAsync(id);
+
+                if (deletedReport != null)
+                {
+                    TempData["Success"] = "Report deleted successfully.";
+                    return RedirectToAction("Overview");
+                }
+
+                TempData["Error"] = "Report not found or could not be deleted.";
+                return RedirectToAction("Overview");
+            }
+            catch (InvalidOperationException)
+            {
+                TempData["Error"] = "Unable to delete the report. Please try again.";
+                return RedirectToAction("Overview");
+            }
+            catch (Exception)
+            {
+                TempData["Error"] = "An unexpected error occurred. Please try again.";
+                return RedirectToAction("Overview");
+            }
         }
 
         /// <summary>
@@ -159,16 +240,38 @@ namespace Luftfartshinder.Controllers.Admin
         /// <param name="status">New status.</param>
         private async Task<IActionResult> UpdateObstacleStatus(int id, Obstacle.Statuses status)
         {
-            var obstacle = await _obstacleRepository.GetObstacleById(id);
-            if (obstacle == null)
+            if (id <= 0)
             {
-                return NotFound();
+                TempData["Error"] = "Invalid obstacle ID.";
+                return RedirectToAction("Overview");
             }
 
-            obstacle.Status = status;
-            await _obstacleRepository.UpdateObstacle(obstacle);
+            try
+            {
+                var obstacle = await _obstacleRepository.GetObstacleById(id);
+                if (obstacle == null)
+                {
+                    TempData["Error"] = "Obstacle not found.";
+                    return RedirectToAction("Overview");
+                }
 
-            return RedirectToAction("Details", new { id = obstacle.ReportId });
+                obstacle.Status = status;
+                await _obstacleRepository.UpdateObstacle(obstacle);
+
+                var statusMessage = status == Obstacle.Statuses.Approved ? "approved" : "rejected";
+                TempData["Success"] = $"Obstacle has been {statusMessage}.";
+                return RedirectToAction("Details", new { id = obstacle.ReportId });
+            }
+            catch (InvalidOperationException)
+            {
+                TempData["Error"] = "Unable to update obstacle status. Please try again.";
+                return RedirectToAction("Overview");
+            }
+            catch (Exception)
+            {
+                TempData["Error"] = "An unexpected error occurred. Please try again.";
+                return RedirectToAction("Overview");
+            }
         }
     }
 }

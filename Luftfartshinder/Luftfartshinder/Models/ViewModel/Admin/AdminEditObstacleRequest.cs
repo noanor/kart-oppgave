@@ -1,4 +1,5 @@
 ﻿using Luftfartshinder.Models.ViewModel.Obstacles;
+using System.ComponentModel.DataAnnotations;
 
 namespace Luftfartshinder.Models.ViewModel.Admin
 {
@@ -9,6 +10,7 @@ namespace Luftfartshinder.Models.ViewModel.Admin
     public class AdminEditObstacleRequest : EditObstacleRequest
     {
         /// <summary>Optional note added by the registrar during review.</summary>
+        [MaxLength(1000, ErrorMessage = "Registrar note cannot exceed 1000 characters.")]
         public string? RegistrarNote { get; set; }
     }
 }

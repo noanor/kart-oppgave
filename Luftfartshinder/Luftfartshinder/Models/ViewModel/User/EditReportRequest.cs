@@ -1,4 +1,5 @@
 ﻿using Luftfartshinder.Models.Domain;
+using System.ComponentModel.DataAnnotations;
 
 namespace Luftfartshinder.Models.ViewModel.User
 {
@@ -20,9 +21,12 @@ namespace Luftfartshinder.Models.ViewModel.User
         public DateTime ReportDate { get; set; }
         
         /// <summary>Title of the report.</summary>
+        [Required(ErrorMessage = "Report title is required.")]
+        [MaxLength(100, ErrorMessage = "Title cannot exceed 100 characters.")]
         public required string Title { get; set; }
         
         /// <summary>Summary of the report.</summary>
+        [MaxLength(500, ErrorMessage = "Summary cannot exceed 500 characters.")]
         public string? Summary { get; set; }
 
         /// <summary>Collection of obstacles associated with this report.</summary>
