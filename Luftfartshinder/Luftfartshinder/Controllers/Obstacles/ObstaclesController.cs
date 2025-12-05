@@ -5,28 +5,40 @@ using Luftfartshinder.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
 namespace Luftfartshinder.Controllers.Obstacles
 {
+    /// <summary>
+    /// Controller for managing obstacle drafts and submissions.
+    /// Handles draft creation, editing, and submission to reports.
+    /// </summary>
     public partial class ObstaclesController : Controller
     {
         private const string DraftKey = "ObstacleDraft";
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly IReportRepository reportRepository;
-        private readonly IObstacleRepository obstacleRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IReportRepository _reportRepository;
+        private readonly IObstacleRepository _obstacleRepository;
 
         public record AddOneResponse(bool Ok, int Count);
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="ObstaclesController"/>.
+        /// </summary>
+        /// <param name="userManager">User manager for accessing authenticated user data.</param>
+        /// <param name="reportRepository">Repository for report-related operations.</param>
+        /// <param name="obstacleRepository">Repository for obstacle-related operations.</param>
         public ObstaclesController(UserManager<ApplicationUser> userManager, IReportRepository reportRepository, IObstacleRepository obstacleRepository)
         {
-            this.userManager = userManager;
-            this.reportRepository = reportRepository;
-            this.obstacleRepository = obstacleRepository;
+            _userManager = userManager;
+            _reportRepository = reportRepository;
+            _obstacleRepository = obstacleRepository;
         }
 
-        // === GET: /obstacles/draft ===
-        // Draft-visning: iPad-vennlig layout
+        /// <summary>
+        /// Displays the draft obstacles page (iPad-friendly layout).
+        /// </summary>
         [HttpGet("/obstacles/draft")]
         public IActionResult Draft()
         {
@@ -39,32 +51,85 @@ namespace Luftfartshinder.Controllers.Obstacles
             return View("Draft", draft);
         }
 
-        // === POST: /obstacles/add-one ===
+        /// <summary>
+        /// Adds a single obstacle to the draft session.
+        /// </summary>
+        /// <param name="dto">The obstacle data to add.</param>
+        /// <returns>JSON response with success status and current draft count.</returns>
         [HttpPost("/obstacles/add-one")]
         public IActionResult AddOne([FromBody] AddObstacleRequest dto)
         {
-            if (dto is null) return BadRequest("No data");
+            if (dto is null)
+                return BadRequest(new { error = "No data provided." });
 
-            var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey)
-                     ?? new ObstacleDraftViewModel();
-
-            var o = new Obstacle
+            // Validate the model
+            if (!TryValidateModel(dto))
             {
-                Type = dto.Type,
-                Name = dto.Name ?? $"Obstacle {DateTime.UtcNow:HHmmss}",
-                Description = dto.Description ?? "",
-                Height = dto.Height,
-                Latitude = dto.Latitude,
-                Longitude = dto.Longitude
-            };
+                var errors = ModelState
+                    .Where(x => x.Value?.Errors.Count > 0)
+                    .SelectMany(x => x.Value.Errors.Select(e => new { field = x.Key, message = e.ErrorMessage }))
+                    .ToList();
+                return BadRequest(new { error = "Validation failed", errors });
+            }
 
-            draft.Obstacles.Add(o);
-            HttpContext.Session.Set(DraftKey, draft);
+            // Additional validation for Type
+            if (string.IsNullOrWhiteSpace(dto.Type))
+            {
+                return BadRequest(new { error = "Obstacle type is required." });
+            }
 
-            return Ok(new AddOneResponse(true, draft.Obstacles.Count));
+            try
+            {
+                var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey)
+                        ?? new ObstacleDraftViewModel();
+
+                var o = new Obstacle
+                {
+                    Type = dto.Type.Trim(),
+                    Name = !string.IsNullOrWhiteSpace(dto.Name) ? dto.Name.Trim() : $"Obstacle {DateTime.UtcNow:HHmmss}",
+                    Description = dto.Description?.Trim() ?? "",
+                    Height = dto.Height,
+                    Latitude = dto.Latitude,
+                    Longitude = dto.Longitude
+                };
+
+                // Validate obstacle data matches domain rules
+                if (o.Height.HasValue && (o.Height < 0 || o.Height > 200))
+                {
+                    return BadRequest(new { error = "Height must be between 0 and 200 meters." });
+                }
+
+                if (o.Latitude < -90 || o.Latitude > 90)
+                {
+                    return BadRequest(new { error = "Latitude must be between -90 and 90 degrees." });
+                }
+
+                if (o.Longitude < -180 || o.Longitude > 180)
+                {
+                    return BadRequest(new { error = "Longitude must be between -180 and 180 degrees." });
+                }
+
+                draft.Obstacles.Add(o);
+                HttpContext.Session.Set(DraftKey, draft);
+
+                return Ok(new AddOneResponse(true, draft.Obstacles.Count));
+            }
+            catch (InvalidOperationException)
+            {
+                // Handle known business logic errors
+                return BadRequest(new { error = "Unable to add obstacle. Please check your data and try again." });
+            }
+            catch (Exception)
+            {
+                // Log exception here (use ILogger in production)
+                // Return generic error message - never expose exception details
+                return StatusCode(500, new { error = "An error occurred while processing your request. Please try again." });
+            }
         }
 
-        // === POST: /obstacles/clear-draft ===
+        /// <summary>
+        /// Clears all obstacles from the draft session.
+        /// </summary>
         [HttpPost("/obstacles/clear-draft")]
         public IActionResult ClearDraft()
         {
@@ -73,7 +138,10 @@ namespace Luftfartshinder.Controllers.Obstacles
             return RedirectToAction("Draft");
         }
 
-        // === POST: /obstacles/submit-draft ===
+        /// <summary>
+        /// Submits the draft obstacles as a new report.
+        /// </summary>
+        /// <param name="model">The report submission data including title and summary.</param>
         [Authorize]
         [HttpPost("/obstacles/submit-draft")]
         public async Task<IActionResult> SubmitDraft(SubmitDraftViewModel model)
@@ -92,21 +160,23 @@ namespace Luftfartshinder.Controllers.Obstacles
             }
 
             // 1. Find logged in user
-            var user = await userManager.GetUserAsync(User);
+            var user = await _userManager.GetUserAsync(User);
 
             if (user == null)
             {
-                return Challenge(); // or throw
+                return Challenge();
             }
 
             if (user.OrganizationId == 0)
             {
-                return BadRequest("User is not associated with an organization.");
+                ModelState.AddModelError("", "User is not associated with an organization.");
+                return View("Draft", draft);
             }
 
             if (draft is null || draft.Obstacles.Count == 0)
             {
-                return BadRequest("No draft to submit.");
+                ModelState.AddModelError("", "No draft to submit. Please add at least one obstacle.");
+                return View("Draft", draft);
             }
 
             // Create new report
@@ -130,29 +200,42 @@ namespace Luftfartshinder.Controllers.Obstacles
             try
             {
                 // Send report to DB
-                await reportRepository.AddAsync(newReport);
+                await _reportRepository.AddAsync(newReport);
             }
-            catch (Exception ex)
+            catch (InvalidOperationException)
             {
-                // Log the exception (not shown here for brevity)
-                // Most MySQL details are here:
-                Console.WriteLine("DbUpdateException: " + ex.Message);
-                Console.WriteLine("Inner: " + ex.InnerException?.Message);
-                throw; // or return BadRequest with the inner message
+                // Handle known business logic errors - show user-friendly message
+                ModelState.AddModelError("", "Unable to save your report. Please check your data and try again.");
+                return View("Draft", draft);
             }
-            
+            catch (Exception)
+            {
+                // Return user-friendly error message
+                ModelState.AddModelError("", "An unexpected error occurred while submitting your report. Please try again later.");
+                return View("Draft", draft);
+            }
+
             HttpContext.Session.Remove(DraftKey);
             TempData["DraftSubmitted"] = true;
             return RedirectToAction("Index", "Home");
         }
 
-        // Edit draft obstacle: iPad-vennlig layout
+        /// <summary>
+        /// Displays the edit form for a draft obstacle (iPad-friendly layout).
+        /// </summary>
+        /// <param name="index">The index of the obstacle in the draft to edit.</param>
         [HttpGet]
         public IActionResult EditObstacle(int index)
         {
             ViewData["LayoutType"] = "ipad";
+
+            if (index < 0)
+            {
+                return BadRequest("Invalid obstacle index.");
+            }
+
             var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey);
-            if (draft is null || index < 0 || index >= draft.Obstacles.Count)
+            if (draft is null || index >= draft.Obstacles.Count)
             {
                 return BadRequest("Invalid draft or index.");
             }
@@ -177,34 +260,71 @@ namespace Luftfartshinder.Controllers.Obstacles
             return NotFound();
         }
 
-        // === POST: /obstacles/edit-obstacle ===
+        /// <summary>
+        /// Updates a draft obstacle with new data.
+        /// </summary>
+        /// <param name="editObstacleRequest">The updated obstacle data.</param>
+        /// <param name="index">The index of the obstacle in the draft to update.</param>
         [HttpPost]
         public IActionResult EditObstacle(EditObstacleRequest editObstacleRequest, int index)
         {
+            ViewData["LayoutType"] = "ipad";
             var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey);
-            if (draft is null || index < 0 || index >= draft.Obstacles.Count)
+
+            if (index < 0)
+            {
+                return BadRequest("Invalid obstacle index.");
+            }
+
+            // Validate model
+            if (!ModelState.IsValid)
+            {
+                if (draft is null || index >= draft.Obstacles.Count)
+                {
+                    return BadRequest("Invalid draft or index.");
+                }
+                ViewBag.Index = index;
+                return View("EditObstacle", editObstacleRequest);
+            }
+
+            if (draft is null || index >= draft.Obstacles.Count)
             {
                 return BadRequest("Invalid draft or index.");
             }
 
-            draft.Obstacles[index] = new Obstacle
+            try
             {
-                Type = editObstacleRequest.Type,
-                Name = editObstacleRequest.Name,
-                Height = editObstacleRequest.Height,
-                Latitude = editObstacleRequest.Latitude,
-                Longitude = editObstacleRequest.Longitude,
-                Description = editObstacleRequest.Description
-            };
+                draft.Obstacles[index] = new Obstacle
+                {
+                    Type = editObstacleRequest.Type?.Trim() ?? string.Empty,
+                    Name = editObstacleRequest.Name?.Trim() ?? string.Empty,
+                    Height = editObstacleRequest.Height,
+                    Latitude = editObstacleRequest.Latitude,
+                    Longitude = editObstacleRequest.Longitude,
+                    Description = editObstacleRequest.Description?.Trim()
+                };
 
-
-
-            HttpContext.Session.Set(DraftKey, draft);
-
-            return RedirectToAction("Draft");
-
+                HttpContext.Session.Set(DraftKey, draft);
+                TempData["Success"] = "Obstacle updated successfully.";
+                return RedirectToAction("Draft");
+            }
+            catch (InvalidOperationException)
+            {
+                ModelState.AddModelError("", "Unable to update the obstacle. Please check your data and try again.");
+                ViewBag.Index = index;
+                return View("EditObstacle", editObstacleRequest);
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "An unexpected error occurred while updating the obstacle. Please try again.");
+                ViewBag.Index = index;
+                return View("EditObstacle", editObstacleRequest);
+            }
         }
 
+        /// <summary>
+        /// Returns the current draft obstacles as JSON.
+        /// </summary>
         [HttpGet("/obstacles/draft-json")]
         public IActionResult DraftJson()
         {
@@ -226,31 +346,63 @@ namespace Luftfartshinder.Controllers.Obstacles
             return Ok(list);
         }
 
-        // Delete draft obstacle
+        /// <summary>
+        /// Deletes an obstacle from the draft session.
+        /// </summary>
+        /// <param name="index">The index of the obstacle to delete.</param>
         [HttpPost]
         public IActionResult DeleteDraftObstacle(int index)
         {
-            var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey);
-            if (draft is null || index < 0 || index >= draft.Obstacles.Count)
+            if (index < 0)
             {
-                return BadRequest("Invalid draft or index.");
+                TempData["Error"] = "Invalid obstacle index.";
+                return RedirectToAction("Draft");
             }
 
-            draft.Obstacles.RemoveAt(index);
-            HttpContext.Session.Set(DraftKey, draft);
+            var draft = HttpContext.Session.Get<ObstacleDraftViewModel>(DraftKey);
+            if (draft is null || index >= draft.Obstacles.Count)
+            {
+                TempData["Error"] = "Invalid draft or index.";
+                return RedirectToAction("Draft");
+            }
 
-            TempData["ObstacleDeleted"] = true;
+            try
+            {
+                draft.Obstacles.RemoveAt(index);
+                HttpContext.Session.Set(DraftKey, draft);
+                TempData["Success"] = "Obstacle deleted successfully.";
+            }
+            catch (Exception)
+            {
+                TempData["Error"] = "An error occurred while deleting the obstacle. Please try again.";
+            }
+
             return RedirectToAction("Draft");
         }
 
-        // DTO for JSON requests
+        /// <summary>
+        /// DTO for adding a single obstacle to the draft.
+        /// </summary>
         public class AddObstacleRequest
         {
+            [Required(ErrorMessage = "Obstacle type is required.")]
             public string? Type { get; set; }
+
+            [Required(ErrorMessage = "Latitude is required.")]
+            [Range(-90, 90, ErrorMessage = "Latitude must be between -90 and 90 degrees.")]
             public double Latitude { get; set; }
+
+            [Required(ErrorMessage = "Longitude is required.")]
+            [Range(-180, 180, ErrorMessage = "Longitude must be between -180 and 180 degrees.")]
             public double Longitude { get; set; }
+
+            [Range(0, 200, ErrorMessage = "Height must be between 0 and 200 meters.")]
             public double? Height { get; set; }
+
+            [StringLength(40, ErrorMessage = "Name cannot exceed 40 characters.")]
             public string? Name { get; set; }
+
+            [MaxLength(500, ErrorMessage = "Description cannot exceed 500 characters.")]
             public string? Description { get; set; }
         }
     }

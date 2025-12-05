@@ -38,17 +38,22 @@ namespace Luftfartshinder.Tests
 
         /// <summary>
         /// GOAL: Test that Obstacle rejects height over 200m
-        /// LOGIC: Attempts to set Height to 250.0 and expects exception
-        /// RESULT: ArgumentOutOfRangeException should be thrown when height exceeds 200m
+        /// LOGIC: Attempts to set Height to 250.0 and expects validation to fail
+        /// RESULT: Validation should fail when height exceeds 200m
         /// </summary>
         [Fact]
         public void UnitTest_ObstacleHeightValidation_RejectsHeightOver200()
         {
             // Arrange
-            var obstacle = new Obstacle { Name = "Test", Latitude = 60.0, Longitude = 10.0 };
+            var obstacle = new Obstacle { Name = "Test", Latitude = 60.0, Longitude = 10.0, Height = 250.0 };
 
-            // Act & Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() => obstacle.Height = 250.0);
+            // Act
+            var validationResults = new List<ValidationResult>();
+            var isValid = Validator.TryValidateObject(obstacle, new ValidationContext(obstacle), validationResults, true);
+
+            // Assert
+            Assert.False(isValid);
+            Assert.Contains(validationResults, v => v.MemberNames.Contains("Height"));
         }
 
         // 2. SYSTEMSTESTING (System Testing)
@@ -139,15 +144,20 @@ namespace Luftfartshinder.Tests
         {
             // Arrange - Since Latitude and Longitude are double (not nullable), they always have a value (0.0 default)
             // The [Required] attribute on double doesn't work the same way as on nullable types
-            // Instead, we test that coordinates must be set to valid values (not 0.0)
-            var obstacle = new Obstacle { Name = "Test", Latitude = 0.0, Longitude = 0.0 };
+            // We need to set both Type and Name (required fields) for validation to pass
+            var obstacle = new Obstacle 
+            { 
+                Type = "Mast",
+                Name = "Test", 
+                Latitude = 0.0, 
+                Longitude = 0.0 
+            };
 
             // Act
             var validationResults = new List<ValidationResult>();
             var isValid = Validator.TryValidateObject(obstacle, new ValidationContext(obstacle), validationResults, true);
 
-            // Assert - Since double always has a value, validation will pass
-            // But we can verify that the obstacle has the Required attribute on coordinates
+            // Assert - Since double always has a value, validation will pass when all required fields are set
             Assert.True(isValid); // Coordinates are set (even if 0.0), so validation passes
             // The actual validation should happen at application level, not model level for double types
         }

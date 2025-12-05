@@ -21,7 +21,18 @@ namespace Luftfartshinder.Tests
 
         public void Set(string key, byte[] value) => _store[key] = value;
 
-        public bool TryGetValue(string key, out byte[]? value) => _store.TryGetValue(key, out value);
+#pragma warning disable CS8769 // Nullability of reference types in type of parameter doesn't match implemented member
+        bool ISession.TryGetValue(string key, out byte[]? value)
+        {
+            if (_store.TryGetValue(key, out var bytes))
+            {
+                value = bytes;
+                return true;
+            }
+            value = null;
+            return false;
+        }
+#pragma warning restore CS8769
 
         // Helper methods for string operations
         public string? GetString(string key)

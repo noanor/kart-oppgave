@@ -356,7 +356,6 @@ C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\akyxjxcf3o-{0}-g3iwhdslqe-g3iwhdslqe.gz
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\c13l2wq13u-{0}-ek0q4iyoq5-ek0q4iyoq5.gz
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\3tmo7al1ky-{0}-rrqoy9nip2-rrqoy9nip2.gz
-C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\lxql42msdv-{0}-me3ybwnznx-me3ybwnznx.gz
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\i8089q8v5i-{0}-nmpd83zsup-nmpd83zsup.gz
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\92lp4nwjm3-{0}-i118nywm1n-i118nywm1n.gz
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\8vc2rc1mou-{0}-87txtcvnil-87txtcvnil.gz
@@ -435,14 +434,11 @@ C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\egurzr60r9-{0}-muycvpuwrr-muycvpuwrr.gz
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\klgshy1flx-{0}-87fc7y1x7t-87fc7y1x7t.gz
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\8xpciivwy1-{0}-jfsiqqwiad-jfsiqqwiad.gz
-C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\wxw63y8p9g-{0}-bjet39j14t-bjet39j14t.gz
-C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\a582dsn24r-{0}-bjet39j14t-bjet39j14t.gz
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\staticwebassets.build.endpoints.json
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\swae.build.ex.cache
-C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\Luftfart.07673CF6.Up2Date
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\Luftfartshinder.dll
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\refint\Luftfartshinder.dll
@@ -450,3 +446,7 @@ C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\Luftfartshinder.genruntimeconfig.cache
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\ref\Luftfartshinder.dll
 C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\bvs801oyvp-{0}-y6i1hrkqem-y6i1hrkqem.gz
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\lxql42msdv-{0}-kgxb58rhjk-kgxb58rhjk.gz
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\wxw63y8p9g-{0}-zv45vclnij-zv45vclnij.gz
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\compressed\a582dsn24r-{0}-zv45vclnij-zv45vclnij.gz
+C:\Users\Noa\repos\kart-oppgave\Luftfartshinder\Luftfartshinder\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

@@ -28,7 +28,7 @@ namespace Luftfartshinder.Tests
         {
             var userStoreMock = new Mock<IUserStore<ApplicationUser>>();
             userManagerMock = new Mock<UserManager<ApplicationUser>>(
-                userStoreMock.Object, null, null, null, null, null, null, null, null);
+                userStoreMock.Object, null!, null!, null!, null!, null!, null!, null!, null!);
 
             var contextAccessorMock = new Mock<Microsoft.AspNetCore.Http.IHttpContextAccessor>();
             var claimsFactoryMock = new Mock<IUserClaimsPrincipalFactory<ApplicationUser>>();
@@ -36,7 +36,7 @@ namespace Luftfartshinder.Tests
                 userManagerMock.Object,
                 contextAccessorMock.Object,
                 claimsFactoryMock.Object,
-                null, null, null, null);
+                null!, null!, null!, null!);
 
             accountRepositoryMock = new Mock<IAccountRepository>();
             reportRepositoryMock = new Mock<IReportRepository>();
@@ -95,7 +95,7 @@ namespace Luftfartshinder.Tests
             var model = new LoginViewModel { Username = "testuser", Password = "wrongpassword" };
             
             userManagerMock.Setup(x => x.FindByNameAsync(It.IsAny<string>()))
-                .ReturnsAsync((ApplicationUser)null);
+                .ReturnsAsync((ApplicationUser?)null);
             signInManagerMock.Setup(x => x.PasswordSignInAsync(
                 It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .ReturnsAsync(Microsoft.AspNetCore.Identity.SignInResult.Failed);
@@ -123,7 +123,7 @@ namespace Luftfartshinder.Tests
             var result = await controller.Login(model);
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.False(controller.ModelState.IsValid);
-            Assert.Contains("pending approval", controller.ModelState[""].Errors[0].ErrorMessage);
+            Assert.Contains("pending approval", controller.ModelState[""]!.Errors[0].ErrorMessage);
         }
 
         [Fact]

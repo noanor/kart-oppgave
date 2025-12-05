@@ -2,10 +2,11 @@ using Luftfartshinder.Controllers.Obstacles;
 using Luftfartshinder.Models.Domain;
 using Luftfartshinder.Models.ViewModel.Obstacles;
 using Luftfartshinder.Repository;
+using Luftfartshinder.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
-using System.Text.Json;
 using Xunit;
 
 namespace Luftfartshinder.Tests
@@ -26,6 +27,12 @@ namespace Luftfartshinder.Tests
             // Setup HttpContext with session
             var httpContextMock = new Mock<HttpContext>();
             httpContextMock.Setup(h => h.Session).Returns(session);
+            
+            // Setup TempData
+            var tempDataProvider = new Mock<ITempDataProvider>();
+            var tempDataDictionary = new TempDataDictionary(httpContextMock.Object, tempDataProvider.Object);
+            controller.TempData = tempDataDictionary;
+            
             controller.ControllerContext = new ControllerContext
             {
                 HttpContext = httpContextMock.Object
@@ -33,7 +40,7 @@ namespace Luftfartshinder.Tests
         }
 
         [Fact]
-        public async Task Add_NoDraft_ReturnsBadRequest()
+        public async Task Add_NoDraft_ReturnsRedirect()
         {
             // Arrange - Session is empty
             session.Clear();
@@ -42,25 +49,29 @@ namespace Luftfartshinder.Tests
             var result = await controller.Add();
 
             // Assert
-            Assert.IsType<BadRequestObjectResult>(result);
+            var redirectResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Draft", redirectResult.ActionName);
+            Assert.Equal("Obstacles", redirectResult.ControllerName);
         }
 
         [Fact]
-        public async Task Add_EmptyDraft_ReturnsBadRequest()
+        public async Task Add_EmptyDraft_ReturnsRedirect()
         {
             // Arrange
             var draft = new ObstacleDraftViewModel
             {
                 Obstacles = new List<Obstacle>()
             };
-            var json = JsonSerializer.Serialize(draft, new JsonSerializerOptions(JsonSerializerDefaults.Web));
-            session.SetString("ObstacleDraft", json);
+            // Use the Set extension method to properly serialize the draft
+            session.Set("ObstacleDraft", draft);
 
             // Act
             var result = await controller.Add();
 
             // Assert
-            Assert.IsType<BadRequestObjectResult>(result);
+            var redirectResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Draft", redirectResult.ActionName);
+            Assert.Equal("Obstacles", redirectResult.ControllerName);
         }
 
         [Fact]
@@ -80,8 +91,8 @@ namespace Luftfartshinder.Tests
             {
                 Obstacles = new List<Obstacle> { obstacle }
             };
-            var json = JsonSerializer.Serialize(draft, new JsonSerializerOptions(JsonSerializerDefaults.Web));
-            session.SetString("ObstacleDraft", json);
+            // Use the Set extension method to properly serialize the draft
+            session.Set("ObstacleDraft", draft);
 
             repositoryMock.Setup(r => r.AddObstacle(It.IsAny<Obstacle>())).ReturnsAsync(obstacle);
 
@@ -93,7 +104,7 @@ namespace Luftfartshinder.Tests
             Assert.Equal("Index", redirectResult.ActionName);
             Assert.Equal("Home", redirectResult.ControllerName);
             repositoryMock.Verify(r => r.AddObstacle(It.IsAny<Obstacle>()), Times.Once);
-            Assert.Null(session.GetString("ObstacleDraft")); // Verify draft was removed
+            Assert.Null(session.Get<ObstacleDraftViewModel>("ObstacleDraft")); // Verify draft was removed
         }
     }
 }

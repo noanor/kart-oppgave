@@ -22,7 +22,7 @@ namespace Luftfartshinder.Tests
         {
             var userStoreMock = new Mock<IUserStore<ApplicationUser>>();
             userManagerMock = new Mock<UserManager<ApplicationUser>>(
-                userStoreMock.Object, null, null, null, null, null, null, null, null);
+                userStoreMock.Object, null!, null!, null!, null!, null!, null!, null!, null!);
 
             userRepositoryMock = new Mock<IUserRepository>();
             organizationRepositoryMock = new Mock<IOrganizationRepository>();

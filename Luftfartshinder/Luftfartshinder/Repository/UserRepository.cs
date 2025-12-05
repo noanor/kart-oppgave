@@ -7,15 +7,15 @@ namespace Luftfartshinder.Repository
 {
     public class UserRepository : IUserRepository
     {
-        private readonly AuthDbContext authDbContext;
+        private readonly AuthDbContext _authDbContext;
 
         public UserRepository(AuthDbContext authDbContext)
         {
-            this.authDbContext = authDbContext;
+            _authDbContext = authDbContext;
         }
         public async Task<IEnumerable<ApplicationUser>> GetAll()
         {
-            var users = await authDbContext.Users
+            var users = await _authDbContext.Users
                 .Include(u => u.Organization)
                 .ToListAsync();
             

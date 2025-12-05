@@ -12,7 +12,7 @@ namespace Luftfartshinder.Controllers.Obstacles
         public async Task<IActionResult> List()
         {
             ViewData["LayoutType"] = "pc";
-            var obstacles = await obstacleRepository.GetAllAsync();
+            var obstacles = await _obstacleRepository.GetAllAsync();
             return View(obstacles);
         }
 
@@ -21,7 +21,7 @@ namespace Luftfartshinder.Controllers.Obstacles
         public async Task<IActionResult> Edit(int id)
         {
             ViewData["LayoutType"] = "pc";
-            var existingObstacle = await obstacleRepository.GetObstacleById(id);
+            var existingObstacle = await _obstacleRepository.GetObstacleById(id);
 
             if (existingObstacle == null)
             {
@@ -52,7 +52,7 @@ namespace Luftfartshinder.Controllers.Obstacles
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            var deletedObstacle = await obstacleRepository.DeleteById(id);
+            var deletedObstacle = await _obstacleRepository.DeleteById(id);
 
             if (deletedObstacle != null)
             {

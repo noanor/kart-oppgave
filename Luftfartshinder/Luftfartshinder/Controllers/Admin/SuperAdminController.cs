@@ -13,17 +13,23 @@ namespace Luftfartshinder.Controllers.Admin
     [Authorize(Roles = "SuperAdmin")]
     public class SuperAdminController(IUserRepository userRepository, UserManager<ApplicationUser> userManager, IOrganizationRepository organizationRepository) : Controller
     {
-        private readonly IUserRepository userRepository = userRepository;
-        private readonly UserManager<ApplicationUser> userManager = userManager;
-        private readonly IOrganizationRepository organizationRepository = organizationRepository;
+        private readonly IUserRepository _userRepository = userRepository;
+        private readonly UserManager<ApplicationUser> _userManager = userManager;
+        private readonly IOrganizationRepository _organizationRepository = organizationRepository;
 
         /// <summary>
         /// Displays a filtered list of users with role, status, and organization filters.
         /// </summary>
+        /// <param name="roleFilter">Filter by user role.</param>
+        /// <param name="statusFilter">Filter by approval status.</param>
+        /// <param name="organizationFilter">Filter by organization name.</param>
         public async Task<IActionResult> List(string roleFilter = "All", string statusFilter = "", string organizationFilter = "")
         { 
             ViewData["LayoutType"] = "pc";
-            var allUsers = await userRepository.GetAll();
+            
+            try
+            {
+                var allUsers = await _userRepository.GetAll();
             var filteredUsers = new List<User>();
             var uniqueOrganizations = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
     
@@ -36,7 +42,7 @@ namespace Luftfartshinder.Controllers.Admin
 
             foreach (var user in allUsers)
             {
-                var userRoles = await userManager.GetRolesAsync(user);
+                var userRoles = await _userManager.GetRolesAsync(user);
                 var userRole = userRoles.FirstOrDefault() ?? "No Role";
         
                 if (roleFilter != "All" && userRole != roleFilter)
@@ -134,26 +140,61 @@ namespace Luftfartshinder.Controllers.Admin
             }
             
             return View(viewModel);
+            }
+            catch (Exception)
+            {
+                TempData["Error"] = "An error occurred while loading users. Please try again.";
+                return View(new UserViewModel { Users = new List<User>() });
+            }
         }
         
         /// <summary>
         /// Deletes a user by ID.
         /// </summary>
+        /// <param name="id">The ID of the user to delete.</param>
+        /// <param name="roleFilter">Current role filter to preserve after redirect.</param>
+        /// <param name="statusFilter">Current status filter to preserve after redirect.</param>
+        /// <param name="organizationFilter">Current organization filter to preserve after redirect.</param>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(Guid id, string roleFilter, string statusFilter, string organizationFilter)
         {
-            var user = await userManager.FindByIdAsync(id.ToString());
-
-            if (user != null)
+            if (id == Guid.Empty)
             {
+                TempData["Error"] = "Invalid user ID.";
+                return RedirectToAction("List", new { roleFilter, statusFilter, organizationFilter });
+            }
+
+            try
+            {
+                var user = await _userManager.FindByIdAsync(id.ToString());
+
+                if (user == null)
+                {
+                    TempData["Error"] = "User not found.";
+                    return RedirectToAction("List", new { roleFilter, statusFilter, organizationFilter });
+                }
+
                 var username = user.UserName;
-                var deleteResult = await userManager.DeleteAsync(user);
+                var deleteResult = await _userManager.DeleteAsync(user);
 
                 if (deleteResult.Succeeded)
                 {
                     TempData["Success"] = $"User '{username}' has been successfully deleted.";
                 }
+                else
+                {
+                    var errors = string.Join(", ", deleteResult.Errors.Select(e => e.Description));
+                    TempData["Error"] = $"Unable to delete user: {errors}";
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                TempData["Error"] = "Unable to delete the user. Please try again.";
+            }
+            catch (Exception)
+            {
+                TempData["Error"] = "An unexpected error occurred while deleting the user. Please try again.";
             }
 
             return RedirectToAction("List", new { roleFilter, statusFilter, organizationFilter });
@@ -162,21 +203,50 @@ namespace Luftfartshinder.Controllers.Admin
         /// <summary>
         /// Approves a user, allowing them to log in.
         /// </summary>
+        /// <param name="id">The ID of the user to approve.</param>
+        /// <param name="roleFilter">Current role filter to preserve after redirect.</param>
+        /// <param name="statusFilter">Current status filter to preserve after redirect.</param>
+        /// <param name="organizationFilter">Current organization filter to preserve after redirect.</param>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Approve(Guid id, string roleFilter, string statusFilter, string organizationFilter)
         {
-            var user = await userManager.FindByIdAsync(id.ToString());
-
-            if (user != null)
+            if (id == Guid.Empty)
             {
+                TempData["Error"] = "Invalid user ID.";
+                return RedirectToAction("List", new { roleFilter, statusFilter, organizationFilter });
+            }
+
+            try
+            {
+                var user = await _userManager.FindByIdAsync(id.ToString());
+
+                if (user == null)
+                {
+                    TempData["Error"] = "User not found.";
+                    return RedirectToAction("List", new { roleFilter, statusFilter, organizationFilter });
+                }
+
                 user.IsApproved = true;
-                var updateResult = await userManager.UpdateAsync(user);
+                var updateResult = await _userManager.UpdateAsync(user);
 
                 if (updateResult.Succeeded)
                 {
                     TempData["Success"] = $"User '{user.UserName}' has been approved and can now log in.";
                 }
+                else
+                {
+                    var errors = string.Join(", ", updateResult.Errors.Select(e => e.Description));
+                    TempData["Error"] = $"Unable to approve user: {errors}";
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                TempData["Error"] = "Unable to approve the user. Please try again.";
+            }
+            catch (Exception)
+            {
+                TempData["Error"] = "An unexpected error occurred while approving the user. Please try again.";
             }
 
             return RedirectToAction("List", new { roleFilter, statusFilter, organizationFilter });
@@ -185,21 +255,50 @@ namespace Luftfartshinder.Controllers.Admin
         /// <summary>
         /// Declines a user registration and removes them from the system.
         /// </summary>
+        /// <param name="id">The ID of the user to decline.</param>
+        /// <param name="roleFilter">Current role filter to preserve after redirect.</param>
+        /// <param name="statusFilter">Current status filter to preserve after redirect.</param>
+        /// <param name="organizationFilter">Current organization filter to preserve after redirect.</param>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Decline(Guid id, string roleFilter, string statusFilter, string organizationFilter)
         {
-            var user = await userManager.FindByIdAsync(id.ToString());
-
-            if (user != null)
+            if (id == Guid.Empty)
             {
+                TempData["Error"] = "Invalid user ID.";
+                return RedirectToAction("List", new { roleFilter, statusFilter, organizationFilter });
+            }
+
+            try
+            {
+                var user = await _userManager.FindByIdAsync(id.ToString());
+
+                if (user == null)
+                {
+                    TempData["Error"] = "User not found.";
+                    return RedirectToAction("List", new { roleFilter, statusFilter, organizationFilter });
+                }
+
                 var username = user.UserName;
-                var deleteResult = await userManager.DeleteAsync(user);
+                var deleteResult = await _userManager.DeleteAsync(user);
 
                 if (deleteResult.Succeeded)
                 {
                     TempData["Success"] = $"User '{username}' has been declined and removed from the system.";
                 }
+                else
+                {
+                    var errors = string.Join(", ", deleteResult.Errors.Select(e => e.Description));
+                    TempData["Error"] = $"Unable to decline user: {errors}";
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                TempData["Error"] = "Unable to decline the user. Please try again.";
+            }
+            catch (Exception)
+            {
+                TempData["Error"] = "An unexpected error occurred while declining the user. Please try again.";
             }
 
             return RedirectToAction("List", new { roleFilter, statusFilter, organizationFilter });

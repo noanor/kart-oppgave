@@ -117,7 +117,7 @@ docker-compose down
 **"Cannot find path" error:**
 - Check that you are in the correct folder: Run `dir` (Windows) or `ls` (Mac/Linux)
 - You should see the `docker-compose.yml` file
-- If not, navigate to: `cd kart-oppgave/Luftfartshinder`
+- If not, run: `cd kart-oppgave/Luftfartshinder`
 
 **"docker-compose: command not found":**
 - Try: `docker compose` (without hyphen)
@@ -151,6 +151,9 @@ After the first startup, you can log in with:
 - Username: `pilot`
 - Password: `Passord123!`
 
+- Username: `pilot2`
+- Password: `Passord123!`
+
 ## Testing
 
 ### C# Tests
@@ -161,16 +164,13 @@ cd Luftfartshinder/Luftfartshinder.Tests
 dotnet test
 ```
 
-<<<<<<< HEAD
 **Test Implementation:**
-- All 78 tests pass successfully
+- All 75 tests pass successfully
 - Uses `TestSession` class for testing session functionality (replaces Moq ISession mocking to avoid extension method issues)
 - Tests cover controllers: ObstaclesController, ReportController, AccountController, DashboardController, HomeController, RegistrarController, and SuperAdminController
 - Repository tests: ObstacleRepositoryTests (9 tests) and ReportRepositoryTests (10 tests) using InMemory database
 - All tests include documentation with GOAL, LOGIC, and RESULT
 
-=======
->>>>>>> 9abab9b (Refaktorisering av registrar sider og superadmin list)
 ### JavaScript Tests
 
 The project also contains JavaScript tests for frontend functionality using **Jest**.
@@ -222,3 +222,11 @@ This runs all JavaScript tests in `Luftfartshinder/Luftfartshinder/wwwroot/js/`:
 
 - **Detailed documentation:** See [README.md](Luftfartshinder/Luftfartshinder/README.md) in the Luftfartshinder/Luftfartshinder folder for system architecture, operations, and testing
 - **Testing:** See the [Testing section](Luftfartshinder/Luftfartshinder/README.md#testing) in README.md for test documentation and results
+
+## AI Assistance Disclosure
+During the development of this MVC application, AI tools (specifically ChatGPT from OpenAI and Cursor IDE) were utilized to support the following tasks:
+• Researching architectural patterns and best practices
+• Generating initial drafts of explanations and documentation
+• Providing code suggestions and troubleshooting guidance
+
+All AI-generated material was critically evaluated, edited, and integrated by the project members. The final implementation and documentation reflect our own understanding and decisions.
